@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="colorPrimaryHome">#CFCFCF</color>
+
+    <color name="colorBtn1">#1CB0F6</color>
+    <color name="colorBtn3">#8EE000</color>
+    <color name="colorBac">#fcfbf8</color>
+
+    <!-- Background color for the kamus category -->
+    <color name="tan_background">#FFF7DA</color>
+    <color name="category_sh">#FD8E09</color>
+    <color name="category_sa">#379237</color>
+    <color name="category_kb">#8800A0</color>
+    <color name="category_kk">#D33131</color>
+    <color name="category_ks">#16AFCA</color>
+    <color name="category_kket">#864E1B</color>
+
+    <!--Text color for tabs-->
+    <color name="tab_Default_color">#A8A19E</color>
+    <!-- Primary color of the app (shown in the app bar) -->
+    <color name="primary_color">#4A312A</color>
+
+</resources>

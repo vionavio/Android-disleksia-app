@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBac"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/logo_utama"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="130dp"
+        android:paddingBottom="20dp"
+        android:src="@drawable/logo_utama" />
+
+    <TextView
+        style="@style/FontStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/p1"/>
+
+    <TextView
+        style="@style/FontStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/p2"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/btnRegister"
+        style="@style/ButtonStyle1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/btn_round1"
+        android:onClick="Register"
+        android:text="daftar"
+        android:textColor="#fff"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/ButtonStyle1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/btn_round2"
+        android:onClick="Masuk"
+        android:text="@string/saya_sudah_punya_akun"
+        android:textColor="@color/colorBtn1"
+        tools:ignore="OnClick" />
+</LinearLayout>
