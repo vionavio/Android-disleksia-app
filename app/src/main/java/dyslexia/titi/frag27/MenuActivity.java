@@ -64,6 +64,12 @@ public class MenuActivity extends AppCompatActivity {
 //                Log.d("Word entity = ", wordEntities.get(1).getWord());
 //            }
 //        });
+
+        CardView settingCardView = findViewById(R.id.cv_setting);
+        settingCardView.setOnClickListener(view -> {
+            Intent settingIntent = new Intent(MenuActivity.this, SettingActivity.class);
+            startActivity(settingIntent);
+        });
     }
 
     // tombol kembali langsung keluar
