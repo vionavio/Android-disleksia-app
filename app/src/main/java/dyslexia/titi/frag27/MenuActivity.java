@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.kamus.KamusActivity;
-import dyslexia.titi.frag27.perbaikanKata.PerbaikanKataActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -24,14 +23,14 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-        CardView perbaikanKata = (CardView) findViewById(R.id.perbaikankata);
-        perbaikanKata.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent perbaikanKataIntent = new Intent(MenuActivity.this, PerbaikanKataActivity.class);
-                startActivity(perbaikanKataIntent);
-            }
-        });
-
+//        CardView perbaikanKata = (CardView) findViewById(R.id.perbaikankata);
+//        perbaikanKata.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                Intent perbaikanKataIntent = new Intent(MenuActivity.this, PerbaikanKataActivity.class);
+//                startActivity(perbaikanKataIntent);
+//            }
+//        });
+//
 //        CardView permainan = (CardView) findViewById(R.id.permainan);
 //        permainan.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View view) {
