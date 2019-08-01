@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import dyslexia.titi.frag27.R;
+
 public class PerbaikanKataActivity extends AppCompatActivity {
 
     @Override
