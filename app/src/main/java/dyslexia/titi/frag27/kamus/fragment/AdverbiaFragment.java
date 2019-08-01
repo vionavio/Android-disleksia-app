@@ -5,16 +5,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
@@ -26,7 +31,8 @@ import dyslexia.titi.frag27.kamus.model.Kamus;
 public class AdverbiaFragment extends Fragment {
 
     ListView lv;
-    TextView tv,tvt;
+    TextView tv;
+    TextToSpeech t1;
     ArrayAdapter<Kamus> adapter;
 
     public static AdverbiaFragment newInstance()
@@ -39,8 +45,6 @@ public class AdverbiaFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,11 +65,26 @@ public class AdverbiaFragment extends Fragment {
 
         adapter=new ArrayAdapter<Kamus>(getActivity(),android.R.layout.simple_list_item_1,db.retrieveKamus("adverbia"));
         lv.setAdapter(adapter);
+        t1 = new TextToSpeech(getActivity().getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    t1.setLanguage(new Locale("id", "ID"));
+                }
+            }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+                Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
+                t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
     }
 
     private void initializeViews(View rootView) {
         lv=  rootView.findViewById(R.id.list);
-
         tv = rootView.findViewById(R.id.title_name);
         tv.setText(toString());
     }
@@ -95,12 +114,18 @@ public class AdverbiaFragment extends Fragment {
 
                 adapter.getFilter().filter(word);
                 return false;
-
-
             }
         });
 
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    public void onPauseID() {
+        if (t1 != null) {
+            t1.stop();
+            t1.shutdown();
+        }
+        super.onPause();
     }
 
 

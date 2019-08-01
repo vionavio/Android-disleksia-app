@@ -5,16 +5,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
@@ -28,6 +33,7 @@ public class AlphabetFragment extends Fragment {
     ListView lv;
     TextView tv;
     ArrayAdapter<Kamus> adapter;
+    TextToSpeech t1;
 
     public static AlphabetFragment newInstance()
     {
@@ -58,6 +64,23 @@ public class AlphabetFragment extends Fragment {
         DatabaseAdapter db=new DatabaseAdapter(getActivity());
         adapter=new ArrayAdapter<Kamus>(getActivity(),android.R.layout.simple_list_item_1,db.retrieveKamus("alphabet"));
         lv.setAdapter(adapter);
+
+        t1 = new TextToSpeech(getActivity().getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    t1.setLanguage(new Locale("id", "ID"));
+                }
+            }
+        });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+                Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
+                t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
     }
 
     private void initializeViews(View rootView) {
@@ -99,5 +122,11 @@ public class AlphabetFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
+    public void onPauseID() {
+        if (t1 != null) {
+            t1.stop();
+            t1.shutdown();
+        }
+        super.onPause();
+    }
 }
