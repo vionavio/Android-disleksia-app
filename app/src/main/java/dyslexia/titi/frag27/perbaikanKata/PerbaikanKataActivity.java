@@ -15,6 +15,8 @@ import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 
+import dyslexia.titi.frag27.R;
+
 public class PerbaikanKataActivity extends AppCompatActivity {
 
     TextToSpeech t1;
