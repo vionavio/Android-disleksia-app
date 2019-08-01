@@ -3,14 +3,12 @@ package dyslexia.titi.frag27.kamus.fragment;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -19,24 +17,21 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import java.util.Locale;
-
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Kamus;
 
 import static android.R.layout.simple_list_item_1;
-import static dyslexia.titi.frag27.R.id.lv_word;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AdjektivaFragment extends Fragment{
+public class AdjektivaFragment extends Fragment {
 
     ListView lv;
     public TextView tv;
     ArrayAdapter<Kamus> adapter;
-    TextToSpeech t1,t2;
+    TextToSpeech t1, t2;
 
     public static AdjektivaFragment newInstance() {
         return new AdjektivaFragment();
@@ -46,7 +41,6 @@ public class AdjektivaFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -70,7 +64,6 @@ public class AdjektivaFragment extends Fragment{
     }
 
 
-
     @Override
     public void onDetach() {
         super.onDetach();
@@ -81,18 +74,16 @@ public class AdjektivaFragment extends Fragment{
         adapter = new ArrayAdapter<Kamus>(getActivity(), simple_list_item_1, db.retrieveKamus("adjektiva"));
         lv.setAdapter(adapter);
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lv.setOnItemClickListener((parent, view, position, id) -> {
 
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //String selectedFromList = (String) lv.getItemAtPosition(position);
-                String selectedFromList = (String) lv.getItemAtPosition(position);
+            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
 
-               Toast.makeText(getActivity(),"  ListItem : " +selectedFromList , Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "id: " + selectedFromList.getId_word() + "\n"
+                    + "position: " + position + "\n"
+                    + "kata: " + selectedFromList.getWord(), Toast.LENGTH_SHORT).show();
 
-                //Toast.makeText(getActivity(),"ListItem : ", Toast.LENGTH_LONG).show();
-                //Log.v("TAG", "CLICKED row number: " + position);
-            }
-
+            //Toast.makeText(getActivity(),"ListItem : ", Toast.LENGTH_LONG).show();
+            //Log.v("TAG", "CLICKED row number: " + position);
         });
 
 
@@ -102,8 +93,6 @@ public class AdjektivaFragment extends Fragment{
         lv = rootView.findViewById(R.id.list);
         tv = rootView.findViewById(R.id.title_name);
         tv.setText(toString());
-
-
 
 
     }
@@ -141,17 +130,14 @@ public class AdjektivaFragment extends Fragment{
 
         super.onCreateOptionsMenu(menu, inflater);
     }
-    public void onPauseEn(){
-        if (t1 != null){
+
+    public void onPauseEn() {
+        if (t1 != null) {
             t1.stop();
             t1.shutdown();
         }
         super.onPause();
     }
-
-
-
-
 
 
 }
