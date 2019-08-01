@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
+import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.login.database.DatabaseHelper;
 
@@ -68,8 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                         mSettings.edit().putBoolean("isLoggedIn", true).apply();
 
                         //User Logged in Successfully Launch You home screen activity
-//                        Intent intent=new Intent(LoginActivity.this, MenuActivity.class);
-//                        startActivity(intent);
+                        Intent intent=new Intent(LoginActivity.this, MenuActivity.class);
+                        startActivity(intent);
                         finish();
 
                     } else {
