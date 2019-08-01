@@ -1,8 +1,10 @@
-package dyslexia.titi.frag27;
+package dyslexia.titi.frag27.setting;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import dyslexia.titi.frag27.R;
 
 public class SettingActivity extends AppCompatActivity {
 

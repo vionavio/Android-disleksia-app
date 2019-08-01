@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.kamus.KamusActivity;
+import dyslexia.titi.frag27.setting.SettingActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
