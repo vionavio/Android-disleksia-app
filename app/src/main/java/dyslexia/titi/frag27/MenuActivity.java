@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.kamus.KamusActivity;
+import dyslexia.titi.frag27.perbaikanKata.PerbaikanKataActivity;
+import dyslexia.titi.frag27.setting.SettingActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -23,13 +25,13 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-//        CardView perbaikanKata = (CardView) findViewById(R.id.perbaikankata);
-//        perbaikanKata.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                Intent perbaikanKataIntent = new Intent(MenuActivity.this, PerbaikanKataActivity.class);
-//                startActivity(perbaikanKataIntent);
-//            }
-//        });
+        CardView settingCardView = (CardView) findViewById(R.id.cv_setting);
+        settingCardView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent perbaikanKataIntent = new Intent(MenuActivity.this, SettingActivity.class);
+                startActivity(perbaikanKataIntent);
+            }
+        });
 //
 //        CardView permainan = (CardView) findViewById(R.id.permainan);
 //        permainan.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +66,13 @@ public class MenuActivity extends AppCompatActivity {
 //                Log.d("Word entity = ", wordEntities.get(1).getWord());
 //            }
 //        });
+        CardView perbaikanKata = (CardView) findViewById(R.id.perbaikankata);
+        perbaikanKata.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent perbaikanKataIntent = new Intent(MenuActivity.this, PerbaikanKataActivity.class);
+                startActivity(perbaikanKataIntent);
+            }
+        });
     }
 
     // tombol kembali langsung keluar
