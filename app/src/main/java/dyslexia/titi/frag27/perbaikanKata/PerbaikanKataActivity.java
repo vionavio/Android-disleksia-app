@@ -2,20 +2,26 @@ package dyslexia.titi.frag27.perbaikanKata;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
+import dyslexia.titi.frag27.kamus.model.Kamus;
 
 public class PerbaikanKataActivity extends AppCompatActivity {
 
@@ -24,6 +30,7 @@ public class PerbaikanKataActivity extends AppCompatActivity {
     Button btn_proseskata;
     TextView tv_hasil;
     ImageView iv_suara;
+    DatabaseAdapter db;
 
 
     @Override
@@ -35,11 +42,43 @@ public class PerbaikanKataActivity extends AppCompatActivity {
         btn_proseskata = findViewById(R.id.btnProsesKata);
         tv_hasil = findViewById(R.id.tv_hasil);
         iv_suara = findViewById(R.id.iv_suara);
-        jaroWinklerDistance();
+       btn_proseskata.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               jaroWinklerDistance();
+           }
+       });
         loadSuara();
     }
 
     private void jaroWinklerDistance() {
+
+        List<Kamus> listKata = new ArrayList<>();
+        db = new DatabaseAdapter(getApplicationContext());
+        listKata = db.retrieveKamus("all");
+
+        String hasil = "";
+        double similarityMax =0;
+        for (Kamus kamus: listKata){
+            double similarity = new JaroWinkler().getSimilarity(kamus.getWord(), ed_kataAwal.getText().toString());
+            if (similarity >similarityMax && similarity> 0)
+            {
+                similarityMax = similarity;
+                hasil = kamus.getWord();
+
+            }
+        }
+
+        tv_hasil.setText(hasil);
+
+        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = this.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this    );
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
     }
 
