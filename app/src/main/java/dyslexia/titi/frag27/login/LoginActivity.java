@@ -77,13 +77,10 @@ public class LoginActivity extends AppCompatActivity {
 
                         //User Logged in Failed
                         Snackbar.make(btnLogin, "Gagal masuk , silakan coba lagi", Snackbar.LENGTH_LONG).show();
-
                     }
                 }
             }
         });
-
-
     }
 
     //this method used to set Create account TextView text and click event( maltipal colors
@@ -153,7 +150,6 @@ public class LoginActivity extends AppCompatActivity {
                 textInputPassword.setError("Password terlalu pendek!");
             }
         }
-
         return valid;
     }
 }

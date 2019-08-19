@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.kamus.KamusActivity;
 import dyslexia.titi.frag27.perbaikanKata.PerbaikanKataActivity;
+import dyslexia.titi.frag27.permainan.PermainanActivity;
 import dyslexia.titi.frag27.setting.SettingActivity;
 
 public class MenuActivity extends AppCompatActivity {
@@ -18,11 +19,9 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         CardView kamus = (CardView) findViewById(R.id.kamus);
-        kamus.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent kamusIntent = new Intent(MenuActivity.this, KamusActivity.class);
-                startActivity(kamusIntent);
-            }
+        kamus.setOnClickListener(view -> {
+            Intent kamusIntent = new Intent(MenuActivity.this, KamusActivity.class);
+            startActivity(kamusIntent);
         });
 
         CardView settingCardView = (CardView) findViewById(R.id.cv_setting);
@@ -32,14 +31,14 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(perbaikanKataIntent);
             }
         });
-//
-//        CardView permainan = (CardView) findViewById(R.id.permainan);
-//        permainan.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                Intent permainanIntent = new Intent(MenuActivity.this, KamusActivity.class);
-//                startActivity(permainanIntent);
-//            }
-//        });
+
+        CardView permainan = (CardView) findViewById(R.id.permainan);
+        permainan.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent permainanIntent = new Intent(MenuActivity.this, PermainanActivity.class);
+                startActivity(permainanIntent);
+            }
+        });
 //
 //        CardView bantuan = (CardView) findViewById(R.id.bantuan);
 //        bantuan.setOnClickListener(new View.OnClickListener() {

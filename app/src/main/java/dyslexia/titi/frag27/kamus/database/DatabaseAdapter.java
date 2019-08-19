@@ -15,7 +15,7 @@ import dyslexia.titi.frag27.kamus.model.Kamus;
 public class DatabaseAdapter extends SQLiteAssetHelper {
 
 
-    private static final String DB_NAME = "dictionary.db";
+    private static final String DB_NAME = "dictionary2.db";
     private static final int DB_VER = 1;
 
     public DatabaseAdapter(Context context) {
