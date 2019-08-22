@@ -18,26 +18,22 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        CardView kamus = (CardView) findViewById(R.id.kamus);
+        CardView kamus =  findViewById(R.id.kamus);
         kamus.setOnClickListener(view -> {
             Intent kamusIntent = new Intent(MenuActivity.this, KamusActivity.class);
             startActivity(kamusIntent);
         });
 
-        CardView settingCardView = (CardView) findViewById(R.id.cv_setting);
-        settingCardView.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent perbaikanKataIntent = new Intent(MenuActivity.this, SettingActivity.class);
-                startActivity(perbaikanKataIntent);
-            }
+        CardView settingCardView =  findViewById(R.id.cv_setting);
+        settingCardView.setOnClickListener(view -> {
+            Intent perbaikanKataIntent = new Intent(MenuActivity.this, SettingActivity.class);
+            startActivity(perbaikanKataIntent);
         });
 
-        CardView permainan = (CardView) findViewById(R.id.permainan);
-        permainan.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent permainanIntent = new Intent(MenuActivity.this, PermainanActivity.class);
-                startActivity(permainanIntent);
-            }
+        CardView permainan =  findViewById(R.id.permainan);
+        permainan.setOnClickListener(view -> {
+            Intent permainanIntent = new Intent(MenuActivity.this, PermainanActivity.class);
+            startActivity(permainanIntent);
         });
 //
 //        CardView bantuan = (CardView) findViewById(R.id.bantuan);
