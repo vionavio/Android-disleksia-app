@@ -24,4 +24,6 @@
     <!-- Primary color of the app (shown in the app bar) -->
     <color name="primary_color">#4A312A</color>
 
+    <color name="colorPurple">#332FA2</color>
+
 </resources>
