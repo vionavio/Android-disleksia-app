@@ -42,12 +42,7 @@ public class PerbaikanKataActivity extends AppCompatActivity {
         btn_proseskata = findViewById(R.id.btnProsesKata);
         tv_hasil = findViewById(R.id.tv_hasil);
         iv_suara = findViewById(R.id.iv_suara);
-       btn_proseskata.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               jaroWinklerDistance();
-           }
-       });
+        btn_proseskata.setOnClickListener(view -> jaroWinklerDistance());
         loadSuara();
     }
 
@@ -58,11 +53,10 @@ public class PerbaikanKataActivity extends AppCompatActivity {
         listKata = db.retrieveKamus("all");
 
         String hasil = "";
-        double similarityMax =0;
-        for (Kamus kamus: listKata){
+        double similarityMax = 0;
+        for (Kamus kamus : listKata) {
             double similarity = new JaroWinkler().getSimilarity(kamus.getWord(), ed_kataAwal.getText().toString());
-            if (similarity >similarityMax && similarity> 0)
-            {
+            if (similarity > similarityMax && similarity > 0.7) {
                 similarityMax = similarity;
                 hasil = kamus.getWord();
 
@@ -76,7 +70,7 @@ public class PerbaikanKataActivity extends AppCompatActivity {
         View view = this.getCurrentFocus();
         //If no view currently has focus, create a new one, just so we can grab a window token from it
         if (view == null) {
-            view = new View(this    );
+            view = new View(this);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
@@ -86,18 +80,18 @@ public class PerbaikanKataActivity extends AppCompatActivity {
         t1 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-                if (status != TextToSpeech.ERROR){
-                    t1.setLanguage(new Locale("id","ID"));
+                if (status != TextToSpeech.ERROR) {
+                    t1.setLanguage(new Locale("id", "ID"));
                 }
             }
         });
 
-        iv_suara.setOnClickListener(new View.OnClickListener(){
+        iv_suara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String toSpeak = tv_hasil.getText().toString();
-                Toast.makeText(getApplicationContext(),toSpeak,Toast.LENGTH_SHORT).show();
-                t1.speak(toSpeak , TextToSpeech.QUEUE_FLUSH,null);
+                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+                t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
             }
         });
     }

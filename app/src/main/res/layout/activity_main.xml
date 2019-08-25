@@ -20,14 +20,14 @@
         style="@style/FontStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/p1"/>
+        android:text="@string/p1" />
 
     <TextView
         style="@style/FontStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/p2"
-        android:textAlignment="center"/>
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/btnRegister"

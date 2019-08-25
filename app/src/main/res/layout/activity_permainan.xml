@@ -17,15 +17,13 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/susunabjad"
                 android:layout_width="120dp"
                 android:layout_height="140dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="15dp"
                 android:layout_marginBottom="10dp"
-                android:layout_gravity=""
+                android:layout_marginRight="10dp"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="6dp">
 
@@ -59,7 +57,7 @@
             android:id="@+id/kuis"
             android:layout_width="120dp"
             android:layout_height="140dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             app:cardCornerRadius="30dp"

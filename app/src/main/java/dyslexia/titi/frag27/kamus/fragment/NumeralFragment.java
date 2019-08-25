@@ -62,23 +62,18 @@ public class NumeralFragment extends Fragment {
 
     private void loadData() {
         DatabaseAdapter db=new DatabaseAdapter(getActivity());
-        adapter=new ArrayAdapter<Kamus>(getActivity(),android.R.layout.simple_list_item_1,db.retrieveKamus("numeralia"));
+        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("numeralia"));
         lv.setAdapter(adapter);
-        t1 = new TextToSpeech(getActivity().getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    t1.setLanguage(new Locale("id", "ID"));
-                }
+        t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                t1.setLanguage(new Locale("id", "ID"));
             }
         });
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
-                Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
-                t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
-            }
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+            Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
+            t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
         });
     }
 

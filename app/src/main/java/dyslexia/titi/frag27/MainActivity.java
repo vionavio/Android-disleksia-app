@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if (mSettings.getBoolean("isLoggedIn", false)){
+        if (mSettings.getBoolean("isLoggedIn", false)) {
 
-            Intent menuIntent = new Intent (MainActivity.this, MenuActivity.class );
+            Intent menuIntent = new Intent(MainActivity.this, MenuActivity.class);
             startActivity(menuIntent);
         }
 
@@ -27,13 +27,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Masuk(View view) {
-        Intent loginIntent = new Intent (MainActivity.this, LoginActivity.class );
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(loginIntent);
     }
 
     public void Register(View view) {
 
-        Intent registerIntent = new Intent (MainActivity.this, RegisterActivity.class );
+        Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
         startActivity(registerIntent);
     }
 }

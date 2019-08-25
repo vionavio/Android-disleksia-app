@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="dyslexia.titi.frag27">
 
     <application
@@ -8,21 +9,42 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".permainan.susunAlfabet.LowercaseActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".permainan.susunAlfabet.LowercaseActivity"
+            android:theme="@style/GameAbjad"
+            android:label="Menyusun Abjad"
+            android:parentActivityName=".permainan.PermainanActivity" />
         <activity android:name=".permainan.kuis.KuisActivity" />
-        <activity android:name=".permainan.susunAlfabet.SusunAlfabet" />
+        <activity
+            android:name=".permainan.susunAlfabet.SusunAlfabet"
+            android:theme="@style/GameAbjad"
+            android:label="Menyusun Abjad"
+            android:parentActivityName=".permainan.PermainanActivity" />
         <activity android:name=".bantuan.BantuanActivity" />
         <activity android:name=".setting.SettingActivity" />
-        <activity android:name=".perbaikanKata.PerbaikanKataActivity" />
-        <activity android:name=".permainan.PermainanActivity" />
+        <activity
+            android:name=".perbaikanKata.PerbaikanKataActivity"
+            android:theme="@style/PerbaikanKata"
+            android:label="Perbaikan Kata"
+            android:parentActivityName=".MenuActivity" />
+        <activity
+            android:name=".permainan.PermainanActivity"
+            android:theme="@style/MenuGame"
+            android:label="Permainan"
+            android:parentActivityName=".MenuActivity" />
         <activity
             android:name=".kamus.KamusActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="Kamus" />
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/noTitleBar" />
-        <activity android:name=".MenuActivity" />
+        <activity
+            android:name=".MenuActivity"
+            android:theme="@style/MenuUtama"
+            android:label="Disleksia App" />
         <activity android:name=".login.RegisterActivity" />
         <activity
             android:name=".MainActivity"

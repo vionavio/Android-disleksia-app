@@ -29,7 +29,9 @@ public class SusunAlfabet extends AppCompatActivity {
             , "J", "K", "L", "M", "N", "O", "P", "Q", "R"
             , "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private String textAnswer = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    TextView textQuestion, textTitle;
+    TextView textQuestion;
+    EditText editText;
+    FlexboxLayout flexboxLayout;
     Animation smallbigforth;
 
     @Override
@@ -37,10 +39,19 @@ public class SusunAlfabet extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_susun_alfabet);
 
+        editText = findViewById(R.id.editText);
+        flexboxLayout = findViewById(R.id.layoutParent);
+
         Button lowercase = findViewById(R.id.lowercase);
         lowercase.setOnClickListener(view -> {
             Intent lowercaseIntent = new Intent(SusunAlfabet.this, LowercaseActivity.class);
             startActivity(lowercaseIntent);
+        });
+
+        Button reset = findViewById(R.id.ulangi);
+        reset.setOnClickListener(view -> {
+            editText.setText("");
+            doValidate();
         });
 
         smallbigforth = AnimationUtils.loadAnimation(this, R.anim.smallbigforth);
@@ -48,7 +59,7 @@ public class SusunAlfabet extends AppCompatActivity {
         keys = shuffleArray(keys);
 
         for (String key : keys) {
-            addView(((FlexboxLayout) findViewById(R.id.layoutParent)), key, ((EditText) findViewById(R.id.editText)));
+            addView((flexboxLayout), key, (editText));
         }
 
         maxPresCounter = 26;
@@ -88,9 +99,9 @@ public class SusunAlfabet extends AppCompatActivity {
         textView.setClickable(true);
         textView.setFocusable(true);
         textView.setTextSize(32);
-        textView.setPadding(40, 20, 40, 20);
+        textView.setPadding(30, 15, 30, 15);
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/FredokaOneRegular.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Arial.ttf");
 
         textQuestion = (TextView) findViewById(R.id.textQuestion);
         //   textScreen = (TextView) findViewById(R.id.textScreen);
@@ -140,8 +151,7 @@ public class SusunAlfabet extends AppCompatActivity {
 
             //     editText.setText("");
         } else {
-            Toast.makeText(SusunAlfabet.this, "Wrong", Toast.LENGTH_SHORT).show();
-            //     editText.setText("");
+            Toast.makeText(SusunAlfabet.this, " ", Toast.LENGTH_SHORT).show();
         }
 
         keys = shuffleArray(keys);
@@ -150,4 +160,6 @@ public class SusunAlfabet extends AppCompatActivity {
             addView(flexboxLayout, key, editText);
         }
     }
+
+
 }

@@ -12,7 +12,7 @@ public class MyPageAdapter extends FragmentPagerAdapter {
     /*
     PAGES
      */
-    List<Fragment> pages=new ArrayList<>();
+    List<Fragment> pages = new ArrayList<>();
 
     public MyPageAdapter(FragmentManager fm) {
         super(fm);
@@ -33,8 +33,7 @@ public class MyPageAdapter extends FragmentPagerAdapter {
         return pages.get(position).toString();
     }
 
-    public void addPage(Fragment f)
-    {
+    public void addPage(Fragment f) {
         pages.add(f);
     }
 }

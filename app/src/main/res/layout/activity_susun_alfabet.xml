@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bgapp"
-    android:paddingBottom="10dp"
     android:orientation="vertical"
+    android:paddingBottom="5dp"
     tools:context=".permainan.susunAlfabet.SusunAlfabet">
 
     <LinearLayout
@@ -24,61 +24,35 @@
             android:layout_height="45dp"
             android:background="@drawable/bgquestion"
             android:gravity="center_vertical"
-            android:text="Susunlah huruf sesuai abjad"
+            android:text="Susunlah huruf sesuai urutanya"
             android:textAlignment="center"
             android:textColor="#332FA2"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/lowercase"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_purple"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:layout_gravity="right"
-            android:text="a"
-            android:textAllCaps="false"
-            android:textColor="#ffffff"
-            android:textSize="25sp" />
+            android:textSize="22sp" />
 
     </LinearLayout>
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="120dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:layout_marginTop="600dp"
-        android:layout_marginBottom="70dp"
         android:background="@drawable/bgpurple"
         android:clickable="false"
         android:focusable="false"
         android:gravity="center"
-        android:paddingRight="20dp"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
+        android:paddingRight="20dp"
         android:paddingBottom="10dp"
         android:textColor="#332FA2"
         android:textSize="32sp" />
 
-    <!--<TextView-->
-    <!--android:id="@+id/textTitle"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginLeft="28dp"-->
-    <!--android:layout_marginRight="28dp"-->
-    <!--android:layout_marginBottom="16dp"-->
-    <!--android:text="Ammo"-->
-    <!--android:textColor="#FFF"-->
-    <!--android:textSize="24sp" />-->
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="270dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/layoutParent"
@@ -94,4 +68,39 @@
 
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fadeScrollbars="false"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/lowercase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/btn_purple"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Huruf Kecil"
+            android:textAllCaps="false"
+            android:textColor="#332FA2"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/ulangi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_purple"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Ulangi"
+            android:textAllCaps="false"
+            android:textColor="#332FA2"
+            android:textSize="25sp" />
+    </LinearLayout>
 </LinearLayout>

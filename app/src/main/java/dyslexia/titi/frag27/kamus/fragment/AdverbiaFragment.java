@@ -63,7 +63,7 @@ public class AdverbiaFragment extends Fragment {
     private void loadData() {
         DatabaseAdapter db=new DatabaseAdapter(getActivity());
 
-        adapter=new ArrayAdapter<Kamus>(getActivity(),android.R.layout.simple_list_item_1,db.retrieveKamus("adverbia"));
+        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("adverbia"));
         lv.setAdapter(adapter);
         t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {
             if (status != TextToSpeech.ERROR) {

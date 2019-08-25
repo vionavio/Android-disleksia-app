@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -29,7 +30,9 @@ public class LowercaseActivity extends AppCompatActivity {
             , "j", "k", "l", "m", "n", "o", "p", "q", "r"
             , "s", "t", "u", "v", "w", "x", "y", "z"};
     private String textAnswer = "abcdefghijklmnopqrstuvwxyz";
-    TextView textQuestion, textTitle;
+    TextView textQuestion;
+    EditText editText;
+    FlexboxLayout flexboxLayout;
     Animation smallbigforth;
 
     @Override
@@ -37,10 +40,19 @@ public class LowercaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lowercase);
 
+        editText = findViewById(R.id.editText);
+        flexboxLayout = findViewById(R.id.layoutParent);
+
         Button uppercase = findViewById(R.id.uppercase);
         uppercase.setOnClickListener(view -> {
             Intent uppercaseIntent = new Intent(LowercaseActivity.this, SusunAlfabet.class);
             startActivity(uppercaseIntent);
+        });
+
+        Button reset = findViewById(R.id.ulangi);
+        reset.setOnClickListener(view -> {
+            editText.setText("");
+            doValidate();
         });
 
         smallbigforth = AnimationUtils.loadAnimation(this, R.anim.smallbigforth);
@@ -48,8 +60,9 @@ public class LowercaseActivity extends AppCompatActivity {
         keys = shuffleArray(keys);
 
         for (String key : keys) {
-            addView((findViewById(R.id.layoutParent)), key, (findViewById(R.id.editText)));
+            addView((flexboxLayout), key, (editText));
         }
+
         maxPresCounter = 26;
     }
 
@@ -87,13 +100,17 @@ public class LowercaseActivity extends AppCompatActivity {
         textView.setClickable(true);
         textView.setFocusable(true);
         textView.setTextSize(32);
-        textView.setPadding(40, 20, 40, 20);
+        textView.setPadding(30, 15, 30, 15);
 
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/FredokaOneRegular.ttf");
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Arial.ttf");
 
         textQuestion = (TextView) findViewById(R.id.textQuestion);
+        //   textScreen = (TextView) findViewById(R.id.textScreen);
+        // textTitle = (TextView) findViewById(R.id.textTitle);
 
         textQuestion.setTypeface(typeface);
+        //  textScreen.setTypeface(typeface);
+        // textTitle.setTypeface(typeface);
         editText.setTypeface(typeface);
         textView.setTypeface(typeface);
 
@@ -112,9 +129,9 @@ public class LowercaseActivity extends AppCompatActivity {
             }
         });
 
+
         viewParent.addView(textView);
     }
-
 
     private void doValidate() {
         presCounter = 0;
@@ -125,13 +142,12 @@ public class LowercaseActivity extends AppCompatActivity {
         if (editText.getText().toString().equals(textAnswer)) {
             Toast.makeText(LowercaseActivity.this, "Correct", Toast.LENGTH_SHORT).show();
 
-//            Intent a = new Intent(MainActivity.this, BossAct.class);
+//            Intent a = new Intent(MainActivity.this,BossAct.class);
 //            startActivity(a);
 
-            //   editText.setText("");
+            //     editText.setText("");
         } else {
-            Toast.makeText(LowercaseActivity.this, "Wrong", Toast.LENGTH_SHORT).show();
-            //   editText.setText("");
+            Toast.makeText(LowercaseActivity.this, " ", Toast.LENGTH_SHORT).show();
         }
 
         keys = shuffleArray(keys);
@@ -139,8 +155,6 @@ public class LowercaseActivity extends AppCompatActivity {
         for (String key : keys) {
             addView(flexboxLayout, key, editText);
         }
-
     }
-
 
 }

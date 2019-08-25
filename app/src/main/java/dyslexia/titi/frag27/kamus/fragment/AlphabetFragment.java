@@ -62,7 +62,7 @@ public class AlphabetFragment extends Fragment {
 
     private void loadData() {
         DatabaseAdapter db=new DatabaseAdapter(getActivity());
-        adapter=new ArrayAdapter<Kamus>(getActivity(),android.R.layout.simple_list_item_1,db.retrieveKamus("alphabet"));
+        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("alphabet"));
         lv.setAdapter(adapter);
 
         t1 = new TextToSpeech(getActivity().getApplicationContext(), new TextToSpeech.OnInitListener() {

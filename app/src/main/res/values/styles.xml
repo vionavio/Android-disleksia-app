@@ -8,6 +8,43 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="GameAbjad" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ff5ea2</item>
+        <item name="colorPrimaryDark">#d04f85</item>
+        <item name="colorAccent">#FF4081</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
+    <style name="MenuGame" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ffcfd5</item>
+        <item name="colorPrimaryDark">#e55e74</item>
+        <item name="colorAccent">#FF4081</item>
+        <item name="android:textColorPrimary">#c6425b</item>
+    </style>
+
+    <style name="MenuUtama" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#fff5ab</item>
+        <item name="colorPrimaryDark">#c0ab53</item>
+        <item name="android:textColorPrimary">#968540</item>
+    </style>
+
+    <style name="PerbaikanKata" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#dbfeac</item>
+        <item name="colorPrimaryDark">#689F38</item>
+        <item name="android:textColorPrimary">#558c26</item>
+    </style>
+
+    <style name="Kamus" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#8ac6d1</item>
+        <item name="colorPrimaryDark">#66a2ac</item>
+        <item name="android:textColorPrimary">#afecf7</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

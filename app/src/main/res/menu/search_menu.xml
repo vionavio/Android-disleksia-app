@@ -9,4 +9,9 @@
         myapp:actionViewClass="android.widget.SearchView"
         android:title="Search" />
 
+
+    <!--<item name="colorPrimary">#8ac6d1</item>-->
+    <!--<item name="colorPrimaryDark">#66a2ac</item>-->
+    <!--<item name="android:textColorPrimary">#afecf7</item>-->
+
 </menu>
