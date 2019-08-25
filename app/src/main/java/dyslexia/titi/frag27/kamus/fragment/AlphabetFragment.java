@@ -74,12 +74,10 @@ public class AlphabetFragment extends Fragment {
             }
         });
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
-                Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
-                t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
-            }
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+            Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
+            t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
         });
     }
 
@@ -97,7 +95,6 @@ public class AlphabetFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-
         inflater.inflate(R.menu.search_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -114,8 +111,6 @@ public class AlphabetFragment extends Fragment {
 
                 adapter.getFilter().filter(word);
                 return false;
-
-
             }
         });
 

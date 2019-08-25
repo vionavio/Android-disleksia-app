@@ -20,6 +20,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import java.util.Random;
 
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.permainan.PermainanActivity;
 
 public class SusunAlfabet extends AppCompatActivity {
 
@@ -51,7 +52,7 @@ public class SusunAlfabet extends AppCompatActivity {
         Button reset = findViewById(R.id.ulangi);
         reset.setOnClickListener(view -> {
             editText.setText("");
-            doValidate();
+            doValidateReset();
         });
 
         smallbigforth = AnimationUtils.loadAnimation(this, R.anim.smallbigforth);
@@ -113,23 +114,18 @@ public class SusunAlfabet extends AppCompatActivity {
         editText.setTypeface(typeface);
         textView.setTypeface(typeface);
 
-        textView.setOnClickListener(new View.OnClickListener() {
+        textView.setOnClickListener(v -> {
+            if (presCounter < maxPresCounter) {
+                if (presCounter == 0)
+                    editText.setText("");
 
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                if (presCounter < maxPresCounter) {
-                    if (presCounter == 0)
-                        editText.setText("");
+                editText.setText(editText.getText().toString() + text);
+                textView.startAnimation(smallbigforth);
+                textView.animate().alpha(0).setDuration(300);
+                presCounter++;
 
-                    editText.setText(editText.getText().toString() + text);
-                    textView.startAnimation(smallbigforth);
-                    textView.animate().alpha(0).setDuration(300);
-                    presCounter++;
-
-                    if (presCounter == maxPresCounter)
-                        doValidate();
-                }
+                if (presCounter == maxPresCounter)
+                    doValidate();
             }
         });
 
@@ -139,6 +135,7 @@ public class SusunAlfabet extends AppCompatActivity {
 
     private void doValidate() {
         presCounter = 0;
+
 
         EditText editText = findViewById(R.id.editText);
         FlexboxLayout flexboxLayout = findViewById(R.id.layoutParent);
@@ -151,7 +148,8 @@ public class SusunAlfabet extends AppCompatActivity {
 
             //     editText.setText("");
         } else {
-            Toast.makeText(SusunAlfabet.this, " ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SusunAlfabet.this, "Salah, Ulangi Kembali", Toast.LENGTH_SHORT).show();
+
         }
 
         keys = shuffleArray(keys);
@@ -161,5 +159,30 @@ public class SusunAlfabet extends AppCompatActivity {
         }
     }
 
+    private void doValidateReset() {
+        presCounter = 0;
+
+
+        EditText editText = findViewById(R.id.editText);
+        FlexboxLayout flexboxLayout = findViewById(R.id.layoutParent);
+
+        if (!(editText.getText().toString().equals(textAnswer))) {
+            Toast.makeText(SusunAlfabet.this, "Ulangi", Toast.LENGTH_SHORT).show();
+        }
+
+        keys = shuffleArray(keys);
+        flexboxLayout.removeAllViews();
+        for (String key : keys) {
+            addView(flexboxLayout, key, editText);
+        }
+    }
+
+
+    public void onBackPressed() {
+        // TODO: Use declarative variable name
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), PermainanActivity.class);
+        startActivity(intent);
+    }
 
 }

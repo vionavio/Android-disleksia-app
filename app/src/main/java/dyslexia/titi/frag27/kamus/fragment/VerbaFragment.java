@@ -89,7 +89,6 @@ public class VerbaFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-
         inflater.inflate(R.menu.search_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -106,8 +105,6 @@ public class VerbaFragment extends Fragment {
 
                 adapter.getFilter().filter(word);
                 return false;
-
-
             }
         });
 
@@ -121,5 +118,4 @@ public class VerbaFragment extends Fragment {
         }
         super.onPause();
     }
-
 }

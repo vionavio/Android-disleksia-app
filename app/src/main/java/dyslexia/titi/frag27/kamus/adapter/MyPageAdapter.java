@@ -9,9 +9,7 @@ import java.util.List;
 
 public class MyPageAdapter extends FragmentPagerAdapter {
 
-    /*
-    PAGES
-     */
+
     List<Fragment> pages = new ArrayList<>();
 
     public MyPageAdapter(FragmentManager fm) {

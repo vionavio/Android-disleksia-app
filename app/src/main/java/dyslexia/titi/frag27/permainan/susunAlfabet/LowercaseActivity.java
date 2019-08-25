@@ -21,6 +21,7 @@ import com.google.android.flexbox.FlexboxLayout;
 import java.util.Random;
 
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.permainan.PermainanActivity;
 
 public class LowercaseActivity extends AppCompatActivity {
 
@@ -52,7 +53,7 @@ public class LowercaseActivity extends AppCompatActivity {
         Button reset = findViewById(R.id.ulangi);
         reset.setOnClickListener(view -> {
             editText.setText("");
-            doValidate();
+            doValidateReset();
         });
 
         smallbigforth = AnimationUtils.loadAnimation(this, R.anim.smallbigforth);
@@ -136,6 +137,7 @@ public class LowercaseActivity extends AppCompatActivity {
     private void doValidate() {
         presCounter = 0;
 
+
         EditText editText = findViewById(R.id.editText);
         FlexboxLayout flexboxLayout = findViewById(R.id.layoutParent);
 
@@ -147,7 +149,8 @@ public class LowercaseActivity extends AppCompatActivity {
 
             //     editText.setText("");
         } else {
-            Toast.makeText(LowercaseActivity.this, " ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LowercaseActivity.this, "Salah, Ulangi Kembali", Toast.LENGTH_SHORT).show();
+
         }
 
         keys = shuffleArray(keys);
@@ -155,6 +158,32 @@ public class LowercaseActivity extends AppCompatActivity {
         for (String key : keys) {
             addView(flexboxLayout, key, editText);
         }
+    }
+
+    private void doValidateReset() {
+        presCounter = 0;
+
+
+        EditText editText = findViewById(R.id.editText);
+        FlexboxLayout flexboxLayout = findViewById(R.id.layoutParent);
+
+        if (!(editText.getText().toString().equals(textAnswer))) {
+            Toast.makeText(LowercaseActivity.this, "Ulangi", Toast.LENGTH_SHORT).show();
+        }
+
+        keys = shuffleArray(keys);
+        flexboxLayout.removeAllViews();
+        for (String key : keys) {
+            addView(flexboxLayout, key, editText);
+        }
+    }
+
+
+    public void onBackPressed() {
+        // TODO: Use declarative variable name
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), PermainanActivity.class);
+        startActivity(intent);
     }
 
 }

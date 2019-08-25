@@ -9,7 +9,7 @@ public class User {
     public String email;
     public String password;
 
-    public User(String id,String name, String jk,String tanggaLahir, String userName, String email, String password) {
+    public User(String id, String name, String jk, String tanggaLahir, String userName, String email, String password) {
         this.id = id;
         this.name = name;
         this.jk = jk;
@@ -19,4 +19,3 @@ public class User {
         this.password = password;
     }
 }
-

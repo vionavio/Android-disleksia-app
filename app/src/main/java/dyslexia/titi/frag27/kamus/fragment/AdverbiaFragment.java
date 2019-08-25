@@ -122,6 +122,4 @@ public class AdverbiaFragment extends Fragment {
         }
         super.onPause();
     }
-
-
 }

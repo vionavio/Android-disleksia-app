@@ -2,17 +2,14 @@ package dyslexia.titi.frag27.permainan;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.kamus.KamusActivity;
 import dyslexia.titi.frag27.permainan.kuis.KuisActivity;
 import dyslexia.titi.frag27.permainan.susunAlfabet.SusunAlfabet;
-import dyslexia.titi.frag27.setting.SettingActivity;
 
 public class PermainanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +27,12 @@ public class PermainanActivity extends AppCompatActivity {
             Intent kuisIntent = new Intent(PermainanActivity.this, KuisActivity.class);
             startActivity(kuisIntent);
         });
+    }
+
+    public void onBackPressed() {
+        // TODO: Use declarative variable name
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), MenuActivity.class);
+        startActivity(intent);
     }
 }

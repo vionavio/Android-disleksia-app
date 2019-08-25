@@ -1,7 +1,6 @@
 package dyslexia.titi.frag27.kamus.fragment;
 
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -120,5 +118,4 @@ public class AdjektivaFragment extends Fragment {
         }
         super.onPause();
     }
-
 }

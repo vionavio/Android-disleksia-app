@@ -64,21 +64,16 @@ public class NominaFragment extends Fragment {
         adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("nomina"));
         lv.setAdapter(adapter);
 
-        t1 = new TextToSpeech(getActivity().getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    t1.setLanguage(new Locale("id", "ID"));
-                }
+        t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                t1.setLanguage(new Locale("id", "ID"));
             }
         });
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
-                Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
-                t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
-            }
+        lv.setOnItemClickListener((parent, view, position, id) -> {
+            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+            Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
+            t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
         });
     }
 
@@ -96,7 +91,6 @@ public class NominaFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
 
-
         inflater.inflate(R.menu.search_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -113,8 +107,6 @@ public class NominaFragment extends Fragment {
 
                 adapter.getFilter().filter(word);
                 return false;
-
-
             }
         });
 
@@ -128,5 +120,4 @@ public class NominaFragment extends Fragment {
         }
         super.onPause();
     }
-
 }

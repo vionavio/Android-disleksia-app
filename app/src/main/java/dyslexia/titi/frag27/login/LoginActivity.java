@@ -45,39 +45,36 @@ public class LoginActivity extends AppCompatActivity {
         initViews();
 
         //set click event of login button
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnLogin.setOnClickListener(view -> {
 
-                //Check user input is correct or not
-                if (validate()) {
+            //Check user input is correct or not
+            if (validate()) {
 
-                    //Get values from EditText fields
-                    String Email = editTextEmail.getText().toString();
-                    String Password = editTextPassword.getText().toString();
+                //Get values from EditText fields
+                String Email = editTextEmail.getText().toString();
+                String Password = editTextPassword.getText().toString();
 
-                    //Authenticate user
-                    User currentUser = databaseHelper.Authenticate(new User(null, null,null,null, null, Email, Password));
+                //Authenticate user
+                User currentUser = databaseHelper.Authenticate(new User(null, null, null, null, null, Email, Password));
 
-                    //Check Authentication is successful or not
-                    if (currentUser != null) {
-                        Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
+                //Check Authentication is successful or not
+                if (currentUser != null) {
+                    Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
 
-                        //shared preferences digunakan untuk menyimpan key value dari login yang telah terjadi
+                    //shared preferences digunakan untuk menyimpan key value dari login yang telah terjadi
 
-                        SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        mSettings.edit().putBoolean("isLoggedIn", true).apply();
+                    SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    mSettings.edit().putBoolean("isLoggedIn", true).apply();
 
-                        //User Logged in Successfully Launch You home screen activity
-                        Intent intent=new Intent(LoginActivity.this, MenuActivity.class);
-                        startActivity(intent);
-                        finish();
+                    //User Logged in Successfully Launch You home screen activity
+                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                    finish();
 
-                    } else {
+                } else {
 
-                        //User Logged in Failed
-                        Snackbar.make(btnLogin, "Gagal masuk , silakan coba lagi", Snackbar.LENGTH_LONG).show();
-                    }
+                    //User Logged in Failed
+                    Snackbar.make(btnLogin, "Gagal masuk , silakan coba lagi", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
@@ -88,12 +85,9 @@ public class LoginActivity extends AppCompatActivity {
     private void initCreateAccountTextView() {
         TextView textViewCreateAccount = (TextView) findViewById(R.id.textViewCreateAccount);
         textViewCreateAccount.setText(fromHtml("<font color='#aaa'>Saya belum punya akun. </font><font color='#0c0099'> Buat Akun</font>"));
-        textViewCreateAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        textViewCreateAccount.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
     }
 

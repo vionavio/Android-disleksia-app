@@ -18,11 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (mSettings.getBoolean("isLoggedIn", false)) {
-
             Intent menuIntent = new Intent(MainActivity.this, MenuActivity.class);
             startActivity(menuIntent);
         }
-
         setContentView(R.layout.activity_main);
     }
 
@@ -32,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void Register(View view) {
-
         Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
         startActivity(registerIntent);
     }
