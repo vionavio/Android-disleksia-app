@@ -31,9 +31,16 @@
         <item name="android:textColorPrimary">#968540</item>
     </style>
 
+    <style name="MenuKuis" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#fbc02d</item>
+        <item name="colorPrimaryDark">#e1a205</item>
+        <item name="android:textColorPrimary">#FFFfff</item>
+    </style>
+
     <style name="PerbaikanKata" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#dbfeac</item>
+        <item name="colorPrimary">#FBC02D</item>
         <item name="colorPrimaryDark">#689F38</item>
         <item name="android:textColorPrimary">#558c26</item>
     </style>
@@ -109,6 +116,11 @@
         <item name="tabBackground">@color/primary_color</item>
         <item name="tabTextAppearance">@style/MyCustomTabTextAppearance</item>
         <item name="tabSelectedTextColor">@android:color/white</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#ff6f00</item>
+        <item name="colorControlActivated">#ffffff</item>
     </style>
 
 </resources>

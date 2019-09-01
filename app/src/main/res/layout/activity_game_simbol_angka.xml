@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffeee6"
+    tools:context=".permainan.kuis.simbolAngka.GameSimbolAngkaActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/tvCountdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="00:30"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            android:freezesText="true"/>
+        <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textAlignment="viewEnd"
+            android:textColor="@android:color/black"
+            android:text="Nilai: 0"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/question_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvScore"
+            android:textSize="18sp"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/black"
+            android:text="Pertanyaan: 1/x"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_margin="20dp"
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="159dp"
+            app:srcCompat="@drawable/buku"
+            android:id="@+id/imageView1" />
+
+            <TextView
+                android:id="@+id/message1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:textColor="@color/primary_color"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingRight="30dp"
+                android:text="Huruf yang diacak" />
+
+            <TextView
+                android:id="@+id/scrambledletters"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAllCaps="true"
+                android:textColor="@color/primary_color"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="26sp"
+                android:textStyle="normal|bold" />
+            <TextView
+                android:layout_row="1"
+                android:layout_column="0"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Susun huruf dengan urutan yang benar"
+                android:paddingLeft="8dp"
+                android:paddingRight="30dp"
+                android:textColor="@color/primary_color"
+                android:id="@+id/message2"
+                />
+
+        <EditText
+            android:id="@+id/answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:textColor="@color/primary_color"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="text" />
+        <Button
+            android:id="@+id/check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/btn_round4"
+            android:text="SELANJUTNYA"
+            android:textColor="#4d0000"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
