@@ -1,40 +1,35 @@
 package dyslexia.titi.frag27.perbaikanKata;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
-
-import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Kamus;
+import dyslexia.titi.frag27.kamus.model.KamusSimilar;
 
 public class PerbaikanKataActivity extends AppCompatActivity {
 
-    TextToSpeech t1;
+    TextToSpeech textToSpeech;
     EditText ed_kataAwal;
     Button btn_proseskata;
-    TextView tv_hasil;
-    ListView lv_hasil;
-    //ImageView iv_suara;
-    DatabaseAdapter db;
-
+    ListView listViewSimiliarWords;
+    DatabaseAdapter databaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,57 +38,66 @@ public class PerbaikanKataActivity extends AppCompatActivity {
 
         ed_kataAwal = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
-        tv_hasil = findViewById(R.id.tv_hasil);
-        lv_hasil = findViewById(R.id.lv_hasil);
-        //iv_suara = findViewById(R.id.iv_suara);
-        btn_proseskata.setOnClickListener(view -> {
-            jaroWinklerDistance();
-        });
-       // loadSuara();
+        listViewSimiliarWords = findViewById(R.id.lv_similar_words);
+        btn_proseskata.setOnClickListener(view -> jaroWinklerDistance());
+        loadSuara();
     }
 
     private void jaroWinklerDistance() {
+        List<Kamus> kamusList;
+        List<KamusSimilar> kamusSimilarList = new ArrayList<>();
+        List<KamusSimilar> kamusSimilarFilteredList = new ArrayList<>();
+        List<String> finalWords = new ArrayList<>();
 
-        List<Kamus> listKata;
-        db = new DatabaseAdapter(getApplicationContext());
-        listKata = db.retrieveKamus("all");
+        databaseAdapter = new DatabaseAdapter(getApplicationContext());
+        kamusList = databaseAdapter.retrieveKamus("all");
 
-        String hasil = "";
-        double similarityMax = 0;
-        for (Kamus kamus : listKata) {
-            double similarity = new JaroWinkler().getSimilarity(kamus.getWord(), ed_kataAwal.getText().toString());
-            if (similarity > similarityMax && similarity > 0.7) {
-                similarityMax = similarity;
-                hasil = kamus.getWord();
+        for (Kamus kamus : kamusList) {
+            kamusSimilarList.add(new KamusSimilar(kamus.getId_word(), kamus.getWord(), kamus.getType(), getSimilarScore(kamus.getWord())));
+        }
+        for (KamusSimilar kamusSimilar : kamusSimilarList) {
+            if (kamusSimilar.getSimilarScore() > 0.7) {
+                kamusSimilarFilteredList.add(kamusSimilar);
             }
         }
-        final ArrayAdapter<Kamus> adapter = new ArrayAdapter<Kamus>(this,
-                android.R.layout.simple_list_item_1, R.id.tv_hasil, listKata);
-        lv_hasil.setAdapter(adapter);
-        tv_hasil.setText(hasil);
+        Collections.sort(kamusSimilarFilteredList, (kamusSimilar, kamusSimilar2) -> Double.compare(kamusSimilar2.getSimilarScore(), kamusSimilar.getSimilarScore()));
+        Log.d("aaaaaa", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
+        for (KamusSimilar kamusSimilar : kamusSimilarFilteredList) {
+            finalWords.add(kamusSimilar.getWord());
+        }
 
-        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        //Find the currently focused view, so we can grab the correct window token from it.
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, finalWords);
+        listViewSimiliarWords.setAdapter(arrayAdapter);
+        inputMethodManager();
+    }
+
+    private void inputMethodManager() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        // Find the currently focused view, so we can grab the correct window token from it.
         View view = this.getCurrentFocus();
-        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        // If no view currently has focus, create a new one, just so we can grab a window token from it
         if (view == null) {
             view = new View(this);
         }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-//    private void loadSuara() {
-//        t1 = new TextToSpeech(getApplicationContext(), status -> {
-//            if (status != TextToSpeech.ERROR) {
-//                t1.setLanguage(new Locale("id", "ID"));
-//            }
-//        });
-//
+    private double getSimilarScore(String word) {
+        String inputWord = ed_kataAwal.getText().toString();
+        return new JaroWinkler().getSimilarity(word, inputWord);
+    }
+
+    private void loadSuara() {
+        textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech.setLanguage(new Locale("id", "ID"));
+            }
+        });
+
 //        iv_suara.setOnClickListener(view -> {
 //            String toSpeak = tv_hasil.getText().toString();
 //            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
-//            t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+//            textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
 //        });
-//    }
+    }
 }

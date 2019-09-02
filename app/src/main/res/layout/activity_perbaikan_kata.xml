@@ -32,7 +32,7 @@
         android:textColor="#fff" />
 
     <ListView
-        android:id="@+id/lv_hasil"
+        android:id="@+id/lv_similar_words"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
