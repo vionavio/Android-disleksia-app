@@ -20,6 +20,7 @@ public class KamusSimilar extends Kamus {
     @Override
     public String toString() {
         return "KamusSimilar{" +
+                "word=" + getWord() + " " +
                 "similarScore=" + similarScore +
                 '}';
     }

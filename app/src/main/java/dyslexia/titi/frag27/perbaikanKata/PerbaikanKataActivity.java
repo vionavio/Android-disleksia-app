@@ -6,6 +6,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,6 +38,7 @@ public class PerbaikanKataActivity extends AppCompatActivity {
 
         ed_kataAwal = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
+        listViewSimiliarWords = findViewById(R.id.lv_similar_words);
         btn_proseskata.setOnClickListener(view -> jaroWinklerDistance());
         loadSuara();
     }
@@ -43,6 +46,8 @@ public class PerbaikanKataActivity extends AppCompatActivity {
     private void jaroWinklerDistance() {
         List<Kamus> kamusList;
         List<KamusSimilar> kamusSimilarList = new ArrayList<>();
+        List<KamusSimilar> kamusSimilarFilteredList = new ArrayList<>();
+        List<String> finalWords = new ArrayList<>();
 
         databaseAdapter = new DatabaseAdapter(getApplicationContext());
         kamusList = databaseAdapter.retrieveKamus("all");
@@ -50,8 +55,21 @@ public class PerbaikanKataActivity extends AppCompatActivity {
         for (Kamus kamus : kamusList) {
             kamusSimilarList.add(new KamusSimilar(kamus.getId_word(), kamus.getWord(), kamus.getType(), getSimilarScore(kamus.getWord())));
         }
-
-        Log.d("aaaaaa", "jaroWinklerDistance: " + kamusSimilarList.toString());
+        for (KamusSimilar kamusSimilar : kamusSimilarList) {
+            if (kamusSimilar.getSimilarScore() > 0.7) {
+                kamusSimilarFilteredList.add(kamusSimilar);
+            }
+        }
+        Collections.sort(kamusSimilarFilteredList, (kamusSimilar, kamusSimilar2) -> {
+            double comparator = kamusSimilar2.getSimilarScore() - kamusSimilar.getSimilarScore();
+            return (int) Math.floor(comparator);
+        });
+        for (KamusSimilar kamusSimilar: kamusSimilarFilteredList) {
+            finalWords.add(kamusSimilar.getWord());
+        }
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, finalWords);
+        listViewSimiliarWords.setAdapter(arrayAdapter);
+        Log.d("aaaaaa", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
         inputMethodManager();
     }
 
