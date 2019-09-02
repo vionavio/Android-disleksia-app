@@ -40,5 +40,22 @@
     <string name="perempuan">Perempuan</string>
     <string name="pengaturan">Pengaturan</string>
     <string name="logout">Logout</string>
+    <string name="petunjuk">PETUNJUK</string>
+    <string name="a_petubjuk_kamus">A. Petunjuk Kamus</string>
+    <string name="petunjuk_kamus_1">1. Menu kamus merupakan menu yang berisi kamus bahasa indonesia yang didalamnya dibagi menjadi 6 kategori yaitu simbol huruf, simbol angka, kata kerja, kata benda, kata sifat dan kata keterangan</string>
+    <string name="petunjuk_kamu_2">2. Pada kamus ini terdapat fitur pencarian kata yang terdapat pada kamus</string>
+    <string name="b_petubjuk_perbaikan_kata">B. Petunjuk Perbaikan Kata</string>
+    <string name="petunjuk_perbaikan_kata_1">1. Menu Perbaikan kata merupakan menu untuk memperbaiki kata yang diinputkan oleh pengguna</string>
+    <string name="petunjuk_perbaikan_kata_2">2. Cara menggunakanya yaitu ketik kata yang akan dikoreksi, kata akan diproses dan kata dengan nilai kesamaan paling tinggi akan muncul</string>
+    <string name="c_petubjuk_permainan">C. Petunjuk Permainan</string>
+    <string name="petunjuk_permainan_1">1. Menu permainan yang pertama yaitu abjad, pada permainan ini akan disajikan abjad yang teracak</string>
+    <string name="petunjuk_permainan_2">2. Pemain harus mengurutkan abjad dengan benar berdasarkan huruf yang tertera sehingga pemain berhasil menyelesaikan permainan ini</string>
+    <string name="petunjuk_permainan_3">3. Permainan ini disediakan tombol untuk beralih ke abjad dalam huruf kapital dan huruf kecil</string>
+    <string name="petunjuk_permainan_4">4. Menu permainan yang kedua yaitu kuis, dalam kuis ini terbagi menjadi lima pilihan kuis yaitu kuis simbol angka, kata benda, kata kerja, kata sidat dan kata keterangan</string>
+    <string name="petunjuk_permainan_5">5. Kuis ini disajikan dengan gambar dan terdapat huruf teracak, pemain diminta untuk menyusun sebuah kata dari huruf yang telah teracak. Kata yang mendiskripsikan gambar</string>
+    <string name="petunjuk_permainan_6">6. Kuis ini terdiri dari 10 soal setiap menu</string>
+    <string name="petunjuk_permainan_7">7. Dalam menjawab kuis, setiap kuis akan dibatasi waktu 30 detik</string>
+    <string name="petunjuk_permianan_8">8. Jika pemain dapat menjawab dengan benar satu soal, akan mendapatkan skor 1, jika salah akan mendapatkan skor 0</string>
+    <string name="petunjuk_permainan_9">9. Skor total akan muncul diakhir ketika pemain sudah menyelesaikan kuis</string>
 
 </resources>

@@ -1,40 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f9ebf1"
+    android:padding="20dp"
     android:orientation="vertical"
     tools:context=".bantuan.BantuanActivity">
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="PETUNJUK"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="A. Petubjuk Kamus"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1. Menu kamus merupakan menu yang berisi kamus
-        bahasa indonesia yang didalamnya dibagi menjadi
-        6 kategori yaitu simbol huruf, simbol angka, kata kerja,
-     kata benda, kata sifat dan kata keterangan"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="B. Petubjuk Perbaikan Kata"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="A. Petubjuk Permainan"
-        />
+        android:layout_height="wrap_content">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:paddingBottom="10dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="@string/petunjuk" />
 
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:textColor="@color/colorBlack"
+        android:textSize="23sp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:text="@string/a_petubjuk_kamus" />
+
+    <com.codesgood.views.JustifiedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/petunjuk_kamus_1" />
+
+    <com.codesgood.views.JustifiedTextView
+        android:layout_width="match_parent"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_kamu_2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:paddingBottom="10dp"
+        android:textSize="23sp"
+        android:text="@string/b_petubjuk_perbaikan_kata" />
+
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_perbaikan_kata_1" />
+
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_perbaikan_kata_2" />
+
+    <TextView
+        android:textColor="@color/colorBlack"
+        android:textSize="23sp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/c_petubjuk_permainan" />
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_permainan_1"/>
+    <com.codesgood.views.JustifiedTextView
+        android:layout_width="match_parent"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_permainan_2"/>
+
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_permainan_3" />
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_permainan_4" />
+    <com.codesgood.views.JustifiedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/petunjuk_permainan_5" />
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_permainan_6" />
+    <com.codesgood.views.JustifiedTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/colorBlack"
+        android:text="@string/petunjuk_permainan_7" />
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/petunjuk_permianan_8" />
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/petunjuk_permainan_9" />
+    </LinearLayout>
+
+</ScrollView>

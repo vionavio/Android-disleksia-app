@@ -40,7 +40,7 @@
 
     <style name="PerbaikanKata" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#FBC02D</item>
+        <item name="colorPrimary">#cee6b3</item>
         <item name="colorPrimaryDark">#689F38</item>
         <item name="android:textColorPrimary">#558c26</item>
     </style>
@@ -50,6 +50,13 @@
         <item name="colorPrimary">#8ac6d1</item>
         <item name="colorPrimaryDark">#66a2ac</item>
         <item name="android:textColorPrimary">#afecf7</item>
+    </style>
+
+    <style name="Bantuan" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#892953</item>
+        <item name="colorPrimaryDark">#3b1223</item>
+        <item name="android:textColorPrimary">#f3d8e4</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

@@ -11,32 +11,44 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".permainan.kuis.ScoreActivity"
-            android:theme="@style/noTitleBar"></activity>
-        <activity android:name=".permainan.kuis.kataSifat.GameKataSifatActivity"
-            android:theme="@style/noTitleBar"/>
-        <activity android:name=".permainan.kuis.kataKeterangan.GameKataKeteranganActivity"
-            android:theme="@style/noTitleBar"/>
-        <activity android:name=".permainan.kuis.kataKerja.GameKataKerjaActivity"
-            android:theme="@style/noTitleBar"/>
-        <activity android:name=".permainan.kuis.simbolAngka.GameSimbolAngkaActivity"
-            android:theme="@style/noTitleBar"/>
-        <activity android:name=".permainan.kuis.kataBenda.GameKataBendaActivity"
-            android:theme="@style/noTitleBar"/>
+        <activity android:name=".tentang.TentangActivity"></activity>
+        <activity
+            android:name=".permainan.kuis.ScoreActivity"
+            android:theme="@style/noTitleBar" />
+        <activity
+            android:name=".permainan.kuis.kataSifat.GameKataSifatActivity"
+            android:theme="@style/noTitleBar" />
+        <activity
+            android:name=".permainan.kuis.kataKeterangan.GameKataKeteranganActivity"
+            android:theme="@style/noTitleBar" />
+        <activity
+            android:name=".permainan.kuis.kataKerja.GameKataKerjaActivity"
+            android:theme="@style/noTitleBar" />
+        <activity
+            android:name=".permainan.kuis.simbolAngka.GameSimbolAngkaActivity"
+            android:theme="@style/noTitleBar" />
+        <activity
+            android:name=".permainan.kuis.kataBenda.GameKataBendaActivity"
+            android:theme="@style/noTitleBar" />
         <activity
             android:name=".permainan.susunAlfabet.LowercaseActivity"
             android:label="Menyusun Abjad"
             android:parentActivityName=".permainan.PermainanActivity"
             android:theme="@style/GameAbjad" />
-        <activity android:name=".permainan.kuis.KuisActivity"
-            android:theme="@style/MenuKuis"
-            android:label="Menu Kuis"/>
+        <activity
+            android:name=".permainan.kuis.KuisActivity"
+            android:label="Menu Kuis"
+            android:theme="@style/MenuKuis" />
         <activity
             android:name=".permainan.susunAlfabet.SusunAlfabet"
             android:label="Menyusun Abjad"
             android:parentActivityName=".permainan.PermainanActivity"
             android:theme="@style/GameAbjad" />
-        <activity android:name=".bantuan.BantuanActivity" />
+        <activity
+            android:name=".bantuan.BantuanActivity"
+            android:label="Menyusun Abjad"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/Bantuan" />
         <activity android:name=".setting.SettingActivity" />
         <activity
             android:name=".perbaikanKata.PerbaikanKataActivity"

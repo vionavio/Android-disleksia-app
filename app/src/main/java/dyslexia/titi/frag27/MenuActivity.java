@@ -12,6 +12,7 @@ import dyslexia.titi.frag27.kamus.KamusActivity;
 import dyslexia.titi.frag27.perbaikanKata.PerbaikanKataActivity;
 import dyslexia.titi.frag27.permainan.PermainanActivity;
 import dyslexia.titi.frag27.setting.SettingActivity;
+import dyslexia.titi.frag27.tentang.TentangActivity;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -43,29 +44,16 @@ public class MenuActivity extends AppCompatActivity {
             startActivity(bantuanIntent);
         });
 
-//        CardView tentang = (CardView) findViewById(R.id.tentang);
-//        tentang.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                Intent tentangIntent = new Intent(MenuActivity.this, TentangActivity.class);
-//                startActivity(tentangIntent);
-//            }
-//        });
+        CardView tentang = findViewById(R.id.tentang);
+        tentang.setOnClickListener(view -> {
+            Intent tentangIntent = new Intent(MenuActivity.this, TentangActivity.class);
+            startActivity(tentangIntent);
+        });
 
-//        final AppDatabase db = RoomAsset.databaseBuilder(
-//                getApplicationContext(), AppDatabase.class, "dictionary.sqlite").build();
-//        db.wordDao().getWords().observe(this, new Observer<List<WordEntity>>() {
-//            @Override
-//            public void onChanged(@Nullable List<WordEntity> wordEntities) {
-//                assert wordEntities != null;
-//                Log.d("Word entity = ", wordEntities.get(1).getWord());
-//            }
-//        });
-        CardView perbaikanKata = (CardView) findViewById(R.id.perbaikankata);
-        perbaikanKata.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent perbaikanKataIntent = new Intent(MenuActivity.this, PerbaikanKataActivity.class);
-                startActivity(perbaikanKataIntent);
-            }
+        CardView perbaikanKata = findViewById(R.id.perbaikankata);
+        perbaikanKata.setOnClickListener(view -> {
+            Intent perbaikanKataIntent = new Intent(MenuActivity.this, PerbaikanKataActivity.class);
+            startActivity(perbaikanKataIntent);
         });
     }
 
