@@ -14,11 +14,10 @@
         android:id="@+id/ed_kataAwal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:gravity="center"
         android:hint="Masukkan teks disini"
         android:inputType="textPersonName"
-        android:paddingTop="80dp"
+        android:paddingTop="60dp"
         android:textColor="#455d29"
         android:textSize="28sp" />
 
@@ -32,25 +31,31 @@
         android:text="@string/cek_kata"
         android:textColor="#fff" />
 
-    <TextView
-        android:id="@+id/tv_hasil"
+    <ListView
+        android:id="@+id/lv_hasil"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:gravity="center_horizontal"
-        android:lines="3"
-        android:textColor="#455d29"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"/>
 
-    <ImageView
-        android:id="@+id/iv_suara"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        app:srcCompat="@drawable/volume" />
+<!--    <TextView-->
+<!--        android:id="@+id/tv_hasil"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="10dp"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:gravity="center_horizontal"-->
+<!--        android:lines="3"-->
+<!--        android:textColor="#455d29"-->
+<!--        android:textSize="28sp"-->
+<!--        android:textStyle="bold" />-->
+
+
+<!--    <ImageView-->
+<!--        android:id="@+id/iv_suara"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        app:srcCompat="@drawable/volume" />-->
 
 </LinearLayout>

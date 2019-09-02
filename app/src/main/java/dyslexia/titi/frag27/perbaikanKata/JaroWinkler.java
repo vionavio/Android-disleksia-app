@@ -17,7 +17,7 @@ public class JaroWinkler {
 
         double res = -1;
 
-         int m = getMatch();
+        int m = getMatch();
         int t = 0;
         if (getMissMatch(compTwo,compOne) > 0)
         {

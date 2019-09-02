@@ -33,4 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
         startActivity(registerIntent);
     }
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }

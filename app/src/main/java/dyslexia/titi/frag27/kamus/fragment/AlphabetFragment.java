@@ -65,12 +65,9 @@ public class AlphabetFragment extends Fragment {
         adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("alphabet"));
         lv.setAdapter(adapter);
 
-        t1 = new TextToSpeech(getActivity().getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    t1.setLanguage(new Locale("id", "ID"));
-                }
+        t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                t1.setLanguage(new Locale("id", "ID"));
             }
         });
 

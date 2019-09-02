@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,8 @@ public class PerbaikanKataActivity extends AppCompatActivity {
     EditText ed_kataAwal;
     Button btn_proseskata;
     TextView tv_hasil;
-    ImageView iv_suara;
+    ListView lv_hasil;
+    //ImageView iv_suara;
     DatabaseAdapter db;
 
 
@@ -41,14 +44,17 @@ public class PerbaikanKataActivity extends AppCompatActivity {
         ed_kataAwal = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
         tv_hasil = findViewById(R.id.tv_hasil);
-        iv_suara = findViewById(R.id.iv_suara);
-        btn_proseskata.setOnClickListener(view -> jaroWinklerDistance());
-        loadSuara();
+        lv_hasil = findViewById(R.id.lv_hasil);
+        //iv_suara = findViewById(R.id.iv_suara);
+        btn_proseskata.setOnClickListener(view -> {
+            jaroWinklerDistance();
+        });
+       // loadSuara();
     }
 
     private void jaroWinklerDistance() {
 
-        List<Kamus> listKata = new ArrayList<>();
+        List<Kamus> listKata;
         db = new DatabaseAdapter(getApplicationContext());
         listKata = db.retrieveKamus("all");
 
@@ -59,10 +65,11 @@ public class PerbaikanKataActivity extends AppCompatActivity {
             if (similarity > similarityMax && similarity > 0.7) {
                 similarityMax = similarity;
                 hasil = kamus.getWord();
-
             }
         }
-
+        final ArrayAdapter<Kamus> adapter = new ArrayAdapter<Kamus>(this,
+                android.R.layout.simple_list_item_1, R.id.tv_hasil, listKata);
+        lv_hasil.setAdapter(adapter);
         tv_hasil.setText(hasil);
 
         InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -76,23 +83,17 @@ public class PerbaikanKataActivity extends AppCompatActivity {
 
     }
 
-    private void loadSuara() {
-        t1 = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    t1.setLanguage(new Locale("id", "ID"));
-                }
-            }
-        });
-
-        iv_suara.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String toSpeak = tv_hasil.getText().toString();
-                Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
-                t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-            }
-        });
-    }
+//    private void loadSuara() {
+//        t1 = new TextToSpeech(getApplicationContext(), status -> {
+//            if (status != TextToSpeech.ERROR) {
+//                t1.setLanguage(new Locale("id", "ID"));
+//            }
+//        });
+//
+//        iv_suara.setOnClickListener(view -> {
+//            String toSpeak = tv_hasil.getText().toString();
+//            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+//            t1.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+//        });
+//    }
 }
