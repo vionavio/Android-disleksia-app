@@ -59,6 +59,20 @@
         <item name="android:textColorPrimary">#f3d8e4</item>
     </style>
 
+    <style name="Tentang" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#7ecec3</item>
+        <item name="colorPrimaryDark">#389488</item>
+        <item name="android:textColorPrimary">#235c55</item>
+    </style>
+
+    <style name="Setting" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#a6a6a6</item>
+        <item name="colorPrimaryDark">#737373</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

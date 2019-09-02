@@ -5,13 +5,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".tentang.TentangActivity"></activity>
+
         <activity
             android:name=".permainan.kuis.ScoreActivity"
             android:theme="@style/noTitleBar" />
@@ -46,10 +46,19 @@
             android:theme="@style/GameAbjad" />
         <activity
             android:name=".bantuan.BantuanActivity"
-            android:label="Menyusun Abjad"
+            android:label="Bantuan"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/Bantuan" />
-        <activity android:name=".setting.SettingActivity" />
+
+        <activity android:name=".tentang.TentangActivity"
+            android:label="Tentang"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/Tentang"/>
+
+        <activity android:name=".setting.SettingActivity"
+            android:label="Pengaturan"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/Setting"/>
         <activity
             android:name=".perbaikanKata.PerbaikanKataActivity"
             android:label="Perbaikan Kata"

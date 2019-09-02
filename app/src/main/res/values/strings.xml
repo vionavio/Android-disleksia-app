@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Frag27</string>
+    <string name="app_name">Disleksia App</string>
 
     <string name="app_n_kamus">Kamus</string>
 
@@ -57,5 +57,7 @@
     <string name="petunjuk_permainan_7">7. Dalam menjawab kuis, setiap kuis akan dibatasi waktu 30 detik</string>
     <string name="petunjuk_permianan_8">8. Jika pemain dapat menjawab dengan benar satu soal, akan mendapatkan skor 1, jika salah akan mendapatkan skor 0</string>
     <string name="petunjuk_permainan_9">9. Skor total akan muncul diakhir ketika pemain sudah menyelesaikan kuis</string>
+    <string name="tentang_isi">Aplikasi disleksia sebagai media pembantu penderita disleksia dari umur 6 tahun keatas. Aplikasi ini fokus untuk membantu penderita disleksia dalam mempelajari kata dan mengenal huruf dengan benar. Aplikasi ini dikembangkan oleh Maryati, mahasiswi UPN "Veteran" Yogyakarta dalam penelitian Pengembangan Media Pembelajaran untuk Penderita Disleksia dengan Algoritma Jaro Winkler Distance Berbasis Android</string>
+    <string name="disleksia_app">Disleksia App</string>
 
 </resources>
