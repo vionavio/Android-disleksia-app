@@ -60,16 +60,14 @@ public class PerbaikanKataActivity extends AppCompatActivity {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
         }
-        Collections.sort(kamusSimilarFilteredList, (kamusSimilar, kamusSimilar2) -> {
-            double comparator = kamusSimilar2.getSimilarScore() - kamusSimilar.getSimilarScore();
-            return (int) Math.floor(comparator);
-        });
-        for (KamusSimilar kamusSimilar: kamusSimilarFilteredList) {
+        Collections.sort(kamusSimilarFilteredList, (kamusSimilar, kamusSimilar2) -> Double.compare(kamusSimilar2.getSimilarScore(), kamusSimilar.getSimilarScore()));
+        Log.d("aaaaaa", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
+        for (KamusSimilar kamusSimilar : kamusSimilarFilteredList) {
             finalWords.add(kamusSimilar.getWord());
         }
+
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, finalWords);
         listViewSimiliarWords.setAdapter(arrayAdapter);
-        Log.d("aaaaaa", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
         inputMethodManager();
     }
 

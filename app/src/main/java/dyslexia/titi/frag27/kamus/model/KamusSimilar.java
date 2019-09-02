@@ -22,6 +22,6 @@ public class KamusSimilar extends Kamus {
         return "KamusSimilar{" +
                 "word=" + getWord() + " " +
                 "similarScore=" + similarScore +
-                '}';
+                "}\n";
     }
 }
