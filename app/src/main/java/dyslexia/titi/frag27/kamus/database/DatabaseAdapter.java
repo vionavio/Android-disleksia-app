@@ -56,6 +56,7 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
 
         if (cursor.moveToFirst()) {
             do {
+                Kamus kamus = new Kamus(0, "", "");
                 kamus.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
                 kamus.setWord(cursor.getString(cursor.getColumnIndex("word")));
                 kamus.setType(cursor.getString(cursor.getColumnIndex("type")));
@@ -65,6 +66,4 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
         }
         return kamuses;
     }
-
-
 }
