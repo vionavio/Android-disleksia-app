@@ -17,6 +17,7 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
 
     private static final String DB_NAME = "dictionary2.db";
     private static final int DB_VER = 1;
+    public Kamus kamus;
 
     public DatabaseAdapter(Context context) {
         super(context, DB_NAME, null, DB_VER);
@@ -55,7 +56,6 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Kamus kamus = new Kamus();
                 kamus.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
                 kamus.setWord(cursor.getString(cursor.getColumnIndex("word")));
                 kamus.setType(cursor.getString(cursor.getColumnIndex("type")));
