@@ -1,5 +1,5 @@
 package dyslexia.titi.frag27.kamus.model;
-// Created by Arif Ikhsanudin on 9/2/2019.
+
 
 public class KamusSimilar extends Kamus {
     private double similarScore;

@@ -1,6 +1,8 @@
 package dyslexia.titi.frag27.kamus.fragment;
 
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
@@ -9,7 +11,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -17,23 +22,34 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.kamus.adapter.MyPageAdapter;
+import dyslexia.titi.frag27.kamus.crud.DetailKamusActivity;
+import dyslexia.titi.frag27.kamus.crud.EditKamusActivity;
+import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Kamus;
-
-import static android.R.layout.simple_list_item_1;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AdjektivaFragment extends Fragment {
+public class AdjektivaFragment extends Fragment  {
 
     ListView lv;
     TextView tv;
     ArrayAdapter<Kamus> adapter;
+    List<Kamus> kamuses = new ArrayList<>();
     TextToSpeech t1;
+
+    MyPageAdapter pagerAdapter;
+    private Button tambahButton;
+    private Button editButton;
+    private Button detailButton;
+    private Button delButton;
 
     public static AdjektivaFragment newInstance() {
         return new AdjektivaFragment();
@@ -70,12 +86,61 @@ public class AdjektivaFragment extends Fragment {
             }
         });
 
-        lv.setOnItemClickListener((parent, view, position, id) -> {
+        lv.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
             Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
             Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
             t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
         });
+
+        lv.setOnItemLongClickListener((adapterView, view, position, id) -> {
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_view_kamus);
+                    dialog.show();
+
+                    tambahButton = dialog.findViewById(R.id.button_tambah_data);
+                    editButton = dialog.findViewById(R.id.button_edit_data);
+                    detailButton = dialog.findViewById(R.id.button_detail);
+                    delButton = dialog.findViewById(R.id.button_delete_data);
+
+                    Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+
+                    tambahButton.setOnClickListener((View view1) -> {
+                        Intent tambahIntent = new Intent(this.getActivity(), TambahKamusActivity.class);
+                        startActivity(tambahIntent);
+                    });
+
+                    //apabila tombol edit diklik
+                    editButton.setOnClickListener(
+                            v -> {
+                                //  Auto-generated method stub
+                                switchToEdit(selectedFromList.getId_word());
+                                dialog.dismiss();
+                            }
+                    );
+                    //apabila tombol detail diklik
+                    detailButton.setOnClickListener(
+                            v -> {
+                                //  Auto-generated method stub
+                                switchToGetData(selectedFromList.getId_word());
+                                dialog.dismiss();
+                            }
+                    );
+
+                    delButton.setOnClickListener(
+                            v -> {
+                                // Delete kata dari db
+                                DatabaseAdapter databaseAdapter = new DatabaseAdapter(getActivity());
+                                databaseAdapter.deleteKamus(selectedFromList.getId_word());
+                                getActivity().finish();
+                            }
+                    );
+                    return true;
+                }
+        );
     }
+
+
+
 
     private void initializeViews(View rootView) {
         lv = rootView.findViewById(R.id.list);
@@ -111,11 +176,47 @@ public class AdjektivaFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    public void onPauseID() {
+    public void onPause() {
         if (t1 != null) {
             t1.stop();
             t1.shutdown();
         }
         super.onPause();
     }
+
+    //method untuk get single data
+    private void switchToEdit(long id_word) {
+
+        DatabaseAdapter databaseAdapter =new DatabaseAdapter(getActivity());
+        Kamus selectedFromList = (Kamus) databaseAdapter.getKamus(id_word);
+        Intent intent = new Intent(getActivity(), EditKamusActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("id_word", selectedFromList.getId_word());
+        bundle.putString("word", selectedFromList.getWord());
+        bundle.putString("type",selectedFromList.getType());
+        intent.putExtras(bundle);
+        databaseAdapter.close();
+        startActivity(intent);
+    }
+
+    private void switchToGetData(long id_word) {
+        DatabaseAdapter databaseAdapter =new DatabaseAdapter(getActivity());
+        Kamus selectedFromList = (Kamus) databaseAdapter.getKamus(id_word);
+        Intent intent = new Intent(getActivity(), DetailKamusActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong("id_word", selectedFromList.getId_word());
+        bundle.putString("word", selectedFromList.getWord());
+        bundle.putString("type",selectedFromList.getType());
+        intent.putExtras(bundle);
+        databaseAdapter.close();
+        startActivity(intent);
+
+    }
+
+
+
+
+
+
+
 }

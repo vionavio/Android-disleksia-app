@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".kamus.crud.DetailKamusActivity"></activity>
+        <activity android:name=".kamus.crud.TambahKamusActivity" />
+        <activity android:name=".kamus.crud.EditKamusActivity" />
         <activity
             android:name=".permainan.kuis.ScoreActivity"
             android:theme="@style/noTitleBar" />
@@ -49,16 +51,16 @@
             android:label="Bantuan"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/Bantuan" />
-
-        <activity android:name=".tentang.TentangActivity"
+        <activity
+            android:name=".tentang.TentangActivity"
             android:label="Tentang"
             android:parentActivityName=".MenuActivity"
-            android:theme="@style/Tentang"/>
-
-        <activity android:name=".setting.SettingActivity"
+            android:theme="@style/Tentang" />
+        <activity
+            android:name=".setting.SettingActivity"
             android:label="Pengaturan"
             android:parentActivityName=".MenuActivity"
-            android:theme="@style/Setting"/>
+            android:theme="@style/Setting" />
         <activity
             android:name=".perbaikanKata.PerbaikanKataActivity"
             android:label="Perbaikan Kata"
