@@ -105,12 +105,10 @@ public class SusunAlfabet extends AppCompatActivity {
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Arial.ttf");
 
         textQuestion = (TextView) findViewById(R.id.textQuestion);
-        //   textScreen = (TextView) findViewById(R.id.textScreen);
-        // textTitle = (TextView) findViewById(R.id.textTitle);
+
 
         textQuestion.setTypeface(typeface);
-        //  textScreen.setTypeface(typeface);
-        // textTitle.setTypeface(typeface);
+
         editText.setTypeface(typeface);
         textView.setTypeface(typeface);
 
@@ -128,8 +126,6 @@ public class SusunAlfabet extends AppCompatActivity {
                     doValidate();
             }
         });
-
-
         viewParent.addView(textView);
     }
 

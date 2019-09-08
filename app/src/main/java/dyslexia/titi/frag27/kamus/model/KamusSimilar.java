@@ -1,6 +1,6 @@
 package dyslexia.titi.frag27.kamus.model;
 
-
+//kelas baru yang mewarisi kamus
 public class KamusSimilar extends Kamus {
     private double similarScore;
 

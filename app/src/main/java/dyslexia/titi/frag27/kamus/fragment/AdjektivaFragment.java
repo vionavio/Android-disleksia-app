@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -93,47 +92,34 @@ public class AdjektivaFragment extends Fragment  {
         });
 
         lv.setOnItemLongClickListener((adapterView, view, position, id) -> {
-                    Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_view_kamus);
-                    dialog.show();
+            Dialog dialog = new Dialog(getActivity());
+            dialog.setContentView(R.layout.dialog_view_kata);
+            dialog.show();
 
-                    tambahButton = dialog.findViewById(R.id.button_tambah_data);
-                    editButton = dialog.findViewById(R.id.button_edit_data);
-                    detailButton = dialog.findViewById(R.id.button_detail);
-                    delButton = dialog.findViewById(R.id.button_delete_data);
+            editButton = dialog.findViewById(R.id.button_edit_data);
+            delButton = dialog.findViewById(R.id.button_delete_data);
 
-                    Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
 
-                    tambahButton.setOnClickListener((View view1) -> {
-                        Intent tambahIntent = new Intent(this.getActivity(), TambahKamusActivity.class);
-                        startActivity(tambahIntent);
-                    });
 
-                    //apabila tombol edit diklik
-                    editButton.setOnClickListener(
-                            v -> {
-                                //  Auto-generated method stub
-                                switchToEdit(selectedFromList.getId_word());
-                                dialog.dismiss();
-                            }
-                    );
-                    //apabila tombol detail diklik
-                    detailButton.setOnClickListener(
-                            v -> {
-                                //  Auto-generated method stub
-                                switchToGetData(selectedFromList.getId_word());
-                                dialog.dismiss();
-                            }
-                    );
 
-                    delButton.setOnClickListener(
-                            v -> {
-                                // Delete kata dari db
-                                DatabaseAdapter databaseAdapter = new DatabaseAdapter(getActivity());
-                                databaseAdapter.deleteKamus(selectedFromList.getId_word());
-                                getActivity().finish();
-                            }
-                    );
+            //apabila tombol edit diklik
+            editButton.setOnClickListener(
+                    v -> {
+                        //  Auto-generated method stub
+                        switchToEdit(selectedFromList.getId_word());
+                        dialog.dismiss();
+                    }
+            );
+
+            delButton.setOnClickListener(
+                    v -> {
+                        // Delete kata dari db
+                        DatabaseAdapter databaseAdapter = new DatabaseAdapter(getActivity());
+                        databaseAdapter.deleteKamus(selectedFromList.getId_word());
+                        getActivity().finish();
+                    }
+            );
                     return true;
                 }
         );
@@ -199,19 +185,7 @@ public class AdjektivaFragment extends Fragment  {
         startActivity(intent);
     }
 
-    private void switchToGetData(long id_word) {
-        DatabaseAdapter databaseAdapter =new DatabaseAdapter(getActivity());
-        Kamus selectedFromList = (Kamus) databaseAdapter.getKamus(id_word);
-        Intent intent = new Intent(getActivity(), DetailKamusActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putLong("id_word", selectedFromList.getId_word());
-        bundle.putString("word", selectedFromList.getWord());
-        bundle.putString("type",selectedFromList.getType());
-        intent.putExtras(bundle);
-        databaseAdapter.close();
-        startActivity(intent);
 
-    }
 
 
 

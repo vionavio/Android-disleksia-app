@@ -1,16 +1,25 @@
 package dyslexia.titi.frag27.perbaikanKata;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -19,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Kamus;
 import dyslexia.titi.frag27.kamus.model.KamusSimilar;
@@ -30,18 +40,44 @@ public class PerbaikanKataActivity extends AppCompatActivity {
     Button btn_proseskata;
     ListView listViewSimiliarWords;
     DatabaseAdapter databaseAdapter;
+    ImageView iv_suara;
+
+    private Button editButton;
+    private Button deleteButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perbaikan_kata);
 
+        iv_suara = findViewById(R.id.iv_suara);
         ed_kataAwal = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
-        btn_proseskata.setOnClickListener(view -> jaroWinklerDistance());
+        btn_proseskata.setOnClickListener(view -> {
+            jaroWinklerDistance();
+        });
         loadSuara();
+        loadSuara2();
+        loadMenu();
     }
+
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.option_menu,menu);
+        return true;
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.tambahKata:
+                Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
+                startActivity(tambahIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     private void jaroWinklerDistance() {
         List<Kamus> kamusList;
@@ -56,7 +92,10 @@ public class PerbaikanKataActivity extends AppCompatActivity {
             kamusSimilarList.add(new KamusSimilar(kamus.getId_word(), kamus.getWord(), kamus.getType(), getSimilarScore(kamus.getWord())));
         }
         for (KamusSimilar kamusSimilar : kamusSimilarList) {
-            if (kamusSimilar.getSimilarScore() > 0.7) {
+            if (kamusSimilar.getSimilarScore() > 0.99 ) {
+                kamusSimilarFilteredList.add(kamusSimilar);
+            }
+            if ((kamusSimilar.getSimilarScore() > 0.89 )||(kamusSimilar.getSimilarScore() <= 0.99 ) ) {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
         }
@@ -83,7 +122,7 @@ public class PerbaikanKataActivity extends AppCompatActivity {
     }
 
     private double getSimilarScore(String word) {
-        String inputWord = ed_kataAwal.getText().toString();
+        String inputWord = ed_kataAwal.getText().toString().trim();
         return new JaroWinkler().getSimilarity(word, inputWord);
     }
 
@@ -94,10 +133,88 @@ public class PerbaikanKataActivity extends AppCompatActivity {
             }
         });
 
-//        iv_suara.setOnClickListener(view -> {
-//            String toSpeak = tv_hasil.getText().toString();
-//            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
-//            textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
-//        });
+        listViewSimiliarWords.setOnItemClickListener((AdapterView<?> adapterView, View view, int position, long l) -> {
+            String selectedItem = String.valueOf(adapterView.getItemAtPosition(position));
+            Toast.makeText(getApplicationContext(),""+ selectedItem,Toast.LENGTH_LONG).show();
+            textToSpeech.speak(selectedItem,TextToSpeech.QUEUE_FLUSH,null);
+        });
+
+    }
+
+    private void loadSuara2() {
+
+        textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech.setLanguage(new Locale("id", "ID"));
+            }
+        });
+
+        iv_suara.setOnClickListener(view -> {
+            String toSpeak = ed_kataAwal.getText().toString().trim();
+            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+            textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+        });
+
+    }
+
+    private void loadMenu() {
+        listViewSimiliarWords.setOnItemLongClickListener((adapterView, view, position, l) -> {
+            Dialog dialog = new Dialog(PerbaikanKataActivity.this);
+            dialog.setContentView(R.layout.dialog_view_kata);
+            dialog.show();
+
+            editButton = dialog.findViewById(R.id.button_edit_data);
+            deleteButton = dialog.findViewById(R.id.button_delete_data);
+
+             //String selectedFromList = (String) listViewSimiliarWords.getItemAtPosition(position);
+
+            Kamus selectedFromList = (Kamus) listViewSimiliarWords.getItemAtPosition(position);
+
+
+            //apabila tombol edit diklik
+            editButton.setOnClickListener(
+                    v -> {
+                        //  Auto-generated method stub
+                        //switchToEdit(selectedFromList.getId_word());
+                        Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
+                        startActivity(tambahIntent);
+                    }
+            );
+
+            deleteButton.setOnClickListener(
+                    v -> {
+                        // Delete kata dari db
+
+                        //Kamus selectedItem = (Kamus) adapterView.getItemAtPosition(position);
+                       // DatabaseAdapter databaseAdapter = new DatabaseAdapter(getApplicationContext());
+                        //databaseAdapter.deleteKamus(selectedItem.getId_word());
+                       // finish();
+                        //startActivity(getIntent());
+
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(PerbaikanKataActivity.this);
+                        builder.setTitle("Delete process");
+                        builder.setMessage("Are you sure to delete : ");
+
+                        builder.setPositiveButton("YES", (dialogInterface, i) -> {
+
+//                                databaseAdapter.deleteKamus(id.getText().toString());
+//                                name.setText("");
+//                                tel.setText("");
+                            Toast.makeText(PerbaikanKataActivity.this, "A contact is deleted ",
+                                    Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }).setNegativeButton("NO", (dialogInterface, i) -> {
+                            dialogInterface.cancel();
+                            dialog.dismiss();});
+
+                        builder.create().show();
+
+                    }
+            );
+
+
+            return false;
+        });
     }
 }

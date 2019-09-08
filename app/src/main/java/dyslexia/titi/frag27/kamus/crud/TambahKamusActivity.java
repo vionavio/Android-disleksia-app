@@ -25,11 +25,11 @@ public class TambahKamusActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_kamus);
-
-        buttonSubmit = (Button) findViewById(R.id.buttom_submit);
-        buttonSubmit.setOnClickListener((View.OnClickListener) this);
-        edWord = (EditText) findViewById(R.id.et_word);
-        edType = (EditText) findViewById(R.id.et_type);
+//
+//        buttonSubmit = (Button) findViewById(R.id.buttom_submit);
+//        buttonSubmit.setOnClickListener((View.OnClickListener) this);
+//        edWord = (EditText) findViewById(R.id.et_word);
+//        edType = (EditText) findViewById(R.id.et_type);
 
         // instanstiasi kelas DBDataSource
 //        DatabaseAdapter databaseAdapter = new DatabaseAdapter(this);

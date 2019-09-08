@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".kamus.crud.DetailKamusActivity"></activity>
+        <activity android:name=".kamus.crud.DetailKamusActivity"/>
         <activity android:name=".kamus.crud.TambahKamusActivity" />
         <activity android:name=".kamus.crud.EditKamusActivity" />
         <activity
