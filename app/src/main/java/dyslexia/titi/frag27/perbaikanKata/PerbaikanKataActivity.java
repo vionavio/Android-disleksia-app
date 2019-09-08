@@ -92,10 +92,11 @@ public class PerbaikanKataActivity extends AppCompatActivity {
             kamusSimilarList.add(new KamusSimilar(kamus.getId_word(), kamus.getWord(), kamus.getType(), getSimilarScore(kamus.getWord())));
         }
         for (KamusSimilar kamusSimilar : kamusSimilarList) {
-            if (kamusSimilar.getSimilarScore() > 0.99 ) {
+
+            if((kamusSimilar.getSimilarScore() > 0.99 )&&(kamusSimilar.getSimilarScore() <= 1.03 )) {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
-            if ((kamusSimilar.getSimilarScore() > 0.89 )||(kamusSimilar.getSimilarScore() <= 0.99 ) ) {
+           else if ((kamusSimilar.getSimilarScore() > 0.92 )&&(kamusSimilar.getSimilarScore() < 0.98 ) ) {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
         }
@@ -105,7 +106,7 @@ public class PerbaikanKataActivity extends AppCompatActivity {
             finalWords.add(kamusSimilar.getWord());
         }
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, finalWords);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
         listViewSimiliarWords.setAdapter(arrayAdapter);
         inputMethodManager();
     }
@@ -151,7 +152,7 @@ public class PerbaikanKataActivity extends AppCompatActivity {
 
         iv_suara.setOnClickListener(view -> {
             String toSpeak = ed_kataAwal.getText().toString().trim();
-            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_LONG).show();
             textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
         });
 
