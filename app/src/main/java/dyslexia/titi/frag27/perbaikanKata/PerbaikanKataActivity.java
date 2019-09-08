@@ -3,7 +3,6 @@ package dyslexia.titi.frag27.perbaikanKata;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
@@ -16,11 +15,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,12 +25,13 @@ import java.util.List;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.base.BaseActivity;
 import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Kamus;
 import dyslexia.titi.frag27.kamus.model.KamusSimilar;
 
-public class PerbaikanKataActivity extends AppCompatActivity {
+public class PerbaikanKataActivity extends BaseActivity {
 
     TextToSpeech textToSpeech;
     EditText ed_kataAwal;
@@ -45,28 +43,63 @@ public class PerbaikanKataActivity extends AppCompatActivity {
     private Button editButton;
     private Button deleteButton;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_perbaikan_kata);
+    List<Kamus> kamusList;
+    String inputWord;
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_perbaikan_kata;
+    }
+
+    @Override
+    public void initView() {
         iv_suara = findViewById(R.id.iv_suara);
         ed_kataAwal = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
-        btn_proseskata.setOnClickListener(view -> {
-            jaroWinklerDistance();
-        });
+        loadDatabase();
+    }
+
+    @Override
+    public void populateView() {
+        btn_proseskata.setOnClickListener(view -> search());
         loadSuara();
         loadSuara2();
         loadMenu();
     }
 
+    public void loadDatabase() {
+        databaseAdapter = new DatabaseAdapter(getApplicationContext());
+        kamusList = databaseAdapter.retrieveKamus("all");
+    }
 
-    public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.option_menu,menu);
+    public void search() {
+        inputWord = ed_kataAwal.getText().toString().trim();
+        String wordMatch = "";
+        for (Kamus kamus : kamusList) {
+            if (inputWord.equals(kamus.getWord())) {
+                wordMatch = kamus.getWord();
+                break;
+            }
+        }
+        if (wordMatch.equals("")) {
+            multipleWord();
+        } else {
+            singleWord();
+        }
+    }
+
+    public void singleWord() {
+    }
+
+    public void multipleWord() {
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option_menu, menu);
         return true;
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.tambahKata:
@@ -78,24 +111,20 @@ public class PerbaikanKataActivity extends AppCompatActivity {
         }
     }
 
-
     private void jaroWinklerDistance() {
-        List<Kamus> kamusList;
+
         List<KamusSimilar> kamusSimilarList = new ArrayList<>();
         List<KamusSimilar> kamusSimilarFilteredList = new ArrayList<>();
         List<String> finalWords = new ArrayList<>();
-
-        databaseAdapter = new DatabaseAdapter(getApplicationContext());
-        kamusList = databaseAdapter.retrieveKamus("all");
 
         for (Kamus kamus : kamusList) {
             kamusSimilarList.add(new KamusSimilar(kamus.getId_word(), kamus.getWord(), kamus.getType(), getSimilarScore(kamus.getWord())));
         }
         for (KamusSimilar kamusSimilar : kamusSimilarList) {
-            if (kamusSimilar.getSimilarScore() > 0.99 ) {
+            if (kamusSimilar.getSimilarScore() > 0.99) {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
-            if ((kamusSimilar.getSimilarScore() > 0.89 )||(kamusSimilar.getSimilarScore() <= 0.99 ) ) {
+            if ((kamusSimilar.getSimilarScore() > 0.89) || (kamusSimilar.getSimilarScore() <= 0.99)) {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
         }
@@ -135,8 +164,8 @@ public class PerbaikanKataActivity extends AppCompatActivity {
 
         listViewSimiliarWords.setOnItemClickListener((AdapterView<?> adapterView, View view, int position, long l) -> {
             String selectedItem = String.valueOf(adapterView.getItemAtPosition(position));
-            Toast.makeText(getApplicationContext(),""+ selectedItem,Toast.LENGTH_LONG).show();
-            textToSpeech.speak(selectedItem,TextToSpeech.QUEUE_FLUSH,null);
+            Toast.makeText(getApplicationContext(), "" + selectedItem, Toast.LENGTH_LONG).show();
+            textToSpeech.speak(selectedItem, TextToSpeech.QUEUE_FLUSH, null);
         });
 
     }
@@ -166,7 +195,7 @@ public class PerbaikanKataActivity extends AppCompatActivity {
             editButton = dialog.findViewById(R.id.button_edit_data);
             deleteButton = dialog.findViewById(R.id.button_delete_data);
 
-             //String selectedFromList = (String) listViewSimiliarWords.getItemAtPosition(position);
+            //String selectedFromList = (String) listViewSimiliarWords.getItemAtPosition(position);
 
             Kamus selectedFromList = (Kamus) listViewSimiliarWords.getItemAtPosition(position);
 
@@ -186,9 +215,9 @@ public class PerbaikanKataActivity extends AppCompatActivity {
                         // Delete kata dari db
 
                         //Kamus selectedItem = (Kamus) adapterView.getItemAtPosition(position);
-                       // DatabaseAdapter databaseAdapter = new DatabaseAdapter(getApplicationContext());
+                        // DatabaseAdapter databaseAdapter = new DatabaseAdapter(getApplicationContext());
                         //databaseAdapter.deleteKamus(selectedItem.getId_word());
-                       // finish();
+                        // finish();
                         //startActivity(getIntent());
 
 
@@ -206,7 +235,8 @@ public class PerbaikanKataActivity extends AppCompatActivity {
                             dialog.dismiss();
                         }).setNegativeButton("NO", (dialogInterface, i) -> {
                             dialogInterface.cancel();
-                            dialog.dismiss();});
+                            dialog.dismiss();
+                        });
 
                         builder.create().show();
 
