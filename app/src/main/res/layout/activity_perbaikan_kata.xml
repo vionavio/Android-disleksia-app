@@ -17,7 +17,7 @@
         android:gravity="center"
         android:hint="Masukkan teks disini"
         android:inputType="textPersonName"
-        android:paddingTop="60dp"
+        android:paddingTop="30dp"
         android:textColor="#455d29"
         android:textSize="28sp" />
 
@@ -48,17 +48,17 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_hasil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center_horizontal"
+        android:text=" "
+        android:textColor="#455d29"
+        android:textSize="23sp"
+        android:textStyle="bold" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_hasil"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:gravity="center_horizontal"-->
-<!--        android:text=" Kata Benar"-->
-<!--        android:textColor="#455d29"-->
-<!--        android:textSize="25sp"-->
-<!--        android:textStyle="bold" />-->
 
     <ListView
         android:id="@+id/lv_similar_words"

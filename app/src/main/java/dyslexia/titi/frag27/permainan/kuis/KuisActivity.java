@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.permainan.PermainanActivity;
 import dyslexia.titi.frag27.permainan.kuis.kataBenda.GameKataBendaActivity;
 import dyslexia.titi.frag27.permainan.kuis.kataKerja.GameKataKerjaActivity;
 import dyslexia.titi.frag27.permainan.kuis.kataKeterangan.GameKataKeteranganActivity;
@@ -49,5 +50,12 @@ public class KuisActivity extends AppCompatActivity {
             Intent kataKeteranganIntent = new Intent(KuisActivity.this, GameKataKeteranganActivity.class);
             startActivity(kataKeteranganIntent);
         });
+
+
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.setClass(getApplicationContext(), PermainanActivity.class);
+        startActivity(intent);
     }
 }

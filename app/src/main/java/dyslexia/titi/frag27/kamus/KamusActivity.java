@@ -14,6 +14,7 @@ import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.adapter.MyPageAdapter;
 import dyslexia.titi.frag27.kamus.fragment.AdjektivaFragment;
 import dyslexia.titi.frag27.kamus.fragment.AdverbiaFragment;
+import dyslexia.titi.frag27.kamus.fragment.AllFragment;
 import dyslexia.titi.frag27.kamus.fragment.AlphabetFragment;
 import dyslexia.titi.frag27.kamus.fragment.NominaFragment;
 import dyslexia.titi.frag27.kamus.fragment.NumeralFragment;
@@ -54,6 +55,7 @@ public class KamusActivity extends AppCompatActivity implements TabLayout.OnTabS
         myPageAdapter.addPage(VerbaFragment.newInstance());
         myPageAdapter.addPage(AdjektivaFragment.newInstance());
         myPageAdapter.addPage(AdverbiaFragment.newInstance());
+        myPageAdapter.addPage(AllFragment.newInstance());
         vp.setAdapter(myPageAdapter);
     }
 
@@ -68,7 +70,6 @@ public class KamusActivity extends AppCompatActivity implements TabLayout.OnTabS
     public void onTabReselected(TabLayout.Tab tab) {
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

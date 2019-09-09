@@ -40,6 +40,7 @@
         <activity
             android:name=".permainan.kuis.KuisActivity"
             android:label="Menu Kuis"
+            android:parentActivityName=".permainan.PermainanActivity"
             android:theme="@style/MenuKuis" />
         <activity
             android:name=".permainan.susunAlfabet.SusunAlfabet"

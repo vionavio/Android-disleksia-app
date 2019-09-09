@@ -4,6 +4,9 @@ package dyslexia.titi.frag27.kamus.fragment;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,24 +22,20 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.fragment.app.Fragment;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.adapter.MyPageAdapter;
-import dyslexia.titi.frag27.kamus.crud.DetailKamusActivity;
 import dyslexia.titi.frag27.kamus.crud.EditKamusActivity;
-import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Kamus;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AdjektivaFragment extends Fragment  {
+public class AllFragment extends Fragment {
 
     ListView lv;
     TextView tv;
@@ -44,18 +43,14 @@ public class AdjektivaFragment extends Fragment  {
     List<Kamus> kamuses = new ArrayList<>();
     TextToSpeech t1;
 
-    MyPageAdapter pagerAdapter;
-    private Button tambahButton;
     private Button editButton;
-    private Button detailButton;
     private Button delButton;
 
-    public static AdjektivaFragment newInstance() {
-        return new AdjektivaFragment();
+    public static Fragment newInstance() {
+        return new AllFragment();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -69,14 +64,19 @@ public class AdjektivaFragment extends Fragment  {
         return rootView;
     }
 
-    @Override
     public void onDetach() {
         super.onDetach();
     }
 
     private void loadData() {
         DatabaseAdapter db = new DatabaseAdapter(getActivity());
-        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("adjektiva"));
+        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("all"));
+
+
+        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus2, db.retrieveKamus("all"));
+
+
+
         lv.setAdapter(adapter);
 
         t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {
@@ -92,34 +92,32 @@ public class AdjektivaFragment extends Fragment  {
         });
 
         lv.setOnItemLongClickListener((adapterView, view, position, id) -> {
-            Dialog dialog = new Dialog(getActivity());
-            dialog.setContentView(R.layout.dialog_view_kata);
-            dialog.show();
+                    Dialog dialog = new Dialog(getActivity());
+                    dialog.setContentView(R.layout.dialog_view_kata);
+                    dialog.show();
 
-            editButton = dialog.findViewById(R.id.button_edit_data);
-            delButton = dialog.findViewById(R.id.button_delete_data);
+                    editButton = dialog.findViewById(R.id.button_edit_data);
+                    delButton = dialog.findViewById(R.id.button_delete_data);
 
-            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+                    Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
 
+                    //apabila tombol edit diklik
+                    editButton.setOnClickListener(
+                            v -> {
+                                //  Auto-generated method stub
+                                switchToEdit(selectedFromList.getId_word());
+                                dialog.dismiss();
+                            }
+                    );
 
-
-            //apabila tombol edit diklik
-            editButton.setOnClickListener(
-                    v -> {
-                        //  Auto-generated method stub
-                        switchToEdit(selectedFromList.getId_word());
-                        dialog.dismiss();
-                    }
-            );
-
-            delButton.setOnClickListener(
-                    v -> {
-                        // Delete kata dari db
-                        DatabaseAdapter databaseAdapter = new DatabaseAdapter(getActivity());
-                        databaseAdapter.deleteKamus(selectedFromList.getId_word());
-                        getActivity().finish();
-                    }
-            );
+                    delButton.setOnClickListener(
+                            v -> {
+                                // Delete kata dari db
+                                DatabaseAdapter databaseAdapter = new DatabaseAdapter(getActivity());
+                                databaseAdapter.deleteKamus(selectedFromList.getId_word());
+                                getActivity().finish();
+                            }
+                    );
                     return true;
                 }
         );
@@ -133,7 +131,7 @@ public class AdjektivaFragment extends Fragment  {
 
     @Override
     public String toString() {
-        return "Kata Sifat";
+        return "Kamus Kata";
     }
 
     @Override
@@ -181,13 +179,6 @@ public class AdjektivaFragment extends Fragment  {
         databaseAdapter.close();
         startActivity(intent);
     }
-
-
-
-
-
-
-
 
 
 }

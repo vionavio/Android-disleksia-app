@@ -51,7 +51,7 @@ public class GameKataSifatActivity extends AppCompatActivity {
     private int imageResource;
     int score = 0;
     int question = 0;
-    int chances = 9;
+    int chances = 10;
 
 
     @Override
