@@ -2,14 +2,13 @@ package dyslexia.titi.frag27;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.bantuan.BantuanActivity;
 import dyslexia.titi.frag27.kamus.KamusActivity;
-import dyslexia.titi.frag27.perbaikanKata.PerbaikanKataActivity;
+import dyslexia.titi.frag27.perbaikanKata.WordRepairActivity;
 import dyslexia.titi.frag27.permainan.PermainanActivity;
 import dyslexia.titi.frag27.setting.SettingActivity;
 import dyslexia.titi.frag27.tentang.TentangActivity;
@@ -52,7 +51,7 @@ public class MenuActivity extends AppCompatActivity {
 
         CardView perbaikanKata = findViewById(R.id.perbaikankata);
         perbaikanKata.setOnClickListener(view -> {
-            Intent perbaikanKataIntent = new Intent(MenuActivity.this, PerbaikanKataActivity.class);
+            Intent perbaikanKataIntent = new Intent(MenuActivity.this, WordRepairActivity.class);
             startActivity(perbaikanKataIntent);
         });
     }

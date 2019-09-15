@@ -63,7 +63,7 @@
             android:parentActivityName=".MenuActivity"
             android:theme="@style/Setting" />
         <activity
-            android:name=".perbaikanKata.PerbaikanKataActivity"
+            android:name=".perbaikanKata.WordRepairActivity"
             android:label="Perbaikan Kata"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/PerbaikanKata" />

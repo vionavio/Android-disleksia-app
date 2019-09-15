@@ -18,15 +18,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 
-import androidx.appcompat.app.AlertDialog;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.base.BaseActivity;
 import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
@@ -34,11 +32,9 @@ import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Kamus;
 import dyslexia.titi.frag27.kamus.model.KamusSimilar;
 import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.MainReplaceLetter;
-import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.ShuffleWord;
-import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.SimiliarLetter;
 import dyslexia.titi.frag27.perbaikanKata.anagram.AnagramAlgoritm;
 
-public class PerbaikanKataActivity extends BaseActivity {
+public class WordRepairActivity extends BaseActivity {
 
     TextToSpeech textToSpeech;
     EditText ed_kataAwal;
@@ -48,10 +44,9 @@ public class PerbaikanKataActivity extends BaseActivity {
     ImageView iv_suara;
     TextView tv_hasil;
     ArrayList<String> replacedWords;
-    //String replacedWords;
     ArrayList<Kamus> replacedWordsAnagram = new ArrayList<>();
     ArrayAdapter<Kamus> adapter;
-    AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(PerbaikanKataActivity.this);
+    AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(WordRepairActivity.this);
 
     //anagram
     ArrayList<String> foundedString;
@@ -108,7 +103,8 @@ public class PerbaikanKataActivity extends BaseActivity {
         for (Kamus kamus : kamusList) {
             if (inputWord.equals(kamus.getWord())) {
                 wordMatch = kamus.getWord();
-                break; }
+                break;
+            }
         }
 
         if (wordMatch != "") {
@@ -125,18 +121,18 @@ public class PerbaikanKataActivity extends BaseActivity {
     private void cariDiAnagram() {
         foundedWords.clear();
         inputWord = ed_kataAwal.getText().toString().trim();
-        AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(PerbaikanKataActivity.this);
+        AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(WordRepairActivity.this);
         foundedString = anagramAlgoritm.getAnagrams(inputWord);
-           Log.d("aaaaaaaaaa", "loadKata: " + foundedString.toString());
-        for (String string: foundedString) {
+        Log.d("aaaaaaaaaa", "loadKata: " + foundedString.toString());
+        for (String string : foundedString) {
             foundedWords.add(new Kamus(0, string, ""));
         }
         adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row, foundedWords);
 
-            if (!(foundedWords.isEmpty()))
-            { tv_hasil.setText(" ");
-              listViewSimiliarWords.setAdapter(adapter);}
-        else {
+        if (!(foundedWords.isEmpty())) {
+            tv_hasil.setText(" ");
+            listViewSimiliarWords.setAdapter(adapter);
+        } else {
 
 //                tv_hasil.setText(" RAKETEMU");
 //                listViewSimiliarWords.setAdapter(null);
@@ -158,16 +154,15 @@ public class PerbaikanKataActivity extends BaseActivity {
     }
 
 
-
     private void cariLagiDiAnagram() {
 
         ArrayList<String> stringArrayList = new ArrayList<>();
 
-        for ( String replacedWord : replacedWords) {
+        for (String replacedWord : replacedWords) {
             stringArrayList = anagramAlgoritm.getAnagrams(replacedWord);
             Log.d("pppppp", "buatKataDariPersamaanHuruf: " + stringArrayList);
         }
-        for (String string: stringArrayList) {
+        for (String string : stringArrayList) {
             replacedWordsAnagram.add(new Kamus(0, string, ""));
         }
         Log.d("llllll", "cariLagiDiAnagram: " + replacedWordsAnagram);
@@ -175,11 +170,9 @@ public class PerbaikanKataActivity extends BaseActivity {
         listViewSimiliarWords.setAdapter(adapter);
 
 
-
         Log.d("nnnnnn", "cariLagiDiAnagram: " + replacedWordsAnagram);
         Log.d("mmmmmm", "cariLagiDiAnagram: " + replacedWords);
         replacedWords.clear();
-
 
 
     }
@@ -267,7 +260,7 @@ public class PerbaikanKataActivity extends BaseActivity {
 
     private void loadMenu() {
         listViewSimiliarWords.setOnItemLongClickListener((adapterView, view, position, l) -> {
-            Dialog dialog = new Dialog(PerbaikanKataActivity.this);
+            Dialog dialog = new Dialog(WordRepairActivity.this);
             dialog.setContentView(R.layout.dialog_view_kata);
             dialog.show();
 
@@ -300,7 +293,7 @@ public class PerbaikanKataActivity extends BaseActivity {
                         //startActivity(getIntent());
 
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(PerbaikanKataActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(WordRepairActivity.this);
                         builder.setTitle("Delete process");
                         builder.setMessage("Are you sure to delete : ");
 
@@ -309,7 +302,7 @@ public class PerbaikanKataActivity extends BaseActivity {
 //                                databaseAdapter.deleteKamus(id.getText().toString());
 //                                name.setText("");
 //                                tel.setText("");
-                            Toast.makeText(PerbaikanKataActivity.this, "A contact is deleted ",
+                            Toast.makeText(WordRepairActivity.this, "A contact is deleted ",
                                     Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }).setNegativeButton("NO", (dialogInterface, i) -> {
