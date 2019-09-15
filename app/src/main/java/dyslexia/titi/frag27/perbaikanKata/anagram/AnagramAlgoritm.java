@@ -16,7 +16,6 @@ public class AnagramAlgoritm {
     private int wordSize;
     private Context mContext;
     private DatabaseAdapter databaseAdapter;
-    private List<Kamus> anagramTracker = new ArrayList<Kamus>();
 
     public AnagramAlgoritm(Context context){
         mContext = context;
@@ -35,7 +34,6 @@ public class AnagramAlgoritm {
         // "rumah" > ["r","u", ...]
         char[] givenChar = inputWord.trim().toCharArray();
         for (int i = 0 ; i < sortedDictionary.size(); i++){
-            anagramTracker.clear();
             mainAlgoritm(i, givenChar);
         }
         return kamus;
