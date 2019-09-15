@@ -1,0 +1,29 @@
+package dyslexia.titi.frag27.perbaikanKata.ReplaceLetter;
+
+public class SimiliarLetter {
+
+    //letterKey = huruf yang masuk daftar untuk terdeteksi
+    private Character letterKey;
+    private Character letterEquation;
+
+    public SimiliarLetter(Character letterKey, Character letterEquation) {
+        this.letterKey = letterKey;
+        this.letterEquation = letterEquation;
+    }
+
+    public Character getLetterKey() {
+        return letterKey;
+    }
+
+    public void setLetterKey(Character letterKey) {
+        this.letterKey = letterKey;
+    }
+
+    public Character getLetterEquation() {
+        return letterEquation;
+    }
+
+    public void setLetterEquation(Character letterEquation) {
+        this.letterEquation = letterEquation;
+    }
+}

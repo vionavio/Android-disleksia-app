@@ -72,11 +72,6 @@ public class AllFragment extends Fragment {
         DatabaseAdapter db = new DatabaseAdapter(getActivity());
         adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("all"));
 
-
-        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus2, db.retrieveKamus("all"));
-
-
-
         lv.setAdapter(adapter);
 
         t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {

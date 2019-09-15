@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:hint="Masukkan teks disini"
+        android:hint="Masukkan kata disini"
         android:inputType="textPersonName"
         android:paddingTop="30dp"
         android:textColor="#455d29"

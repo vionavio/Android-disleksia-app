@@ -18,19 +18,25 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
+import androidx.appcompat.app.AlertDialog;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.base.BaseActivity;
 import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Kamus;
 import dyslexia.titi.frag27.kamus.model.KamusSimilar;
+import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.MainReplaceLetter;
+import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.ShuffleWord;
+import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.SimiliarLetter;
+import dyslexia.titi.frag27.perbaikanKata.anagram.AnagramAlgoritm;
 
 public class PerbaikanKataActivity extends BaseActivity {
 
@@ -41,12 +47,25 @@ public class PerbaikanKataActivity extends BaseActivity {
     DatabaseAdapter databaseAdapter;
     ImageView iv_suara;
     TextView tv_hasil;
+    ArrayList<String> replacedWords;
+    ArrayList<Kamus> replacedWordsAnagram = new ArrayList<>();
+    ArrayAdapter<Kamus> adapter;
+    AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(PerbaikanKataActivity.this);
+
+    //anagram
+    ArrayList<String> foundedString;
+    ArrayList<Kamus> foundedWords = new ArrayList<>();
+
+    ArrayList<Kamus> a = new ArrayList<>();
 
     private Button editButton;
     private Button deleteButton;
 
     List<Kamus> kamusList;
     String inputWord;
+
+    //MENYAMAKAN HURUF
+
 
     @Override
     protected int getLayoutId() {
@@ -61,11 +80,15 @@ public class PerbaikanKataActivity extends BaseActivity {
         btn_proseskata = findViewById(R.id.btnProsesKata);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
         loadDatabase();
+
     }
 
     @Override
     public void populateView() {
-        btn_proseskata.setOnClickListener(view -> search());
+        btn_proseskata.setOnClickListener((View view) -> {
+
+            search();
+        });
         loadSuara();
         loadSuara2();
         loadSuara3();
@@ -73,48 +96,118 @@ public class PerbaikanKataActivity extends BaseActivity {
     }
 
 
-
     public void loadDatabase() {
         databaseAdapter = new DatabaseAdapter(getApplicationContext());
-        kamusList = databaseAdapter.retrieveKamus("all");
     }
 
     public void search() {
+
+
+        kamusList = databaseAdapter.retrieveKamus("all");
+        foundedWords.clear();
         inputWord = ed_kataAwal.getText().toString().trim();
         String wordMatch = "";
+
         for (Kamus kamus : kamusList) {
             if (inputWord.equals(kamus.getWord())) {
                 wordMatch = kamus.getWord();
                 break;
             }
         }
-        if (wordMatch.equals("")) {
-            multipleWord();
-        } else {
+
+        if (wordMatch != "") {
             tv_hasil.setText(wordMatch);
             listViewSimiliarWords.setAdapter(null);
+            Log.d("eeeeeeee", "loadKata: " + wordMatch);
+        } else {
+            // cari di anagram
+            cariDiAnagram();
+        }
+
+
+//        adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row,  databaseAdapter.retrieveKamus("all"));
+//        adapter.getFilter().filter(inputWord);
+//        listViewSimiliarWords.setAdapter(adapter);
+
+    }
+
+    private void cariDiAnagram() {
+
+        //Log.d("aaaaaaaaaa", "loadKata: " + foundedString.toString());
+
+
+        foundedWords.clear();
+        inputWord = ed_kataAwal.getText().toString().trim();
+        AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(PerbaikanKataActivity.this);
+        foundedString = anagramAlgoritm.getAnagrams(inputWord);
+           Log.d("aaaaaaaaaa", "loadKata: " + foundedString.toString());
+        for (String string: foundedString) {
+            foundedWords.add(new Kamus(0, string, ""));
+        }
+        adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row, foundedWords);
+
+            if (!(foundedWords.isEmpty()))
+            { tv_hasil.setText(" ");
+              listViewSimiliarWords.setAdapter(adapter);}
+        else {
+
+//                tv_hasil.setText(" RAKETEMU");
+//                listViewSimiliarWords.setAdapter(null);
+//            Log.d("ccccc", "loadKata: tidak ketemu");
+            buatKataDariPersamaanHuruf();
         }
     }
 
-    public void multipleWord() {
+    private void buatKataDariPersamaanHuruf() {
+
+
+        Log.d("yyy", "cariLagiDiAnagram: " + a.toString());
+
+        replacedWords = MainReplaceLetter.generateWords(inputWord);
+//        Log.d("bbbbbbb", "buatKataDariPersamaanHuruf: " + replacedWords.toString());
+
+        //cari lagi di anagram
+        cariLagiDiAnagram();
+    }
+
+
+
+    private void cariLagiDiAnagram() {
+
+        a.clear();
+        for (String replacedWord : replacedWords) {
+            ArrayList<String> stringArrayList;
+            stringArrayList = anagramAlgoritm.getAnagrams(replacedWord);
+
+            for (String string: stringArrayList) {
+                replacedWordsAnagram.add(new Kamus(0, string, ""));
+            }
+        }
+        Set<Kamus> replacedWordsAnagramUniq = new LinkedHashSet<Kamus>(replacedWordsAnagram);
+
+
+
+        a.addAll(replacedWordsAnagramUniq);
+//        for (Kamus kamus: replacedWordsAnagramUniq) {
+//            replacedWordsAnagram.add(kamus);
+//            a.add(kamus);
+//        }
+
+        Log.d("ccc", "cariLagiDiAnagram: " + a.toString());
+        adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row, a);
         tv_hasil.setText(" ");
-        jaroWinklerDistance();
-    }
+        listViewSimiliarWords.setAdapter(adapter);
+        replacedWords.clear();
 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.option_menu, menu);
-        return true;
-    }
 
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.tambahKata:
-                Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
-                startActivity(tambahIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+//        if (!(a.isEmpty())) {
+//
+//
+//        } else {
+//            tv_hasil.setText(" cari di jaro ");
+//           // jaroWinklerDistance();
+//        }
+        inputMethodManager();
     }
 
     private void jaroWinklerDistance() {
@@ -159,8 +252,9 @@ public class PerbaikanKataActivity extends BaseActivity {
         return new JaroWinkler().getSimilarity(word, inputWord);
     }
 
+
     private void loadSuara() {
-       textToSpeech();
+        textToSpeech();
         listViewSimiliarWords.setOnItemClickListener((AdapterView<?> adapterView, View view, int position, long l) -> {
             String selectedItem = String.valueOf(adapterView.getItemAtPosition(position));
             Toast.makeText(getApplicationContext(), "" + selectedItem, Toast.LENGTH_LONG).show();
@@ -170,7 +264,7 @@ public class PerbaikanKataActivity extends BaseActivity {
     }
 
     private void loadSuara2() {
-       textToSpeech();
+        textToSpeech();
         iv_suara.setOnClickListener(view -> {
             String toSpeak = ed_kataAwal.getText().toString().trim();
             Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_LONG).show();
@@ -188,7 +282,7 @@ public class PerbaikanKataActivity extends BaseActivity {
         });
     }
 
-    private  void textToSpeech(){
+    private void textToSpeech() {
         textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
             if (status != TextToSpeech.ERROR) {
                 textToSpeech.setLanguage(new Locale("id", "ID"));
@@ -258,4 +352,30 @@ public class PerbaikanKataActivity extends BaseActivity {
             return false;
         });
     }
+
+    public void declarationArrayList() {
+        ArrayList<SimiliarLetter> similarList = new ArrayList<>();
+        ArrayList<Character> similarKeys = new ArrayList<>();
+        ArrayList<ShuffleWord> shuffleWordArrayList = new ArrayList<>();
+        ArrayList<String> shuffledWords = new ArrayList<>();
+        ArrayList<ArrayList<Boolean>> possibilities = new ArrayList<ArrayList<Boolean>>();
+
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.tambahKata:
+                Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
+                startActivity(tambahIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

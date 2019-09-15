@@ -24,7 +24,7 @@
             android:layout_height="45dp"
             android:background="@drawable/bgquestion"
             android:gravity="center_vertical"
-            android:text="Susunlah huruf sesuai urutanya"
+            android:text="Susunlah huruf sesuai urutannya"
             android:textAlignment="center"
             android:textColor="#332FA2"
             android:textSize="22sp" />

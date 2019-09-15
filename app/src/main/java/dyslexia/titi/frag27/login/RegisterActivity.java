@@ -61,65 +61,51 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mDisplayDate = findViewById(R.id.editTextTL);
 
-        mDisplayDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
+        mDisplayDate.setOnClickListener(view -> {
+            Calendar cal = Calendar.getInstance();
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(RegisterActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener, year, month, day);
-                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
-            }
+            DatePickerDialog dialog = new DatePickerDialog(RegisterActivity.this,
+                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                    mDateSetListener, year, month, day);
+            Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
         });
 
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                month = month + 1;
-                String date = day + "-" + month + "-" + year;
-                mDisplayDate.setText(date);
-            }
+        mDateSetListener = (datePicker, year, month, day) -> {
+            month = month + 1;
+            String date = day + "-" + month + "-" + year;
+            mDisplayDate.setText(date);
         };
 
         sqliteHelper = new DatabaseHelper(this);
         initTextViewLogin();
         initViews();
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validate()) {
+        buttonRegister.setOnClickListener(view -> {
+            if (validate()) {
 
-                    int selectedIdJK = radioJK.getCheckedRadioButtonId();
+                int selectedIdJK = radioJK.getCheckedRadioButtonId();
 
-                    //find the radiobutton by returened id
-                    mRadioButton = findViewById(selectedIdJK);
+                //find the radiobutton by returened id
+                mRadioButton = findViewById(selectedIdJK);
 
-                    String Name = editTextName.getText().toString();
-                    String JK = mRadioButton.getText().toString();
-                    String TL = editTextTL.getText().toString();
-                    String UserName = editTextUserName.getText().toString();
-                    String Email = editTextEmail.getText().toString();
-                    String Password = editTextPassword.getText().toString();
-                    //Check in the database is there any user associated with  this email
-                    if (!sqliteHelper.isEmailExists(Email)) {
-                        //Email does not exist now add new user to database
-                        sqliteHelper.addUser(new User(null, Name, JK, TL, UserName, Email, Password));
-                        Snackbar.make(buttonRegister, "User created successfully! Please Login ", Snackbar.LENGTH_LONG).show();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                finish();
-                            }
-                        }, Snackbar.LENGTH_LONG);
-                    } else {
-                        //Email exists with email input provided so show error user already exist
-                        Snackbar.make(buttonRegister, "User already exists with same email ", Snackbar.LENGTH_LONG).show();
-                    }
+                String Name = editTextName.getText().toString();
+                String JK = mRadioButton.getText().toString();
+                String TL = editTextTL.getText().toString();
+                String UserName = editTextUserName.getText().toString();
+                String Email = editTextEmail.getText().toString();
+                String Password = editTextPassword.getText().toString();
+                //Check in the database is there any user associated with  this email
+                if (!sqliteHelper.isEmailExists(Email)) {
+                    //Email does not exist now add new user to database
+                    sqliteHelper.addUser(new User(null, Name, JK, TL, UserName, Email, Password));
+                    Snackbar.make(buttonRegister, "User created successfully! Please Login ", Snackbar.LENGTH_LONG).show();
+                    new Handler().postDelayed(() -> finish(), Snackbar.LENGTH_LONG);
+                } else {
+                    //Email exists with email input provided so show error user already exist
+                    Snackbar.make(buttonRegister, "User already exists with same email ", Snackbar.LENGTH_LONG).show();
                 }
             }
         });
@@ -128,12 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
     //this method used to set Login TextView click event
     private void initTextViewLogin() {
         TextView textViewLogin = findViewById(R.id.textViewLogin);
-        textViewLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        textViewLogin.setOnClickListener(view -> finish());
     }
 
     //    this method is used to connect XML views to its Objects
@@ -152,7 +133,6 @@ public class RegisterActivity extends AppCompatActivity {
         textInputPassword = findViewById(R.id.textInputPassword);
         textInputUserName = findViewById(R.id.textInputUserName);
         buttonRegister = findViewById(R.id.btnRegister);
-
 
     }
 
