@@ -48,6 +48,7 @@ public class PerbaikanKataActivity extends BaseActivity {
     ImageView iv_suara;
     TextView tv_hasil;
     ArrayList<String> replacedWords;
+    //String replacedWords;
     ArrayList<Kamus> replacedWordsAnagram = new ArrayList<>();
     ArrayAdapter<Kamus> adapter;
     AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(PerbaikanKataActivity.this);
@@ -80,13 +81,11 @@ public class PerbaikanKataActivity extends BaseActivity {
         btn_proseskata = findViewById(R.id.btnProsesKata);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
         loadDatabase();
-
     }
 
     @Override
     public void populateView() {
         btn_proseskata.setOnClickListener((View view) -> {
-
             search();
         });
         loadSuara();
@@ -102,17 +101,14 @@ public class PerbaikanKataActivity extends BaseActivity {
 
     public void search() {
 
-
         kamusList = databaseAdapter.retrieveKamus("all");
-        foundedWords.clear();
         inputWord = ed_kataAwal.getText().toString().trim();
         String wordMatch = "";
 
         for (Kamus kamus : kamusList) {
             if (inputWord.equals(kamus.getWord())) {
                 wordMatch = kamus.getWord();
-                break;
-            }
+                break; }
         }
 
         if (wordMatch != "") {
@@ -124,18 +120,9 @@ public class PerbaikanKataActivity extends BaseActivity {
             cariDiAnagram();
         }
 
-
-//        adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row,  databaseAdapter.retrieveKamus("all"));
-//        adapter.getFilter().filter(inputWord);
-//        listViewSimiliarWords.setAdapter(adapter);
-
     }
 
     private void cariDiAnagram() {
-
-        //Log.d("aaaaaaaaaa", "loadKata: " + foundedString.toString());
-
-
         foundedWords.clear();
         inputWord = ed_kataAwal.getText().toString().trim();
         AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(PerbaikanKataActivity.this);
@@ -161,10 +148,10 @@ public class PerbaikanKataActivity extends BaseActivity {
     private void buatKataDariPersamaanHuruf() {
 
 
-        Log.d("yyy", "cariLagiDiAnagram: " + a.toString());
-
+        Log.d("yyy", "cariLagiDiAnagram: " + replacedWordsAnagram);
+        inputWord = ed_kataAwal.getText().toString().trim();
         replacedWords = MainReplaceLetter.generateWords(inputWord);
-//        Log.d("bbbbbbb", "buatKataDariPersamaanHuruf: " + replacedWords.toString());
+        Log.d("bbbbbbb", "buatKataDariPersamaanHuruf: " + replacedWords.toString());
 
         //cari lagi di anagram
         cariLagiDiAnagram();
@@ -174,40 +161,27 @@ public class PerbaikanKataActivity extends BaseActivity {
 
     private void cariLagiDiAnagram() {
 
-        a.clear();
-        for (String replacedWord : replacedWords) {
-            ArrayList<String> stringArrayList;
+        ArrayList<String> stringArrayList = new ArrayList<>();
+
+        for ( String replacedWord : replacedWords) {
             stringArrayList = anagramAlgoritm.getAnagrams(replacedWord);
-
-            for (String string: stringArrayList) {
-                replacedWordsAnagram.add(new Kamus(0, string, ""));
-            }
+            Log.d("pppppp", "buatKataDariPersamaanHuruf: " + stringArrayList);
         }
-        Set<Kamus> replacedWordsAnagramUniq = new LinkedHashSet<Kamus>(replacedWordsAnagram);
-
-
-
-        a.addAll(replacedWordsAnagramUniq);
-//        for (Kamus kamus: replacedWordsAnagramUniq) {
-//            replacedWordsAnagram.add(kamus);
-//            a.add(kamus);
-//        }
-
-        Log.d("ccc", "cariLagiDiAnagram: " + a.toString());
-        adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row, a);
-        tv_hasil.setText(" ");
+        for (String string: stringArrayList) {
+            replacedWordsAnagram.add(new Kamus(0, string, ""));
+        }
+        Log.d("llllll", "cariLagiDiAnagram: " + replacedWordsAnagram);
+        adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row, replacedWordsAnagram);
         listViewSimiliarWords.setAdapter(adapter);
+
+
+
+        Log.d("nnnnnn", "cariLagiDiAnagram: " + replacedWordsAnagram);
+        Log.d("mmmmmm", "cariLagiDiAnagram: " + replacedWords);
         replacedWords.clear();
 
 
-//        if (!(a.isEmpty())) {
-//
-//
-//        } else {
-//            tv_hasil.setText(" cari di jaro ");
-//           // jaroWinklerDistance();
-//        }
-        inputMethodManager();
+
     }
 
     private void jaroWinklerDistance() {
@@ -351,15 +325,6 @@ public class PerbaikanKataActivity extends BaseActivity {
 
             return false;
         });
-    }
-
-    public void declarationArrayList() {
-        ArrayList<SimiliarLetter> similarList = new ArrayList<>();
-        ArrayList<Character> similarKeys = new ArrayList<>();
-        ArrayList<ShuffleWord> shuffleWordArrayList = new ArrayList<>();
-        ArrayList<String> shuffledWords = new ArrayList<>();
-        ArrayList<ArrayList<Boolean>> possibilities = new ArrayList<ArrayList<Boolean>>();
-
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
