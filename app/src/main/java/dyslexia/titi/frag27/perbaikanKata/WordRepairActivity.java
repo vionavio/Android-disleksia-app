@@ -43,8 +43,6 @@ public class WordRepairActivity extends BaseActivity {
     DatabaseAdapter databaseAdapter;
     ImageView iv_suara;
     TextView tv_resultWord;
-    ArrayList<String> replacedWords;
-    ArrayList<Dictionary> replacedWordsAnagram = new ArrayList<>();
     ArrayList<Dictionary> wordRepairResultList = new ArrayList<>();
 
 
@@ -83,6 +81,7 @@ public class WordRepairActivity extends BaseActivity {
 
     @Override
     public void populateView() {
+        inputWord = ed_inputWord.getText().toString().trim();
         btn_proseskata.setOnClickListener((View view) -> searchInDictionary());
         dictionaryWords = databaseAdapter.retrieveKamus("all");
         loadSuara();
@@ -93,8 +92,6 @@ public class WordRepairActivity extends BaseActivity {
 
     public void searchInDictionary() {
         String wordRepairResultSingle = "";
-        inputWord = ed_inputWord.getText().toString().trim();
-
         for (Dictionary dictionary : dictionaryWords) {
             if (inputWord.equals(dictionary.getWord())) {
                 wordRepairResultSingle = dictionary.getWord();
@@ -127,7 +124,7 @@ public class WordRepairActivity extends BaseActivity {
     private void anagramSearch() {
         wordRepairResultList = new ArrayList<>();
         resultAnagramSearchList = anagramAlgorithm.getAnagrams(inputWord);
-        Log.d(TAG, "wordRepairResultList: " + wordRepairResultList );
+        Log.d(TAG, "wordRepairResultList: " + wordRepairResultList);
         Log.d(TAG, "resultAnagramSearchList: " + resultAnagramSearchList);
         for (String resultAnagramSearchWord : resultAnagramSearchList) {
             wordRepairResultList.add(new Dictionary(0, resultAnagramSearchWord, ""));
@@ -137,41 +134,42 @@ public class WordRepairActivity extends BaseActivity {
             setMultiResult(wordRepairResultList);
         } else {
             Log.d(TAG, "anagramSearch: tidak ketemu di anagramSearch 1");
-            buatKataDariPersamaanHuruf();
+            generateWordsFromAbnormalityCondition();
         }
     }
 
-    private void buatKataDariPersamaanHuruf() {
-        Log.d("yyy", "cariLagiDiAnagram: " + replacedWordsAnagram);
+    private void generateWordsFromAbnormalityCondition() {
+        ArrayList<String> generatedWordsFromSimilarCase = new ArrayList<>();
+        generatedWordsFromSimilarCase.clear();
         inputWord = ed_inputWord.getText().toString().trim();
-        replacedWords = ReplaceLetter.generateWords(inputWord);
-        Log.d("bbbbbbb", "buatKataDariPersamaanHuruf: " + replacedWords.toString());
+        Log.d(TAG, "generateWordsFromAbnormalityCondition: " + inputWord);
+        generatedWordsFromSimilarCase = ReplaceLetter.generateWords(inputWord);
+//        Log.d(TAG, "generateWordsFromAbnormalityCondition: " + generatedWordsFromSimilarCase.toString());
 
         //cari lagi di anagram
-        cariLagiDiAnagram();
+        cariLagiDiAnagram(generatedWordsFromSimilarCase);
     }
 
 
-    private void cariLagiDiAnagram() {
-
+    private void cariLagiDiAnagram(ArrayList<String> generatedWordsFromSimilarCase) {
         ArrayList<String> stringArrayList = new ArrayList<>();
+        ArrayList<Dictionary> replacedWordsAnagram = new ArrayList<>();
 
-        for (String replacedWord : replacedWords) {
-            stringArrayList = anagramAlgorithm.getAnagrams(replacedWord);
-            Log.d("pppppp", "buatKataDariPersamaanHuruf: " + stringArrayList);
-        }
+        stringArrayList = anagramAlgorithm.getAnagrams(generatedWordsFromSimilarCase);
+//        for (String replacedWord : generatedWordsFromSimilarCase) {
+//            stringArrayList = anagramAlgorithm.getAnagrams(replacedWord);
+//            Log.d("pppppp", "generateWordsFromAbnormalityCondition: " + stringArrayList);
+//        }
         for (String string : stringArrayList) {
             replacedWordsAnagram.add(new Dictionary(0, string, ""));
         }
-        Log.d("llllll", "cariLagiDiAnagram: " + replacedWordsAnagram);
+        Log.d(TAG, "cariLagiDiAnagram: " + replacedWordsAnagram);
         setMultiResult(replacedWordsAnagram);
 
 
         Log.d("nnnnnn", "cariLagiDiAnagram: " + replacedWordsAnagram);
-        Log.d("mmmmmm", "cariLagiDiAnagram: " + replacedWords);
-        replacedWords.clear();
-
-
+//        Log.d("mmmmmm", "cariLagiDiAnagram: " + generatedWordsFromSimilarCase);
+        generatedWordsFromSimilarCase.clear();
     }
 
     private void jaroWinklerDistance() {

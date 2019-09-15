@@ -11,16 +11,16 @@ public class AnagramAlgorithm {
 
     private ArrayList<Dictionary> sortedDictionary;
 
-    private ArrayList<String> stringArrayList = new ArrayList<>();
-    private int wordSize;
     private Context mContext;
     private DatabaseAdapter databaseAdapter;
+    private ArrayList<String> stringArrayList = new ArrayList<>();
+
 
     public AnagramAlgorithm(Context context){
         mContext = context;
     }
 
-    public void loadDatabase(){
+    private void loadDatabase(){
         databaseAdapter = new DatabaseAdapter(mContext);
         sortedDictionary = (ArrayList<Dictionary>) databaseAdapter.retrieveKamus("all");
     }
@@ -29,16 +29,29 @@ public class AnagramAlgorithm {
         stringArrayList.clear();
         loadDatabase();
 
-        wordSize = inputWord.length();
+        int wordSize = inputWord.length();
         // "rumah" > ["r","u", ...]
         char[] givenChar = inputWord.trim().toCharArray();
         for (int i = 0 ; i < sortedDictionary.size(); i++){
-            mainAlgoritm(i, givenChar);
+            mainAlgorithm(i, givenChar, wordSize);
         }
         return stringArrayList;
     }
 
-    private void mainAlgoritm(int index , char[] unresolvedInputWordChar) {
+    public ArrayList<String> getAnagrams(ArrayList<String> inputWords) {
+        stringArrayList.clear();
+        loadDatabase();
+        for (String inputWord: inputWords) {
+            int wordSize = inputWord.length();
+            char[] givenChar = inputWord.trim().toCharArray();
+            for (int i = 0 ; i < sortedDictionary.size(); i++){
+                mainAlgorithm(i, givenChar, wordSize);
+            }
+        }
+        return stringArrayList;
+    }
+
+    private void mainAlgorithm(int index , char[] unresolvedInputWordChar, int wordSize) {
 
         Dictionary availableWord = sortedDictionary.get(index);
         char[] searchWordChars = availableWord.getWord().toCharArray();

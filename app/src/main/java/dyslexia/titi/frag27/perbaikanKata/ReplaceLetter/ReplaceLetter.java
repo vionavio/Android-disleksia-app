@@ -1,18 +1,24 @@
 package dyslexia.titi.frag27.perbaikanKata.ReplaceLetter;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class ReplaceLetter {
-    private static String mainWord;
     private static ArrayList<SimiliarLetter> similarList = new ArrayList<>();
     private static ArrayList<Character> similarKeys = new ArrayList<>();
     private static ArrayList<ShuffleWord> shuffleWordArrayList = new ArrayList<>();
     private static ArrayList<String> shuffledWords = new ArrayList<>();
     private static ArrayList<ArrayList<Boolean>> possibilities = new ArrayList<>();
+    private static String TAG = "ReplaceLetter";
 
-    public static ArrayList<String> generateWords(String string) {
-        mainWord = string;
+    public static ArrayList<String> generateWords(String mainWord) {
+        shuffleWordArrayList.clear();
+        shuffledWords.clear();
+        possibilities.clear();
+        Log.e(TAG, "shuffleWordArrayList: " + shuffleWordArrayList);
+        Log.e(TAG, "shuffledWords: " + shuffledWords);
         prepare();
         for (int i = 0; i < mainWord.length(); i++) {
             if (similarKeys.contains(mainWord.charAt(i))) {
@@ -24,7 +30,8 @@ public class ReplaceLetter {
             }
         }
         generatePossibilities();
-        generateShuffleWords();
+        generateShuffleWords(mainWord);
+        Log.d(TAG, "generateWords: " + shuffledWords);
         return shuffledWords;
     }
 
@@ -34,8 +41,8 @@ public class ReplaceLetter {
         similarList.add(new SimiliarLetter('m', 'w'));
         similarList.add(new SimiliarLetter('n', 'u'));
 
-        for (SimiliarLetter similiar : similarList) {
-            similarKeys.add(similiar.getLetterKey());
+        for (SimiliarLetter similar : similarList) {
+            similarKeys.add(similar.getLetterKey());
         }
     }
 
@@ -67,9 +74,10 @@ public class ReplaceLetter {
             }
             possibilities.add(boolArray2);
         }
+        Log.d(TAG, "generatePossibilities: " + possibilities);
     }
 
-    private static void generateShuffleWords() {
+    private static void generateShuffleWords(String mainWord) {
         for (ArrayList<Boolean> possibilityList : possibilities) {
             StringBuilder newWord = new StringBuilder(mainWord);
             Iterator<Boolean> possibilityIterator = possibilityList.iterator();
