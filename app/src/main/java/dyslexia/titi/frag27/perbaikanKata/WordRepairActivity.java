@@ -32,7 +32,7 @@ import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 import dyslexia.titi.frag27.kamus.model.DictionarySimilar;
 import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.ReplaceLetter;
-import dyslexia.titi.frag27.perbaikanKata.anagram.AnagramAlgoritm;
+import dyslexia.titi.frag27.perbaikanKata.anagram.AnagramAlgorithm;
 
 public class WordRepairActivity extends BaseActivity {
 
@@ -45,21 +45,22 @@ public class WordRepairActivity extends BaseActivity {
     TextView tv_resultWord;
     ArrayList<String> replacedWords;
     ArrayList<Dictionary> replacedWordsAnagram = new ArrayList<>();
-    ArrayAdapter<Dictionary> adapter;
-    String wordRepairResultSingle;
+    ArrayList<Dictionary> wordRepairResultList = new ArrayList<>();
+
 
     //anagram
     ArrayList<String> resultAnagramSearchList;
-    ArrayList<Dictionary> wordRepairResultList = new ArrayList<>();
 
     ArrayList<Dictionary> a = new ArrayList<>();
 
     private Button editButton;
     private Button deleteButton;
-    AnagramAlgoritm anagramAlgoritm;
+    AnagramAlgorithm anagramAlgorithm;
 
     List<Dictionary> dictionaryWords;
     String inputWord;
+    final String TAG = "WordRepairActivity";
+
 
     //MENYAMAKAN HURUF
 
@@ -77,7 +78,7 @@ public class WordRepairActivity extends BaseActivity {
         btn_proseskata = findViewById(R.id.btnProsesKata);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
         databaseAdapter = new DatabaseAdapter(getApplicationContext());
-        anagramAlgoritm = new AnagramAlgoritm(WordRepairActivity.this);
+        anagramAlgorithm = new AnagramAlgorithm(WordRepairActivity.this);
     }
 
     @Override
@@ -91,6 +92,7 @@ public class WordRepairActivity extends BaseActivity {
     }
 
     public void searchInDictionary() {
+        String wordRepairResultSingle = "";
         inputWord = ed_inputWord.getText().toString().trim();
 
         for (Dictionary dictionary : dictionaryWords) {
@@ -101,32 +103,45 @@ public class WordRepairActivity extends BaseActivity {
         }
 
         if (!wordRepairResultSingle.isEmpty()) {
-            tv_resultWord.setText(wordRepairResultSingle);
-            listViewSimiliarWords.setAdapter(null);
-            Log.d("eeeeeeee", "loadKata: " + wordRepairResultSingle);
+            setSingleResult(wordRepairResultSingle);
         } else {
             anagramSearch();
+            Log.d(TAG, "anagramSearch 1");
         }
     }
 
+    private void setSingleResult(String word) {
+        tv_resultWord.setText(word);
+        listViewSimiliarWords.setAdapter(null);
+        Log.d(TAG, "single result: " + word);
+    }
+
+    private void setMultiResult(ArrayList<Dictionary> dictionaryArrayList) {
+        ArrayAdapter<Dictionary> dictionaryArrayAdapter;
+        dictionaryArrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, dictionaryArrayList);
+        tv_resultWord.setVisibility(View.GONE);
+        listViewSimiliarWords.setAdapter(dictionaryArrayAdapter);
+        Log.d(TAG, "multi result: " + dictionaryArrayList);
+    }
+
     private void anagramSearch() {
-        resultAnagramSearchList = anagramAlgoritm.getAnagrams(inputWord);
+        wordRepairResultList = new ArrayList<>();
+        resultAnagramSearchList = anagramAlgorithm.getAnagrams(inputWord);
+        Log.d(TAG, "wordRepairResultList: " + wordRepairResultList );
+        Log.d(TAG, "resultAnagramSearchList: " + resultAnagramSearchList);
         for (String resultAnagramSearchWord : resultAnagramSearchList) {
             wordRepairResultList.add(new Dictionary(0, resultAnagramSearchWord, ""));
         }
-        adapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, wordRepairResultList);
 
         if (!(wordRepairResultList.isEmpty())) {
-            tv_resultWord.setVisibility(View.GONE);
-            listViewSimiliarWords.setAdapter(adapter);
+            setMultiResult(wordRepairResultList);
         } else {
+            Log.d(TAG, "anagramSearch: tidak ketemu di anagramSearch 1");
             buatKataDariPersamaanHuruf();
         }
     }
 
     private void buatKataDariPersamaanHuruf() {
-
-
         Log.d("yyy", "cariLagiDiAnagram: " + replacedWordsAnagram);
         inputWord = ed_inputWord.getText().toString().trim();
         replacedWords = ReplaceLetter.generateWords(inputWord);
@@ -142,15 +157,14 @@ public class WordRepairActivity extends BaseActivity {
         ArrayList<String> stringArrayList = new ArrayList<>();
 
         for (String replacedWord : replacedWords) {
-            stringArrayList = anagramAlgoritm.getAnagrams(replacedWord);
+            stringArrayList = anagramAlgorithm.getAnagrams(replacedWord);
             Log.d("pppppp", "buatKataDariPersamaanHuruf: " + stringArrayList);
         }
         for (String string : stringArrayList) {
             replacedWordsAnagram.add(new Dictionary(0, string, ""));
         }
         Log.d("llllll", "cariLagiDiAnagram: " + replacedWordsAnagram);
-        adapter = new ArrayAdapter<Dictionary>(this, R.layout.kamus_list_row, replacedWordsAnagram);
-        listViewSimiliarWords.setAdapter(adapter);
+        setMultiResult(replacedWordsAnagram);
 
 
         Log.d("nnnnnn", "cariLagiDiAnagram: " + replacedWordsAnagram);

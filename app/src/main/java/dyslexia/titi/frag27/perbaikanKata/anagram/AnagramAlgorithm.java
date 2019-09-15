@@ -7,26 +7,26 @@ import java.util.ArrayList;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 
-public class AnagramAlgoritm {
+public class AnagramAlgorithm {
 
     private ArrayList<Dictionary> sortedDictionary;
 
-    private ArrayList<String> kamus = new ArrayList<>();
+    private ArrayList<String> stringArrayList = new ArrayList<>();
     private int wordSize;
     private Context mContext;
     private DatabaseAdapter databaseAdapter;
 
-    public AnagramAlgoritm(Context context){
+    public AnagramAlgorithm(Context context){
         mContext = context;
     }
 
-    public  void loadDatabase(){
+    public void loadDatabase(){
         databaseAdapter = new DatabaseAdapter(mContext);
         sortedDictionary = (ArrayList<Dictionary>) databaseAdapter.retrieveKamus("all");
-
     }
 
     public ArrayList<String> getAnagrams(String inputWord){
+        stringArrayList.clear();
         loadDatabase();
 
         wordSize = inputWord.length();
@@ -35,7 +35,7 @@ public class AnagramAlgoritm {
         for (int i = 0 ; i < sortedDictionary.size(); i++){
             mainAlgoritm(i, givenChar);
         }
-        return kamus;
+        return stringArrayList;
     }
 
     private void mainAlgoritm(int index , char[] unresolvedInputWordChar) {
@@ -48,7 +48,7 @@ public class AnagramAlgoritm {
             if (newChar.length == 0){
                 //                Log.d("bbb", "mainAlgorithm: " + availableWord.getWord());
                 if (availableWord.getWord().length() == wordSize){
-                    kamus.add(availableWord.getWord());
+                    stringArrayList.add(availableWord.getWord());
                 }
             }
         }
