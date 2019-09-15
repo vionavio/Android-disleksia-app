@@ -31,7 +31,7 @@ import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 import dyslexia.titi.frag27.kamus.model.DictionarySimilar;
-import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.MainReplaceLetter;
+import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.ReplaceLetter;
 import dyslexia.titi.frag27.perbaikanKata.anagram.AnagramAlgoritm;
 
 public class WordRepairActivity extends BaseActivity {
@@ -82,15 +82,15 @@ public class WordRepairActivity extends BaseActivity {
 
     @Override
     public void populateView() {
-        btn_proseskata.setOnClickListener((View view) -> search());
+        btn_proseskata.setOnClickListener((View view) -> searchInDictionary());
+        dictionaryWords = databaseAdapter.retrieveKamus("all");
         loadSuara();
         loadSuara2();
         loadSuara3();
         loadMenu();
     }
 
-    public void search() {
-        dictionaryWords = databaseAdapter.retrieveKamus("all");
+    public void searchInDictionary() {
         inputWord = ed_inputWord.getText().toString().trim();
 
         for (Dictionary dictionary : dictionaryWords) {
@@ -107,7 +107,6 @@ public class WordRepairActivity extends BaseActivity {
         } else {
             anagramSearch();
         }
-
     }
 
     private void anagramSearch() {
@@ -130,7 +129,7 @@ public class WordRepairActivity extends BaseActivity {
 
         Log.d("yyy", "cariLagiDiAnagram: " + replacedWordsAnagram);
         inputWord = ed_inputWord.getText().toString().trim();
-        replacedWords = MainReplaceLetter.generateWords(inputWord);
+        replacedWords = ReplaceLetter.generateWords(inputWord);
         Log.d("bbbbbbb", "buatKataDariPersamaanHuruf: " + replacedWords.toString());
 
         //cari lagi di anagram

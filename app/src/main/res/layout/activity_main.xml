@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_round1"
-        android:onClick="Register"
+        android:onClick="register"
         android:text="daftar"
         android:textColor="#fff"
         tools:ignore="OnClick" />
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="@drawable/btn_round2"
-        android:onClick="Masuk"
+        android:onClick="login"
         android:text="@string/saya_sudah_punya_akun"
         android:textColor="@color/colorBtn1"
         tools:ignore="OnClick" />

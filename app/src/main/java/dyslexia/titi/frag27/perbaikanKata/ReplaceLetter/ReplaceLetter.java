@@ -3,7 +3,7 @@ package dyslexia.titi.frag27.perbaikanKata.ReplaceLetter;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class MainReplaceLetter {
+public class ReplaceLetter {
     private static String mainWord;
     private static ArrayList<SimiliarLetter> similarList = new ArrayList<>();
     private static ArrayList<Character> similarKeys = new ArrayList<>();

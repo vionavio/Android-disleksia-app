@@ -19,7 +19,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        CardView kamus =  findViewById(R.id.kamus);
+        CardView kamus =  findViewById(R.id.dictionary);
         kamus.setOnClickListener(view -> {
             Intent kamusIntent = new Intent(MenuActivity.this, KamusActivity.class);
             startActivity(kamusIntent);
