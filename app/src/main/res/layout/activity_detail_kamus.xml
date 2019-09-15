@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".kamus.crud.DetailKamusActivity">
+    tools:context=".dictionary.crud.DetailKamusActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

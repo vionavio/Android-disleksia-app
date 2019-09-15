@@ -27,10 +27,9 @@ import java.util.List;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.kamus.adapter.MyPageAdapter;
 import dyslexia.titi.frag27.kamus.crud.EditKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
-import dyslexia.titi.frag27.kamus.model.Kamus;
+import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,8 +38,8 @@ public class AllFragment extends Fragment {
 
     ListView lv;
     TextView tv;
-    ArrayAdapter<Kamus> adapter;
-    List<Kamus> kamuses = new ArrayList<>();
+    ArrayAdapter<Dictionary> adapter;
+    List<Dictionary> dictionaries = new ArrayList<>();
     TextToSpeech t1;
 
     private Button editButton;
@@ -70,7 +69,7 @@ public class AllFragment extends Fragment {
 
     private void loadData() {
         DatabaseAdapter db = new DatabaseAdapter(getActivity());
-        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("all"));
+        adapter = new ArrayAdapter<Dictionary>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("all"));
 
         lv.setAdapter(adapter);
 
@@ -81,7 +80,7 @@ public class AllFragment extends Fragment {
         });
 
         lv.setOnItemClickListener((AdapterView<?> parent, View view, int position, long id) -> {
-            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+            Dictionary selectedFromList = (Dictionary) lv.getItemAtPosition(position);
             Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
             t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
         });
@@ -94,7 +93,7 @@ public class AllFragment extends Fragment {
                     editButton = dialog.findViewById(R.id.button_edit_data);
                     delButton = dialog.findViewById(R.id.button_delete_data);
 
-                    Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+                    Dictionary selectedFromList = (Dictionary) lv.getItemAtPosition(position);
 
                     //apabila tombol edit diklik
                     editButton.setOnClickListener(
@@ -126,7 +125,7 @@ public class AllFragment extends Fragment {
 
     @Override
     public String toString() {
-        return "Kamus Kata";
+        return "Dictionary Kata";
     }
 
     @Override
@@ -164,7 +163,7 @@ public class AllFragment extends Fragment {
     private void switchToEdit(long id_word) {
 
         DatabaseAdapter databaseAdapter =new DatabaseAdapter(getActivity());
-        Kamus selectedFromList = (Kamus) databaseAdapter.getKamus(id_word);
+        Dictionary selectedFromList = (Dictionary) databaseAdapter.getKamus(id_word);
         Intent intent = new Intent(getActivity(), EditKamusActivity.class);
         Bundle bundle = new Bundle();
         bundle.putLong("id_word", selectedFromList.getId_word());

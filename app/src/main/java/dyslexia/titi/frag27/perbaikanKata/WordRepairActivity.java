@@ -29,35 +29,36 @@ import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.base.BaseActivity;
 import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
-import dyslexia.titi.frag27.kamus.model.Kamus;
-import dyslexia.titi.frag27.kamus.model.KamusSimilar;
+import dyslexia.titi.frag27.kamus.model.Dictionary;
+import dyslexia.titi.frag27.kamus.model.DictionarySimilar;
 import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.MainReplaceLetter;
 import dyslexia.titi.frag27.perbaikanKata.anagram.AnagramAlgoritm;
 
 public class WordRepairActivity extends BaseActivity {
 
     TextToSpeech textToSpeech;
-    EditText ed_kataAwal;
+    EditText ed_inputWord;
     Button btn_proseskata;
     ListView listViewSimiliarWords;
     DatabaseAdapter databaseAdapter;
     ImageView iv_suara;
-    TextView tv_hasil;
+    TextView tv_resultWord;
     ArrayList<String> replacedWords;
-    ArrayList<Kamus> replacedWordsAnagram = new ArrayList<>();
-    ArrayAdapter<Kamus> adapter;
-    AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(WordRepairActivity.this);
+    ArrayList<Dictionary> replacedWordsAnagram = new ArrayList<>();
+    ArrayAdapter<Dictionary> adapter;
+    String wordRepairResultSingle;
 
     //anagram
-    ArrayList<String> foundedString;
-    ArrayList<Kamus> foundedWords = new ArrayList<>();
+    ArrayList<String> resultAnagramSearchList;
+    ArrayList<Dictionary> wordRepairResultList = new ArrayList<>();
 
-    ArrayList<Kamus> a = new ArrayList<>();
+    ArrayList<Dictionary> a = new ArrayList<>();
 
     private Button editButton;
     private Button deleteButton;
+    AnagramAlgoritm anagramAlgoritm;
 
-    List<Kamus> kamusList;
+    List<Dictionary> dictionaryWords;
     String inputWord;
 
     //MENYAMAKAN HURUF
@@ -70,73 +71,56 @@ public class WordRepairActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        tv_hasil = findViewById(R.id.tv_hasil);
+        tv_resultWord = findViewById(R.id.tv_hasil);
         iv_suara = findViewById(R.id.iv_suara);
-        ed_kataAwal = findViewById(R.id.ed_kataAwal);
+        ed_inputWord = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
-        loadDatabase();
+        databaseAdapter = new DatabaseAdapter(getApplicationContext());
+        anagramAlgoritm = new AnagramAlgoritm(WordRepairActivity.this);
     }
 
     @Override
     public void populateView() {
-        btn_proseskata.setOnClickListener((View view) -> {
-            search();
-        });
+        btn_proseskata.setOnClickListener((View view) -> search());
         loadSuara();
         loadSuara2();
         loadSuara3();
         loadMenu();
     }
 
-
-    public void loadDatabase() {
-        databaseAdapter = new DatabaseAdapter(getApplicationContext());
-    }
-
     public void search() {
+        dictionaryWords = databaseAdapter.retrieveKamus("all");
+        inputWord = ed_inputWord.getText().toString().trim();
 
-        kamusList = databaseAdapter.retrieveKamus("all");
-        inputWord = ed_kataAwal.getText().toString().trim();
-        String wordMatch = "";
-
-        for (Kamus kamus : kamusList) {
-            if (inputWord.equals(kamus.getWord())) {
-                wordMatch = kamus.getWord();
+        for (Dictionary dictionary : dictionaryWords) {
+            if (inputWord.equals(dictionary.getWord())) {
+                wordRepairResultSingle = dictionary.getWord();
                 break;
             }
         }
 
-        if (wordMatch != "") {
-            tv_hasil.setText(wordMatch);
+        if (!wordRepairResultSingle.isEmpty()) {
+            tv_resultWord.setText(wordRepairResultSingle);
             listViewSimiliarWords.setAdapter(null);
-            Log.d("eeeeeeee", "loadKata: " + wordMatch);
+            Log.d("eeeeeeee", "loadKata: " + wordRepairResultSingle);
         } else {
-            // cari di anagram
-            cariDiAnagram();
+            anagramSearch();
         }
 
     }
 
-    private void cariDiAnagram() {
-        foundedWords.clear();
-        inputWord = ed_kataAwal.getText().toString().trim();
-        AnagramAlgoritm anagramAlgoritm = new AnagramAlgoritm(WordRepairActivity.this);
-        foundedString = anagramAlgoritm.getAnagrams(inputWord);
-        Log.d("aaaaaaaaaa", "loadKata: " + foundedString.toString());
-        for (String string : foundedString) {
-            foundedWords.add(new Kamus(0, string, ""));
+    private void anagramSearch() {
+        resultAnagramSearchList = anagramAlgoritm.getAnagrams(inputWord);
+        for (String resultAnagramSearchWord : resultAnagramSearchList) {
+            wordRepairResultList.add(new Dictionary(0, resultAnagramSearchWord, ""));
         }
-        adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row, foundedWords);
+        adapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, wordRepairResultList);
 
-        if (!(foundedWords.isEmpty())) {
-            tv_hasil.setText(" ");
+        if (!(wordRepairResultList.isEmpty())) {
+            tv_resultWord.setVisibility(View.GONE);
             listViewSimiliarWords.setAdapter(adapter);
         } else {
-
-//                tv_hasil.setText(" RAKETEMU");
-//                listViewSimiliarWords.setAdapter(null);
-//            Log.d("ccccc", "loadKata: tidak ketemu");
             buatKataDariPersamaanHuruf();
         }
     }
@@ -145,7 +129,7 @@ public class WordRepairActivity extends BaseActivity {
 
 
         Log.d("yyy", "cariLagiDiAnagram: " + replacedWordsAnagram);
-        inputWord = ed_kataAwal.getText().toString().trim();
+        inputWord = ed_inputWord.getText().toString().trim();
         replacedWords = MainReplaceLetter.generateWords(inputWord);
         Log.d("bbbbbbb", "buatKataDariPersamaanHuruf: " + replacedWords.toString());
 
@@ -163,10 +147,10 @@ public class WordRepairActivity extends BaseActivity {
             Log.d("pppppp", "buatKataDariPersamaanHuruf: " + stringArrayList);
         }
         for (String string : stringArrayList) {
-            replacedWordsAnagram.add(new Kamus(0, string, ""));
+            replacedWordsAnagram.add(new Dictionary(0, string, ""));
         }
         Log.d("llllll", "cariLagiDiAnagram: " + replacedWordsAnagram);
-        adapter = new ArrayAdapter<Kamus>(this, R.layout.kamus_list_row, replacedWordsAnagram);
+        adapter = new ArrayAdapter<Dictionary>(this, R.layout.kamus_list_row, replacedWordsAnagram);
         listViewSimiliarWords.setAdapter(adapter);
 
 
@@ -179,14 +163,14 @@ public class WordRepairActivity extends BaseActivity {
 
     private void jaroWinklerDistance() {
 
-        List<KamusSimilar> kamusSimilarList = new ArrayList<>();
-        List<KamusSimilar> kamusSimilarFilteredList = new ArrayList<>();
+        List<DictionarySimilar> kamusSimilarList = new ArrayList<>();
+        List<DictionarySimilar> kamusSimilarFilteredList = new ArrayList<>();
         List<String> finalWords = new ArrayList<>();
 
-        for (Kamus kamus : kamusList) {
-            kamusSimilarList.add(new KamusSimilar(kamus.getId_word(), kamus.getWord(), kamus.getType(), getSimilarScore(kamus.getWord())));
+        for (Dictionary dictionary : dictionaryWords) {
+            kamusSimilarList.add(new DictionarySimilar(dictionary.getId_word(), dictionary.getWord(), dictionary.getType(), getSimilarScore(dictionary.getWord())));
         }
-        for (KamusSimilar kamusSimilar : kamusSimilarList) {
+        for (DictionarySimilar kamusSimilar : kamusSimilarList) {
             if (kamusSimilar.getSimilarScore() > 0.85) {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
@@ -194,7 +178,7 @@ public class WordRepairActivity extends BaseActivity {
         }
         Collections.sort(kamusSimilarFilteredList, (kamusSimilar, kamusSimilar2) -> Double.compare(kamusSimilar2.getSimilarScore(), kamusSimilar.getSimilarScore()));
         Log.d("aaaaaa", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
-        for (KamusSimilar kamusSimilar : kamusSimilarFilteredList) {
+        for (DictionarySimilar kamusSimilar : kamusSimilarFilteredList) {
             finalWords.add(kamusSimilar.getWord());
         }
 
@@ -215,7 +199,7 @@ public class WordRepairActivity extends BaseActivity {
     }
 
     private double getSimilarScore(String word) {
-        String inputWord = ed_kataAwal.getText().toString().trim();
+        String inputWord = ed_inputWord.getText().toString().trim();
         return new JaroWinkler().getSimilarity(word, inputWord);
     }
 
@@ -233,7 +217,7 @@ public class WordRepairActivity extends BaseActivity {
     private void loadSuara2() {
         textToSpeech();
         iv_suara.setOnClickListener(view -> {
-            String toSpeak = ed_kataAwal.getText().toString().trim();
+            String toSpeak = ed_inputWord.getText().toString().trim();
             Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_LONG).show();
             textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
         });
@@ -242,8 +226,8 @@ public class WordRepairActivity extends BaseActivity {
 
     private void loadSuara3() {
         textToSpeech();
-        tv_hasil.setOnClickListener(view -> {
-            String toSpeak = tv_hasil.getText().toString().trim();
+        tv_resultWord.setOnClickListener(view -> {
+            String toSpeak = tv_resultWord.getText().toString().trim();
             Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_LONG).show();
             textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
         });
@@ -269,7 +253,7 @@ public class WordRepairActivity extends BaseActivity {
 
             //String selectedFromList = (String) listViewSimiliarWords.getItemAtPosition(position);
 
-            Kamus selectedFromList = (Kamus) listViewSimiliarWords.getItemAtPosition(position);
+            Dictionary selectedFromList = (Dictionary) listViewSimiliarWords.getItemAtPosition(position);
 
 
             //apabila tombol edit diklik
@@ -286,7 +270,7 @@ public class WordRepairActivity extends BaseActivity {
                     v -> {
                         // Delete kata dari db
 
-                        //Kamus selectedItem = (Kamus) adapterView.getItemAtPosition(position);
+                        //Dictionary selectedItem = (Dictionary) adapterView.getItemAtPosition(position);
                         // DatabaseAdapter databaseAdapter = new DatabaseAdapter(getApplicationContext());
                         //databaseAdapter.deleteKamus(selectedItem.getId_word());
                         // finish();

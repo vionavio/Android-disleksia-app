@@ -9,7 +9,7 @@ public class MainReplaceLetter {
     private static ArrayList<Character> similarKeys = new ArrayList<>();
     private static ArrayList<ShuffleWord> shuffleWordArrayList = new ArrayList<>();
     private static ArrayList<String> shuffledWords = new ArrayList<>();
-    private static ArrayList<ArrayList<Boolean>> possibilities = new ArrayList<ArrayList<Boolean>>();
+    private static ArrayList<ArrayList<Boolean>> possibilities = new ArrayList<>();
 
     public static ArrayList<String> generateWords(String string) {
         mainWord = string;

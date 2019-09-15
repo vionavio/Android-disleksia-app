@@ -22,7 +22,7 @@ import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
-import dyslexia.titi.frag27.kamus.model.Kamus;
+import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +31,7 @@ public class NumeralFragment extends Fragment {
 
     ListView lv;
     TextView tv;
-    ArrayAdapter<Kamus> adapter;
+    ArrayAdapter<Dictionary> adapter;
     TextToSpeech t1;
 
     public static NumeralFragment newInstance()
@@ -61,7 +61,7 @@ public class NumeralFragment extends Fragment {
 
     private void loadData() {
         DatabaseAdapter db=new DatabaseAdapter(getActivity());
-        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("numeralia"));
+        adapter = new ArrayAdapter<Dictionary>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("numeralia"));
         lv.setAdapter(adapter);
         t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {
             if (status != TextToSpeech.ERROR) {
@@ -70,7 +70,7 @@ public class NumeralFragment extends Fragment {
         });
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
-            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+            Dictionary selectedFromList = (Dictionary) lv.getItemAtPosition(position);
             Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
             t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
         });

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".kamus.crud.TambahKamusActivity">
+    tools:context=".dictionary.crud.TambahKamusActivity">
 
     <EditText
         android:id="@+id/et_word"

@@ -3,14 +3,13 @@ package dyslexia.titi.frag27.perbaikanKata.anagram;
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
-import dyslexia.titi.frag27.kamus.model.Kamus;
+import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 public class AnagramAlgoritm {
 
-    private ArrayList<Kamus> sortedDictionary;
+    private ArrayList<Dictionary> sortedDictionary;
 
     private ArrayList<String> kamus = new ArrayList<>();
     private int wordSize;
@@ -23,7 +22,7 @@ public class AnagramAlgoritm {
 
     public  void loadDatabase(){
         databaseAdapter = new DatabaseAdapter(mContext);
-        sortedDictionary = (ArrayList<Kamus>) databaseAdapter.retrieveKamus("all");
+        sortedDictionary = (ArrayList<Dictionary>) databaseAdapter.retrieveKamus("all");
 
     }
 
@@ -41,7 +40,7 @@ public class AnagramAlgoritm {
 
     private void mainAlgoritm(int index , char[] unresolvedInputWordChar) {
 
-        Kamus availableWord = sortedDictionary.get(index);
+        Dictionary availableWord = sortedDictionary.get(index);
         char[] searchWordChars = availableWord.getWord().toCharArray();
 
         if (AnagramHelper.isSubset(searchWordChars, unresolvedInputWordChar)){

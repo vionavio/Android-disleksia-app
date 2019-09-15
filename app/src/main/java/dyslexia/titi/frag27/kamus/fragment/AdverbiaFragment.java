@@ -12,7 +12,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -23,7 +22,7 @@ import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
-import dyslexia.titi.frag27.kamus.model.Kamus;
+import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +32,7 @@ public class AdverbiaFragment extends Fragment {
     ListView lv;
     TextView tv;
     TextToSpeech t1;
-    ArrayAdapter<Kamus> adapter;
+    ArrayAdapter<Dictionary> adapter;
 
     public static AdverbiaFragment newInstance()
     {
@@ -63,7 +62,7 @@ public class AdverbiaFragment extends Fragment {
     private void loadData() {
         DatabaseAdapter db=new DatabaseAdapter(getActivity());
 
-        adapter = new ArrayAdapter<Kamus>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("adverbia"));
+        adapter = new ArrayAdapter<Dictionary>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("adverbia"));
         lv.setAdapter(adapter);
         t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {
             if (status != TextToSpeech.ERROR) {
@@ -72,7 +71,7 @@ public class AdverbiaFragment extends Fragment {
         });
 
         lv.setOnItemClickListener((parent, view, position, id) -> {
-            Kamus selectedFromList = (Kamus) lv.getItemAtPosition(position);
+            Dictionary selectedFromList = (Dictionary) lv.getItemAtPosition(position);
             Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
             t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
         });
