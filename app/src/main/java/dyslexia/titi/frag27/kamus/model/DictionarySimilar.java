@@ -1,10 +1,10 @@
 package dyslexia.titi.frag27.kamus.model;
 
-//kelas baru yang mewarisi kamus
-public class KamusSimilar extends Kamus {
+//kelas baru yang mewarisi dictionary
+public class DictionarySimilar extends Dictionary {
     private double similarScore;
 
-    public KamusSimilar(long id_word, String word, String type, double similarScore) {
+    public DictionarySimilar(long id_word, String word, String type, double similarScore) {
         super(id_word, word, type);
         this.similarScore = similarScore;
     }
@@ -19,7 +19,7 @@ public class KamusSimilar extends Kamus {
 
     @Override
     public String toString() {
-        return "KamusSimilar{" +
+        return "DictionarySimilar{" +
                 "word=" + getWord() + " " +
                 "similarScore=" + similarScore +
                 "}\n";

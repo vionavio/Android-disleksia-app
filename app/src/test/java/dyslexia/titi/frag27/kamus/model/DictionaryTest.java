@@ -10,9 +10,9 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 // Created by Arif Ikhsanudin on 9/2/2019.
 
-public class KamusTest {
+public class DictionaryTest {
 
-    private Kamus dictionary;
+    private Dictionary dictionary;
 
     private long id = 1;
     private String word = "word";
@@ -20,7 +20,7 @@ public class KamusTest {
 
     @Before
     public void setUp() throws Exception {
-        dictionary = new Kamus(id, word, type);
+        dictionary = new Dictionary(id, word, type);
     }
 
     @After

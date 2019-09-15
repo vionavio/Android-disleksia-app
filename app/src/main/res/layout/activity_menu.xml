@@ -17,7 +17,7 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/kamus"
+            android:id="@+id/dictionary"
             android:layout_width="120dp"
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
@@ -42,8 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@string/kamus"
-                    android:textSize="17dp"
+                    android:text="@string/dictionary"
+                    android:textSize="17sp"
                     android:textStyle="bold" />
             </LinearLayout>
 

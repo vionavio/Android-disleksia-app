@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#ecf5f7"
     android:fitsSystemWindows="true"
-    tools:context=".kamus.KamusActivity">
+    tools:context=".dictionary.KamusActivity">
 
   <com.google.android.material.appbar.AppBarLayout
       android:layout_width="match_parent"

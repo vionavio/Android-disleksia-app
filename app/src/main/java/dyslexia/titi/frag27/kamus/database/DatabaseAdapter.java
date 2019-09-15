@@ -11,14 +11,14 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import dyslexia.titi.frag27.kamus.model.Kamus;
+import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 public class DatabaseAdapter extends SQLiteAssetHelper {
 
 
     private static final String DB_NAME = "dictionary2.db";
     private static final int DB_VER = 1;
-    public Kamus kamus;
+    public Dictionary dictionary;
     SQLiteDatabase database;
 
     public DatabaseAdapter(Context context) {
@@ -35,7 +35,7 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
      1. RETRIEVE SPACECRAFTS FROM DB AND POPULATE ARRAYLIST
      2. RETURN THE LIST
      */
-    public List<Kamus> retrieveKamus(String type) {
+    public List<Dictionary> retrieveKamus(String type) {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
@@ -51,25 +51,25 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
             cursor = qb.query(db, sqlSelect, "type LIKE ?", new String[]{type}, null, null, null);
         }
 
-        List<Kamus> kamuses = new ArrayList<>();
+        List<Dictionary> dictionaries = new ArrayList<>();
 
         // Cursor c=db.rawQuery("SELECT * FROM WORDS WHERE TYPE "+type+"'",null);
 
         if (cursor.moveToFirst()) {
             do {
-                Kamus kamus = new Kamus(0, "", "");
-                kamus.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
-                kamus.setWord(cursor.getString(cursor.getColumnIndex("word")));
-                kamus.setType(cursor.getString(cursor.getColumnIndex("type")));
+                Dictionary dictionary = new Dictionary(0, "", "");
+                dictionary.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
+                dictionary.setWord(cursor.getString(cursor.getColumnIndex("word")));
+                dictionary.setType(cursor.getString(cursor.getColumnIndex("type")));
 
-                kamuses.add(kamus);
+                dictionaries.add(dictionary);
             } while (cursor.moveToNext());
         }
-        return kamuses;
+        return dictionaries;
     }
 
 
-    public Kamus getKamus(long id_word) {
+    public Dictionary getKamus(long id_word) {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         String[] sqlSelect = {"id_word", "word", "type"};
@@ -80,21 +80,21 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
 
         Cursor cursor = qb.query(db, sqlSelect, "id_word =" + id_word, null, null, null, null);
 
-        List<Kamus> kamuses = new ArrayList<>();
+        List<Dictionary> dictionaries = new ArrayList<>();
 
         // Cursor c=db.rawQuery("SELECT * FROM WORDS WHERE TYPE "+type+"'",null);
 
         if (cursor.moveToFirst()) {
             do {
-                Kamus kamus = new Kamus(0, "", "");
-                kamus.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
-                kamus.setWord(cursor.getString(cursor.getColumnIndex("word")));
-                kamus.setType(cursor.getString(cursor.getColumnIndex("type")));
+                Dictionary dictionary = new Dictionary(0, "", "");
+                dictionary.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
+                dictionary.setWord(cursor.getString(cursor.getColumnIndex("word")));
+                dictionary.setType(cursor.getString(cursor.getColumnIndex("type")));
 
-                kamuses.add(kamus);
+                dictionaries.add(dictionary);
             } while (cursor.moveToNext());
         }
-        return kamus;
+        return dictionary;
 
     }
 

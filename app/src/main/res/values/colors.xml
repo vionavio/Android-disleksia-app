@@ -10,7 +10,7 @@
     <color name="colorBtn3">#8EE000</color>
     <color name="colorBac">#fcfbf8</color>
 
-    <!-- Background color for the kamus category -->
+    <!-- Background color for the dictionary category -->
     <color name="tan_background">#ead890</color>
     <color name="category_sh">#FD8E09</color>
     <color name="category_sa">#379237</color>

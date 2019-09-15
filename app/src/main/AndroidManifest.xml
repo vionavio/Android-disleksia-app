@@ -11,9 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".kamus.crud.DetailKamusActivity"/>
-        <activity android:name=".kamus.crud.TambahKamusActivity" />
-        <activity android:name=".kamus.crud.EditKamusActivity" />
+        <activity android:name=".dictionary.crud.DetailKamusActivity"/>
+        <activity android:name=".dictionary.crud.TambahKamusActivity" />
+        <activity android:name=".dictionary.crud.EditKamusActivity" />
         <activity
             android:name=".permainan.kuis.ScoreActivity"
             android:theme="@style/noTitleBar" />
@@ -63,7 +63,7 @@
             android:parentActivityName=".MenuActivity"
             android:theme="@style/Setting" />
         <activity
-            android:name=".perbaikanKata.PerbaikanKataActivity"
+            android:name=".perbaikanKata.WordRepairActivity"
             android:label="Perbaikan Kata"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/PerbaikanKata" />
@@ -73,7 +73,7 @@
             android:parentActivityName=".MenuActivity"
             android:theme="@style/MenuGame" />
         <activity
-            android:name=".kamus.KamusActivity"
+            android:name=".dictionary.KamusActivity"
             android:label="Kamus"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

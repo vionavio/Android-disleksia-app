@@ -1,12 +1,12 @@
 package dyslexia.titi.frag27.kamus.model;
 
-public class Kamus {
+public class Dictionary {
     // inisialisasi
     public long id_word;
     public String word;
     public String type;
 
-    public Kamus(long id_word, String word, String type) {
+    public Dictionary(long id_word, String word, String type) {
         this.id_word = id_word;
         this.word = word;
         this.type = type;
