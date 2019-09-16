@@ -125,7 +125,7 @@ public class AllFragment extends Fragment {
 
     @Override
     public String toString() {
-        return "Dictionary Kata";
+        return "Kamus Kata";
     }
 
     @Override

@@ -2,6 +2,7 @@ package dyslexia.titi.frag27;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -19,7 +20,7 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        CardView kamus =  findViewById(R.id.dictionary);
+        CardView kamus =  findViewById(R.id.kamus);
         kamus.setOnClickListener(view -> {
             Intent kamusIntent = new Intent(MenuActivity.this, KamusActivity.class);
             startActivity(kamusIntent);
@@ -32,7 +33,7 @@ public class MenuActivity extends AppCompatActivity {
         });
 
         CardView permainan =  findViewById(R.id.permainan);
-        permainan.setOnClickListener(view -> {
+        permainan.setOnClickListener((View view) -> {
             Intent permainanIntent = new Intent(MenuActivity.this, PermainanActivity.class);
             startActivity(permainanIntent);
         });
