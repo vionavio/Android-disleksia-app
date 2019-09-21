@@ -164,7 +164,6 @@ public class AdjektivaFragment extends Fragment  {
 
     //method untuk get single data
     private void switchToEdit(long id_word) {
-
         DatabaseDictionary databaseDictionary =new DatabaseDictionary(getActivity());
         Dictionary selectedFromList = (Dictionary) databaseDictionary.getKamus(id_word);
         Intent intent = new Intent(getActivity(), EditKamusActivity.class);
@@ -176,13 +175,4 @@ public class AdjektivaFragment extends Fragment  {
         databaseDictionary.close();
         startActivity(intent);
     }
-
-
-
-
-
-
-
-
-
 }

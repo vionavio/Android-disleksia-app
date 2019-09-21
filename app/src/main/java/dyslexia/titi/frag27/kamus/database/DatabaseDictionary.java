@@ -67,6 +67,7 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
                 dictionaries.add(dictionary);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return dictionaries;
     }
 
@@ -78,14 +79,11 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
         String tableName = "words";
         qb.setTables(tableName);
 
-
-
         Cursor cursor = qb.query(db, sqlSelect, "id_word =" + id_word, null, null, null, null);
 
         List<Dictionary> dictionaries = new ArrayList<>();
 
         // Cursor c=db.rawQuery("SELECT * FROM WORDS WHERE TYPE "+type+"'",null);
-
         if (cursor.moveToFirst()) {
             do {
                 Dictionary dictionary = new Dictionary(0, "", "");
@@ -96,15 +94,15 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
                 dictionaries.add(dictionary);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return dictionary;
-
     }
 
     public void deleteKamus(long id)
     {
         SQLiteDatabase db = getReadableDatabase();
         db.delete("words","id_word" + " ='" + id + "'",null);
-
+        db.close();
     }
 
     public void open() {
