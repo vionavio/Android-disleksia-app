@@ -20,7 +20,7 @@ import dyslexia.titi.frag27.kamus.fragment.NominaFragment;
 import dyslexia.titi.frag27.kamus.fragment.NumeralFragment;
 import dyslexia.titi.frag27.kamus.fragment.VerbaFragment;
 
-public class KamusActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener  {
+public class DictionaryActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener  {
     private TabLayout tab;
     private ViewPager vp;
     int currentPos=0;

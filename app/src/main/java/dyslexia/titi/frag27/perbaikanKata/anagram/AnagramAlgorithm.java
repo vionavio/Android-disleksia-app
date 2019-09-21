@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
+import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 public class AnagramAlgorithm {
@@ -12,7 +12,7 @@ public class AnagramAlgorithm {
     private ArrayList<Dictionary> sortedDictionary;
 
     private Context mContext;
-    private DatabaseAdapter databaseAdapter;
+    private DatabaseDictionary databaseDictionary;
     private ArrayList<String> stringArrayList = new ArrayList<>();
 
 
@@ -21,8 +21,8 @@ public class AnagramAlgorithm {
     }
 
     private void loadDatabase(){
-        databaseAdapter = new DatabaseAdapter(mContext);
-        sortedDictionary = (ArrayList<Dictionary>) databaseAdapter.retrieveKamus("all");
+        databaseDictionary = new DatabaseDictionary(mContext);
+        sortedDictionary = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("all");
     }
 
     public ArrayList<String> getAnagrams(String inputWord){
@@ -31,6 +31,8 @@ public class AnagramAlgorithm {
 
         int wordSize = inputWord.length();
         // "rumah" > ["r","u", ...]
+        //to Char Array mengalokasikan array karakter baru dari inputWord menjadi karakter,
+        //mengandung urutan karakter diwakili oleh string yang ditentukan.
         char[] givenChar = inputWord.trim().toCharArray();
         for (int i = 0 ; i < sortedDictionary.size(); i++){
             mainAlgorithm(i, givenChar, wordSize);
@@ -56,6 +58,7 @@ public class AnagramAlgorithm {
         Dictionary availableWord = sortedDictionary.get(index);
         char[] searchWordChars = availableWord.getWord().toCharArray();
 
+        //Mengembalikan True jika set lain berisi set ini
         if (AnagramHelper.isSubset(searchWordChars, unresolvedInputWordChar)){
             char[] newChar = AnagramHelper.getDifference(unresolvedInputWordChar,searchWordChars);
             if (newChar.length == 0){

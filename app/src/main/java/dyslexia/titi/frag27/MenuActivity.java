@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.bantuan.BantuanActivity;
-import dyslexia.titi.frag27.kamus.KamusActivity;
+import dyslexia.titi.frag27.kamus.DictionaryActivity;
 import dyslexia.titi.frag27.perbaikanKata.WordRepairActivity;
 import dyslexia.titi.frag27.permainan.PermainanActivity;
 import dyslexia.titi.frag27.setting.SettingActivity;
@@ -22,7 +22,7 @@ public class MenuActivity extends AppCompatActivity {
 
         CardView kamus =  findViewById(R.id.kamus);
         kamus.setOnClickListener(view -> {
-            Intent kamusIntent = new Intent(MenuActivity.this, KamusActivity.class);
+            Intent kamusIntent = new Intent(MenuActivity.this, DictionaryActivity.class);
             startActivity(kamusIntent);
         });
 

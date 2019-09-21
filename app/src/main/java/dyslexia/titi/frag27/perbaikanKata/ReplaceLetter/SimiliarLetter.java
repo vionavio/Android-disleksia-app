@@ -1,8 +1,11 @@
 package dyslexia.titi.frag27.perbaikanKata.ReplaceLetter;
 
 public class SimiliarLetter {
+    // model yg menyimpan karakter sebelum dan sesudah
 
     //letterKey = huruf yang masuk daftar untuk terdeteksi
+    // "aasds"
+    // 'a'
     private Character letterKey;
     private Character letterEquation;
 

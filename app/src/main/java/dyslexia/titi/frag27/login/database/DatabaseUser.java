@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import dyslexia.titi.frag27.login.User;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class DatabaseUser extends SQLiteOpenHelper {
 
     //DATABASE NAME
     public static final String DATABASE_NAME = "disleksia.db";
@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_PASSWORD + " TEXT"
             + " ) ";
 
-    public DatabaseHelper(Context context) {
+    public DatabaseUser(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

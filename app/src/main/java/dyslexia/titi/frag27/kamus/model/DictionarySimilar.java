@@ -1,6 +1,6 @@
 package dyslexia.titi.frag27.kamus.model;
 
-//kelas baru yang mewarisi dictionary
+//kelas baru yang mewarisi dictionary untuk menampilkan nilai jaro
 public class DictionarySimilar extends Dictionary {
     private double similarScore;
 

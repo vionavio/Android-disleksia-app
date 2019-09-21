@@ -43,7 +43,7 @@
             android:parentActivityName=".permainan.PermainanActivity"
             android:theme="@style/MenuKuis" />
         <activity
-            android:name=".permainan.susunAlfabet.SusunAlfabet"
+            android:name=".permainan.susunAlfabet.UppercaseAlfabet"
             android:label="Menyusun Abjad"
             android:parentActivityName=".permainan.PermainanActivity"
             android:theme="@style/GameAbjad" />
@@ -73,7 +73,7 @@
             android:parentActivityName=".MenuActivity"
             android:theme="@style/MenuGame" />
         <activity
-            android:name=".kamus.KamusActivity"
+            android:name=".kamus.DictionaryActivity"
             android:label="Kamus"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

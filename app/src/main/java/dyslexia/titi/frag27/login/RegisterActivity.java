@@ -5,9 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -23,7 +21,7 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.login.database.DatabaseHelper;
+import dyslexia.titi.frag27.login.database.DatabaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -36,7 +34,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Declaration TextInputLayout
     TextInputLayout textInputName;
-    TextInputLayout textInputJK;
     TextInputLayout textInputTL;
     TextInputLayout textInputUserName;
     TextInputLayout textInputEmail;
@@ -53,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button buttonRegister;
 
     //Declaration SqliteHelper
-    DatabaseHelper sqliteHelper;
+    DatabaseUser sqliteHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
             mDisplayDate.setText(date);
         };
 
-        sqliteHelper = new DatabaseHelper(this);
+        sqliteHelper = new DatabaseUser(this);
         initTextViewLogin();
         initViews();
         buttonRegister.setOnClickListener(view -> {
