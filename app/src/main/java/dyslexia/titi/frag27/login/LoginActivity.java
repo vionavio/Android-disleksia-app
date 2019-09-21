@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +17,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.login.database.DatabaseHelper;
+import dyslexia.titi.frag27.login.database.DatabaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -34,13 +33,13 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
 
     //Declaration SqliteHelper
-    DatabaseHelper databaseHelper;
+    DatabaseUser databaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        databaseHelper = new DatabaseHelper(this);
+        databaseUser = new DatabaseUser(this);
         initCreateAccountTextView();
         initViews();
 
@@ -55,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                 String Password = editTextPassword.getText().toString();
 
                 //Authenticate user
-                User currentUser = databaseHelper.Authenticate(new User(null, null, null, null, null, Email, Password));
+                User currentUser = databaseUser.Authenticate(new User(null, null, null, null, null, Email, Password));
 
                 //Check Authentication is successful or not
                 if (currentUser != null) {

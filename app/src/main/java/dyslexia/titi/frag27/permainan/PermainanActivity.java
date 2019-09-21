@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView;
 import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.permainan.kuis.KuisActivity;
-import dyslexia.titi.frag27.permainan.susunAlfabet.SusunAlfabet;
+import dyslexia.titi.frag27.permainan.susunAlfabet.UppercaseAlfabet;
 
 public class PermainanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class PermainanActivity extends AppCompatActivity {
 
         CardView alfabet = findViewById(R.id.susunabjad);
         alfabet.setOnClickListener(view -> {
-            Intent alfabetIntent = new Intent(PermainanActivity.this, SusunAlfabet.class);
+            Intent alfabetIntent = new Intent(PermainanActivity.this, UppercaseAlfabet.class);
             startActivity(alfabetIntent);
         });
 

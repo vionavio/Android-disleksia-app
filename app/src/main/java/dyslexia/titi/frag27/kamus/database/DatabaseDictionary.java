@@ -13,7 +13,7 @@ import java.util.List;
 
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 
-public class DatabaseAdapter extends SQLiteAssetHelper {
+public class DatabaseDictionary extends SQLiteAssetHelper {
 
 
     private static final String DB_NAME = "dictionary2.db";
@@ -21,7 +21,7 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
     public Dictionary dictionary;
     SQLiteDatabase database;
 
-    public DatabaseAdapter(Context context) {
+    public DatabaseDictionary(Context context) {
         super(context, DB_NAME, null, DB_VER);
     }
 
@@ -34,6 +34,8 @@ public class DatabaseAdapter extends SQLiteAssetHelper {
     /*
      1. RETRIEVE SPACECRAFTS FROM DB AND POPULATE ARRAYLIST
      2. RETURN THE LIST
+     list digunakan untuk membuat daftar elemen (objek) yang dikaitkan dengan nomor indeks mereka.
+     retrieve = ambil
      */
     public List<Dictionary> retrieveKamus(String type) {
         SQLiteDatabase db = getReadableDatabase();

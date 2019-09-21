@@ -1,6 +1,7 @@
 package dyslexia.titi.frag27.kamus.model;
 
 public class Dictionary {
+    // model = menggambarkan struktur data dalam database
     // inisialisasi
     public long id_word;
     public String word;

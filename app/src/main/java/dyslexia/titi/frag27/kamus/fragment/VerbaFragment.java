@@ -21,7 +21,7 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
+import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 /**
@@ -59,7 +59,7 @@ public class VerbaFragment extends Fragment {
     }
 
     private void loadData() {
-        DatabaseAdapter db=new DatabaseAdapter(getActivity());
+        DatabaseDictionary db=new DatabaseDictionary(getActivity());
         adapter = new ArrayAdapter<Dictionary>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("verba"));
         lv.setAdapter(adapter);
         t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {

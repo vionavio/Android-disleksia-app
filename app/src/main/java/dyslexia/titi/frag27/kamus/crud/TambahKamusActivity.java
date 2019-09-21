@@ -2,7 +2,7 @@ package dyslexia.titi.frag27.kamus.crud;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
+import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,7 +15,7 @@ public class TambahKamusActivity extends AppCompatActivity {
     private EditText edWord;
     private EditText edType;
     //inisialisasi kontroller/Data Source
-    private DatabaseAdapter databaseAdapter;
+    private DatabaseDictionary databaseDictionary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +28,10 @@ public class TambahKamusActivity extends AppCompatActivity {
 //        edType = (EditText) findViewById(R.id.et_type);
 
         // instanstiasi kelas DBDataSource
-//        DatabaseAdapter databaseAdapter = new DatabaseAdapter(this);
+//        DatabaseDictionary databaseDictionary = new DatabaseDictionary(this);
 //
 //        //membuat sambungan baru ke database
-//        databaseAdapter.open();
+//        databaseDictionary.open();
 
     }
 //    public void onClik(View v){
@@ -53,7 +53,7 @@ public class TambahKamusActivity extends AppCompatActivity {
 //            {
 //                case R.id.buttom_submit:
 //                    // insert data barang baru
-//                    dictionary =databaseAdapter.insert(word, type);
+//                    dictionary =databaseDictionary.insert(word, type);
 //
 //                    //konfirmasi kesuksesan
 //                    Toast.makeText(this, "masuk KATA\n" +

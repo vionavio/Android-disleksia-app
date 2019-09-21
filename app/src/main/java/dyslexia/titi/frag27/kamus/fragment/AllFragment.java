@@ -28,7 +28,7 @@ import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.crud.EditKamusActivity;
-import dyslexia.titi.frag27.kamus.database.DatabaseAdapter;
+import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 /**
@@ -68,7 +68,7 @@ public class AllFragment extends Fragment {
     }
 
     private void loadData() {
-        DatabaseAdapter db = new DatabaseAdapter(getActivity());
+        DatabaseDictionary db = new DatabaseDictionary(getActivity());
         adapter = new ArrayAdapter<Dictionary>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("all"));
 
         lv.setAdapter(adapter);
@@ -107,8 +107,8 @@ public class AllFragment extends Fragment {
                     delButton.setOnClickListener(
                             v -> {
                                 // Delete kata dari db
-                                DatabaseAdapter databaseAdapter = new DatabaseAdapter(getActivity());
-                                databaseAdapter.deleteKamus(selectedFromList.getId_word());
+                                DatabaseDictionary databaseDictionary = new DatabaseDictionary(getActivity());
+                                databaseDictionary.deleteKamus(selectedFromList.getId_word());
                                 getActivity().finish();
                             }
                     );
@@ -162,15 +162,15 @@ public class AllFragment extends Fragment {
     //method untuk get single data
     private void switchToEdit(long id_word) {
 
-        DatabaseAdapter databaseAdapter =new DatabaseAdapter(getActivity());
-        Dictionary selectedFromList = (Dictionary) databaseAdapter.getKamus(id_word);
+        DatabaseDictionary databaseDictionary =new DatabaseDictionary(getActivity());
+        Dictionary selectedFromList = (Dictionary) databaseDictionary.getKamus(id_word);
         Intent intent = new Intent(getActivity(), EditKamusActivity.class);
         Bundle bundle = new Bundle();
         bundle.putLong("id_word", selectedFromList.getId_word());
         bundle.putString("word", selectedFromList.getWord());
         bundle.putString("type",selectedFromList.getType());
         intent.putExtras(bundle);
-        databaseAdapter.close();
+        databaseDictionary.close();
         startActivity(intent);
     }
 

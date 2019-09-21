@@ -2,13 +2,10 @@ package dyslexia.titi.frag27.permainan.susunAlfabet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -46,7 +43,7 @@ public class LowercaseActivity extends AppCompatActivity {
 
         Button uppercase = findViewById(R.id.uppercase);
         uppercase.setOnClickListener(view -> {
-            Intent uppercaseIntent = new Intent(LowercaseActivity.this, SusunAlfabet.class);
+            Intent uppercaseIntent = new Intent(LowercaseActivity.this, UppercaseAlfabet.class);
             startActivity(uppercaseIntent);
         });
 

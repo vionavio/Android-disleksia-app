@@ -7,7 +7,7 @@
     android:background="@drawable/bgapp"
     android:orientation="vertical"
     android:paddingBottom="5dp"
-    tools:context=".permainan.susunAlfabet.SusunAlfabet">
+    tools:context=".permainan.susunAlfabet.UppercaseAlfabet">
 
     <LinearLayout
         android:layout_width="match_parent"

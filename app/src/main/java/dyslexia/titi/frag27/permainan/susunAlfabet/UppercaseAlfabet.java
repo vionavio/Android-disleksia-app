@@ -1,11 +1,9 @@
 package dyslexia.titi.frag27.permainan.susunAlfabet;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -22,7 +20,7 @@ import java.util.Random;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.permainan.PermainanActivity;
 
-public class SusunAlfabet extends AppCompatActivity {
+public class UppercaseAlfabet extends AppCompatActivity {
 
     private int presCounter = 0;
     private int maxPresCounter = 26;
@@ -38,14 +36,14 @@ public class SusunAlfabet extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_susun_alfabet);
+        setContentView(R.layout.activity_uppercase);
 
         editText = findViewById(R.id.editText);
         flexboxLayout = findViewById(R.id.layoutParent);
 
         Button lowercase = findViewById(R.id.lowercase);
         lowercase.setOnClickListener(view -> {
-            Intent lowercaseIntent = new Intent(SusunAlfabet.this, LowercaseActivity.class);
+            Intent lowercaseIntent = new Intent(UppercaseAlfabet.this, LowercaseActivity.class);
             startActivity(lowercaseIntent);
         });
 
@@ -137,14 +135,14 @@ public class SusunAlfabet extends AppCompatActivity {
         FlexboxLayout flexboxLayout = findViewById(R.id.layoutParent);
 
         if (editText.getText().toString().equals(textAnswer)) {
-            Toast.makeText(SusunAlfabet.this, "Correct", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UppercaseAlfabet.this, "Correct", Toast.LENGTH_SHORT).show();
 
 //            Intent a = new Intent(MainActivity.this,BossAct.class);
 //            startActivity(a);
 
             //     editText.setText("");
         } else {
-            Toast.makeText(SusunAlfabet.this, "Salah, Ulangi Kembali", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UppercaseAlfabet.this, "Salah, Ulangi Kembali", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -163,7 +161,7 @@ public class SusunAlfabet extends AppCompatActivity {
         FlexboxLayout flexboxLayout = findViewById(R.id.layoutParent);
 
         if (!(editText.getText().toString().equals(textAnswer))) {
-            Toast.makeText(SusunAlfabet.this, "Ulangi", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UppercaseAlfabet.this, "Ulangi", Toast.LENGTH_SHORT).show();
         }
 
         keys = shuffleArray(keys);

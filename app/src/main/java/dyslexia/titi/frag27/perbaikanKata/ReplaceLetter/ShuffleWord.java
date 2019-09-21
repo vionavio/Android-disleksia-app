@@ -1,6 +1,7 @@
 package dyslexia.titi.frag27.perbaikanKata.ReplaceLetter;
 
 public class ShuffleWord {
+    //model kelas untuk menyimpan index, word key dan word equation
 
     private int index;
     private Character word_key;
@@ -34,7 +35,5 @@ public class ShuffleWord {
         this.index = index;
         this.word_key = word_key;
         this.word_equation = word_equation;
-
-
     }
 }

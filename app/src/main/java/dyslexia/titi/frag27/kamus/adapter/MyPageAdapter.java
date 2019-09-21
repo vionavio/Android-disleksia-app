@@ -10,6 +10,8 @@ import java.util.List;
 public class MyPageAdapter extends FragmentPagerAdapter {
 
 
+
+
     List<Fragment> pages = new ArrayList<>();
 
     public MyPageAdapter(FragmentManager fm) {
