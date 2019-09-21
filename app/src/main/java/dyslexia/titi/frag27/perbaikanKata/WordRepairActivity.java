@@ -336,5 +336,4 @@ public class WordRepairActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

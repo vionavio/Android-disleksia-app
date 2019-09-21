@@ -1,10 +1,6 @@
 package dyslexia.titi.frag27.kamus.fragment;
 
-
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,6 +13,8 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import java.util.Locale;
 
@@ -34,8 +32,7 @@ public class AlphabetFragment extends Fragment {
     ArrayAdapter<Dictionary> adapter;
     TextToSpeech t1;
 
-    public static AlphabetFragment newInstance()
-    {
+    public static AlphabetFragment newInstance() {
         return new AlphabetFragment();
     }
 
@@ -48,7 +45,7 @@ public class AlphabetFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView=inflater.inflate(R.layout.fragment,null);
+        View rootView = inflater.inflate(R.layout.fragment, null);
         initializeViews(rootView);
         loadData();
         return rootView;
@@ -56,11 +53,12 @@ public class AlphabetFragment extends Fragment {
 
     @Override
     public void onDetach() {
+        adapter.clear();
         super.onDetach();
     }
 
     private void loadData() {
-        DatabaseDictionary db=new DatabaseDictionary(getActivity());
+        DatabaseDictionary db = new DatabaseDictionary(getActivity());
         adapter = new ArrayAdapter<Dictionary>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("alphabet"));
         lv.setAdapter(adapter);
 
@@ -78,10 +76,11 @@ public class AlphabetFragment extends Fragment {
     }
 
     private void initializeViews(View rootView) {
-        lv=  rootView.findViewById(R.id.list);
+        lv = rootView.findViewById(R.id.list);
         tv = rootView.findViewById(R.id.title_name);
         tv.setText(toString());
     }
+
     @Override
     public String toString() {
         return "Simbol Huruf";

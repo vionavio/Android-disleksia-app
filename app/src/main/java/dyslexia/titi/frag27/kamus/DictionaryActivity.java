@@ -1,12 +1,11 @@
 package dyslexia.titi.frag27.kamus;
 
+import android.os.Bundle;
+import android.view.Menu;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
-import android.view.Menu;
-import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -20,16 +19,16 @@ import dyslexia.titi.frag27.kamus.fragment.NominaFragment;
 import dyslexia.titi.frag27.kamus.fragment.NumeralFragment;
 import dyslexia.titi.frag27.kamus.fragment.VerbaFragment;
 
-public class DictionaryActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener  {
+public class DictionaryActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
     private TabLayout tab;
     private ViewPager vp;
-    int currentPos=0;
+    int currentPos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kamus);
-        Toolbar toolbar =  findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //VIEWPAGER AND TABS
@@ -37,7 +36,7 @@ public class DictionaryActivity extends AppCompatActivity implements TabLayout.O
         addPages();
 
         //SETUP TAB
-        tab =findViewById(R.id.tabs);
+        tab = findViewById(R.id.tabs);
         tab.setTabGravity(TabLayout.GRAVITY_FILL);
         tab.setupWithViewPager(vp);
         tab.addOnTabSelectedListener(this);
@@ -46,9 +45,8 @@ public class DictionaryActivity extends AppCompatActivity implements TabLayout.O
     }
 
     //FILL TAB PAGES
-    private void addPages()
-    {
-        MyPageAdapter myPageAdapter=new MyPageAdapter(getSupportFragmentManager());
+    private void addPages() {
+        MyPageAdapter myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
         myPageAdapter.addPage(AlphabetFragment.newInstance());
         myPageAdapter.addPage(NumeralFragment.newInstance());
         myPageAdapter.addPage(NominaFragment.newInstance());
@@ -60,7 +58,7 @@ public class DictionaryActivity extends AppCompatActivity implements TabLayout.O
     }
 
     public void onTabSelected(TabLayout.Tab tab) {
-        vp.setCurrentItem(currentPos=tab.getPosition());
+        vp.setCurrentItem(currentPos = tab.getPosition());
     }
 
     public void onTabUnselected(TabLayout.Tab tab) {
