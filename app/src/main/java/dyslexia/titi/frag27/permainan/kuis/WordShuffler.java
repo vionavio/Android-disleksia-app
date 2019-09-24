@@ -5,25 +5,29 @@ import java.util.List;
 
 public class WordShuffler {
 
-    //shuffle method accecpting a string as an input
+    // wordShuffler metod menerima string sebagai input
     public String shuffle(String input){
 
-        //create an arraylist to hold the characters of the string
+        //buat objek arraylist untuk menyimpan characters dari string
         List<Character> inputArray = new ArrayList<Character>();
 
-        //loop through the characters in  the string and add them to the arralist
-        for(char c:input.toCharArray()){
-            inputArray.add(c);
+        //loop(acak) melalui karakter dalam string dan menambahkannya ke daftar array
+        for(char character:input.toCharArray()){
+            inputArray.add(character);
         }
 
-        //create onbject to build our random string from
+        //StringBuilder digunakan untuk membentuk atau melakukan operasi terhadap objek string
+        //buat onbject untuk membuat kata dengan huruf yang acak (our random string from)
         StringBuilder output = new StringBuilder(input.length());
 
-        //check that there are still characters unused to randomly choose
+        //chek ketika masih ada karakter yang belum digunakan secara acak
+        // check that there are still characters unused to randomly choose
         while(inputArray.size()!=0){
+            //pilih secara acak huruf dari list, dan hapus setelahnya.
             //randomly choose a letter from the list, and remove it after.
-            int randPick = (int)(Math.random()*inputArray.size());
-            output.append(inputArray.remove(randPick));
+            int randomPick = (int)(Math.random()*inputArray.size());
+            //menambah larik karakter pada buffer string
+            output.append(inputArray.remove(randomPick));
         }
 
         //return the scrambled word

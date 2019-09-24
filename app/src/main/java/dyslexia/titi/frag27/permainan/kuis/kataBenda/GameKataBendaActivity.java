@@ -71,8 +71,8 @@ public class GameKataBendaActivity extends AppCompatActivity {
 
             //restore text
 
-            Drawable res = getResources().getDrawable(imageResource);
-            pic.setImageDrawable(res);
+            Drawable resources = getResources().getDrawable(imageResource);
+            pic.setImageDrawable(resources);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
             Typeface customfont= Typeface.createFromAsset(getAssets(),"fonts/IBMPlexMono-SemiBold.ttf");
@@ -170,11 +170,11 @@ public class GameKataBendaActivity extends AppCompatActivity {
         answer = input.getText().toString().toLowerCase().trim();
         if (question < chances) {
             WordShuffler shuffler = new WordShuffler();
-            Random rand = new Random();
+            Random random = new Random();
             //use this code block to make sure don't show the same picture back to back
             int whichpic = previousChoice;
             while (whichpic == previousChoice) {
-                whichpic = rand.nextInt(10);
+                whichpic = random.nextInt(10);
             }
             previousChoice = whichpic;
 

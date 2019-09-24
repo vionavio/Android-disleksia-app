@@ -36,7 +36,7 @@
             android:name=".permainan.susunAlfabet.LowercaseActivity"
             android:label="Menyusun Abjad"
             android:parentActivityName=".permainan.PermainanActivity"
-            android:theme="@style/GameAbjad" />
+            android:theme="@style/GameAbjadLower" />
         <activity
             android:name=".permainan.kuis.KuisActivity"
             android:label="Menu Kuis"

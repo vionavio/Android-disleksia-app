@@ -1,6 +1,7 @@
 package dyslexia.titi.frag27.perbaikanKata.anagram;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -34,9 +35,12 @@ public class AnagramAlgorithm {
         //to Char Array mengalokasikan array karakter baru dari inputWord menjadi karakter,
         //mengandung urutan karakter diwakili oleh string yang ditentukan.
         char[] givenChar = inputWord.trim().toCharArray();
+
+        //.size() = menghitung panjang array
         for (int i = 0 ; i < sortedDictionary.size(); i++){
             mainAlgorithm(i, givenChar, wordSize);
         }
+
         return stringArrayList;
     }
 
@@ -58,8 +62,8 @@ public class AnagramAlgorithm {
         Dictionary availableWord = sortedDictionary.get(index);
         char[] searchWordChars = availableWord.getWord().toCharArray();
 
-        //Mengembalikan True jika set lain berisi set ini
-        if (AnagramHelper.isSubset(searchWordChars, unresolvedInputWordChar)){
+       //Mengembalikan True jika set lain berisi set ini
+        if (AnagramHelper.isSubset(unresolvedInputWordChar, searchWordChars)){
             char[] newChar = AnagramHelper.getDifference(unresolvedInputWordChar,searchWordChars);
             if (newChar.length == 0){
                 //                Log.d("bbb", "mainAlgorithm: " + availableWord.getWord());

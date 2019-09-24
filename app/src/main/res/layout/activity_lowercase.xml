@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgapp"
+    android:background="@drawable/bgapp_low"
     android:orientation="vertical"
     android:paddingBottom="5dp"
     tools:context=".permainan.susunAlfabet.LowercaseActivity">
@@ -26,7 +26,7 @@
             android:gravity="center_vertical"
             android:text="Susunlah huruf sesuai urutannya"
             android:textAlignment="center"
-            android:textColor="#332FA2"
+            android:textColor="#075054"
             android:textSize="22sp" />
 
     </LinearLayout>
@@ -34,10 +34,10 @@
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="150dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:background="@drawable/bgpurple"
+        android:background="@drawable/back_editext"
         android:clickable="false"
         android:focusable="false"
         android:gravity="center"
@@ -45,12 +45,12 @@
         android:paddingTop="10dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
-        android:textColor="#332FA2"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="32sp" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="250dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
@@ -81,12 +81,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/btn_purple"
+            android:background="@drawable/back_editext"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Huruf Kapital"
             android:textAllCaps="false"
-            android:textColor="#332FA2"
+            android:textColor="#075054"
             android:textSize="25sp" />
 
         <Button
@@ -95,12 +95,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/btn_purple"
+            android:background="@drawable/back_editext"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="Ulangi"
             android:textAllCaps="false"
-            android:textColor="#332FA2"
+            android:textColor="#075054"
             android:textSize="25sp" />
     </LinearLayout>
 </LinearLayout>

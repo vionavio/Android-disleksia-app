@@ -39,7 +39,7 @@ public class ReplaceLetter {
                 ShuffleWord shuffleWord = new ShuffleWord( i, mainWord.charAt(i), getEqualCharacterSimilar(mainWord.charAt(i)));
                 shuffleWordArrayList.add(shuffleWord);
 
-                // [ {1, u , n}, {1, u , n} ]
+                // [ {1, u , n}, {1, m , w} ]
             }
         }
 
@@ -82,19 +82,20 @@ public class ReplaceLetter {
         return foundCharacter;
     }
 
+    //permutasi , penyusunan kembali suatu objek dalam urutan yang berbeda dari urutan semula
     private static void generatePossibilities() {
         final int n = shuffleWordArrayList.size();
         for (int i = 0; i < Math.pow(2, n); i++) {
             // 2 ^ 3=
-            StringBuilder bin = new StringBuilder(Integer.toBinaryString(i));
+            StringBuilder binary = new StringBuilder(Integer.toBinaryString(i));
                    // nilai binary dari 1-7
-            while (bin.length() < n)
+            while (binary.length() < n)
                 //nilai yang kurang dari 3 ditambah 0 dibelakangnya
                 //menambah huruf didepanya
-                bin.insert(0, "0");
+                binary.insert(0, "0");
             // char[] karakter di dalam array
             //   misal 7=111 menjadi ['1','1','1']
-            char[] chars = bin.toString().toCharArray();
+            char[] chars = binary.toString().toCharArray();
 
             //instansiasi yang panjangnya n = 0,1,2 = 3
 //            boolean[] boolArray = new boolean[n];
@@ -110,7 +111,7 @@ public class ReplaceLetter {
 //                boolArray2.add(value);
 //            }
 
-            //membuat variabel boolarray dengan tipedata arraylist yang isinya boolean, kemudian diinisalisasi dengan panjang n
+            //membuat variabel boolarray dengan tipe arraylist yang isinya boolean, kemudian diinisalisasi dengan panjang n
             // membuat arraylist yang lebar/wadah 3 [ , , ] , membuat objek boolArray
             ArrayList<Boolean> boolArray = new ArrayList<>(n);
             for(int j = 0; j < chars.length; j++)

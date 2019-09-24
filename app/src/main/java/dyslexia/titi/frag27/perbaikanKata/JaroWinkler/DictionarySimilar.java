@@ -1,4 +1,6 @@
-package dyslexia.titi.frag27.kamus.model;
+package dyslexia.titi.frag27.perbaikanKata.JaroWinkler;
+
+import dyslexia.titi.frag27.kamus.model.Dictionary;
 
 //kelas baru yang mewarisi dictionary untuk menampilkan nilai jaro
 public class DictionarySimilar extends Dictionary {

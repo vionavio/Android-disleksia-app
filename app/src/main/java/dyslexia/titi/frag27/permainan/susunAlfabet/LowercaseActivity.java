@@ -24,10 +24,10 @@ public class LowercaseActivity extends AppCompatActivity {
 
     private int presCounter = 0;
     private int maxPresCounter = 26;
-    private String[] keys = {"a", "b", "c", "d", "e", "f", "g", "h", "i"
-            , "j", "k", "l", "m", "n", "o", "p", "q", "r"
-            , "s", "t", "u", "v", "w", "x", "y", "z"};
-    private String textAnswer = "abcdefghijklmnopqrstuvwxyz";
+    private String[] keys = {"a ", "b ", "c ", "d ", "e ", "f ", "g ", "h ", "i "
+            , "j ", "k ", "l ", "m ", "n ", "o ", "p ", "q ", "r "
+            , "s ", "t ", "u ", "v ", "w ", "x ", "y ", "z "};
+    private String textAnswer = "a b c d e f g h i j k l m n o p q r s t u v w x y z ";
     TextView textQuestion;
     EditText editText;
     FlexboxLayout flexboxLayout;
@@ -92,13 +92,13 @@ public class LowercaseActivity extends AppCompatActivity {
 
         textView.setLayoutParams(flexboxLayoutParams);
         textView.setBackground(this.getResources().getDrawable(R.drawable.bgpink));
-        textView.setTextColor(this.getResources().getColor(R.color.colorPurple));
+        textView.setTextColor(this.getResources().getColor(R.color.colorPrimary));
         textView.setGravity(Gravity.CENTER);
         textView.setText(text);
         textView.setClickable(true);
         textView.setFocusable(true);
         textView.setTextSize(32);
-        textView.setPadding(30, 15, 30, 15);
+        textView.setPadding(30, 15, 20, 15);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Arial.ttf");
 
@@ -139,22 +139,25 @@ public class LowercaseActivity extends AppCompatActivity {
         FlexboxLayout flexboxLayout = findViewById(R.id.layoutParent);
 
         if (editText.getText().toString().equals(textAnswer)) {
-            Toast.makeText(LowercaseActivity.this, "Correct", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LowercaseActivity.this, "Yeayyy Berhasill", Toast.LENGTH_LONG).show();
 
 //            Intent a = new Intent(MainActivity.this,BossAct.class);
 //            startActivity(a);
 
             //     editText.setText("");
         } else {
-            Toast.makeText(LowercaseActivity.this, "Salah, Ulangi Kembali", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(LowercaseActivity.this, "Salah, Ulangi Kembali", Toast.LENGTH_LONG).show();
+            editText.setText("");
+            keys = shuffleArray(keys);
+            flexboxLayout.removeAllViews();
+            for (String key : keys) {
+                addView(flexboxLayout, key, editText);
+            }
 
         }
 
-        keys = shuffleArray(keys);
-        flexboxLayout.removeAllViews();
-        for (String key : keys) {
-            addView(flexboxLayout, key, editText);
-        }
+
     }
 
     private void doValidateReset() {

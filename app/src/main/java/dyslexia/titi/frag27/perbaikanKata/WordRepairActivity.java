@@ -30,7 +30,8 @@ import dyslexia.titi.frag27.base.BaseActivity;
 import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
-import dyslexia.titi.frag27.kamus.model.DictionarySimilar;
+import dyslexia.titi.frag27.perbaikanKata.JaroWinkler.DictionarySimilar;
+import dyslexia.titi.frag27.perbaikanKata.JaroWinkler.JaroWinkler;
 import dyslexia.titi.frag27.perbaikanKata.ReplaceLetter.ReplaceLetter;
 import dyslexia.titi.frag27.perbaikanKata.anagram.AnagramAlgorithm;
 
@@ -113,15 +114,17 @@ public class WordRepairActivity extends BaseActivity {
         //Log.d(TAG, "wordRepairResultList: " + wordRepairResultList);
         //Log.d(TAG, "resultAnagramSearchList: " + resultAnagramSearchList);
         for (String resultAnagramSearchWord : resultAnagramSearchList) {
-            wordRepairResultList.add(new Dictionary(0, resultAnagramSearchWord, ""));
+            Dictionary dictionary = new Dictionary(0,resultAnagramSearchWord,"");
+            wordRepairResultList.add(dictionary);
         }
         ArrayAdapter<Dictionary> adapter;
         adapter = new ArrayAdapter<Dictionary>(this, R.layout.kamus_list_row, wordRepairResultList);
+        Log.d(TAG, "anagramSearch: "+ wordRepairResultList);
 
         if (!(wordRepairResultList.isEmpty())) {
             tv_resultWord.setText(" ");
             listViewSimiliarWords.setAdapter(adapter);
-            //Log.d(TAG, "multi result: " + adapter);
+
         } else {
             Log.d(TAG, "anagramSearch: tidak ketemu di anagramSearch 1");
             generateWordsFromAbnormalityCondition();
@@ -177,11 +180,17 @@ public class WordRepairActivity extends BaseActivity {
         List<DictionarySimilar> kamusSimilarFilteredList = new ArrayList<>();
         List<String> finalWords = new ArrayList<>();
 
+
         for (Dictionary dictionary : dictionaryWords) {
-            kamusSimilarList.add(new DictionarySimilar(dictionary.getId_word(), dictionary.getWord(), dictionary.getType(), getSimilarScore(dictionary.getWord())));
+            //menginstansiasi dictionarySimilar dari kelas DictionarySimilar untuk menampung score
+            //menyimpan value ke dalam kamusSimilarList
+            DictionarySimilar dictionarySimilar = new DictionarySimilar(dictionary.getId_word(), dictionary.getWord(), dictionary.getType(), getSimilarScore(dictionary.getWord()));
+            kamusSimilarList.add(dictionarySimilar);
         }
+
+        //kelas baru yang mewarisi kelas dictionary untuk mengaluarkan nilai jaro
         for (DictionarySimilar kamusSimilar : kamusSimilarList) {
-            if (kamusSimilar.getSimilarScore() > 0.89) {
+            if (kamusSimilar.getSimilarScore() > 0.89 ) {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
         }
@@ -218,7 +227,7 @@ public class WordRepairActivity extends BaseActivity {
 
     private double getSimilarScore(String word) {
         String inputWord = ed_inputWord.getText().toString().trim();
-        return new JaroWinkler().getSimilarity(word, inputWord);
+        return new JaroWinkler().getSimilarity(inputWord, word);
     }
 
     private void loadSuara() {
@@ -336,4 +345,5 @@ public class WordRepairActivity extends BaseActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }

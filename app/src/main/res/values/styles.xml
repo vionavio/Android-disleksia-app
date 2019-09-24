@@ -16,6 +16,13 @@
         <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
 
+    <style name="GameAbjadLower" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#32dbc6</item>
+        <item name="colorPrimaryDark">#07a693</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
     <style name="MenuGame" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#ffcfd5</item>

@@ -24,10 +24,10 @@ public class UppercaseAlfabet extends AppCompatActivity {
 
     private int presCounter = 0;
     private int maxPresCounter = 26;
-    private String[] keys = {"A", "B", "C", "D", "E", "F", "G", "H", "I"
-            , "J", "K", "L", "M", "N", "O", "P", "Q", "R"
-            , "S", "T", "U", "V", "W", "X", "Y", "Z"};
-    private String textAnswer = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private String[] keys = {"A ", "B ", "C ", "D ", "E ", "F ", "G ", "H ", "I "
+            , "J ", "K ", "L ", "M ", "N ", "O ", "P ", "Q ", "R "
+            , "S ", "T ", "U ", "V ", "W ", "X ", "Y ", "Z "};
+    private String textAnswer = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ";
     TextView textQuestion;
     EditText editText;
     FlexboxLayout flexboxLayout;
@@ -65,15 +65,15 @@ public class UppercaseAlfabet extends AppCompatActivity {
     }
 
 
-    private String[] shuffleArray(String[] ar) {
-        Random rnd = new Random();
-        for (int i = ar.length - 1; i > 0; i--) {
-            int index = rnd.nextInt(i + 1);
-            String a = ar[index];
-            ar[index] = ar[i];
-            ar[i] = a;
+    private String[] shuffleArray(String[] letter) {
+        Random random = new Random();
+        for (int i = letter.length - 1; i > 0; i--) {
+            int index = random.nextInt(i + 1);
+            String a = letter[index];
+            letter[index] = letter[i];
+            letter[i] = a;
         }
-        return ar;
+        return letter;
     }
 
 
@@ -98,7 +98,7 @@ public class UppercaseAlfabet extends AppCompatActivity {
         textView.setClickable(true);
         textView.setFocusable(true);
         textView.setTextSize(32);
-        textView.setPadding(30, 15, 30, 15);
+        textView.setPadding(30, 15, 20, 15);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/Arial.ttf");
 
@@ -135,22 +135,25 @@ public class UppercaseAlfabet extends AppCompatActivity {
         FlexboxLayout flexboxLayout = findViewById(R.id.layoutParent);
 
         if (editText.getText().toString().equals(textAnswer)) {
-            Toast.makeText(UppercaseAlfabet.this, "Correct", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UppercaseAlfabet.this, "Yeayy, Berhasil", Toast.LENGTH_LONG).show();
 
 //            Intent a = new Intent(MainActivity.this,BossAct.class);
 //            startActivity(a);
 
             //     editText.setText("");
         } else {
-            Toast.makeText(UppercaseAlfabet.this, "Salah, Ulangi Kembali", Toast.LENGTH_SHORT).show();
+            editText.setText("");
+            keys = shuffleArray(keys);
+            flexboxLayout.removeAllViews();
+            for (String key : keys) {
+                addView(flexboxLayout, key, editText);
+            }
+            Toast.makeText(UppercaseAlfabet.this, "Salah, Ulangi Kembali", Toast.LENGTH_LONG).show();
 
         }
 
-        keys = shuffleArray(keys);
-        flexboxLayout.removeAllViews();
-        for (String key : keys) {
-            addView(flexboxLayout, key, editText);
-        }
+
+
     }
 
     private void doValidateReset() {

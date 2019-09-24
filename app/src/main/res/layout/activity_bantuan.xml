@@ -75,6 +75,24 @@
         android:layout_height="wrap_content"
         android:text="@string/petunjuk_perbaikan_kata_2" />
 
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_perbaikan_kata_3" />
+
+    <com.codesgood.views.JustifiedTextView
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp"
+        android:paddingLeft="20dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/petunjuk_perbaikan_kata_4" />
+
     <TextView
         android:textColor="@color/colorBlack"
         android:textSize="23sp"

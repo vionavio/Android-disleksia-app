@@ -71,6 +71,7 @@ public class AdjektivaFragment extends Fragment  {
 
     private void loadData() {
         DatabaseDictionary db = new DatabaseDictionary(getActivity());
+        //sebuah kelas dalam package Widget Adapter yang di gunakan dalam bentuk datanya array.
         adapter = new ArrayAdapter<Dictionary>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("adjektiva"));
         lv.setAdapter(adapter);
 
