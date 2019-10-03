@@ -12,7 +12,7 @@ import dyslexia.titi.frag27.database.daos.UserDao;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.database.entities.UserEntity;
 
-@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 1)
+@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "disleksia_db";
     private static AppDatabase appDatabaseInstance;
@@ -21,6 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
         if (appDatabaseInstance == null) {
             appDatabaseInstance = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, DATABASE_NAME)
                     .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .build();
         }
         return appDatabaseInstance;

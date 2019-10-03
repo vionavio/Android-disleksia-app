@@ -17,12 +17,15 @@ public interface UserDao {
     @Query("SELECT * FROM users")
     List<UserEntity> getAll();
 
+    @Query("SELECT * FROM users WHERE email = :email")
+    UserEntity getSingle(String email);
+
     @Insert
-    void insert(User user);
+    void insert(UserEntity userEntity);
 
     @Update
-    void update(User user);
+    void update(UserEntity userEntity);
 
     @Delete
-    void delete(User user);
+    void delete(UserEntity userEntity);
 }

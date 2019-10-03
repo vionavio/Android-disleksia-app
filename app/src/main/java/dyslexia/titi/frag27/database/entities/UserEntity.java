@@ -12,4 +12,20 @@ public class UserEntity {
 
     @ColumnInfo(name = "name")
     public String name;
+
+    @ColumnInfo(name = "email")
+    public String email;
+
+    @ColumnInfo(name = "username")
+    public String username;
+
+    @ColumnInfo(name = "password")
+    public String password;
+
+    public UserEntity(String name, String email, String username, String password) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
 }
