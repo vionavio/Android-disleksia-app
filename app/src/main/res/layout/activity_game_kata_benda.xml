@@ -84,7 +84,7 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="true"
+            android:textAllCaps="false"
             android:textColor="@color/primary_color"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
