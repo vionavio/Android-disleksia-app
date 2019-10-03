@@ -19,6 +19,9 @@ public interface ScoreDao {
     ScoreEntity getOne(int id);
 
     @Insert
+    void insert(ScoreEntity scoreEntity);
+
+    @Insert
     void insertAll(ScoreEntity... scoreEntities);
 
     @Delete

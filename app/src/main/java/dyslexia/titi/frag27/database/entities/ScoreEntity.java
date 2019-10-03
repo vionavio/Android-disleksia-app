@@ -14,11 +14,18 @@ public class ScoreEntity {
     public int userId;
 
     @ColumnInfo(name = "quiz_type")
-    public int quizType;
+    public String quizType;
 
     @ColumnInfo(name = "score")
     public double score;
 
     @ColumnInfo(name = "created_at")
     public String createdAt;
+
+    public ScoreEntity(int userId, String quizType, double score, String createdAt) {
+        this.userId = userId;
+        this.quizType = quizType;
+        this.score = score;
+        this.createdAt = createdAt;
+    }
 }

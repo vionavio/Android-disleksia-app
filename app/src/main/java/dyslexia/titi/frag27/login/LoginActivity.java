@@ -155,6 +155,8 @@ public class LoginActivity extends AppCompatActivity {
         if (userEntity == null) {
             return false;
         }
+        SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        mSettings.edit().putInt("userId", userEntity.id).apply();
         return userEntity.password.equals(password);
     }
 }

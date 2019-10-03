@@ -12,7 +12,7 @@ import dyslexia.titi.frag27.database.daos.UserDao;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.database.entities.UserEntity;
 
-@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 2)
+@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "disleksia_db";
     private static AppDatabase appDatabaseInstance;
