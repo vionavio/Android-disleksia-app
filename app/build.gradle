@@ -47,6 +47,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-alpha10'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android:flexbox:1.1.0'
+    implementation "androidx.room:room-runtime:2.2.0-rc01"
+    annotationProcessor "androidx.room:room-compiler:2.2.0-rc01"
 
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-3'
 

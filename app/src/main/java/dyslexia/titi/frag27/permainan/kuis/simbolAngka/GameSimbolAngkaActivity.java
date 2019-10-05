@@ -1,11 +1,5 @@
 package dyslexia.titi.frag27.permainan.kuis.simbolAngka;
 
-import androidx.appcompat.app.AppCompatActivity;
-import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
-import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.permainan.kuis.kataBenda.GameKataBendaActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,22 +7,31 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Locale;
 import java.util.Random;
+
+import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.AppDatabase;
+import dyslexia.titi.frag27.database.entities.ScoreEntity;
+import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
+import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
 
 public class GameSimbolAngkaActivity extends AppCompatActivity {
 
     public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
 
 
-    private String[] names = new String[]{"nol","satu","dua","tiga","empat","lima","enam",
-    "tujuh","delapan","sembilan"};
+    private String[] names = new String[]{"nol", "satu", "dua", "tiga", "empat", "lima", "enam",
+            "tujuh", "delapan", "sembilan"};
 
     private String word;
     private String answer;
@@ -51,10 +54,10 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_simbol_angka);
 
         btn_check = findViewById(R.id.check);
-        tvScore =  findViewById(R.id.tvScore);
-        tvQuestionCount =  findViewById(R.id.question_count);
-        tvCountdown =  findViewById(R.id.tvCountdown);
-        pic =  findViewById(R.id.imageView1);
+        tvScore = findViewById(R.id.tvScore);
+        tvQuestionCount = findViewById(R.id.question_count);
+        tvCountdown = findViewById(R.id.tvCountdown);
+        pic = findViewById(R.id.imageView1);
 
         tvScore.setText("SCORE: " + score);
         tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
@@ -74,7 +77,7 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
             pic.setImageDrawable(res);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            Typeface customfont= Typeface.createFromAsset(getAssets(),"fonts/IBMPlexMono-SemiBold.ttf");
+            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexMono-SemiBold.ttf");
             scram.setTypeface(customfont);
 
         } else {
@@ -83,11 +86,10 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         }
 
         btn_check.setOnClickListener(view -> {
-            answered=true;
-            if(answered){
+            answered = true;
+            if (answered) {
                 checkAnswer();
-            }
-            else{
+            } else {
                 setImage();
             }
 //            EditText input = findViewById(R.id.answer);
@@ -116,7 +118,7 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
     }
 
 
-    private void startCountDown(){
+    private void startCountDown() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -144,18 +146,18 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         answer = input.getText().toString().toLowerCase();
 
 
-            if (answer.equals(word)) {
-                question++;
-                tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
-                score++;
-                tvScore.setText("SCORE: " + score);
-                Toast.makeText(GameSimbolAngkaActivity.this, "Benar", Toast.LENGTH_SHORT).show();
-            } else if (!(answer.equals(word))) {
-                question++;
-                tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
-                Toast.makeText(GameSimbolAngkaActivity.this, "Salah", Toast.LENGTH_SHORT).show();
-            }
-            setImage();
+        if (answer.equals(word)) {
+            question++;
+            tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
+            score++;
+            tvScore.setText("SCORE: " + score);
+            Toast.makeText(GameSimbolAngkaActivity.this, "Benar", Toast.LENGTH_SHORT).show();
+        } else if (!(answer.equals(word))) {
+            question++;
+            tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
+            Toast.makeText(GameSimbolAngkaActivity.this, "Salah", Toast.LENGTH_SHORT).show();
+        }
+        setImage();
 
     }
 
@@ -174,7 +176,7 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
-        SharedPreferences preferences = getSharedPreferences("PREFS",0);
+        SharedPreferences preferences = getSharedPreferences("PREFS", 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("lastScore", score);
         editor.apply();
@@ -186,40 +188,38 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
 
     protected void setImage() {
         EditText input = findViewById(R.id.answer);
-        Typeface customfont= Typeface.createFromAsset(getAssets(),"fonts/IBMPlexMono-SemiBold.ttf");
+        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexMono-SemiBold.ttf");
         input.setTypeface(customfont);
-            answer = input.getText().toString().toLowerCase().trim();
-            if (question < chances) {
-                WordShuffler shuffler = new WordShuffler();
-                Random rand = new Random();
-                //use this code block to make sure don't show the same picture back to back
-                int whichpic = previousChoice;
-                while (whichpic == previousChoice) {
-                    whichpic = rand.nextInt(10);
-                }
-                previousChoice = whichpic;
-
-                //here we get a little creative randomly choosing an image
-                String image = "@drawable/" + names[whichpic];
-                imageResource = getResources().getIdentifier(image, null, getPackageName());
-                Drawable res = getResources().getDrawable(imageResource);
-                pic.setImageDrawable(res);
-
-                //set the new word value and scramble up the new letters! reset the views
-                word = names[whichpic];
-                scrambled = shuffler.shuffle(word);
-                TextView scram = findViewById(R.id.scrambledletters);
-                scram.setText(scrambled);
-                scram.setTypeface(customfont);
-                EditText answer5 = findViewById(R.id.answer);
-                answer5.setText("");
-                timeLeftInMillis = COUNTDOWN_IN_MILLIS;
-                startCountDown();
+        answer = input.getText().toString().toLowerCase().trim();
+        if (question < chances) {
+            WordShuffler shuffler = new WordShuffler();
+            Random rand = new Random();
+            //use this code block to make sure don't show the same picture back to back
+            int whichpic = previousChoice;
+            while (whichpic == previousChoice) {
+                whichpic = rand.nextInt(10);
             }
-            else
-            {
-                finishQuiz();
-            }
+            previousChoice = whichpic;
+
+            //here we get a little creative randomly choosing an image
+            String image = "@drawable/" + names[whichpic];
+            imageResource = getResources().getIdentifier(image, null, getPackageName());
+            Drawable res = getResources().getDrawable(imageResource);
+            pic.setImageDrawable(res);
+
+            //set the new word value and scramble up the new letters! reset the views
+            word = names[whichpic];
+            scrambled = shuffler.shuffle(word);
+            TextView scram = findViewById(R.id.scrambledletters);
+            scram.setText(scrambled);
+            scram.setTypeface(customfont);
+            EditText answer5 = findViewById(R.id.answer);
+            answer5.setText("");
+            timeLeftInMillis = COUNTDOWN_IN_MILLIS;
+            startCountDown();
+        } else {
+            finishQuiz();
+        }
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -232,7 +232,12 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         savedInstanceState.putInt("image", imageResource);
         savedInstanceState.putBoolean("answered", answered);
         savedInstanceState.putLong("millisLeft", timeLeftInMillis);
+    }
 
+    public void saveScore() {
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        appDatabase.scoreDao().insert(new ScoreEntity(mSettings.getInt("userId", 0), "angka", 5, "01-01-2010"));
     }
 
     public void onResume() {

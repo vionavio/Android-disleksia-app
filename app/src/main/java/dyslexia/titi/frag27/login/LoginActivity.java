@@ -17,6 +17,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.AppDatabase;
+import dyslexia.titi.frag27.database.entities.UserEntity;
 import dyslexia.titi.frag27.login.database.DatabaseUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,14 +52,15 @@ public class LoginActivity extends AppCompatActivity {
             if (validate()) {
 
                 //Get values from EditText fields
-                String Email = editTextEmail.getText().toString();
-                String Password = editTextPassword.getText().toString();
+                String email = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
 
                 //Authenticate user
-                User currentUser = databaseUser.Authenticate(new User(null, null, null, null, null, Email, Password));
+//                User currentUser = databaseUser.Authenticate(new User(null, null, null, null, null, Email, Password));
 
                 //Check Authentication is successful or not
-                if (currentUser != null) {
+//                if (currentUser != null) {
+                if (authentication(email, password)) {
                     Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
 
                     //shared preferences digunakan untuk menyimpan key value dari login yang telah terjadi
@@ -144,5 +147,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         return valid;
+    }
+
+    private Boolean authentication(String email, String password) {
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        UserEntity userEntity = appDatabase.userDao().getSingle(email);
+        if (userEntity == null) {
+            return false;
+        }
+        SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        mSettings.edit().putInt("userId", userEntity.id).apply();
+        return userEntity.password.equals(password);
     }
 }

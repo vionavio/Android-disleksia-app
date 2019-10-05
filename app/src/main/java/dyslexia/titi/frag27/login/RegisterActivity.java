@@ -21,6 +21,8 @@ import java.util.Calendar;
 import java.util.Objects;
 
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.AppDatabase;
+import dyslexia.titi.frag27.database.entities.UserEntity;
 import dyslexia.titi.frag27.login.database.DatabaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -88,16 +90,17 @@ public class RegisterActivity extends AppCompatActivity {
                 //find the radiobutton by returened id
                 mRadioButton = findViewById(selectedIdJK);
 
-                String Name = editTextName.getText().toString();
+                String name = editTextName.getText().toString();
                 String JK = mRadioButton.getText().toString();
                 String TL = editTextTL.getText().toString();
-                String UserName = editTextUserName.getText().toString();
-                String Email = editTextEmail.getText().toString();
-                String Password = editTextPassword.getText().toString();
+                String username = editTextUserName.getText().toString();
+                String email = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
+                addUser(new UserEntity(name, email, username, password));
                 //Check in the database is there any user associated with  this email
-                if (!sqliteHelper.isEmailExists(Email)) {
+                if (!sqliteHelper.isEmailExists(email)) {
                     //Email does not exist now add new user to database
-                    sqliteHelper.addUser(new User(null, Name, JK, TL, UserName, Email, Password));
+                    sqliteHelper.addUser(new User(null, name, JK, TL, username, email, password));
                     Snackbar.make(buttonRegister, "User created successfully! Please Login ", Snackbar.LENGTH_LONG).show();
                     new Handler().postDelayed(() -> finish(), Snackbar.LENGTH_LONG);
                 } else {
@@ -150,16 +153,11 @@ public class RegisterActivity extends AppCompatActivity {
             valid = false;
             textInputName.setError("Tolong diisi nama!");
         }
-
-
-
         //Handling validation for TL field
         if (TL.isEmpty()) {
             valid = false;
             textInputTL.setError("Tolong isi Tanggal Lahir!");
         } else
-
-
             //Handling validation for UserName field
             //  Avoid nested if
             if (UserName.isEmpty()) {
@@ -199,5 +197,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
         return valid;
+    }
+
+    private void addUser(UserEntity userEntity) {
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        appDatabase.userDao().insert(userEntity);
     }
 }
