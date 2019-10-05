@@ -1,7 +1,8 @@
 package dyslexia.titi.frag27.perbaikanKata.JaroWinkler;
 
-import android.content.Context;
 import android.util.Log;
+
+import static java.lang.Double.isNaN;
 
 public class JaroWinkler {
     private String wordString1;
@@ -9,7 +10,7 @@ public class JaroWinkler {
 
     private String matchString1 = "";
     private String matchString2 = "";
-    private int mRange   ;
+    private int mRange =0   ;
 
 
     public double getSimilarity(String s1, String s2) {
@@ -17,15 +18,16 @@ public class JaroWinkler {
         wordString2 = s2;
 
         //range = Nilai dj akan dianggap benar bila sama dan tidak melebihi batas yang dinyatakan dalam persamaan
-        mRange = ((Math.max(wordString1.length(), wordString2.length())) / 2) - 1;
+        mRange = Math.max(wordString1.length(), wordString2.length()) / 2 - 1;
         //Log.d("dddddddd", "getRange: " + mRange);
         double dw ;
 
         //jumlah karakter yang sama persis
-        int m = getMatch();
+        int m = getMatch(wordString1,wordString2);
         int t = 0;
         if (getMissMatch(wordString2, wordString1) > 0) {
             t = ((getMissMatch(wordString1, wordString2) / getMissMatch(wordString2, wordString1))/2);
+
         }
 
         int lengthString1 = wordString1.length();
@@ -33,6 +35,8 @@ public class JaroWinkler {
 
         double f = 0.3333;
         double mt = (double) (m - t) / m;
+        if (isNaN(mt)) mt = 0.0;
+
         double p = 0.1;
         
         //rumus jaro untuk menghitung jarak
@@ -44,7 +48,7 @@ public class JaroWinkler {
     }
 
     //mencari jumlah karakter yang sama persis
-    private int getMatch() {
+    private int getMatch(String matchA, String matchB) {
 
         matchString1 = "";
         matchString2 = "";
@@ -58,7 +62,7 @@ public class JaroWinkler {
         for (int i = 0; i < length; i++) {
             //Look backward
             int counter = 0; //mRange
-            while (counter <= 1 && i >= 0 && counter <= i) {
+            while (counter <= mRange && i >= 0 && counter <= i) {
                 //charAt digunakan untuk mengambil karakter pada sebuah String sesuai index yang diinginkan.
                 if (wordString1.charAt(i) == wordString2.charAt(i - counter)) {
                     matches++;
@@ -70,7 +74,7 @@ public class JaroWinkler {
 
             //Look forward
             counter = 1;  //mRange
-            while (counter <= 1 && i < wordString2.length() && counter + i < wordString2.length()) {
+            while (counter <= mRange && i < wordString2.length() && counter + i < wordString2.length()) {
                 if (wordString1.charAt(i) == wordString2.charAt(i + counter)) {
                     matches++;
                     matchString1 = matchString1 + wordString1.charAt(i);
@@ -89,7 +93,7 @@ public class JaroWinkler {
         for (int i = 0; i < matchString1.length(); i++) {
             //Look Backward
             int counter = 0; //mRange
-            while (counter <= 1 && i >= 0 && counter <= i) {
+            while (counter <= mRange && i >= 0 && counter <= i) {
                 if (matchString1.charAt(i) == matchString2.charAt(i - counter) && counter > 0) {
                     transPositions++;
                 }
@@ -98,7 +102,7 @@ public class JaroWinkler {
 
             //Look forward
             counter = 1; //mRange
-            while (counter <= 1 && i < matchString2.length() && (counter + i) < matchString2.length()) {
+            while (counter <= mRange && i < matchString2.length() && (counter + i) < matchString2.length()) {
                 if (matchString1.charAt(i) == matchString2.charAt(i + counter) && counter > 0) {
                     transPositions++;
                 }
@@ -113,10 +117,16 @@ public class JaroWinkler {
 
         //
         int length = wordString1.length() < wordString2.length() ? wordString1.length() : wordString2.length();
-        int cp = 0;
-        for (int i = 0; i < length; i++) {
-            if (wordString1.charAt(i) == wordString2.charAt(i)) cp++;
+
+        int length2 = 0;
+        if (length>4){
+            length = 4;
+             length2 = length;
         }
-        return cp;
+        int commonPrefix = 0;
+        for (int i = 0; i < length2; i++) {
+            if (wordString1.charAt(i) == wordString2.charAt(i)) commonPrefix++;
+        }
+        return commonPrefix;
     }
 }

@@ -55,7 +55,7 @@ public class WordRepairActivity extends BaseActivity {
     private Button deleteButton;
     AnagramAlgorithm anagramAlgorithm;
 
-    List<Dictionary> dictionaryWords;
+    List<Dictionary> dictionaryWords = new ArrayList<>();
     String inputWord;
     final String TAG = "WordRepairActivity";
 
@@ -78,7 +78,7 @@ public class WordRepairActivity extends BaseActivity {
     @Override
     public void populateView() {
 
-        btn_proseskata.setOnClickListener((View view) -> anagramSearch());
+        btn_proseskata.setOnClickListener((View view) -> jaroWinklerDistance());
 
         loadSuara();
         loadSuara2();
@@ -103,9 +103,9 @@ public class WordRepairActivity extends BaseActivity {
 
 
         if (!(wordRepairResultList.isEmpty())) {
-            //jaroWinklerDistance2(wordRepairResultList);
-            tv_resultWord.setText(" ");
-            listViewSimiliarWords.setAdapter(adapter);
+            jaroWinklerDistance2(wordRepairResultList);
+//            tv_resultWord.setText(" ");
+//            listViewSimiliarWords.setAdapter(adapter);
 
         } else {
             Log.d(TAG, "anagramSearch: tidak ketemu di anagramSearch 1");
@@ -176,9 +176,7 @@ public class WordRepairActivity extends BaseActivity {
         //kelas baru yang mewarisi kelas dictionary untuk mengaluarkan nilai jaro
         for (DictionarySimilar kamusSimilar : kamusSimilarList) {
 
-            if (kamusSimilar.getSimilarScore() <= 1 ) {
                 kamusSimilarFilteredList.add(kamusSimilar);
-            }
 
         }
         Collections.sort(kamusSimilarFilteredList, (kamusSimilar, kamusSimilar2) -> Double.compare(kamusSimilar2.getSimilarScore(), kamusSimilar.getSimilarScore()));
@@ -194,15 +192,14 @@ public class WordRepairActivity extends BaseActivity {
         }
         else
         {
-            tv_resultWord.setText(R.string.hasil_kosong);
-            listViewSimiliarWords.setAdapter(null);
-            Log.d("eeeeee", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
-        }
+           jaroWinklerDistance();   }
         inputMethodManager();
     }
 
-
     private void jaroWinklerDistance() {
+
+
+        dictionaryWords = databaseDictionary.retrieveKamus("all");
 
         Log.d("ooooooooooooooo", "jaroWinklerDistance: " + inputWord);
         inputWord = ed_inputWord.getText().toString().trim();
@@ -220,7 +217,7 @@ public class WordRepairActivity extends BaseActivity {
 
         //kelas baru yang mewarisi kelas dictionary untuk mengaluarkan nilai jaro
         for (DictionarySimilar kamusSimilar : kamusSimilarList) {
-            if (kamusSimilar.getSimilarScore() > 0.89 ) {
+            if (kamusSimilar.getSimilarScore() > 0.92) {
                 kamusSimilarFilteredList.add(kamusSimilar);
             }
         }

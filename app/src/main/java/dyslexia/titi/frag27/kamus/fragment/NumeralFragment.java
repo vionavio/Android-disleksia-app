@@ -1,6 +1,7 @@
 package dyslexia.titi.frag27.kamus.fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +13,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -29,10 +32,30 @@ import dyslexia.titi.frag27.kamus.model.Dictionary;
  */
 public class NumeralFragment extends Fragment {
 
+    String number[] = {
+            "satu", "dua","tiga","empat","lima","enam","tujuh","delapan","sembilan","nol"
+    };
+
+    int pic_number[]= {
+            R.drawable.a_satu,
+            R.drawable.a_dua,
+            R.drawable.a_tiga,
+            R.drawable.a_empat,
+            R.drawable.a_lima,
+            R.drawable.a_enam,
+            R.drawable.a_tujuh,
+            R.drawable.a_delapan,
+            R.drawable.a_sembilan,R.drawable.a_nol
+
+    };
+
+    AdapterNumbers adapter;
+
     ListView lv;
     TextView tv;
-    ArrayAdapter<Dictionary> adapter;
     TextToSpeech t1;
+
+
 
     public static NumeralFragment newInstance()
     {
@@ -60,19 +83,25 @@ public class NumeralFragment extends Fragment {
     }
 
     private void loadData() {
-        DatabaseDictionary db=new DatabaseDictionary(getActivity());
-        adapter = new ArrayAdapter<Dictionary>(getActivity(), R.layout.text_view_kamus, db.retrieveKamus("numeralia"));
+        adapter = new AdapterNumbers(getContext(), number, pic_number);
         lv.setAdapter(adapter);
-        t1 = new TextToSpeech(getActivity().getApplicationContext(), status -> {
-            if (status != TextToSpeech.ERROR) {
-                t1.setLanguage(new Locale("id", "ID"));
+
+        t1 = new TextToSpeech(getActivity().getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    t1.setLanguage(new Locale("id", "ID"));
+                }
             }
         });
 
-        lv.setOnItemClickListener((parent, view, position, id) -> {
-            Dictionary selectedFromList = (Dictionary) lv.getItemAtPosition(position);
-            Toast.makeText(getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
-            t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedFromList = number[position];
+                Toast.makeText(NumeralFragment.this.getActivity(), " " + selectedFromList, Toast.LENGTH_LONG).show();
+                t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
+            }
         });
     }
 
@@ -120,4 +149,36 @@ public class NumeralFragment extends Fragment {
         }
         super.onPause();
     }
+
+    private class AdapterNumbers extends ArrayAdapter {
+
+        String number2[];
+        int pic_number2[];
+
+        public AdapterNumbers(Context context, String[] number, int[] pic_number) {
+            super(context, R.layout.text_view_kamus2, number);
+            this.number2 = number;
+            this.pic_number2 = pic_number;
+
+        }
+
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // panggil layout list
+            LayoutInflater inflater = (LayoutInflater) getLayoutInflater();
+            View view = inflater.inflate(R.layout.text_view_kamus2, null);
+            // kenalkan widget yang ada pada list buah
+            ImageView pic_number;
+            TextView number;
+
+            //casting widget id
+            pic_number = view.findViewById(R.id.IvGambar);
+            number = view.findViewById(R.id.TxtNama);
+
+            // set data kedalam image
+            pic_number.setImageResource(pic_number2[position]);
+            return view;
+        }
+
+    }
+
 }
