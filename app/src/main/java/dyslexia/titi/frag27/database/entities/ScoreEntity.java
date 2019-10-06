@@ -1,5 +1,4 @@
 package dyslexia.titi.frag27.database.entities;
-// Created by Arif Ikhsanudin on 10/3/2019.
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -27,5 +26,16 @@ public class ScoreEntity {
         this.quizType = quizType;
         this.score = score;
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "ScoreEntity{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", quizType='" + quizType + '\'' +
+                ", score=" + score +
+                ", createdAt='" + createdAt + '\'' +
+                '}';
     }
 }

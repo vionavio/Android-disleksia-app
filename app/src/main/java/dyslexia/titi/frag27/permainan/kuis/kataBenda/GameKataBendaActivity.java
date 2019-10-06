@@ -2,6 +2,8 @@ package dyslexia.titi.frag27.permainan.kuis.kataBenda;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.AppDatabase;
+import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
 import dyslexia.titi.frag27.permainan.kuis.simbolAngka.GameSimbolAngkaActivity;
@@ -13,12 +15,14 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
@@ -153,14 +157,19 @@ public class GameKataBendaActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
-        SharedPreferences preferences = getSharedPreferences("PREFS",0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("lastScore", score);
-        editor.apply();
+           AppDatabase appDatabase = AppDatabase.getInstance(this);
+            appDatabase.scoreDao().insert(new ScoreEntity(1, "kata_benda", 5, "10/10/2010"));
 
-        Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
-        startActivity(intent);
-        finish();
+            Log.d("scoreee" ,"addScore: " + appDatabase.scoreDao().getAll());
+
+//        SharedPreferences preferences = getSharedPreferences("PREFS",0);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putInt("lastScore", score);
+//        editor.apply();
+//
+//        Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+//        startActivity(intent);
+//        finish();
     }
 
     protected void setImage() {

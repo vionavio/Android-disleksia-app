@@ -1,18 +1,17 @@
 package dyslexia.titi.frag27.login;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -20,6 +19,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.Calendar;
 import java.util.Objects;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.UserEntity;
@@ -30,14 +32,12 @@ public class RegisterActivity extends AppCompatActivity {
     //Declaration EditTexts
     EditText editTextName;
     EditText editTextTL;
-    EditText editTextUserName;
     EditText editTextEmail;
     EditText editTextPassword;
 
     //Declaration TextInputLayout
     TextInputLayout textInputName;
     TextInputLayout textInputTL;
-    TextInputLayout textInputUserName;
     TextInputLayout textInputEmail;
     TextInputLayout textInputPassword;
 
@@ -53,12 +53,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     //Declaration SqliteHelper
     DatabaseUser sqliteHelper;
+    AppDatabase appDatabase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mDisplayDate = findViewById(R.id.editTextTL);
+
+        appDatabase = AppDatabase.getInstance(this);
 
         mDisplayDate.setOnClickListener(view -> {
             Calendar cal = Calendar.getInstance();
@@ -84,7 +87,6 @@ public class RegisterActivity extends AppCompatActivity {
         initViews();
         buttonRegister.setOnClickListener(view -> {
             if (validate()) {
-
                 int selectedIdJK = radioJK.getCheckedRadioButtonId();
 
                 //find the radiobutton by returened id
@@ -93,20 +95,36 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = editTextName.getText().toString();
                 String JK = mRadioButton.getText().toString();
                 String TL = editTextTL.getText().toString();
-                String username = editTextUserName.getText().toString();
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
-                addUser(new UserEntity(name, email, username, password));
-                //Check in the database is there any user associated with  this email
-                if (!sqliteHelper.isEmailExists(email)) {
-                    //Email does not exist now add new user to database
-                    sqliteHelper.addUser(new User(null, name, JK, TL, username, email, password));
-                    Snackbar.make(buttonRegister, "User created successfully! Please Login ", Snackbar.LENGTH_LONG).show();
-                    new Handler().postDelayed(() -> finish(), Snackbar.LENGTH_LONG);
+
+
+                // cari email di database
+
+                // jika email sudah ada, maka muncul snackbar
+                // jika emial belum ada, maka didaftarkan
+
+                if (appDatabase.userDao().getSingle(email) == null) {
+                    addUser(new UserEntity(name, JK, TL, email, password));
+                    startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
                 } else {
-                    //Email exists with email input provided so show error user already exist
-                    Snackbar.make(buttonRegister, "User already exists with same email ", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(buttonRegister, "Akun telah terbuat! silakan login ", Snackbar.LENGTH_LONG).show();
                 }
+
+
+                //Check in the database is there any user associated with  this email
+
+//                if (!sqliteHelper.isEmailExists(email)) {
+//                    //Email does not exist now add new user to database
+//                    //sqliteHelper.addUser(new User(null, name, JK, TL,  email, password));
+//                    Snackbar.make(buttonRegister, "Akun telah terbuat! silakan login ", Snackbar.LENGTH_LONG).show();
+//                    new Handler().postDelayed(() -> finish(), Snackbar.LENGTH_LONG);
+//                } else {
+//                    // gerek login
+//                    Intent intent = new Intent(this)
+//                    //Email exists with email input provided so show error user already exist
+//                    Snackbar.make(buttonRegister, "Akun telah ada, silakan masuk ", Snackbar.LENGTH_LONG).show();
+//                }
             }
         });
     }
@@ -123,7 +141,6 @@ public class RegisterActivity extends AppCompatActivity {
         editTextTL = findViewById(R.id.editTextTL);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
-        editTextUserName = findViewById(R.id.editTextUserName);
 
         radioJK = findViewById(R.id.radioJK);
 
@@ -131,7 +148,6 @@ public class RegisterActivity extends AppCompatActivity {
         textInputTL = findViewById(R.id.textInputTL);
         textInputEmail = findViewById(R.id.textInputEmail);
         textInputPassword = findViewById(R.id.textInputPassword);
-        textInputUserName = findViewById(R.id.textInputUserName);
         buttonRegister = findViewById(R.id.btnRegister);
 
     }
@@ -144,7 +160,6 @@ public class RegisterActivity extends AppCompatActivity {
         //Get values from EditText fields
         String Name = editTextName.getText().toString();
         String TL = editTextTL.getText().toString();
-        String UserName = editTextUserName.getText().toString();
         String Email = editTextEmail.getText().toString();
         String Password = editTextPassword.getText().toString();
 
@@ -157,21 +172,11 @@ public class RegisterActivity extends AppCompatActivity {
         if (TL.isEmpty()) {
             valid = false;
             textInputTL.setError("Tolong isi Tanggal Lahir!");
-        } else
-            //Handling validation for UserName field
-            //  Avoid nested if
-            if (UserName.isEmpty()) {
-                valid = false;
-                textInputUserName.setError("Tolong isi username!");
-            } else {
-                if (UserName.length() > 5) {
-                    valid = true;
-                    textInputUserName.setError(null);
-                } else {
-                    valid = false;
-                    textInputUserName.setError("Username terlalu pendek!");
-                }
-            }
+        } else {
+            valid = true;
+            textInputTL.setError(null);
+        }
+
 
         //Handling validation for Email field
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
@@ -202,5 +207,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void addUser(UserEntity userEntity) {
         AppDatabase appDatabase = AppDatabase.getInstance(this);
         appDatabase.userDao().insert(userEntity);
+
+        Log.d("appppppp", "addUser: " + appDatabase.userDao().getAll());
     }
 }

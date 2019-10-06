@@ -1,5 +1,4 @@
 package dyslexia.titi.frag27.database.entities;
-// Created by Arif Ikhsanudin on 10/3/2019.
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -13,19 +12,35 @@ public class UserEntity {
     @ColumnInfo(name = "name")
     public String name;
 
+    @ColumnInfo(name = "JK")
+    public String jk;
+
+    @ColumnInfo(name = "TL")
+    public String tl;
+
     @ColumnInfo(name = "email")
     public String email;
-
-    @ColumnInfo(name = "username")
-    public String username;
 
     @ColumnInfo(name = "password")
     public String password;
 
-    public UserEntity(String name, String email, String username, String password) {
+    public UserEntity(String name, String email, String jk, String tl, String password) {
         this.name = name;
+        this.jk = jk;
+        this.tl = tl;
         this.email = email;
-        this.username = username;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", jk='" + jk + '\'' +
+                ", tl='" + tl + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

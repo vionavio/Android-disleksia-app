@@ -1,5 +1,4 @@
 package dyslexia.titi.frag27.database.daos;
-// Created by Arif Ikhsanudin on 10/3/2019.
 
 import androidx.room.Dao;
 import androidx.room.Delete;
