@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,11 +25,13 @@ import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
+import dyslexia.titi.frag27.utils.SharedPreferenceUtil;
+
+import static dyslexia.titi.frag27.utils.Constant.GAME_NUMBER;
 
 public class GameSimbolAngkaActivity extends AppCompatActivity {
 
     public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
-
 
     private String[] names = new String[]{"nol", "satu", "dua", "tiga", "empat", "lima", "enam",
             "tujuh", "delapan", "sembilan"};
@@ -47,6 +50,8 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
     int score = 0;
     int question = 0;
     int chances = 10;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +122,6 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         });
     }
 
-
     private void startCountDown() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
@@ -180,6 +184,7 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("lastScore", score);
         editor.apply();
+        saveScore(score);
 
         Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
         startActivity(intent);
@@ -234,10 +239,17 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         savedInstanceState.putLong("millisLeft", timeLeftInMillis);
     }
 
-    public void saveScore() {
+    public void saveScore(Integer score) {
         AppDatabase appDatabase = AppDatabase.getInstance(this);
-        SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        appDatabase.scoreDao().insert(new ScoreEntity(mSettings.getInt("userId", 0), "angka", 5, "01-01-2010"));
+        // TODO: buat tanggal yang compatible dentan API 21
+        appDatabase.scoreDao().insert(new ScoreEntity(
+                SharedPreferenceUtil.getUserId(this),
+                GAME_NUMBER,
+                score,
+                "10-10-2010"
+        ));
+
+        Log.d("aaaaaaaaa", "saveScore: " + appDatabase.scoreDao().getAll());
     }
 
     public void onResume() {

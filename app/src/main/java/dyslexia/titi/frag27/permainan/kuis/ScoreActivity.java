@@ -2,6 +2,8 @@ package dyslexia.titi.frag27.permainan.kuis;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.AppDatabase;
+import dyslexia.titi.frag27.database.entities.ScoreEntity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,12 +11,15 @@ import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class ScoreActivity extends AppCompatActivity {
 
     TextView tvScore;
     RatingBar ratingBar;
     int lastScore;
     int best1, best2, best3;
+    AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,8 @@ public class ScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score);
         tvScore = findViewById(R.id.tvScore);
         ratingBar = findViewById(R.id.rating);
+
+        appDatabase = AppDatabase.getInstance(this);
 
         SharedPreferences preferences = getSharedPreferences("PREFS", 0);
         lastScore = preferences.getInt("lastScore", 0);
@@ -54,6 +61,14 @@ public class ScoreActivity extends AppCompatActivity {
             editor.putInt("best1", best1);
             editor.apply();
         }
+
+        // TODO: implementasi pengambilan nilai dari Room
+
+//        List<ScoreEntity> scoreEntityList = appDatabase.scoreDao().getBestScores();
+//        for (ScoreEntity scoreEntity: scoreEntityList) {
+//            //
+//        }
+
         tvScore.setText("NILAI ANDA: " + lastScore + "\n" +
                 "Nilai Terbaik 1 : " + best1 + "\n" +
                 "Nilai Terbaik 2  : " + best2 + "\n" +

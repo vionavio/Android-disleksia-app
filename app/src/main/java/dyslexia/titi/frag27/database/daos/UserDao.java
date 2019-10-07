@@ -20,7 +20,7 @@ public interface UserDao {
     UserEntity getSingle(String email);
 
     @Insert
-    void insert(UserEntity userEntity);
+    Long insert(UserEntity userEntity);
 
     @Update
     void update(UserEntity userEntity);

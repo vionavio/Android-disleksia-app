@@ -12,24 +12,24 @@ public class UserEntity {
     @ColumnInfo(name = "name")
     public String name;
 
-    @ColumnInfo(name = "JK")
-    public String jk;
-
-    @ColumnInfo(name = "TL")
-    public String tl;
-
     @ColumnInfo(name = "email")
     public String email;
 
     @ColumnInfo(name = "password")
     public String password;
 
-    public UserEntity(String name, String email, String jk, String tl, String password) {
+    @ColumnInfo(name = "gender")
+    public String gender;
+
+    @ColumnInfo(name = "dob")
+    public String dob;
+
+    public UserEntity(String name, String email, String password, String gender, String dob) {
         this.name = name;
-        this.jk = jk;
-        this.tl = tl;
         this.email = email;
         this.password = password;
+        this.gender = gender;
+        this.dob = dob;
     }
 
     @Override
@@ -37,10 +37,10 @@ public class UserEntity {
         return "UserEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", jk='" + jk + '\'' +
-                ", tl='" + tl + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                '}';
+                ", gender='" + gender + '\'' +
+                ", dob='" + dob + '\'' +
+                "}\n";
     }
 }

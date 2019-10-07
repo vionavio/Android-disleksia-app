@@ -36,6 +36,6 @@ public class ScoreEntity {
                 ", quizType='" + quizType + '\'' +
                 ", score=" + score +
                 ", createdAt='" + createdAt + '\'' +
-                '}';
+                "}\n";
     }
 }

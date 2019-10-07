@@ -180,7 +180,6 @@ public class LowercaseActivity extends AppCompatActivity {
 
 
     public void onBackPressed() {
-        // TODO: Use declarative variable name
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), PermainanActivity.class);
         startActivity(intent);
