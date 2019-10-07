@@ -27,7 +27,6 @@ import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.base.BaseActivity;
-import dyslexia.titi.frag27.kamus.crud.TambahKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 import dyslexia.titi.frag27.perbaikanKata.JaroWinkler.DictionarySimilar;
@@ -314,8 +313,8 @@ public class WordRepairActivity extends BaseActivity {
                     v -> {
                         //  Auto-generated method stub
                         //switchToEdit(selectedFromList.getId_word());
-                        Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
-                        startActivity(tambahIntent);
+//                        Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
+//                        startActivity(tambahIntent);
                     }
             );
 
@@ -365,8 +364,8 @@ public class WordRepairActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.tambahKata:
-                Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
-                startActivity(tambahIntent);
+//                Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
+//                startActivity(tambahIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

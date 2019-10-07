@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".kamus.crud.DetailKamusActivity"/>
-        <activity android:name=".kamus.crud.TambahKamusActivity" />
-        <activity android:name=".kamus.crud.EditKamusActivity" />
         <activity
             android:name=".permainan.kuis.ScoreActivity"
             android:theme="@style/noTitleBar" />
@@ -75,6 +72,10 @@
         <activity
             android:name=".kamus.DictionaryActivity"
             android:label="Kamus"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".permainan.kuis.skor.ScoreActivity"
+            android:label="Skor"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".login.LoginActivity"

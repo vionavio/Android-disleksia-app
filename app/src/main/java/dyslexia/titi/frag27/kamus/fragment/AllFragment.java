@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Locale;
 
 import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.kamus.crud.EditKamusActivity;
 import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
 
@@ -85,36 +84,36 @@ public class AllFragment extends Fragment {
             t1.speak(String.valueOf(selectedFromList), TextToSpeech.QUEUE_FLUSH, null);
         });
 
-        lv.setOnItemLongClickListener((adapterView, view, position, id) -> {
-                    Dialog dialog = new Dialog(getActivity());
-                    dialog.setContentView(R.layout.dialog_view_kata);
-                    dialog.show();
-
-                    editButton = dialog.findViewById(R.id.button_edit_data);
-                    delButton = dialog.findViewById(R.id.button_delete_data);
-
-                    Dictionary selectedFromList = (Dictionary) lv.getItemAtPosition(position);
-
-                    //apabila tombol edit diklik
-                    editButton.setOnClickListener(
-                            v -> {
-                                //  Auto-generated method stub
-                                switchToEdit(selectedFromList.getId_word());
-                                dialog.dismiss();
-                            }
-                    );
-
-                    delButton.setOnClickListener(
-                            v -> {
-                                // Delete kata dari db
-                                DatabaseDictionary databaseDictionary = new DatabaseDictionary(getActivity());
-                                databaseDictionary.deleteKamus(selectedFromList.getId_word());
-                                getActivity().finish();
-                            }
-                    );
-                    return true;
-                }
-        );
+//        lv.setOnItemLongClickListener((adapterView, view, position, id) -> {
+//                    Dialog dialog = new Dialog(getActivity());
+//                    dialog.setContentView(R.layout.dialog_view_kata);
+//                    dialog.show();
+//
+//                    editButton = dialog.findViewById(R.id.button_edit_data);
+//                    delButton = dialog.findViewById(R.id.button_delete_data);
+//
+//                    Dictionary selectedFromList = (Dictionary) lv.getItemAtPosition(position);
+//
+//                    //apabila tombol edit diklik
+//                    editButton.setOnClickListener(
+//                            v -> {
+//                                //  Auto-generated method stub
+//                                switchToEdit(selectedFromList.getId_word());
+//                                dialog.dismiss();
+//                            }
+//                    );
+//
+//                    delButton.setOnClickListener(
+//                            v -> {
+//                                // Delete kata dari db
+//                                DatabaseDictionary databaseDictionary = new DatabaseDictionary(getActivity());
+//                                databaseDictionary.deleteKamus(selectedFromList.getId_word());
+//                                getActivity().finish();
+//                            }
+//                    );
+//                    return true;
+//                }
+//        );
     }
 
     private void initializeViews(View rootView) {
@@ -160,19 +159,19 @@ public class AllFragment extends Fragment {
     }
 
     //method untuk get single data
-    private void switchToEdit(long id_word) {
-
-        DatabaseDictionary databaseDictionary =new DatabaseDictionary(getActivity());
-        Dictionary selectedFromList = (Dictionary) databaseDictionary.getKamus(id_word);
-        Intent intent = new Intent(getActivity(), EditKamusActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putLong("id_word", selectedFromList.getId_word());
-        bundle.putString("word", selectedFromList.getWord());
-        bundle.putString("type",selectedFromList.getType());
-        intent.putExtras(bundle);
-        databaseDictionary.close();
-        startActivity(intent);
-    }
+//    private void switchToEdit(long id_word) {
+//
+//        DatabaseDictionary databaseDictionary =new DatabaseDictionary(getActivity());
+//        Dictionary selectedFromList = (Dictionary) databaseDictionary.getKamus(id_word);
+//        Intent intent = new Intent(getActivity(), EditKamusActivity.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putLong("id_word", selectedFromList.getId_word());
+//        bundle.putString("word", selectedFromList.getWord());
+//        bundle.putString("type",selectedFromList.getType());
+//        intent.putExtras(bundle);
+//        databaseDictionary.close();
+//        startActivity(intent);
+//    }
 
 
 }

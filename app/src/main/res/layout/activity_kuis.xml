@@ -62,4 +62,13 @@
         android:background="@drawable/btn_round8"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
+    <Button
+        android:id="@+id/skor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/skor"
+        android:textColor="#2a410b"
+        android:textSize="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 </LinearLayout>
