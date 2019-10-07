@@ -149,11 +149,7 @@ public class UppercaseAlfabet extends AppCompatActivity {
                 addView(flexboxLayout, key, editText);
             }
             Toast.makeText(UppercaseAlfabet.this, "Salah, Ulangi Kembali", Toast.LENGTH_LONG).show();
-
         }
-
-
-
     }
 
     private void doValidateReset() {
@@ -174,12 +170,9 @@ public class UppercaseAlfabet extends AppCompatActivity {
         }
     }
 
-
     public void onBackPressed() {
-        // TODO: Use declarative variable name
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), PermainanActivity.class);
         startActivity(intent);
     }
-
 }

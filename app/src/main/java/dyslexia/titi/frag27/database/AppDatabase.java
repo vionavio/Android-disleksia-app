@@ -11,9 +11,10 @@ import dyslexia.titi.frag27.database.daos.UserDao;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.database.entities.UserEntity;
 
-@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 3)
+import static dyslexia.titi.frag27.utils.Constant.DATABASE_NAME;
+
+@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase {
-    private static final String DATABASE_NAME = "disleksia_db";
     private static AppDatabase appDatabaseInstance;
 
     public static synchronized AppDatabase getInstance(Context context) {

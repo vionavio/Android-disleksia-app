@@ -1,11 +1,10 @@
 package dyslexia.titi.frag27.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +19,8 @@ import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.UserEntity;
 import dyslexia.titi.frag27.login.database.DatabaseUser;
+import dyslexia.titi.frag27.utils.AuthUtil;
+import dyslexia.titi.frag27.utils.AlertUtil;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -50,33 +51,18 @@ public class LoginActivity extends AppCompatActivity {
 
             //Check user input is correct or not
             if (validate()) {
-
-                //Get values from EditText fields
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
-
-                //Authenticate user
-//                User currentUser = databaseUser.Authenticate(new User(null, null, null, null, null, Email, Password));
-
                 //Check Authentication is successful or not
 //                if (currentUser != null) {
-                if (authentication(email, password)) {
+                if (authenticate(email, password)) {
                     Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
-
-                    //shared preferences digunakan untuk menyimpan key value dari login yang telah terjadi
-
-                    SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                    mSettings.edit().putBoolean("isLoggedIn", true).apply();
-
                     //User Logged in Successfully Launch You home screen activity
-                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                    startActivity(intent);
+                    startActivity(new Intent(this, MenuActivity.class));
                     finish();
-
                 } else {
-
                     //User Logged in Failed
-                    Snackbar.make(btnLogin, "Gagal masuk , silakan coba lagi", Snackbar.LENGTH_LONG).show();
+                    AlertUtil.showSnackbar(btnLogin, "Gagal masuk , silakan coba lagi");
                 }
             }
         });
@@ -85,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     //this method used to set Create account TextView text and click event( maltipal colors
     // for TextView yet not supported in Xml so i have done it programmatically)
     private void initCreateAccountTextView() {
-        TextView textViewCreateAccount = (TextView) findViewById(R.id.textViewCreateAccount);
+        TextView textViewCreateAccount = findViewById(R.id.textViewCreateAccount);
         textViewCreateAccount.setText(fromHtml("<font color='#aaa'>Saya belum punya akun. </font><font color='#0c0099'> Buat Akun</font>"));
         textViewCreateAccount.setOnClickListener(view -> {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
@@ -95,12 +81,12 @@ public class LoginActivity extends AppCompatActivity {
 
     //this method is used to connect XML views to its Objects
     private void initViews() {
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextPassword = findViewById(R.id.editTextPassword);
 
-        textInputEmail = (TextInputLayout) findViewById(R.id.textInputEmail);
-        textInputPassword = (TextInputLayout) findViewById(R.id.textInputPassword);
-        btnLogin = (Button) findViewById(R.id.btnLogin);
+        textInputEmail = findViewById(R.id.textInputEmail);
+        textInputPassword = findViewById(R.id.textInputPassword);
+        btnLogin = findViewById(R.id.btnLogin);
 
     }
 
@@ -149,14 +135,17 @@ public class LoginActivity extends AppCompatActivity {
         return valid;
     }
 
-    private Boolean authentication(String email, String password) {
+    private Boolean authenticate(String email, String password) {
         AppDatabase appDatabase = AppDatabase.getInstance(this);
         UserEntity userEntity = appDatabase.userDao().getSingle(email);
-        if (userEntity == null) {
+        Log.d("auth", "authenticate: " + appDatabase.userDao().getAll());
+        Log.d("auth", "authenticate: " + userEntity);
+//        Log.d("auth", "authenticate: " + userEntity.password.equals(password));
+        if (userEntity != null && userEntity.password.equals(password)) {
+            AuthUtil.saveLoginInfo(this, userEntity.id);
+            return true;
+        } else {
             return false;
         }
-        SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        mSettings.edit().putInt("userId", userEntity.id).apply();
-        return userEntity.password.equals(password);
     }
 }

@@ -30,7 +30,6 @@ public class PermainanActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        // TODO: Use declarative variable name
         Intent intent = new Intent();
         intent.setClass(getApplicationContext(), MenuActivity.class);
         startActivity(intent);
