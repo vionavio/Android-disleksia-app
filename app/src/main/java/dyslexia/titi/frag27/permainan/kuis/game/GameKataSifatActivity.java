@@ -6,7 +6,7 @@ import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.utils.SharedPreferenceUtil;
+import dyslexia.titi.frag27.utils.SharedPreferenceRepository;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -178,7 +178,7 @@ public class GameKataSifatActivity extends AppCompatActivity {
     public void saveScore(Integer score) {
         AppDatabase appDatabase = AppDatabase.getInstance(this);
         appDatabase.scoreDao().insert(new ScoreEntity(
-                SharedPreferenceUtil.getUserId(this),
+                SharedPreferenceRepository.getUserId(this),
                 GAME_SIFAT,
                 score,
                 "10-10-2010"

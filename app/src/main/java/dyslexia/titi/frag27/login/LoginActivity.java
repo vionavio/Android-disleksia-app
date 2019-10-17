@@ -1,9 +1,7 @@
 package dyslexia.titi.frag27.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -11,17 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.UserEntity;
 import dyslexia.titi.frag27.login.database.DatabaseUser;
-import dyslexia.titi.frag27.utils.AuthUtil;
+import dyslexia.titi.frag27.services.AuthService;
 import dyslexia.titi.frag27.utils.AlertUtil;
 
 public class LoginActivity extends AppCompatActivity {
@@ -56,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
                 //Check Authentication is successful or not
-          //      if (currentUser != null) {
+                //      if (currentUser != null) {
                 if (authenticate(email, password)) {
                     Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
                     //User Logged in Successfully Launch You home screen activity
@@ -88,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 //                    //User Logged in Failed
 //                    Snackbar.make(btnLogin, "Gagal masuk , silakan coba lagi", Snackbar.LENGTH_LONG).show();
 //
- //               }
+                //               }
             }
         });
     }
@@ -167,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("auth", "authenticate: " + userEntity);
 //        Log.d("auth", "authenticate: " + userEntity.password.equals(password));
         if (userEntity != null && userEntity.password.equals(password)) {
-            AuthUtil.saveLoginInfo(this, userEntity.id);
+            AuthService.saveLoginInfo(this, userEntity.id);
             return true;
         } else {
             return false;

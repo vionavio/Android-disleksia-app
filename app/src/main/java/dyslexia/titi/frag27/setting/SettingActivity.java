@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import dyslexia.titi.frag27.MainActivity;
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.services.AccountService;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -20,6 +22,7 @@ public class SettingActivity extends AppCompatActivity {
 
         Button btnLogout = findViewById(R.id.btn_logout);
         Button btnProfil = findViewById(R.id.btn_profil);
+        EditText editText = findViewById(R.id.et_name);
 
         btnProfil.setOnClickListener(view -> {
             startActivity(new Intent(this, ProfilActivity.class));
@@ -29,6 +32,8 @@ public class SettingActivity extends AppCompatActivity {
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().apply();
             startActivity(new Intent(this, MainActivity.class));
         });
+
+        editText.setText(AccountService.getName(this));
     }
 
     @Override

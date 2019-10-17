@@ -6,7 +6,7 @@ import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.utils.SharedPreferenceUtil;
+import dyslexia.titi.frag27.utils.SharedPreferenceRepository;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,7 +25,6 @@ import android.widget.Toast;
 import java.util.Locale;
 import java.util.Random;
 
-import static dyslexia.titi.frag27.utils.Constant.GAME_ANGKA;
 import static dyslexia.titi.frag27.utils.Constant.GAME_KETERANGAN;
 
 public class GameKataKeteranganActivity extends AppCompatActivity {
@@ -184,7 +183,7 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
         AppDatabase appDatabase = AppDatabase.getInstance(this);
         // TODO: buat tanggal yang compatible dentan API 21
         appDatabase.scoreDao().insert(new ScoreEntity(
-                SharedPreferenceUtil.getUserId(this),
+                SharedPreferenceRepository.getUserId(this),
                 GAME_KETERANGAN,
                 score,
                 "10-10-2010"

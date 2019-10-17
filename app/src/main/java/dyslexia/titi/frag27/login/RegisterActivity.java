@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -24,9 +23,8 @@ import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.UserEntity;
 import dyslexia.titi.frag27.login.database.DatabaseUser;
-import dyslexia.titi.frag27.utils.AuthUtil;
+import dyslexia.titi.frag27.services.AuthService;
 import dyslexia.titi.frag27.utils.AlertUtil;
-import dyslexia.titi.frag27.utils.SharedPreferenceUtil;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -107,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (appDatabase.userDao().getSingle(email) == null) {
                     Long userId = addUser(new UserEntity(name, email, password, gender, dob));
-                    AuthUtil.saveLoginInfo(this, userId.intValue());
+                    AuthService.saveLoginInfo(this, userId.intValue());
                     startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
                 } else {
                     AlertUtil.showSnackbar(buttonRegister, "Akun telah terbuat! silakan login");
