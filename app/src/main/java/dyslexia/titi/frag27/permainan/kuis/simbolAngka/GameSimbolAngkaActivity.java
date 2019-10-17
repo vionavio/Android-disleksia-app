@@ -51,8 +51,6 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
     int question = 0;
     int chances = 10;
 
-    SharedPreferences sharedPreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

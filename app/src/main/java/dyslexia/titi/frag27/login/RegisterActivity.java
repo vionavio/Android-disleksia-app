@@ -209,4 +209,9 @@ public class RegisterActivity extends AppCompatActivity {
         AppDatabase appDatabase = AppDatabase.getInstance(this);
         return appDatabase.userDao().insert(newUser);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

@@ -1,20 +1,18 @@
 package dyslexia.titi.frag27.login;
 
 public class User {
-    public String id;
+    public String id_user;
     public String name;
     public String jk;
     public String tanggaLahir;
-    public String userName;
     public String email;
     public String password;
 
-    public User(String id, String name, String jk, String tanggaLahir, String userName, String email, String password) {
-        this.id = id;
+    public User(String id_user, String name, String jk, String tanggaLahir,  String email, String password) {
+        this.id_user = id_user;
         this.name = name;
         this.jk = jk;
         this.tanggaLahir = tanggaLahir;
-        this.userName = userName;
         this.email = email;
         this.password = password;
     }

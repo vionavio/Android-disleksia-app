@@ -1,7 +1,9 @@
 package dyslexia.titi.frag27.login;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -54,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
                 //Check Authentication is successful or not
-//                if (currentUser != null) {
+          //      if (currentUser != null) {
                 if (authenticate(email, password)) {
                     Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
                     //User Logged in Successfully Launch You home screen activity
@@ -64,6 +66,29 @@ public class LoginActivity extends AppCompatActivity {
                     //User Logged in Failed
                     AlertUtil.showSnackbar(btnLogin, "Gagal masuk , silakan coba lagi");
                 }
+
+//                User currentUser = databaseUser.Authenticate(new User(null, null,null,null,  email, password));
+//
+//                //Check Authentication is successful or not
+//                if (currentUser != null) {
+//                    Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
+//
+//                    //shared preferences digunakan untuk menyimpan key value dari login yang telah terjadi
+//
+//                    SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//                    mSettings.edit().putBoolean("isLoggedIn", true).apply();
+//
+//                    //User Logged in Successfully Launch You home screen activity
+////                        Intent intent=new Intent(LoginActivity.this, MenuActivity.class);
+////                        startActivity(intent);
+//                    finish();
+//
+//                } else {
+//
+//                    //User Logged in Failed
+//                    Snackbar.make(btnLogin, "Gagal masuk , silakan coba lagi", Snackbar.LENGTH_LONG).show();
+//
+ //               }
             }
         });
     }
@@ -147,5 +172,10 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }

@@ -34,4 +34,9 @@ public class PermainanActivity extends AppCompatActivity {
         intent.setClass(getApplicationContext(), MenuActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

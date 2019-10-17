@@ -11,68 +11,101 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".permainan.kuis.ScoreActivity"
             android:theme="@style/noTitleBar" />
+
         <activity
             android:name=".permainan.kuis.kataSifat.GameKataSifatActivity"
             android:theme="@style/noTitleBar" />
+
         <activity
             android:name=".permainan.kuis.kataKeterangan.GameKataKeteranganActivity"
             android:theme="@style/noTitleBar" />
+
         <activity
             android:name=".permainan.kuis.kataKerja.GameKataKerjaActivity"
             android:theme="@style/noTitleBar" />
+
         <activity
             android:name=".permainan.kuis.simbolAngka.GameSimbolAngkaActivity"
             android:theme="@style/noTitleBar" />
+
         <activity
             android:name=".permainan.kuis.kataBenda.GameKataBendaActivity"
             android:theme="@style/noTitleBar" />
+
         <activity
             android:name=".permainan.susunAlfabet.LowercaseActivity"
             android:label="Menyusun Abjad"
             android:parentActivityName=".permainan.PermainanActivity"
             android:theme="@style/GameAbjadLower" />
+
         <activity
             android:name=".permainan.kuis.KuisActivity"
             android:label="Menu Kuis"
             android:parentActivityName=".permainan.PermainanActivity"
             android:theme="@style/MenuKuis" />
+
         <activity
             android:name=".permainan.susunAlfabet.UppercaseAlfabet"
             android:label="Menyusun Abjad"
             android:parentActivityName=".permainan.PermainanActivity"
             android:theme="@style/GameAbjad" />
+
         <activity
             android:name=".bantuan.BantuanActivity"
             android:label="Bantuan"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/Bantuan" />
+
         <activity
             android:name=".tentang.TentangActivity"
             android:label="Tentang"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/Tentang" />
+
         <activity
             android:name=".setting.SettingActivity"
             android:label="Pengaturan"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/Setting" />
+
         <activity
             android:name=".perbaikanKata.WordRepairActivity"
             android:label="Perbaikan Kata"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/PerbaikanKata" />
+
         <activity
             android:name=".permainan.PermainanActivity"
             android:label="Permainan"
             android:parentActivityName=".MenuActivity"
             android:theme="@style/MenuGame" />
+
         <activity
             android:name=".kamus.DictionaryActivity"
             android:label="Kamus"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/MenuKamus"/>
+
+        <activity android:name=".kamus.menu.keterangan.KeteranganActivity" />
+
+        <activity android:name=".kamus.menu.sifat.SifatActivity" />
+
+        <activity android:name=".kamus.menu.kerja.KerjaActivity" />
+
+        <activity android:name=".kamus.menu.benda.BendaActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".kamus.menu.konsonan.MenuKonsonanActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity android:name=".kamus.menu.angka.AngkaActivity" />
+
+        <activity android:name=".kamus.menu.huruf.HurufActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".permainan.kuis.skor.ScoreActivity"
             android:label="Skor"

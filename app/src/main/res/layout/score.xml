@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#ecf5f7"
     android:fitsSystemWindows="true"
-    tools:context=".skor.ScoreActivity">
+    tools:context=".permainan.kuis.skor.ScoreActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

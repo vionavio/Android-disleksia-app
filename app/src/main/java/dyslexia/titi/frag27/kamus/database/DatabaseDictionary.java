@@ -26,23 +26,12 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
     }
 
 
-    /*
-    1. INITIALIZE DB HELPER AND PASS IT A CONTEXT
-     */
-
-
-    /*
-     1. RETRIEVE SPACECRAFTS FROM DB AND POPULATE ARRAYLIST
-     2. RETURN THE LIST
-     list digunakan untuk membuat daftar elemen (objek) yang dikaitkan dengan nomor indeks mereka.
-     retrieve = ambil
-     */
     public List<Dictionary> retrieveKamus(String type) {
         SQLiteDatabase db = getReadableDatabase();
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
         //make sure kolom adalah nama table
-        String[] sqlSelect = {"id_word", "word", "type"};
+        String[] sqlSelect = {"id_word", "LOWER (word)", "type"};
         String tableName = "words";
         qb.setTables(tableName);
         Cursor cursor;
@@ -61,7 +50,7 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
             do {
                 Dictionary dictionary = new Dictionary(0, "", "");
                 dictionary.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
-                dictionary.setWord(cursor.getString(cursor.getColumnIndex("word")));
+                dictionary.setWord(cursor.getString(cursor.getColumnIndex("LOWER (word)")));
                 dictionary.setType(cursor.getString(cursor.getColumnIndex("type")));
 
                 dictionaries.add(dictionary);
@@ -71,43 +60,6 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
         return dictionaries;
     }
 
-
-    public Dictionary getKamus(long id_word) {
-        SQLiteDatabase db = getReadableDatabase();
-        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
-        String[] sqlSelect = {"id_word", "word", "type"};
-        String tableName = "words";
-        qb.setTables(tableName);
-
-        Cursor cursor = qb.query(db, sqlSelect, "id_word =" + id_word, null, null, null, null);
-
-        List<Dictionary> dictionaries = new ArrayList<>();
-
-        // Cursor c=db.rawQuery("SELECT * FROM WORDS WHERE TYPE "+type+"'",null);
-        if (cursor.moveToFirst()) {
-            do {
-                Dictionary dictionary = new Dictionary(0, "", "");
-                dictionary.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
-                dictionary.setWord(cursor.getString(cursor.getColumnIndex("word")));
-                dictionary.setType(cursor.getString(cursor.getColumnIndex("type")));
-
-                dictionaries.add(dictionary);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return dictionary;
-    }
-
-    public void deleteKamus(long id)
-    {
-        SQLiteDatabase db = getReadableDatabase();
-        db.delete("words","id_word" + " ='" + id + "'",null);
-        db.close();
-    }
-
-    public void open() {
-        database = this.getWritableDatabase();
-    }
 
     public long insert(String word, String type) {
 
@@ -125,17 +77,34 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
         return id;
     }
 
-    public int getNotesCount() {
-        String countQuery = "SELECT  * FROM " + "words";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
+    public List<Dictionary> getWord(String word){
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
-        int count = cursor.getCount();
+        //make sure kolom adalah nama table
+        String[] sqlSelect = {"id_word", "LOWER (word)", "type"};
+        String tableName = "words";
+        qb.setTables(tableName);
+        Cursor cursor;
+
+        cursor = qb.query(db, sqlSelect, "word LIKE ?", new String[]{word}, null, null, null);
+
+        List<Dictionary> dictionaries = new ArrayList<>();
+
+        // Cursor c=db.rawQuery("SELECT * FROM WORDS WHERE TYPE "+type+"'",null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Dictionary dictionary = new Dictionary(0, "", "");
+                dictionary.setId_word(cursor.getLong(cursor.getColumnIndex("id_word")));
+                dictionary.setWord(cursor.getString(cursor.getColumnIndex("LOWER (word)")));
+
+                dictionaries.add(dictionary);
+            } while (cursor.moveToNext());
+        }
         cursor.close();
-
-
-        // return count
-        return count;
+        return dictionaries;
     }
+
 
 }

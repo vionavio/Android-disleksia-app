@@ -24,4 +24,9 @@ public class SettingActivity extends AppCompatActivity {
             startActivity(new Intent(this, MainActivity.class));
         });
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

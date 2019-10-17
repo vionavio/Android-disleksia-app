@@ -36,4 +36,9 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
