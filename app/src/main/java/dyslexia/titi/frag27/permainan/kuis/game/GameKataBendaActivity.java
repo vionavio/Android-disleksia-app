@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
+import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
+import dyslexia.titi.frag27.utils.SharedPreferenceUtil;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -21,7 +25,10 @@ import android.widget.Toast;
 import java.util.Locale;
 import java.util.Random;
 
+import static dyslexia.titi.frag27.utils.Constant.GAME_BENDA;
+
 public class GameKataBendaActivity extends AppCompatActivity {
+
     public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
 
 
@@ -152,19 +159,30 @@ public class GameKataBendaActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
-           AppDatabase appDatabase = AppDatabase.getInstance(this);
-            appDatabase.scoreDao().insert(new ScoreEntity(1, "kata_benda", 5, "10/10/2010"));
+        SharedPreferences preferences = getSharedPreferences("PREFS", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("lastScore", score);
+        editor.apply();
+        saveScore(score);
 
-            Log.d("scoreee" ,"addScore: " + appDatabase.scoreDao().getAll());
+        Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+        startActivity(intent);
+        finish();
 
-//        SharedPreferences preferences = getSharedPreferences("PREFS",0);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putInt("lastScore", score);
-//        editor.apply();
-//
-//        Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
-//        startActivity(intent);
-//        finish();
+
+    }
+
+    public void saveScore(Integer score) {
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        // TODO: buat tanggal yang compatible dentan API 21
+        appDatabase.scoreDao().insert(new ScoreEntity(
+                SharedPreferenceUtil.getUserId(this),
+                GAME_BENDA,
+                score,
+                "10-10-2010"
+        ));
+
+        Log.d("aaaaaaaaa", "saveScore: " + appDatabase.scoreDao().getAll());
     }
 
     protected void setImage() {

@@ -2,8 +2,11 @@ package dyslexia.titi.frag27.permainan.kuis.game;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.AppDatabase;
+import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
+import dyslexia.titi.frag27.utils.SharedPreferenceUtil;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +15,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +24,8 @@ import android.widget.Toast;
 
 import java.util.Locale;
 import java.util.Random;
+
+import static dyslexia.titi.frag27.utils.Constant.GAME_SIFAT;
 
 public class GameKataSifatActivity extends AppCompatActivity {
 
@@ -162,11 +168,25 @@ public class GameKataSifatActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("lastScore", score);
         editor.apply();
+        saveScore(score);
 
         Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
         startActivity(intent);
         finish();
     }
+
+    public void saveScore(Integer score) {
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        appDatabase.scoreDao().insert(new ScoreEntity(
+                SharedPreferenceUtil.getUserId(this),
+                GAME_SIFAT,
+                score,
+                "10-10-2010"
+        ));
+
+        Log.d("aaaaaaaaa", "saveScore: " + appDatabase.scoreDao().getAll());
+    }
+
 
     protected void setImage() {
         EditText input = findViewById(R.id.answer);
