@@ -19,6 +19,12 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         Button btnLogout = findViewById(R.id.btn_logout);
+        Button btnProfil = findViewById(R.id.btn_profil);
+
+        btnProfil.setOnClickListener(view -> {
+            startActivity(new Intent(this, ProfilActivity.class));
+        });
+
         btnLogout.setOnClickListener(view -> {
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().apply();
             startActivity(new Intent(this, MainActivity.class));
