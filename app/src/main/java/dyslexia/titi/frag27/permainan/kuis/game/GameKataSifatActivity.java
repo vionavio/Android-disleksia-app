@@ -1,10 +1,9 @@
-package dyslexia.titi.frag27.permainan.kuis.kataSifat;
+package dyslexia.titi.frag27.permainan.kuis.game;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.permainan.kuis.kataBenda.GameKataBendaActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

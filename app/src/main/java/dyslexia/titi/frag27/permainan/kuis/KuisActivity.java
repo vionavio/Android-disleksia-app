@@ -8,11 +8,11 @@ import android.widget.Button;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.permainan.PermainanActivity;
-import dyslexia.titi.frag27.permainan.kuis.kataBenda.GameKataBendaActivity;
-import dyslexia.titi.frag27.permainan.kuis.kataKerja.GameKataKerjaActivity;
-import dyslexia.titi.frag27.permainan.kuis.kataKeterangan.GameKataKeteranganActivity;
-import dyslexia.titi.frag27.permainan.kuis.kataSifat.GameKataSifatActivity;
-import dyslexia.titi.frag27.permainan.kuis.simbolAngka.GameSimbolAngkaActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameKataBendaActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameKataKerjaActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameKataKeteranganActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameKataSifatActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameSimbolAngkaActivity;
 import dyslexia.titi.frag27.permainan.kuis.skor.ScoreActivity;
 
 public class KuisActivity extends AppCompatActivity {

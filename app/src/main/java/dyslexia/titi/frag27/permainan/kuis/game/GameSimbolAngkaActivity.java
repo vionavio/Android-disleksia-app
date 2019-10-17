@@ -1,4 +1,4 @@
-package dyslexia.titi.frag27.permainan.kuis.simbolAngka;
+package dyslexia.titi.frag27.permainan.kuis.game;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;

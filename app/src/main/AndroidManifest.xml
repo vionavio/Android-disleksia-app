@@ -17,23 +17,23 @@
             android:theme="@style/noTitleBar" />
 
         <activity
-            android:name=".permainan.kuis.kataSifat.GameKataSifatActivity"
+            android:name=".permainan.kuis.game.GameKataSifatActivity"
             android:theme="@style/noTitleBar" />
 
         <activity
-            android:name=".permainan.kuis.kataKeterangan.GameKataKeteranganActivity"
+            android:name=".permainan.kuis.game.GameKataKeteranganActivity"
             android:theme="@style/noTitleBar" />
 
         <activity
-            android:name=".permainan.kuis.kataKerja.GameKataKerjaActivity"
+            android:name=".permainan.kuis.game.GameKataKerjaActivity"
             android:theme="@style/noTitleBar" />
 
         <activity
-            android:name=".permainan.kuis.simbolAngka.GameSimbolAngkaActivity"
+            android:name=".permainan.kuis.game.GameSimbolAngkaActivity"
             android:theme="@style/noTitleBar" />
 
         <activity
-            android:name=".permainan.kuis.kataBenda.GameKataBendaActivity"
+            android:name=".permainan.kuis.game.GameKataBendaActivity"
             android:theme="@style/noTitleBar" />
 
         <activity

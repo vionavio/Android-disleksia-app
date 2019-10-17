@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#ffeee6"
-    tools:context=".permainan.kuis.simbolAngka.GameSimbolAngkaActivity">
+    tools:context=".permainan.kuis.game.GameSimbolAngkaActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
