@@ -68,5 +68,7 @@
     <string name="hint_enter_note">Enter your note!</string>
     <string name="hasil_kosong">Kata yang anda cari tidak ketemu</string>
     <string name="skor">skor</string>
+    <string name="profil">profil</string>
+    <string name="ubah">Ubah</string>
 
 </resources>
