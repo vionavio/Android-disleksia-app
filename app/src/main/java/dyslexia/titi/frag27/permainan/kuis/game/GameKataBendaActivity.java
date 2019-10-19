@@ -4,9 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
-import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.utils.SharedPreferenceRepository;
+import dyslexia.titi.frag27.repositories.SharedPreferenceRepository;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -167,7 +166,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
         editor.apply();
         saveScore(score);
 
-        Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ScoreAkhirActivity.class);
         startActivity(intent);
         finish();
 
@@ -200,7 +199,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
             //use this code block to make sure don't show the same picture back to back
             int whichpic = previousChoice;
             while (whichpic == previousChoice) {
-                whichpic = random.nextInt(10);
+                whichpic = random.nextInt(20);
             }
             previousChoice = whichpic;
 

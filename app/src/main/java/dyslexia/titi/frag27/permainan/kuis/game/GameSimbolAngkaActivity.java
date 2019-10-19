@@ -24,9 +24,8 @@ import java.util.Random;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
-import dyslexia.titi.frag27.permainan.kuis.ScoreActivity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.utils.SharedPreferenceRepository;
+import dyslexia.titi.frag27.repositories.SharedPreferenceRepository;
 
 import static dyslexia.titi.frag27.utils.Constant.GAME_ANGKA;
 
@@ -185,7 +184,7 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         editor.apply();
         saveScore(score);
 
-        Intent intent = new Intent(getApplicationContext(), ScoreActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ScoreAkhirActivity.class);
         startActivity(intent);
         finish();
     }
@@ -243,7 +242,6 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         String currentDateandTime = simpleDateFormat.format(new Date());
 
         AppDatabase appDatabase = AppDatabase.getInstance(this);
-        // TODO: buat tanggal yang compatible dentan API 21
         appDatabase.scoreDao().insert(new ScoreEntity(
                 SharedPreferenceRepository.getUserId(this),
                 GAME_ANGKA,

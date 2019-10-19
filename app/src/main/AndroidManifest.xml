@@ -12,9 +12,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".setting.ProfilActivity"/>
-        <activity android:name=".permainan.kuis.skor.Skor2Activity"/>
         <activity
-            android:name=".permainan.kuis.ScoreActivity"
+            android:name=".permainan.kuis.game.ScoreAkhirActivity"
             android:theme="@style/noTitleBar" />
         <activity
             android:name=".permainan.kuis.game.GameKataSifatActivity"
@@ -74,12 +73,15 @@
         <activity
             android:name=".kamus.DictionaryActivity"
             android:label="Kamus"
-            android:theme="@style/MenuKamus" />
-        <activity android:name=".kamus.menu.keterangan.KeteranganActivity" />
+            android:theme="@style/MenuKamus"
+            android:parentActivityName=".MenuActivity"/>
+        <activity android:name=".kamus.menu.keterangan.KeteranganActivity"
+            android:parentActivityName=".kamus.DictionaryActivity"/>
         <activity android:name=".kamus.menu.sifat.SifatActivity" />
         <activity android:name=".kamus.menu.kerja.KerjaActivity" />
         <activity
             android:name=".kamus.menu.benda.BendaActivity"
+            android:parentActivityName=".kamus.DictionaryActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".kamus.menu.konsonan.MenuKonsonanActivity"
@@ -91,7 +93,7 @@
         <activity
             android:name=".permainan.kuis.skor.ScoreActivity"
             android:label="Skor"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/Score" />
         <activity
             android:name=".login.LoginActivity"
             android:theme="@style/noTitleBar" />

@@ -18,12 +18,12 @@ public class ScoreEntity {
     public String quizType;
 
     @ColumnInfo(name = "score")
-    public double score;
+    public Integer score;
 
     @ColumnInfo(name = "created_at")
     public String createdAt;
 
-    public ScoreEntity(int userId, String quizType, double score, String createdAt) {
+    public ScoreEntity(int userId, String quizType, int score, String createdAt) {
         this.userId = userId;
         this.quizType = quizType;
         this.score = score;
@@ -66,10 +66,11 @@ public class ScoreEntity {
     }
 
     public double getScore() {
-        return score;
+        int value = (int)score;
+        return value;
     }
 
-    public void setScore(double score) {
+    public void setScore(int score) {
         this.score = score;
     }
 

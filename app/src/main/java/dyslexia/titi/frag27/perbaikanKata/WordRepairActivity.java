@@ -76,9 +76,7 @@ public class WordRepairActivity extends BaseActivity {
 
     @Override
     public void populateView() {
-
         btn_proseskata.setOnClickListener((View view) -> jaroWinklerDistance());
-
         loadSuara();
         loadSuara2();
         loadSuara3();

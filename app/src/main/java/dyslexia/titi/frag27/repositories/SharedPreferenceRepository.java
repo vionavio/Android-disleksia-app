@@ -1,5 +1,4 @@
-package dyslexia.titi.frag27.utils;
-// Created by Arif Ikhsanudin on 10/7/2019.
+package dyslexia.titi.frag27.repositories;
 
 import android.content.Context;
 import android.content.SharedPreferences;

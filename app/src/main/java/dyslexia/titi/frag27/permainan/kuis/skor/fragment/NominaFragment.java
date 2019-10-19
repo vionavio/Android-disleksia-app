@@ -6,40 +6,53 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.entities.ScoreEntity;
+import dyslexia.titi.frag27.permainan.kuis.adapter.ScoreAdapter;
+import dyslexia.titi.frag27.services.ScoreService;
+import dyslexia.titi.frag27.utils.Constant;
 
 
 public class NominaFragment extends Fragment {
-    ListView lv;
-    TextView tv;
+    ListView listView;
+    TextView textView;
+    List<ScoreEntity> scoreEntityList;
+    ScoreAdapter adapter;
 
     public static NominaFragment newInstance() {
         return new NominaFragment();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment, null);
+        View rootView = inflater.inflate(R.layout.fragment_score, null);
         initializeViews(rootView);
+        loadData();
         return rootView;
     }
+
+    private void loadData() {
+        scoreEntityList = ScoreService.getCurrentScoreBenda(getContext());
+        Log.d(Constant.TAG, "loadData: " + scoreEntityList);
+        adapter = new ScoreAdapter(getContext(),0,scoreEntityList);
+        listView.setAdapter(adapter);
+    }
+
     private void initializeViews(View rootView) {
-        lv = rootView.findViewById(R.id.list);
-        tv = rootView.findViewById(R.id.title_name);
-        tv.setText(toString());
+        listView =rootView.findViewById(R.id.list);
+        textView = rootView.findViewById(R.id.title_name);
+        textView.setText(toString());
     }
 
     @Override
@@ -47,5 +60,19 @@ public class NominaFragment extends Fragment {
         return "Kata Benda";
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
 }

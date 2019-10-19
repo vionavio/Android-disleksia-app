@@ -16,8 +16,20 @@ import dyslexia.titi.frag27.database.entities.ScoreEntity;
 
 public class ScoreAdapter  extends ArrayAdapter<ScoreEntity> {
 
+    private Context mContext;
+    private List<ScoreEntity> listScore;
+
     public ScoreAdapter( Context context, int resource, List<ScoreEntity> objects) {
         super(context, R.layout.item_view_score, objects);
+        this.mContext = context;
+        this.listScore = objects;
+
+    }
+
+    private static int latestNumber = 0;
+
+    public int getNumber(){
+        return ++latestNumber;
     }
 
     @NonNull
@@ -28,12 +40,17 @@ public class ScoreAdapter  extends ArrayAdapter<ScoreEntity> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_view_score, null);
 
             ScoreEntity scoreEntity = getItem(position);
+            //ScoreEntity scoreEntityID = listScore.get(position);
 
-            TextView type = convertView.findViewById(R.id.quiz_type);
+
+
+            //TextView type = convertView.findViewById(R.id.quiz_type);
+            TextView id = convertView.findViewById(R.id.tv_id);
             TextView score = convertView.findViewById(R.id.score);
             TextView createAt = convertView.findViewById(R.id.createdAt);
 
-            type.setText(scoreEntity.getQuizType());
+            //type.setText(scoreEntity.getQuizType());
+            //id.setText(String.valueOf(getNumber()));
             score.setText(String.valueOf(scoreEntity.getScore()));
             createAt.setText(scoreEntity.getCreatedAt());
 
@@ -41,4 +58,6 @@ public class ScoreAdapter  extends ArrayAdapter<ScoreEntity> {
 
         return convertView;
     }
+
+
 }

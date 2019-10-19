@@ -1,9 +1,9 @@
-package dyslexia.titi.frag27.permainan.kuis;
+package dyslexia.titi.frag27.permainan.kuis.game;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
-import dyslexia.titi.frag27.database.entities.ScoreEntity;
+import dyslexia.titi.frag27.permainan.kuis.KuisActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,9 +12,7 @@ import android.os.Bundle;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.util.List;
-
-public class ScoreActivity extends AppCompatActivity {
+public class ScoreAkhirActivity extends AppCompatActivity {
 
     TextView tvScore;
     RatingBar ratingBar;
@@ -26,7 +24,7 @@ public class ScoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score);
+        setContentView(R.layout.activity_score_akhir);
         tvScore = findViewById(R.id.tvScore);
         ratingBar = findViewById(R.id.rating);
 

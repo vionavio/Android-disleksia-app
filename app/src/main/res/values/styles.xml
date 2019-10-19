@@ -8,6 +8,15 @@
         <item name="colorAccent">#00332c</item>
     </style>
 
+    <style name="Score" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#ff4d4d</item>
+        <item name="colorPrimaryDark">#e60000</item>
+        <item name="colorAccent">#660000</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="GameAbjad" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#ff5ea2</item>

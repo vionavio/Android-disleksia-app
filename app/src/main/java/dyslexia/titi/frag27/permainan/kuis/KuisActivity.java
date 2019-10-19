@@ -14,7 +14,6 @@ import dyslexia.titi.frag27.permainan.kuis.game.GameKataKeteranganActivity;
 import dyslexia.titi.frag27.permainan.kuis.game.GameKataSifatActivity;
 import dyslexia.titi.frag27.permainan.kuis.game.GameSimbolAngkaActivity;
 import dyslexia.titi.frag27.permainan.kuis.skor.ScoreActivity;
-import dyslexia.titi.frag27.permainan.kuis.skor.Skor2Activity;
 
 public class KuisActivity extends AppCompatActivity {
 
@@ -50,7 +49,7 @@ public class KuisActivity extends AppCompatActivity {
 
         Button skor =  findViewById(R.id.skor);
         skor.setOnClickListener(view -> {
-            startActivity(new Intent(KuisActivity.this, Skor2Activity.class));
+            startActivity(new Intent(KuisActivity.this, ScoreActivity.class));
         });
 
 

@@ -5,7 +5,7 @@ import android.util.Log;
 
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.UserEntity;
-import dyslexia.titi.frag27.utils.SharedPreferenceRepository;
+import dyslexia.titi.frag27.repositories.SharedPreferenceRepository;
 
 import static dyslexia.titi.frag27.utils.Constant.TAG;
 import static dyslexia.titi.frag27.utils.Constant.USER_ID;
