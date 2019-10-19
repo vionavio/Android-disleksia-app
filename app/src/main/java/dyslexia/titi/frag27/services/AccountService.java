@@ -34,6 +34,18 @@ public class AccountService {
         if (!newUserEntity.name.isEmpty()) {
             userEntity.name = newUserEntity.name;
         }
+        if (!newUserEntity.gender.isEmpty()) {
+            userEntity.gender = newUserEntity.gender;
+        }
+        if (!newUserEntity.dob.isEmpty()) {
+            userEntity.dob = newUserEntity.dob;
+        }
+        if (!newUserEntity.email.isEmpty()) {
+            userEntity.email = newUserEntity.email;
+        }
+        if (!newUserEntity.password.isEmpty()) {
+            userEntity.password = newUserEntity.password;
+        }
 
         Integer updateRow = appDatabase.userDao().update(userEntity);
         return updateRow == 1;

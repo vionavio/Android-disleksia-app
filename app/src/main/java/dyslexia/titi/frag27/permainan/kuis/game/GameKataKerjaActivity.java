@@ -22,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
@@ -175,6 +177,7 @@ public class GameKataKerjaActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
+
         SharedPreferences preferences = getSharedPreferences("PREFS",0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("lastScore", score);
@@ -187,13 +190,16 @@ public class GameKataKerjaActivity extends AppCompatActivity {
     }
 
     public void saveScore(Integer score) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss' 'dd-MM-yyyy");
+        String currentDateandTime = simpleDateFormat.format(new Date());
+
         AppDatabase appDatabase = AppDatabase.getInstance(this);
         // TODO: buat tanggal yang compatible dentan API 21
         appDatabase.scoreDao().insert(new ScoreEntity(
                 SharedPreferenceRepository.getUserId(this),
                 GAME_KERJA,
                 score,
-                "10-10-2010"
+                currentDateandTime
         ));
 
         Log.d("aaaaaaaaa", "saveScore: " + appDatabase.scoreDao().getAll());

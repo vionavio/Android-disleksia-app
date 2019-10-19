@@ -164,7 +164,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("auth", "authenticate: " + userEntity);
 //        Log.d("auth", "authenticate: " + userEntity.password.equals(password));
         if (userEntity != null && userEntity.password.equals(password)) {
-            AuthService.saveLoginInfo(this, userEntity.id);
+            AuthService.saveLoginInfo(this, userEntity.id_user);
             return true;
         } else {
             return false;

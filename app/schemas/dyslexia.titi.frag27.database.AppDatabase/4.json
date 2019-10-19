@@ -2,33 +2,21 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "f70091751f2906f69fa6ecc57a3fa746",
+    "identityHash": "61bc4e23e54a4b8e10e328a19113f28f",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `email` TEXT, `password` TEXT, `gender` TEXT, `dob` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_user` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `gender` TEXT, `dob` TEXT, `email` TEXT, `password` TEXT)",
         "fields": [
           {
-            "fieldPath": "id",
-            "columnName": "id",
+            "fieldPath": "id_user",
+            "columnName": "id_user",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "name",
             "columnName": "name",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "email",
-            "columnName": "email",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "password",
-            "columnName": "password",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -43,11 +31,23 @@
             "columnName": "dob",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
           "columnNames": [
-            "id"
+            "id_user"
           ],
           "autoGenerate": true
         },
@@ -102,7 +102,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f70091751f2906f69fa6ecc57a3fa746')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '61bc4e23e54a4b8e10e328a19113f28f')"
     ]
   }
 }

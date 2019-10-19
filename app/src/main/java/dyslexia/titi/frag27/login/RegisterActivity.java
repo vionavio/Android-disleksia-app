@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
                 // jika emial belum ada, maka didaftarkan
 
                 if (appDatabase.userDao().getSingle(email) == null) {
-                    Long userId = addUser(new UserEntity(name, email, password, gender, dob));
+                    Long userId = addUser(new UserEntity(name,gender,dob,email,password));
                     AuthService.saveLoginInfo(this, userId.intValue());
                     startActivity(new Intent(RegisterActivity.this, MenuActivity.class));
                 } else {

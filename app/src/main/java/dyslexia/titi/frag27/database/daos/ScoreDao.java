@@ -15,7 +15,7 @@ public interface ScoreDao {
     List<ScoreEntity> getAll();
 
     @Query("SELECT * FROM scores WHERE user_id = :id ORDER BY created_at DESC")
-    List<ScoreEntity> getBestScores(Integer id);
+    List<ScoreEntity> getCurrentScores(Integer id);
 
     @Query("SELECT * FROM scores WHERE id = :id")
     ScoreEntity getOne(Integer id);

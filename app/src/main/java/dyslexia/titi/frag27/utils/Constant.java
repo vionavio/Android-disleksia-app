@@ -1,5 +1,4 @@
 package dyslexia.titi.frag27.utils;
-// Created by Arif Ikhsanudin on 10/7/2019.
 
 public class Constant {
     public static final String IS_LOGGED_IN = "isLoggedIn";

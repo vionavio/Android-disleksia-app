@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".setting.ProfilActivity"></activity>
+        <activity android:name=".setting.ProfilActivity"/>
+        <activity android:name=".permainan.kuis.skor.Skor2Activity"/>
         <activity
             android:name=".permainan.kuis.ScoreActivity"
             android:theme="@style/noTitleBar" />

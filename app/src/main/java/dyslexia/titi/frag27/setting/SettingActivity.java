@@ -22,7 +22,7 @@ public class SettingActivity extends AppCompatActivity {
 
         Button btnLogout = findViewById(R.id.btn_logout);
         Button btnProfil = findViewById(R.id.btn_profil);
-        EditText editText = findViewById(R.id.et_name);
+
 
         btnProfil.setOnClickListener(view -> {
             startActivity(new Intent(this, ProfilActivity.class));
@@ -32,9 +32,7 @@ public class SettingActivity extends AppCompatActivity {
             PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().apply();
             startActivity(new Intent(this, MainActivity.class));
         });
-
-        editText.setText(AccountService.getName(this));
-    }
+ }
 
     @Override
     protected void onStop() {

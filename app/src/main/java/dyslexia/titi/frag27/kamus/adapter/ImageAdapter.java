@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class ImageAdapter extends BaseAdapter {
 
     }
 
-    public class ViewHolder{
+    public class ViewHolder {
         ImageView imageView;
     }
 
@@ -63,21 +62,20 @@ public class ImageAdapter extends BaseAdapter {
     @NonNull
     @Override
     public View getView(final int position, View view, ViewGroup parent) {
-        ViewHolder holder ;
-        if (view == null){
+        ViewHolder holder;
+        if (view == null) {
             holder = new ViewHolder();
             view = inflater.inflate(R.layout.list_view_gambar, null);
             holder.imageView = view.findViewById(R.id.iv_image);
 
             view.setTag(holder);
-        }
-        else {
-            holder = (ViewHolder)view.getTag();
+        } else {
+            holder = (ViewHolder) view.getTag();
         }
         final Dictionary currentKamus = list.get(position);
 
         Resources resources = mContext.getResources();
-        final int resourceId = resources.getIdentifier(currentKamus.getWord(),"drawable",mContext.getPackageName());
+        final int resourceId = resources.getIdentifier(currentKamus.getWord(), "drawable", mContext.getPackageName());
         holder.imageView.setImageResource(resourceId);
 
 
@@ -85,7 +83,7 @@ public class ImageAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 //you can add your action handling
-                Toast.makeText(mContext, " "+currentKamus.word, Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, " " + currentKamus.word, Toast.LENGTH_SHORT).show();
                 textToSpeech.speak(String.valueOf(currentKamus.word), TextToSpeech.QUEUE_FLUSH, null);
             }
         });
@@ -97,16 +95,15 @@ public class ImageAdapter extends BaseAdapter {
         return view;
     }
 
-    public void filter(String charText){
+    public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
         list.clear();
-        if (charText.length() == 0){
+        if (charText.length() == 0) {
             list.addAll(kamusList);
-        }
-        else {
-            for (Dictionary strword : kamusList){
+        } else {
+            for (Dictionary strword : kamusList) {
                 if (strword.word.toLowerCase(Locale.getDefault())
-                        .contains(charText)){
+                        .contains(charText)) {
                     list.add(strword);
                 }
             }
@@ -114,9 +111,8 @@ public class ImageAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    protected void onStop()
-    {
-        if(textToSpeech != null){
+    protected void onStop() {
+        if (textToSpeech != null) {
             textToSpeech.shutdown();
         }
     }

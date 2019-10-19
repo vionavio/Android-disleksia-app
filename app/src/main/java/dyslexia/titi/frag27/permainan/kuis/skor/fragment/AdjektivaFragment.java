@@ -16,20 +16,24 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Locale;
 
 import androidx.fragment.app.Fragment;
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
 import dyslexia.titi.frag27.kamus.model.Dictionary;
+import dyslexia.titi.frag27.permainan.kuis.adapter.ScoreAdapter;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class AdjektivaFragment extends Fragment  {
 
-    ListView lv;
-    TextView tv;
+    ListView listView;
+    TextView textView;
+    List<ScoreEntity> scoreEntityList;
+    ScoreAdapter adapter;
+
 
 
     public static AdjektivaFragment newInstance() {
@@ -47,20 +51,24 @@ public class AdjektivaFragment extends Fragment  {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment, null);
         initializeViews(rootView);
-       // loadData();
+        loadData();
         return rootView;
     }
+
+
 
     @Override
     public void onDetach() {
         super.onDetach();
     }
 
+    private void loadData() {
+    }
 
     private void initializeViews(View rootView) {
-        lv = rootView.findViewById(R.id.list);
-        tv = rootView.findViewById(R.id.title_name);
-        tv.setText(toString());
+        listView =rootView.findViewById(R.id.list);
+        textView = rootView.findViewById(R.id.title_name);
+        textView.setText(toString());
     }
 
     @Override
