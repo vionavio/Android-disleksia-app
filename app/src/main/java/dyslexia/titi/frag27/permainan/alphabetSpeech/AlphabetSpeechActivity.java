@@ -3,10 +3,11 @@ package dyslexia.titi.frag27.permainan.alphabetSpeech;
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.database.DatabaseDictionary;
-import dyslexia.titi.frag27.permainan.model.AlphabetSpeech;
 
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
@@ -47,6 +48,9 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
         letterTextView = findViewById(R.id.letter_for_speech_text_view);
         answerletterTextView = findViewById(R.id.letter_of_speech_text_view);
 
+        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
+        answerletterTextView.setTypeface(customfont);
+
         microphoneButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         playButton.setOnClickListener(this);
@@ -55,9 +59,34 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
         databaseDictionary = new DatabaseDictionary(getApplicationContext());
         list = (ArrayList<AlphabetSpeech>) databaseDictionary.retrieveSpeech();
         getRandomPosition();
-
-
     }
+
+    @SuppressLint("SetTextI18n")
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SPEECH_RECOGNITION_CODE) {
+            if (resultCode == RESULT_OK && null != data) {
+                ArrayList<String> result = data
+                        .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                String text = result.get(0);
+                Log.d("EEE", "true " + text);
+                String letter = text.substring(0, 1);
+                if (letter.equals("à")) {
+                    letter = "a";
+                    text = "a";
+                }
+                isAnswer = true;
+                if (letter.equals(list.get(position).getLetter().substring(0, 1)) ||
+                        letter.equals(list.get(position).getLetter().substring(1, 2))) {
+                    answerletterTextView.setText("Benar, Huruf diatas diucapkan" + list.get(position).getLetter().substring(0, 1));
+                    Log.d("EEE", "true");
+                } else answerletterTextView.setText("Anda salah menyebutkan " + text);
+
+            }
+        }
+    }
+
+
 
     private void getRandomPosition() {
         Random random = new Random();
@@ -129,7 +158,7 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
     protected void onStop() {
         if(tts != null){
             tts.stop();
-            // tts.shutdown();
+             tts.shutdown();
         }
         super.onStop();
 

@@ -1,26 +1,18 @@
-package dyslexia.titi.frag27.permainan.model;
+package dyslexia.titi.frag27.permainan.alphabetSpeech;
 
 public class AlphabetSpeech {
 
-    private int id_alphabetspeech;
+
     private String letter;
     private String transcription;
     private int coef;
 
-    public AlphabetSpeech(int id_alphabetspeech, String letter, String transcription, int coef) {
-        this.id_alphabetspeech = id_alphabetspeech;
+    public AlphabetSpeech( String letter, String transcription, int coef) {
         this.letter = letter;
         this.transcription = transcription;
         this.coef = coef;
     }
 
-    public int getId_alphabetspeech() {
-        return id_alphabetspeech;
-    }
-
-    public void setId_alphabetspeech(int id_alphabetspeech) {
-        this.id_alphabetspeech = id_alphabetspeech;
-    }
 
     public String getLetter() {
         return letter;

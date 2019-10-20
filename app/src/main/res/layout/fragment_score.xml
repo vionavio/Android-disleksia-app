@@ -32,22 +32,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-<!--                <TextView-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:text="No"-->
-<!--                    android:layout_height="wrap_content"/>-->
+                <TextView
+                    android:layout_width="50dp"
+                    android:gravity="center"
+                    android:text="No"
+                    android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
                     android:gravity="center"
-                    android:text="Skor" />
+                    android:text="@string/skor2" />
 
                 <TextView
-                    android:layout_width="250dp"
+                    android:layout_width="220dp"
                     android:gravity="center"
-                    android:text="Jam dan Tanggal"
+                    android:text="@string/jam_dan_tanggal"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"/>
 

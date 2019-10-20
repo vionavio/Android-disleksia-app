@@ -18,12 +18,18 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="Pengucapan" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#84bf40</item>
+        <item name="colorPrimaryDark">#689F38</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+    </style>
+
     <style name="GameAbjad" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#ff5ea2</item>
         <item name="colorPrimaryDark">#d04f85</item>
         <item name="colorAccent">#FF4081</item>
-        <item name="android:textColorPrimary">#FFFFFF</item>
     </style>
 
     <style name="GameAbjadLower" parent="Theme.AppCompat.Light">

@@ -73,5 +73,13 @@
     <string name="kuis">KUIS</string>
     <string name="pengucapan">PENGUCAPAN</string>
     <string name="abjad">ABJAD</string>
+    <string name="jam_dan_tanggal">Jam dan Tanggal</string>
+    <string name="_1">1</string>
+    <string name="skor2">Skor</string>
+    <string name="tertera">Ucapkan huruf yang tertera dibawah ini:</string>
+    <string name="_00_30">00:30</string>
+    <string name="nilai_0">Nilai: 0</string>
+    <string name="pertanyaan_1_x">Pertanyaan: 1/x</string>
+    <string name="selanjutnya">SELANJUTNYA</string>
 
 </resources>

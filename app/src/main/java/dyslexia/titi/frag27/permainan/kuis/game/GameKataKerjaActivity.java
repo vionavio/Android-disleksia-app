@@ -99,7 +99,7 @@ public class GameKataKerjaActivity extends AppCompatActivity {
             pic.setImageDrawable(res);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexMono-SemiBold.ttf");
+            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
             scram.setTypeface(customfont);
 
         } else {
@@ -206,7 +206,7 @@ public class GameKataKerjaActivity extends AppCompatActivity {
 
     protected void setImage() {
         EditText input = findViewById(R.id.answer);
-        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexMono-SemiBold.ttf");
+        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
         input.setTypeface(customfont);
         answer = input.getText().toString().toLowerCase().trim();
         if (question < chances) {

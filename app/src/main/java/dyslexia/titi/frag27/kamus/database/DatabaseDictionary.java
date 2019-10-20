@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dyslexia.titi.frag27.kamus.model.Dictionary;
-import dyslexia.titi.frag27.permainan.model.AlphabetSpeech;
+import dyslexia.titi.frag27.permainan.alphabetSpeech.AlphabetSpeech;
 
 public class DatabaseDictionary extends SQLiteAssetHelper {
 
@@ -21,6 +21,8 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
     private static final int DB_VER = 1;
     public Dictionary dictionary;
     SQLiteDatabase database;
+
+
 
     public DatabaseDictionary(Context context) {
         super(context, DB_NAME, null, DB_VER);
@@ -123,8 +125,7 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                AlphabetSpeech alphabetSpeech = new AlphabetSpeech( 0,"", "",0);
-                alphabetSpeech.setId_alphabetspeech(cursor.getInt(cursor.getColumnIndex("id_alphabetspeech")));
+                AlphabetSpeech alphabetSpeech = new AlphabetSpeech( "", "",0);
                 alphabetSpeech.setLetter(cursor.getString(cursor.getColumnIndex("letter")));
                 alphabetSpeech.setTranscription(cursor.getString(cursor.getColumnIndex("transcription")));
                 alphabetSpeech.setCoef(cursor.getInt(cursor.getColumnIndex("coef")));
@@ -135,5 +136,6 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
         cursor.close();
         return speeches;
     }
+
 
 }

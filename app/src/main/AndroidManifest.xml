@@ -11,7 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".permainan.alphabetSpeech.AlphabetSpeechActivity"></activity>
+
+        <activity android:name=".permainan.alphabetSpeech.AlphabetSpeechActivity"
+            android:label="Pengucapan Alphabet"
+            android:theme="@style/Pengucapan"
+            android:parentActivityName=".permainan.PermainanActivity"/>
+
         <activity android:name=".setting.ProfilActivity"
             android:parentActivityName=".setting.SettingActivity"
             android:label="Profil"/>
