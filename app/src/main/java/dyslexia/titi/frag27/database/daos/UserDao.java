@@ -9,7 +9,6 @@ import androidx.room.Update;
 import java.util.List;
 
 import dyslexia.titi.frag27.database.entities.UserEntity;
-import dyslexia.titi.frag27.login.User;
 
 @Dao
 public interface UserDao {
@@ -19,11 +18,14 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE email = :email")
     UserEntity getSingle(String email);
 
+    @Query("SELECT * FROM users WHERE id_user = :userId")
+    UserEntity getSinglebyId(Integer userId);
+
     @Insert
     Long insert(UserEntity userEntity);
 
     @Update
-    void update(UserEntity userEntity);
+    Integer update(UserEntity userEntity);
 
     @Delete
     void delete(UserEntity userEntity);

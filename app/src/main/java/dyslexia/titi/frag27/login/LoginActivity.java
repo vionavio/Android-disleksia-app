@@ -9,17 +9,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.UserEntity;
 import dyslexia.titi.frag27.login.database.DatabaseUser;
-import dyslexia.titi.frag27.utils.AuthUtil;
+import dyslexia.titi.frag27.services.AuthService;
 import dyslexia.titi.frag27.utils.AlertUtil;
 
 public class LoginActivity extends AppCompatActivity {
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
                 //Check Authentication is successful or not
-//                if (currentUser != null) {
+                //      if (currentUser != null) {
                 if (authenticate(email, password)) {
                     Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
                     //User Logged in Successfully Launch You home screen activity
@@ -64,6 +63,29 @@ public class LoginActivity extends AppCompatActivity {
                     //User Logged in Failed
                     AlertUtil.showSnackbar(btnLogin, "Gagal masuk , silakan coba lagi");
                 }
+
+//                User currentUser = databaseUser.Authenticate(new User(null, null,null,null,  email, password));
+//
+//                //Check Authentication is successful or not
+//                if (currentUser != null) {
+//                    Snackbar.make(btnLogin, "Anda berhasil masuk!", Snackbar.LENGTH_LONG).show();
+//
+//                    //shared preferences digunakan untuk menyimpan key value dari login yang telah terjadi
+//
+//                    SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+//                    mSettings.edit().putBoolean("isLoggedIn", true).apply();
+//
+//                    //User Logged in Successfully Launch You home screen activity
+////                        Intent intent=new Intent(LoginActivity.this, MenuActivity.class);
+////                        startActivity(intent);
+//                    finish();
+//
+//                } else {
+//
+//                    //User Logged in Failed
+//                    Snackbar.make(btnLogin, "Gagal masuk , silakan coba lagi", Snackbar.LENGTH_LONG).show();
+//
+                //               }
             }
         });
     }
@@ -142,10 +164,15 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("auth", "authenticate: " + userEntity);
 //        Log.d("auth", "authenticate: " + userEntity.password.equals(password));
         if (userEntity != null && userEntity.password.equals(password)) {
-            AuthUtil.saveLoginInfo(this, userEntity.id);
+            AuthService.saveLoginInfo(this, userEntity.id_user);
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }

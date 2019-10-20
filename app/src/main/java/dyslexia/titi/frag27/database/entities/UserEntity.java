@@ -7,16 +7,10 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "users")
 public class UserEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public int id_user;
 
     @ColumnInfo(name = "name")
     public String name;
-
-    @ColumnInfo(name = "email")
-    public String email;
-
-    @ColumnInfo(name = "password")
-    public String password;
 
     @ColumnInfo(name = "gender")
     public String gender;
@@ -24,23 +18,33 @@ public class UserEntity {
     @ColumnInfo(name = "dob")
     public String dob;
 
-    public UserEntity(String name, String email, String password, String gender, String dob) {
+    @ColumnInfo(name = "email")
+    public String email;
+
+    @ColumnInfo(name = "password")
+    public String password;
+
+
+
+    public UserEntity(String name , String gender, String dob, String email, String password) {
         this.name = name;
-        this.email = email;
-        this.password = password;
         this.gender = gender;
         this.dob = dob;
+        this.email = email;
+        this.password = password;
+
     }
 
     @Override
     public String toString() {
         return "UserEntity{" +
-                "id=" + id +
+                "id_user=" + id_user +
                 ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", gender='" + gender + '\'' +
                 ", dob='" + dob + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+
                 "}\n";
     }
 }

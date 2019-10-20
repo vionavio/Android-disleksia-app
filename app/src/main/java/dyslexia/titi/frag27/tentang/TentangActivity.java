@@ -12,4 +12,9 @@ public class TentangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tentang);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

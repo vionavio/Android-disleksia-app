@@ -1,78 +1,68 @@
 package dyslexia.titi.frag27.kamus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
-
-import com.google.android.material.tabs.TabLayout;
+import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.kamus.adapter.MyPageAdapter;
-import dyslexia.titi.frag27.kamus.fragment.AdjektivaFragment;
-import dyslexia.titi.frag27.kamus.fragment.AdverbiaFragment;
-import dyslexia.titi.frag27.kamus.fragment.AllFragment;
-import dyslexia.titi.frag27.kamus.fragment.AlphabetFragment;
-import dyslexia.titi.frag27.kamus.fragment.NominaFragment;
-import dyslexia.titi.frag27.kamus.fragment.NumeralFragment;
-import dyslexia.titi.frag27.kamus.fragment.VerbaFragment;
+import dyslexia.titi.frag27.kamus.menu.angka.AngkaActivity;
+import dyslexia.titi.frag27.kamus.menu.benda.BendaActivity;
+import dyslexia.titi.frag27.kamus.menu.huruf.HurufActivity;
+import dyslexia.titi.frag27.kamus.menu.kerja.KerjaActivity;
+import dyslexia.titi.frag27.kamus.menu.keterangan.KeteranganActivity;
+import dyslexia.titi.frag27.kamus.menu.konsonan.MenuKonsonanActivity;
+import dyslexia.titi.frag27.kamus.menu.sifat.SifatActivity;
 
-public class DictionaryActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
-    private TabLayout tab;
-    private ViewPager vp;
-    int currentPos = 0;
+import static dyslexia.titi.frag27.R.layout.activity_dictionary;
 
+public class DictionaryActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kamus);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(activity_dictionary);
 
-        //VIEWPAGER AND TABS
-        vp = findViewById(R.id.viewpager);
-        addPages();
+        CardView huruf =  findViewById(R.id.simbol_huruf);
+        huruf.setOnClickListener(view -> {
+            startActivity(new Intent(this, HurufActivity.class));
+        });
 
-        //SETUP TAB
-        tab = findViewById(R.id.tabs);
-        tab.setTabGravity(TabLayout.GRAVITY_FILL);
-        tab.setupWithViewPager(vp);
-        tab.addOnTabSelectedListener(this);
+        CardView angka =  findViewById(R.id.simbol_angka);
+        angka.setOnClickListener(view -> {
+            startActivity(new Intent(this, AngkaActivity.class));
+        });
 
-        //
-    }
+        CardView menuKonsonan =  findViewById(R.id.konsonan);
+        menuKonsonan.setOnClickListener(view -> {
+            startActivity(new Intent(this, MenuKonsonanActivity.class));
+        });
 
-    //FILL TAB PAGES
-    private void addPages() {
-        MyPageAdapter myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
-        myPageAdapter.addPage(AlphabetFragment.newInstance());
-        myPageAdapter.addPage(NumeralFragment.newInstance());
-        myPageAdapter.addPage(NominaFragment.newInstance());
-        myPageAdapter.addPage(VerbaFragment.newInstance());
-        myPageAdapter.addPage(AdjektivaFragment.newInstance());
-        myPageAdapter.addPage(AdverbiaFragment.newInstance());
-        myPageAdapter.addPage(AllFragment.newInstance());
-        vp.setAdapter(myPageAdapter);
-    }
+        CardView kataBenda =  findViewById(R.id.kata_benda);
+        kataBenda.setOnClickListener(view -> {
+            startActivity(new Intent(this, BendaActivity.class));
+        });
 
-    public void onTabSelected(TabLayout.Tab tab) {
-        vp.setCurrentItem(currentPos = tab.getPosition());
-    }
+        CardView kataKerja =  findViewById(R.id.kata_kerja);
+        kataKerja.setOnClickListener(view -> {
+            startActivity(new Intent(this, KerjaActivity.class));
+        });
 
-    public void onTabUnselected(TabLayout.Tab tab) {
+        CardView kataSifat =  findViewById(R.id.kata_sifat);
+        kataSifat.setOnClickListener(view -> {
+            startActivity(new Intent(this, SifatActivity.class));
+        });
 
-    }
-
-    public void onTabReselected(TabLayout.Tab tab) {
-
+        CardView kataKeterangan =  findViewById(R.id.kata_keterangan);
+        kataKeterangan.setOnClickListener(view -> {
+            startActivity(new Intent(this, KeteranganActivity.class));
+        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        // getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+    protected void onStop() {
+        super.onStop();
     }
 }

@@ -1,5 +1,7 @@
 package dyslexia.titi.frag27.database.entities;
 
+import java.util.Date;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -16,12 +18,12 @@ public class ScoreEntity {
     public String quizType;
 
     @ColumnInfo(name = "score")
-    public double score;
+    public Integer score;
 
     @ColumnInfo(name = "created_at")
     public String createdAt;
 
-    public ScoreEntity(int userId, String quizType, double score, String createdAt) {
+    public ScoreEntity(int userId, String quizType, int score, String createdAt) {
         this.userId = userId;
         this.quizType = quizType;
         this.score = score;
@@ -37,5 +39,46 @@ public class ScoreEntity {
                 ", score=" + score +
                 ", createdAt='" + createdAt + '\'' +
                 "}\n";
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getQuizType() {
+        return quizType;
+    }
+
+    public void setQuizType(String quizType) {
+        this.quizType = quizType;
+    }
+
+    public double getScore() {
+        int value = (int)score;
+        return value;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

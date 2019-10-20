@@ -8,11 +8,12 @@ import android.widget.Button;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.permainan.PermainanActivity;
-import dyslexia.titi.frag27.permainan.kuis.kataBenda.GameKataBendaActivity;
-import dyslexia.titi.frag27.permainan.kuis.kataKerja.GameKataKerjaActivity;
-import dyslexia.titi.frag27.permainan.kuis.kataKeterangan.GameKataKeteranganActivity;
-import dyslexia.titi.frag27.permainan.kuis.kataSifat.GameKataSifatActivity;
-import dyslexia.titi.frag27.permainan.kuis.simbolAngka.GameSimbolAngkaActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameKataBendaActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameKataKerjaActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameKataKeteranganActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameKataSifatActivity;
+import dyslexia.titi.frag27.permainan.kuis.game.GameSimbolAngkaActivity;
+import dyslexia.titi.frag27.permainan.kuis.skor.ScoreActivity;
 
 public class KuisActivity extends AppCompatActivity {
 
@@ -23,32 +24,32 @@ public class KuisActivity extends AppCompatActivity {
 
         Button simbolAngka =  findViewById(R.id.btn_sa);
         simbolAngka.setOnClickListener(view -> {
-            Intent simbolAngkaIntent = new Intent(KuisActivity.this, GameSimbolAngkaActivity.class);
-            startActivity(simbolAngkaIntent);
+            startActivity(new Intent(KuisActivity.this, GameSimbolAngkaActivity.class));
         });
 
         Button kataBenda =  findViewById(R.id.btn_kb);
         kataBenda.setOnClickListener(view -> {
-            Intent kataBendaIntent = new Intent(KuisActivity.this, GameKataBendaActivity.class);
-            startActivity(kataBendaIntent);
+            startActivity(new Intent(KuisActivity.this, GameKataBendaActivity.class));
         });
 
         Button kataKerja =  findViewById(R.id.btn_kk);
         kataKerja.setOnClickListener(view -> {
-            Intent kataKerjaIntent = new Intent(KuisActivity.this, GameKataKerjaActivity.class);
-            startActivity(kataKerjaIntent);
+            startActivity(new Intent(KuisActivity.this, GameKataKerjaActivity.class));
         });
 
         Button kataSifat =  findViewById(R.id.btn_ks);
         kataSifat.setOnClickListener(view -> {
-            Intent kataSifatIntent = new Intent(KuisActivity.this, GameKataSifatActivity.class);
-            startActivity(kataSifatIntent);
+            startActivity(new Intent(KuisActivity.this, GameKataSifatActivity.class));
         });
 
         Button kataKeterangan =  findViewById(R.id.btn_kket);
         kataKeterangan.setOnClickListener(view -> {
-            Intent kataKeteranganIntent = new Intent(KuisActivity.this, GameKataKeteranganActivity.class);
-            startActivity(kataKeteranganIntent);
+            startActivity(new Intent(KuisActivity.this, GameKataKeteranganActivity.class));
+        });
+
+        Button skor =  findViewById(R.id.skor);
+        skor.setOnClickListener(view -> {
+            startActivity(new Intent(KuisActivity.this, ScoreActivity.class));
         });
 
 

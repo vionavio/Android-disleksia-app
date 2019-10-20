@@ -13,4 +13,9 @@ public class BantuanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bantuan);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

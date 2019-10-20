@@ -65,4 +65,9 @@ public class MenuActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#ffffcc"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    tools:context=".permainan.kuis.game.ScoreAkhirActivity">
+
+    <RatingBar
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:saveEnabled="true"
+        android:numStars="5"
+        android:layout_centerHorizontal="true"
+        android:isIndicator="false"
+        android:rating="0.5"
+        android:stepSize="0.5"
+        android:theme="@style/RatingBar"/>
+
+    <TextView
+        android:id="@+id/tvScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:gravity="center"
+        android:text="score"
+        android:textColor="#ff8000"
+
+        android:textSize="30sp" />
+</LinearLayout>
