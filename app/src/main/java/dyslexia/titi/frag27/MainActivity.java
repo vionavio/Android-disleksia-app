@@ -1,38 +1,34 @@
 package dyslexia.titi.frag27;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import dyslexia.titi.frag27.login.LoginActivity;
 import dyslexia.titi.frag27.login.RegisterActivity;
+import dyslexia.titi.frag27.services.AuthService;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences mSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if (mSettings.getBoolean("isLoggedIn", false)) {
-            Intent menuIntent = new Intent(MainActivity.this, MenuActivity.class);
-            startActivity(menuIntent);
+        if (AuthService.isLoggedIn(this)) {
+            startActivity(new Intent(MainActivity.this, MenuActivity.class));
         }
         setContentView(R.layout.activity_main);
     }
 
     public void login(View view) {
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(loginIntent);
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
     public void register(View view) {
-        Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-        startActivity(registerIntent);
+        startActivity(new Intent(MainActivity.this, RegisterActivity.class));
     }
+
     public void onBackPressed() {
         moveTaskToBack(true);
     }

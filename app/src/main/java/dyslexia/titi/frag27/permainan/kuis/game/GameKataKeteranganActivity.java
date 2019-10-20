@@ -1,12 +1,5 @@
 package dyslexia.titi.frag27.permainan.kuis.game;
 
-import androidx.appcompat.app.AppCompatActivity;
-import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.database.AppDatabase;
-import dyslexia.titi.frag27.database.entities.ScoreEntity;
-import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.repositories.SharedPreferenceRepository;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -21,10 +14,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
+
+import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.AppDatabase;
+import dyslexia.titi.frag27.database.entities.ScoreEntity;
+import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
+import dyslexia.titi.frag27.services.AccountService;
 
 import static dyslexia.titi.frag27.utils.Constant.GAME_KETERANGAN;
 
@@ -33,18 +34,18 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
     public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
 
 
-    private String[] names = new String[]{"salon" ,
-            "masjid" ,
-            "rumah" ,
-            "gereja" ,
-            "adik" ,
-            "kakak" ,
-            "ayah" ,
-            "ibu" ,
-            "kakek" ,
-            "nenek" ,
-            "pasar" ,
-            "ladang" ,
+    private String[] names = new String[]{"salon",
+            "masjid",
+            "rumah",
+            "gereja",
+            "adik",
+            "kakak",
+            "ayah",
+            "ibu",
+            "kakek",
+            "nenek",
+            "pasar",
+            "ladang",
             "pisau"};
 
     private String word;
@@ -68,10 +69,10 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_kata_keterangan);
 
         btn_check = findViewById(R.id.check);
-        tvScore =  findViewById(R.id.tvScore);
-        tvQuestionCount =  findViewById(R.id.question_count);
-        tvCountdown =  findViewById(R.id.tvCountdown);
-        pic =  findViewById(R.id.imageView1);
+        tvScore = findViewById(R.id.tvScore);
+        tvQuestionCount = findViewById(R.id.question_count);
+        tvCountdown = findViewById(R.id.tvCountdown);
+        pic = findViewById(R.id.imageView1);
 
         tvScore.setText("SCORE: " + score);
         tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
@@ -91,7 +92,7 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
             pic.setImageDrawable(res);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            Typeface customfont= Typeface.createFromAsset(getAssets(),"fonts/IBMPlexMono-SemiBold.ttf");
+            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexMono-SemiBold.ttf");
             scram.setTypeface(customfont);
 
         } else {
@@ -100,18 +101,17 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
         }
 
         btn_check.setOnClickListener(view -> {
-            answered=true;
-            if(answered){
+            answered = true;
+            if (answered) {
                 checkAnswer();
-            }
-            else{
+            } else {
                 setImage();
             }
         });
     }
 
 
-    private void startCountDown(){
+    private void startCountDown() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -169,7 +169,7 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
-        SharedPreferences preferences = getSharedPreferences("PREFS",0);
+        SharedPreferences preferences = getSharedPreferences("PREFS", 0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("lastScore", score);
         editor.apply();
@@ -187,7 +187,7 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
         AppDatabase appDatabase = AppDatabase.getInstance(this);
         // TODO: buat tanggal yang compatible dentan API 21
         appDatabase.scoreDao().insert(new ScoreEntity(
-                SharedPreferenceRepository.getUserId(this),
+                AccountService.getUserId(this),
                 GAME_KETERANGAN,
                 score,
                 currentDateandTime
@@ -199,7 +199,7 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
 
     protected void setImage() {
         EditText input = findViewById(R.id.answer);
-        Typeface customfont= Typeface.createFromAsset(getAssets(),"fonts/IBMPlexMono-SemiBold.ttf");
+        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexMono-SemiBold.ttf");
         input.setTypeface(customfont);
         answer = input.getText().toString().toLowerCase().trim();
         if (question < chances) {
@@ -228,9 +228,7 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
             answer5.setText("");
             timeLeftInMillis = COUNTDOWN_IN_MILLIS;
             startCountDown();
-        }
-        else
-        {
+        } else {
             finishQuiz();
         }
     }

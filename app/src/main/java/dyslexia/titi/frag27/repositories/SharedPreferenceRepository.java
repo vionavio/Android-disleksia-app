@@ -19,6 +19,11 @@ public class SharedPreferenceRepository {
         return sharedPreferences.getInt(key, 0);
     }
 
+    public static Boolean getBoolean(Context context, String key) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return sharedPreferences.getBoolean(key, false);
+    }
+
     public static void setBoolean(Context context, String key, Boolean value) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sharedPreferences.edit().putBoolean(key, value).apply();
@@ -26,10 +31,5 @@ public class SharedPreferenceRepository {
 
     public static void removeInt(Context context, String key) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-    }
-
-    public static Integer getUserId(Context context) {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getInt(USER_ID, 0);
     }
 }

@@ -1,13 +1,13 @@
 package dyslexia.titi.frag27.permainan.kuis.skor;
 
 import android.os.Bundle;
-import android.view.Menu;
-
-import com.google.android.material.tabs.TabLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.kamus.adapter.MyPageAdapter;
 import dyslexia.titi.frag27.permainan.kuis.skor.fragment.AdjektivaFragment;
