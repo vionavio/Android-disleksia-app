@@ -1,7 +1,5 @@
 package dyslexia.titi.frag27.database.entities;
 
-import java.util.Date;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -66,7 +64,7 @@ public class ScoreEntity {
     }
 
     public double getScore() {
-        int value = (int)score;
+        int value = score;
         return value;
     }
 

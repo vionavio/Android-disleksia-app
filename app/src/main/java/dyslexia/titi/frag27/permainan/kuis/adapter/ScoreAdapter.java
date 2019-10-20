@@ -7,28 +7,27 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
-
-import androidx.annotation.NonNull;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 
-public class ScoreAdapter  extends ArrayAdapter<ScoreEntity> {
+public class ScoreAdapter extends ArrayAdapter<ScoreEntity> {
 
     private Context mContext;
     private List<ScoreEntity> listScore;
 
-    public ScoreAdapter( Context context, int resource, List<ScoreEntity> objects) {
+    public ScoreAdapter(Context context, int resource, List<ScoreEntity> objects) {
         super(context, R.layout.item_view_score, objects);
         this.mContext = context;
         this.listScore = objects;
-
     }
 
     private static int latestNumber = 0;
 
-    public int getNumber(){
+    public int getNumber() {
         return ++latestNumber;
     }
 
@@ -47,14 +46,10 @@ public class ScoreAdapter  extends ArrayAdapter<ScoreEntity> {
             TextView createAt = convertView.findViewById(R.id.createdAt);
 
             //type.setText(scoreEntity.getQuizType());
-            //id.setText(String.valueOf(getNumber()));
+            id.setText(String.valueOf(position + 1));
             score.setText(String.valueOf(scoreEntity.getScore()));
             createAt.setText(scoreEntity.getCreatedAt());
-
         }
-
         return convertView;
     }
-
-
 }
