@@ -8,6 +8,7 @@ import androidx.cardview.widget.CardView;
 
 import dyslexia.titi.frag27.MenuActivity;
 import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.permainan.alphabetSpeech.AlphabetSpeechActivity;
 import dyslexia.titi.frag27.permainan.kuis.KuisActivity;
 import dyslexia.titi.frag27.permainan.susunAlfabet.UppercaseAlfabet;
 
@@ -18,14 +19,17 @@ public class PermainanActivity extends AppCompatActivity {
 
         CardView alfabet = findViewById(R.id.susunabjad);
         alfabet.setOnClickListener(view -> {
-            Intent alfabetIntent = new Intent(PermainanActivity.this, UppercaseAlfabet.class);
-            startActivity(alfabetIntent);
+            startActivity(new Intent(PermainanActivity.this, UppercaseAlfabet.class));
         });
 
         CardView kuis = findViewById(R.id.kuis);
         kuis.setOnClickListener(view -> {
-            Intent kuisIntent = new Intent(PermainanActivity.this, KuisActivity.class);
-            startActivity(kuisIntent);
+            startActivity(new Intent(PermainanActivity.this, KuisActivity.class));
+        });
+
+        CardView speech = findViewById(R.id.speechAlphabet);
+        speech.setOnClickListener(view -> {
+            startActivity(new Intent(PermainanActivity.this, AlphabetSpeechActivity.class));
         });
     }
 

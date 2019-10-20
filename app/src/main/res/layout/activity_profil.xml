@@ -128,19 +128,9 @@
                     android:text="@string/ubah"
                     android:textSize="20sp"
                     android:textColor="#ffffff"
-                    android:background="@drawable/btn_round10"
+                    android:background="@drawable/btn_round5"
                      />
 
-                <TextView
-                    android:id="@+id/textViewLogin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:gravity="center"
-                    android:text="@string/back_to_login"
-                    android:textColor="@android:color/white" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

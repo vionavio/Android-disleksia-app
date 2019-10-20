@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".setting.ProfilActivity"/>
+        <activity android:name=".permainan.alphabetSpeech.AlphabetSpeechActivity"></activity>
+        <activity android:name=".setting.ProfilActivity"
+            android:parentActivityName=".setting.SettingActivity"
+            android:label="Profil"/>
         <activity
             android:name=".permainan.kuis.game.ScoreAkhirActivity"
             android:theme="@style/noTitleBar" />
@@ -73,22 +76,31 @@
         <activity
             android:name=".kamus.DictionaryActivity"
             android:label="Kamus"
-            android:theme="@style/MenuKamus"
-            android:parentActivityName=".MenuActivity"/>
-        <activity android:name=".kamus.menu.keterangan.KeteranganActivity"
-            android:parentActivityName=".kamus.DictionaryActivity"/>
-        <activity android:name=".kamus.menu.sifat.SifatActivity" />
-        <activity android:name=".kamus.menu.kerja.KerjaActivity" />
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/MenuKamus" />
+        <activity
+            android:name=".kamus.menu.keterangan.KeteranganActivity"
+            android:label="Kata Keterangan" />
+        <activity
+            android:name=".kamus.menu.sifat.SifatActivity"
+            android:label="Kata Sifat" />
+        <activity
+            android:name=".kamus.menu.kerja.KerjaActivity"
+            android:label="Kata Kerja" />
         <activity
             android:name=".kamus.menu.benda.BendaActivity"
-            android:parentActivityName=".kamus.DictionaryActivity"
+            android:label="Kata Benda"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".kamus.menu.konsonan.MenuKonsonanActivity"
+            android:label="Akhiran Konsonan, Ng, Ny"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".kamus.menu.angka.AngkaActivity" />
+        <activity
+            android:name=".kamus.menu.angka.AngkaActivity"
+            android:label="Simbol Angka" />
         <activity
             android:name=".kamus.menu.huruf.HurufActivity"
+            android:label="Simbol Huruf"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".permainan.kuis.skor.ScoreActivity"
@@ -101,7 +113,9 @@
             android:name=".MenuActivity"
             android:label="Disleksia App"
             android:theme="@style/MenuUtama" />
-        <activity android:name=".login.RegisterActivity" />
+        <activity android:name=".login.RegisterActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="Daftar"/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/noTitleBar">

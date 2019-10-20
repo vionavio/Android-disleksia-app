@@ -127,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/daftar"
                     android:textColor="#ffffff"
-                    android:background="@drawable/btn_round1"
+                    android:background="@drawable/btn_round5"
                     style="@style/ButtonStyle1" />
 
                 <TextView
@@ -139,7 +139,7 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:text="@string/back_to_login"
-                    android:textColor="@android:color/white" />
+                    android:textColor="#aaaaaa" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

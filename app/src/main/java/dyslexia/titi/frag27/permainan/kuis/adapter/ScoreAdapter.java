@@ -40,10 +40,7 @@ public class ScoreAdapter  extends ArrayAdapter<ScoreEntity> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_view_score, null);
 
             ScoreEntity scoreEntity = getItem(position);
-            //ScoreEntity scoreEntityID = listScore.get(position);
-
-
-
+            //ScoreEntity scoreEntityID = listScore.get(pcccc
             //TextView type = convertView.findViewById(R.id.quiz_type);
             TextView id = convertView.findViewById(R.id.tv_id);
             TextView score = convertView.findViewById(R.id.score);

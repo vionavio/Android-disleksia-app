@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dyslexia.titi.frag27.kamus.model.Dictionary;
+import dyslexia.titi.frag27.permainan.model.AlphabetSpeech;
 
 public class DatabaseDictionary extends SQLiteAssetHelper {
 
@@ -106,5 +107,33 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
         return dictionaries;
     }
 
+    public List<AlphabetSpeech> retrieveSpeech() {
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
+
+        //make sure kolom adalah nama table
+        String[] sqlSelect = {"id_alphabetSpeech", "letter", "transcription", " coef"};
+        String tableName = "alphabet_speech";
+        qb.setTables(tableName);
+        Cursor cursor = qb.query(db, sqlSelect, null, null, null, null, null);
+
+        List<AlphabetSpeech> speeches = new ArrayList<>();
+
+        // Cursor c=db.rawQuery("SELECT * FROM WORDS WHERE TYPE "+type+"'",null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                AlphabetSpeech alphabetSpeech = new AlphabetSpeech( 0,"", "",0);
+                alphabetSpeech.setId_alphabetspeech(cursor.getInt(cursor.getColumnIndex("id_alphabetspeech")));
+                alphabetSpeech.setLetter(cursor.getString(cursor.getColumnIndex("letter")));
+                alphabetSpeech.setTranscription(cursor.getString(cursor.getColumnIndex("transcription")));
+                alphabetSpeech.setCoef(cursor.getInt(cursor.getColumnIndex("coef")));
+
+                speeches.add(alphabetSpeech);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return speeches;
+    }
 
 }

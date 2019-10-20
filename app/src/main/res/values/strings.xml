@@ -13,7 +13,7 @@
     <string name="jk">Jenis Kelamin</string>
     <string name="tanggaLahir">Tanggal Lahir (dd-mm-yyyy)</string>
     <string name="register">Register</string>
-    <string name="back_to_login">Back to Login</string>
+    <string name="back_to_login">Login</string>
     <string name="kata_awal">Kata yang Akan di Cek</string>
 
     <!-- Category name for the vocabulary words  [CHAR LIMIT=20] -->
