@@ -70,5 +70,8 @@
     <string name="skor">skor</string>
     <string name="profil">profil</string>
     <string name="ubah">Ubah</string>
+    <string name="kuis">KUIS</string>
+    <string name="pengucapan">PENGUCAPAN</string>
+    <string name="abjad">ABJAD</string>
 
 </resources>
