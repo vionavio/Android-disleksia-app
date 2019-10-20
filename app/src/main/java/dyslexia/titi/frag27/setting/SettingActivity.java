@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.titi.frag27.MainActivity;
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.services.AccountService;
+import dyslexia.titi.frag27.services.AuthService;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class SettingActivity extends AppCompatActivity {
         });
 
         btnLogout.setOnClickListener(view -> {
-            PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().clear().apply();
+            AuthService.logout(this);
             startActivity(new Intent(this, MainActivity.class));
         });
  }

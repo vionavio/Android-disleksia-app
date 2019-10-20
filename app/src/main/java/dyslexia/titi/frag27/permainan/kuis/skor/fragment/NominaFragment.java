@@ -1,11 +1,6 @@
 package dyslexia.titi.frag27.permainan.kuis.skor.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import java.util.List;
 
 import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.permainan.kuis.adapter.ScoreAdapter;
+import dyslexia.titi.frag27.services.AccountService;
 import dyslexia.titi.frag27.services.ScoreService;
+import dyslexia.titi.frag27.services.UserService;
 import dyslexia.titi.frag27.utils.Constant;
 
 
@@ -45,12 +44,14 @@ public class NominaFragment extends Fragment {
     private void loadData() {
         scoreEntityList = ScoreService.getCurrentScoreBenda(getContext());
         Log.d(Constant.TAG, "loadData: " + scoreEntityList);
-        adapter = new ScoreAdapter(getContext(),0,scoreEntityList);
+        Log.d(Constant.TAG, "userID: " + AccountService.getUserId(getContext()));
+        Log.d(Constant.TAG, "users: " + UserService.getUsers(getContext()));
+        adapter = new ScoreAdapter(getContext(), 0, scoreEntityList);
         listView.setAdapter(adapter);
     }
 
     private void initializeViews(View rootView) {
-        listView =rootView.findViewById(R.id.list);
+        listView = rootView.findViewById(R.id.list);
         textView = rootView.findViewById(R.id.title_name);
         textView.setText(toString());
     }

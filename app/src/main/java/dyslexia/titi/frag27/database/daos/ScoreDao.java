@@ -30,7 +30,6 @@ public interface ScoreDao {
     List<ScoreEntity> getScoreKeterangan(Integer id);
 
 
-
     @Query("SELECT * FROM scores WHERE id = :id")
     ScoreEntity getOne(Integer id);
 
