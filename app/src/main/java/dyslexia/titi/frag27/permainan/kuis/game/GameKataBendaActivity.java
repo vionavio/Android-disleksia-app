@@ -1,12 +1,5 @@
 package dyslexia.titi.frag27.permainan.kuis.game;
 
-import androidx.appcompat.app.AppCompatActivity;
-import dyslexia.titi.frag27.R;
-import dyslexia.titi.frag27.database.AppDatabase;
-import dyslexia.titi.frag27.database.entities.ScoreEntity;
-import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.repositories.SharedPreferenceRepository;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -21,10 +14,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
+
+import dyslexia.titi.frag27.R;
+import dyslexia.titi.frag27.database.AppDatabase;
+import dyslexia.titi.frag27.database.entities.ScoreEntity;
+import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
+import dyslexia.titi.frag27.services.AccountService;
+import dyslexia.titi.frag27.utils.Constant;
 
 import static dyslexia.titi.frag27.utils.Constant.GAME_BENDA;
 
@@ -33,10 +35,10 @@ public class GameKataBendaActivity extends AppCompatActivity {
     public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
 
 
-    private String[] names = new String[]{"sepatu", "tas", "buku" , "pensil" ,"baju" ,
-            "celana" , "meja" ,"kursi" ,"bola" , "mobil" , "sepeda" ,
-            "pesawat" , "apel" , "topi" , "rumah" , "pintu",
-            "jendela" , "burung" , "televisi" , "jam"};
+    private String[] names = new String[]{"sepatu", "tas", "buku", "pensil", "baju",
+            "celana", "meja", "kursi", "bola", "mobil", "sepeda",
+            "pesawat", "apel", "topi", "rumah", "pintu",
+            "jendela", "burung", "televisi", "jam"};
 
     private String word;
     private String answer;
@@ -59,10 +61,10 @@ public class GameKataBendaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_kata_benda);
 
         btn_check = findViewById(R.id.check);
-        tvScore =  findViewById(R.id.tvScore);
-        tvQuestionCount =  findViewById(R.id.question_count);
-        tvCountdown =  findViewById(R.id.tvCountdown);
-        pic =  findViewById(R.id.imageView1);
+        tvScore = findViewById(R.id.tvScore);
+        tvQuestionCount = findViewById(R.id.question_count);
+        tvCountdown = findViewById(R.id.tvCountdown);
+        pic = findViewById(R.id.imageView1);
 
         tvScore.setText("SCORE: " + score);
         tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
@@ -82,7 +84,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
             pic.setImageDrawable(resources);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            Typeface customfont= Typeface.createFromAsset(getAssets(),"fonts/IBMPlexMono-SemiBold.ttf");
+            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexMono-SemiBold.ttf");
             scram.setTypeface(customfont);
 
         } else {
@@ -91,18 +93,18 @@ public class GameKataBendaActivity extends AppCompatActivity {
         }
 
         btn_check.setOnClickListener(view -> {
-            answered=true;
-            if(answered){
+            answered = true;
+            if (answered) {
                 checkAnswer();
-            }
-            else{
+            } else {
                 setImage();
             }
         });
+        Log.d(Constant.TAG, "onCreate: " + AccountService.getUserId(this));
     }
 
 
-    private void startCountDown(){
+    private void startCountDown() {
         countDownTimer = new CountDownTimer(timeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -166,11 +168,8 @@ public class GameKataBendaActivity extends AppCompatActivity {
         editor.apply();
         saveScore(score);
 
-        Intent intent = new Intent(getApplicationContext(), ScoreAkhirActivity.class);
-        startActivity(intent);
+        startActivity(new Intent(getApplicationContext(), ScoreAkhirActivity.class));
         finish();
-
-
     }
 
     public void saveScore(Integer score) {
@@ -178,8 +177,8 @@ public class GameKataBendaActivity extends AppCompatActivity {
         String currentDateandTime = simpleDateFormat.format(new Date());
 
         AppDatabase appDatabase = AppDatabase.getInstance(this);
-         appDatabase.scoreDao().insert(new ScoreEntity(
-                SharedPreferenceRepository.getUserId(this),
+        appDatabase.scoreDao().insert(new ScoreEntity(
+                AccountService.getUserId(this),
                 GAME_BENDA,
                 score,
                 currentDateandTime
@@ -190,7 +189,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
 
     protected void setImage() {
         EditText input = findViewById(R.id.answer);
-        Typeface customfont= Typeface.createFromAsset(getAssets(),"fonts/IBMPlexMono-SemiBold.ttf");
+        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/IBMPlexMono-SemiBold.ttf");
         input.setTypeface(customfont);
         answer = input.getText().toString().toLowerCase().trim();
         if (question < chances) {
@@ -219,9 +218,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
             answer5.setText("");
             timeLeftInMillis = COUNTDOWN_IN_MILLIS;
             startCountDown();
-        }
-        else
-        {
+        } else {
             finishQuiz();
         }
     }

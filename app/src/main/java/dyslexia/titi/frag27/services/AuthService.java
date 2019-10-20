@@ -22,6 +22,10 @@ public class AuthService {
         return SharedPreferenceRepository.getBoolean(context, IS_LOGGED_IN);
     }
 
+    public static void logout(Context context) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().clear().apply();
+    }
+
     public static void removeLoginInfo(Context context) {
     }
 }

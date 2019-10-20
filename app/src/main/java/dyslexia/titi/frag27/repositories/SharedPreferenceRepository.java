@@ -32,9 +32,4 @@ public class SharedPreferenceRepository {
     public static void removeInt(Context context, String key) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
     }
-
-    public static Integer getUserId(Context context) {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getInt(USER_ID, 0);
-    }
 }

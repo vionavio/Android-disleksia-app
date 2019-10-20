@@ -26,6 +26,10 @@ public class AccountService {
         return userEntity;
     }
 
+    public static Integer getUserId(Context context) {
+        return SharedPreferenceRepository.getInt(context, USER_ID);
+    }
+
     public static Boolean updateMyProfile(Context context, UserEntity newUserEntity) {
         Integer userId = SharedPreferenceRepository.getInt(context, USER_ID);
         AppDatabase appDatabase = AppDatabase.getInstance(context);

@@ -25,7 +25,7 @@ import dyslexia.titi.frag27.R;
 import dyslexia.titi.frag27.database.AppDatabase;
 import dyslexia.titi.frag27.database.entities.ScoreEntity;
 import dyslexia.titi.frag27.permainan.kuis.WordShuffler;
-import dyslexia.titi.frag27.repositories.SharedPreferenceRepository;
+import dyslexia.titi.frag27.services.AccountService;
 
 import static dyslexia.titi.frag27.utils.Constant.GAME_ANGKA;
 
@@ -243,7 +243,7 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
 
         AppDatabase appDatabase = AppDatabase.getInstance(this);
         appDatabase.scoreDao().insert(new ScoreEntity(
-                SharedPreferenceRepository.getUserId(this),
+                AccountService.getUserId(this),
                 GAME_ANGKA,
                 score,
                 currentDateandTime
