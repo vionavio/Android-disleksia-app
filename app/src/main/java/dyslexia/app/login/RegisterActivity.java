@@ -22,7 +22,7 @@ import dyslexia.app.MenuActivity;
 import dyslexia.app.R;
 import dyslexia.app.database.AppDatabase;
 import dyslexia.app.database.entities.UserEntity;
-import dyslexia.app.login.database.DatabaseUser;
+//import dyslexia.app.login.database.DatabaseUser;
 import dyslexia.app.services.AuthService;
 import dyslexia.app.utils.AlertUtil;
 
@@ -51,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button buttonRegister;
 
     //Declaration SqliteHelper
-    DatabaseUser sqliteHelper;
+    //DatabaseUser sqliteHelper;
     AppDatabase appDatabase;
 
     @Override
@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
             mDisplayDate.setText(date);
         };
 
-        sqliteHelper = new DatabaseUser(this);
+        //sqliteHelper = new DatabaseUser(this);
         initTextViewLogin();
         initViews();
         buttonRegister.setOnClickListener(view -> {

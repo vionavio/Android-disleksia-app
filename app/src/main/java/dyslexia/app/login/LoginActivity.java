@@ -17,7 +17,7 @@ import dyslexia.app.MenuActivity;
 import dyslexia.app.R;
 import dyslexia.app.database.AppDatabase;
 import dyslexia.app.database.entities.UserEntity;
-import dyslexia.app.login.database.DatabaseUser;
+//import dyslexia.app.login.database.DatabaseUser;
 import dyslexia.app.services.AuthService;
 import dyslexia.app.utils.AlertUtil;
 
@@ -35,13 +35,13 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
 
     //Declaration SqliteHelper
-    DatabaseUser databaseUser;
+    //DatabaseUser databaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        databaseUser = new DatabaseUser(this);
+     //   databaseUser = new DatabaseUser(this);
         initCreateAccountTextView();
         initViews();
 
