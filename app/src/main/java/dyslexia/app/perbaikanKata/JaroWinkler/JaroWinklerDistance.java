@@ -2,7 +2,7 @@ package dyslexia.app.perbaikanKata.JaroWinkler;
 
 import static java.lang.Double.isNaN;
 
-public class JaroWinkler {
+public class JaroWinklerDistance {
     private String wordString1;
     private String wordString2;
 

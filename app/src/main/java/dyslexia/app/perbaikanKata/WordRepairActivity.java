@@ -29,7 +29,7 @@ import dyslexia.app.base.BaseActivity;
 import dyslexia.app.kamus.database.DatabaseDictionary;
 import dyslexia.app.kamus.model.Dictionary;
 import dyslexia.app.perbaikanKata.JaroWinkler.DictionarySimilar;
-import dyslexia.app.perbaikanKata.JaroWinkler.JaroWinkler;
+import dyslexia.app.perbaikanKata.JaroWinkler.JaroWinklerDistance;
 import dyslexia.app.perbaikanKata.ReplaceLetter.ReplaceLetter;
 import dyslexia.app.perbaikanKata.anagram.AnagramAlgorithm;
 
@@ -250,7 +250,7 @@ public class WordRepairActivity extends BaseActivity {
 
     private double getSimilarScore(String word) {
         String inputWord = ed_inputWord.getText().toString().trim();
-        return new JaroWinkler().getSimilarity(inputWord, word);
+        return new JaroWinklerDistance().getSimilarity(inputWord, word);
     }
 
     private void loadSuara() {
