@@ -48,9 +48,6 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
         letterTextView = findViewById(R.id.letter_for_speech_text_view);
         answerletterTextView = findViewById(R.id.letter_of_speech_text_view);
 
-        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
-        answerletterTextView.setTypeface(customfont);
-
         microphoneButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         playButton.setOnClickListener(this);
@@ -61,7 +58,7 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
         getRandomPosition();
     }
 
-    @SuppressLint("SetTextI18n")
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == SPEECH_RECOGNITION_CODE) {
@@ -77,8 +74,8 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
                 }
                 isAnswer = true;
                 if (letter.equals(list.get(position).getLetter().substring(0, 1)) ||
-                        letter.equals(list.get(position).getLetter().substring(1, 2))) {
-                    answerletterTextView.setText("Benar, Huruf diatas diucapkan" + list.get(position).getLetter().substring(0, 1));
+                        letter.equals(list.get(position).getLetter().substring(1, 2)) ) {
+                    answerletterTextView.setText("Benar, Huruf diatas diucapkan " + list.get(position).getLetter().substring(0, 1));
                     Log.d("EEE", "true");
                 } else answerletterTextView.setText("Anda salah menyebutkan " + text);
 
@@ -158,7 +155,7 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
     protected void onStop() {
         if(tts != null){
             tts.stop();
-             tts.shutdown();
+            // tts.shutdown();
         }
         super.onStop();
 

@@ -7,12 +7,6 @@ public class AlphabetSpeech {
     private String transcription;
     private int coef;
 
-    public AlphabetSpeech( String letter, String transcription, int coef) {
-        this.letter = letter;
-        this.transcription = transcription;
-        this.coef = coef;
-    }
-
 
     public String getLetter() {
         return letter;

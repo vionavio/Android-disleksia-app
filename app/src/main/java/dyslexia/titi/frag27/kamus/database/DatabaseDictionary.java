@@ -125,11 +125,10 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                AlphabetSpeech alphabetSpeech = new AlphabetSpeech( "", "",0);
+                AlphabetSpeech alphabetSpeech = new AlphabetSpeech();
                 alphabetSpeech.setLetter(cursor.getString(cursor.getColumnIndex("letter")));
                 alphabetSpeech.setTranscription(cursor.getString(cursor.getColumnIndex("transcription")));
                 alphabetSpeech.setCoef(cursor.getInt(cursor.getColumnIndex("coef")));
-
                 speeches.add(alphabetSpeech);
             } while (cursor.moveToNext());
         }
