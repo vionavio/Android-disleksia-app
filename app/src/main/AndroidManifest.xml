@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="dyslexia.titi.frag27">
+    package="dyslexia.app">
 
     <application
         android:allowBackup="true"
@@ -12,117 +12,117 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".permainan.alphabetSpeech.AlphabetSpeechActivity"
+        <activity android:name="dyslexia.app.permainan.alphabetSpeech.AlphabetSpeechActivity"
             android:label="Pengucapan Alphabet"
             android:theme="@style/Pengucapan"
-            android:parentActivityName=".permainan.PermainanActivity"/>
+            android:parentActivityName="dyslexia.app.permainan.PermainanActivity"/>
 
-        <activity android:name=".setting.ProfilActivity"
-            android:parentActivityName=".setting.SettingActivity"
+        <activity android:name="dyslexia.app.setting.ProfilActivity"
+            android:parentActivityName="dyslexia.app.setting.SettingActivity"
             android:label="Profil"/>
         <activity
-            android:name=".permainan.kuis.game.ScoreAkhirActivity"
+            android:name="dyslexia.app.permainan.kuis.game.ScoreAkhirActivity"
             android:theme="@style/noTitleBar" />
         <activity
-            android:name=".permainan.kuis.game.GameKataSifatActivity"
+            android:name="dyslexia.app.permainan.kuis.game.GameKataSifatActivity"
             android:theme="@style/noTitleBar" />
         <activity
-            android:name=".permainan.kuis.game.GameKataKeteranganActivity"
+            android:name="dyslexia.app.permainan.kuis.game.GameKataKeteranganActivity"
             android:theme="@style/noTitleBar" />
         <activity
-            android:name=".permainan.kuis.game.GameKataKerjaActivity"
+            android:name="dyslexia.app.permainan.kuis.game.GameKataKerjaActivity"
             android:theme="@style/noTitleBar" />
         <activity
-            android:name=".permainan.kuis.game.GameSimbolAngkaActivity"
+            android:name="dyslexia.app.permainan.kuis.game.GameSimbolAngkaActivity"
             android:theme="@style/noTitleBar" />
         <activity
-            android:name=".permainan.kuis.game.GameKataBendaActivity"
+            android:name="dyslexia.app.permainan.kuis.game.GameKataBendaActivity"
             android:theme="@style/noTitleBar" />
         <activity
-            android:name=".permainan.susunAlfabet.LowercaseActivity"
+            android:name="dyslexia.app.permainan.susunAlfabet.LowercaseActivity"
             android:label="Menyusun Abjad"
-            android:parentActivityName=".permainan.PermainanActivity"
+            android:parentActivityName="dyslexia.app.permainan.PermainanActivity"
             android:theme="@style/GameAbjadLower" />
         <activity
-            android:name=".permainan.kuis.KuisActivity"
+            android:name="dyslexia.app.permainan.kuis.KuisActivity"
             android:label="Menu Kuis"
-            android:parentActivityName=".permainan.PermainanActivity"
+            android:parentActivityName="dyslexia.app.permainan.PermainanActivity"
             android:theme="@style/MenuKuis" />
         <activity
-            android:name=".permainan.susunAlfabet.UppercaseAlfabet"
+            android:name="dyslexia.app.permainan.susunAlfabet.UppercaseAlfabet"
             android:label="Menyusun Abjad"
-            android:parentActivityName=".permainan.PermainanActivity"
+            android:parentActivityName="dyslexia.app.permainan.PermainanActivity"
             android:theme="@style/GameAbjad" />
         <activity
-            android:name=".bantuan.BantuanActivity"
+            android:name="dyslexia.app.bantuan.BantuanActivity"
             android:label="Bantuan"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName="dyslexia.app.MenuActivity"
             android:theme="@style/Bantuan" />
         <activity
-            android:name=".tentang.TentangActivity"
+            android:name="dyslexia.app.tentang.TentangActivity"
             android:label="Tentang"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName="dyslexia.app.MenuActivity"
             android:theme="@style/Tentang" />
         <activity
-            android:name=".setting.SettingActivity"
+            android:name="dyslexia.app.setting.SettingActivity"
             android:label="Pengaturan"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName="dyslexia.app.MenuActivity"
             android:theme="@style/Setting" />
         <activity
-            android:name=".perbaikanKata.WordRepairActivity"
+            android:name="dyslexia.app.perbaikanKata.WordRepairActivity"
             android:label="Perbaikan Kata"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName="dyslexia.app.MenuActivity"
             android:theme="@style/PerbaikanKata" />
         <activity
-            android:name=".permainan.PermainanActivity"
+            android:name="dyslexia.app.permainan.PermainanActivity"
             android:label="Permainan"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName="dyslexia.app.MenuActivity"
             android:theme="@style/MenuGame" />
         <activity
-            android:name=".kamus.DictionaryActivity"
+            android:name="dyslexia.app.kamus.DictionaryActivity"
             android:label="Kamus"
-            android:parentActivityName=".MenuActivity"
+            android:parentActivityName="dyslexia.app.MenuActivity"
             android:theme="@style/MenuKamus" />
         <activity
-            android:name=".kamus.menu.keterangan.KeteranganActivity"
+            android:name="dyslexia.app.kamus.menu.keterangan.KeteranganActivity"
             android:label="Kata Keterangan" />
         <activity
-            android:name=".kamus.menu.sifat.SifatActivity"
+            android:name="dyslexia.app.kamus.menu.sifat.SifatActivity"
             android:label="Kata Sifat" />
         <activity
-            android:name=".kamus.menu.kerja.KerjaActivity"
+            android:name="dyslexia.app.kamus.menu.kerja.KerjaActivity"
             android:label="Kata Kerja" />
         <activity
-            android:name=".kamus.menu.benda.BendaActivity"
+            android:name="dyslexia.app.kamus.menu.benda.BendaActivity"
             android:label="Kata Benda"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".kamus.menu.konsonan.MenuKonsonanActivity"
+            android:name="dyslexia.app.kamus.menu.konsonan.MenuKonsonanActivity"
             android:label="Akhiran Konsonan, Ng, Ny"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".kamus.menu.angka.AngkaActivity"
+            android:name="dyslexia.app.kamus.menu.angka.AngkaActivity"
             android:label="Simbol Angka" />
         <activity
-            android:name=".kamus.menu.huruf.HurufActivity"
+            android:name="dyslexia.app.kamus.menu.huruf.HurufActivity"
             android:label="Simbol Huruf"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".permainan.kuis.skor.ScoreActivity"
+            android:name="dyslexia.app.permainan.kuis.skor.ScoreActivity"
             android:label="Skor"
             android:theme="@style/Score" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name="dyslexia.app.login.LoginActivity"
             android:theme="@style/noTitleBar" />
         <activity
-            android:name=".MenuActivity"
+            android:name="dyslexia.app.MenuActivity"
             android:label="Disleksia App"
             android:theme="@style/MenuUtama" />
-        <activity android:name=".login.RegisterActivity"
-            android:parentActivityName=".MainActivity"
+        <activity android:name="dyslexia.app.login.RegisterActivity"
+            android:parentActivityName="dyslexia.app.MainActivity"
             android:label="Daftar"/>
         <activity
-            android:name=".MainActivity"
+            android:name="dyslexia.app.MainActivity"
             android:theme="@style/noTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
