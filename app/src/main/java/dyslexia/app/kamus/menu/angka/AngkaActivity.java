@@ -2,6 +2,8 @@ package dyslexia.app.kamus.menu.angka;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
+import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.entities.WordEntity;
 import dyslexia.app.kamus.adapter.WordImageAdapter;
 import dyslexia.app.kamus.database.DatabaseDictionary;
 import dyslexia.app.kamus.model.Dictionary;
@@ -24,11 +26,12 @@ import java.util.ArrayList;
 public class AngkaActivity extends AppCompatActivity  {
 
 
-    ArrayList<Dictionary> arrayList = new ArrayList<>();
+    ArrayList<WordEntity> arrayList = new ArrayList<>();
     ListView listView;
     TextView textView;
     WordImageAdapter adapter;
     TextToSpeech textToSpeech;
+    AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +48,14 @@ public class AngkaActivity extends AppCompatActivity  {
     }
 
     private void loadData() {
-        DatabaseDictionary databaseDictionary = new DatabaseDictionary(getApplicationContext());
-        ArrayList<Dictionary> imageList =
-                (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Numeral");
+        //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getApplicationContext());
+        appDatabase = AppDatabase.getInstance(this);
+        ArrayList<WordEntity> imageList =
+                (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Numeral");
+                    //    databaseDictionary.retrieveKamus("Numeral");
 
-        for (Dictionary kamus : imageList) {
-            arrayList.add(new Dictionary(kamus.id_word, kamus.word, kamus.type));
+        for (WordEntity kamus : imageList) {
+            arrayList.add(new WordEntity(kamus.id_word, kamus.word, kamus.type));
         }
         adapter = new WordImageAdapter(this, arrayList);
         listView.setAdapter(adapter);

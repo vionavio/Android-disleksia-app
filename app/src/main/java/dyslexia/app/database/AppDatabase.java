@@ -7,6 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import dyslexia.app.database.daos.ScoreDao;
+import dyslexia.app.database.daos.SpeechDao;
 import dyslexia.app.database.daos.UserDao;
 import dyslexia.app.database.daos.WordDao;
 import dyslexia.app.database.entities.ScoreEntity;
@@ -36,4 +37,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract ScoreDao scoreDao();
 
     public abstract WordDao wordDao();
+
+    public abstract SpeechDao speechDao();
+
+
 }

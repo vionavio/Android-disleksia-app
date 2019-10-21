@@ -2,6 +2,8 @@ package dyslexia.app.permainan.alphabetSpeech;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
+import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.entities.SpeechEntity;
 import dyslexia.app.kamus.database.DatabaseDictionary;
 
 import android.content.ActivityNotFoundException;
@@ -21,8 +23,8 @@ import java.util.Random;
 
 public class AlphabetSpeechActivity extends AppCompatActivity implements View.OnClickListener  {
 
-    ArrayList<AlphabetSpeech> list;
-    DatabaseDictionary databaseDictionary;
+    ArrayList<SpeechEntity> list;
+    //DatabaseDictionary databaseDictionary;
 
     ImageButton microphoneButton;
     ImageButton nextButton;
@@ -34,6 +36,7 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
     int position;
     boolean isAnswer = false;
     TextToSpeech tts;
+    AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,9 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
         playButton.setOnClickListener(this);
 
         createTTS();
-        databaseDictionary = new DatabaseDictionary(getApplicationContext());
-        list = (ArrayList<AlphabetSpeech>) databaseDictionary.retrieveSpeech();
+        appDatabase = AppDatabase.getInstance(this);
+        //databaseDictionary = new DatabaseDictionary(getApplicationContext());
+        list = (ArrayList<SpeechEntity>) appDatabase.speechDao().getAll();
         getRandomPosition();
     }
 

@@ -16,6 +16,9 @@ public interface WordDao {
     @Query("SELECT * FROM words WHERE type = :type")
     List<WordEntity> getByType(String type);
 
+    @Query("SELECT * FROM words WHERE word LIKE  :word")
+    List<WordEntity> getWord(String word);
+
     @Insert
     void insertAll(WordEntity... wordEntities);
 }

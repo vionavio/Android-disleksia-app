@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import dyslexia.app.R;
+import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.entities.WordEntity;
 import dyslexia.app.kamus.adapter.WordImageAdapter;
 import dyslexia.app.kamus.database.DatabaseDictionary;
 import dyslexia.app.kamus.model.Dictionary;
@@ -27,8 +29,9 @@ public class HewanFragment extends Fragment {
 
     ListView listView;
     TextView textView;
-    ArrayList<Dictionary> arrayList = new ArrayList<>();
+    ArrayList<WordEntity> arrayList = new ArrayList<>();
     WordImageAdapter adapter;
+    AppDatabase appDatabase;
 
     public static HewanFragment newInstance() {
         return new HewanFragment();
@@ -57,11 +60,12 @@ public class HewanFragment extends Fragment {
     }
 
     private void loadData() {
-        DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
-        ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Nomina_h");
+        //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
+        //ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Nomina_h");
+        ArrayList<WordEntity> imageList = (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Nomina_h");
 
-        for (Dictionary kamus: imageList){
-            arrayList.add(new Dictionary(kamus.id_word, kamus.word, kamus.type));
+        for (WordEntity kamus: imageList){
+            arrayList.add(new WordEntity(kamus.id_word, kamus.word, kamus.type));
         }
         adapter = new WordImageAdapter(getContext(), arrayList);
         listView.setAdapter(adapter);
