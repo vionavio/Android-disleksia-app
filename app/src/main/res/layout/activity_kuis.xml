@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:background="#FFF9C4"
-    tools:context=".permainan.kuis.KuisActivity">
+    tools:context=".ui.permainan.kuis.KuisActivity">
 
     <Button
         android:id="@+id/btn_sa"

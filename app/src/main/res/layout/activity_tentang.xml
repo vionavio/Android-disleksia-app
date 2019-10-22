@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#e4f2f0"
     android:padding="20dp"
-    tools:context=".tentang.TentangActivity">
+    tools:context=".ui.tentang.TentangActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

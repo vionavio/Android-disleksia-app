@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#d5f4bd"
-    tools:context=".permainan.kuis.game.GameKataBendaActivity">
+    tools:context=".ui.permainan.kuis.game.GameKataBendaActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
