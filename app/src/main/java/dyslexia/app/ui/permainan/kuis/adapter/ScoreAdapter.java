@@ -25,12 +25,7 @@ public class ScoreAdapter extends ArrayAdapter<ScoreEntity> {
         this.listScore = objects;
     }
 
-    private static int latestNumber = 0;
-
-    public int getNumber() {
-        return ++latestNumber;
-    }
-
+    
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
