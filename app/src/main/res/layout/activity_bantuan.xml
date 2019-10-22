@@ -7,7 +7,7 @@
     android:background="#f9ebf1"
     android:padding="20dp"
     android:orientation="vertical"
-    tools:context=".bantuan.BantuanActivity">
+    tools:context=".ui.bantuan.BantuanActivity">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

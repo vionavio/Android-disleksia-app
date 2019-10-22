@@ -3,8 +3,8 @@ package dyslexia.app.services;
 import android.content.Context;
 import android.util.Log;
 
-import dyslexia.app.database.AppDatabase;
-import dyslexia.app.database.entities.UserEntity;
+import dyslexia.app.repositories.database.AppDatabase;
+import dyslexia.app.repositories.database.entities.UserEntity;
 import dyslexia.app.repositories.SharedPreferenceRepository;
 
 import static dyslexia.app.utils.Constant.TAG;

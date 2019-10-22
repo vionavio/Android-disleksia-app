@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".permainan.kuis.skor.fragment.NominaFragment">
+    tools:context=".ui.permainan.kuis.skor.fragment.NominaFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
