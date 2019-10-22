@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "scores")
 public class ScoreEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public int id_score;
 
     @ColumnInfo(name = "user_id")
     public int userId;
@@ -31,7 +31,7 @@ public class ScoreEntity {
     @Override
     public String toString() {
         return "ScoreEntity{" +
-                "id=" + id +
+                "id_score=" + id_score +
                 ", userId=" + userId +
                 ", quizType='" + quizType + '\'' +
                 ", score=" + score +
@@ -40,11 +40,12 @@ public class ScoreEntity {
     }
 
     public int getId() {
-        return id;
+        return id_score
+                ;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_score) {
+        this.id_score = id_score;
     }
 
     public int getUserId() {

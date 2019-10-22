@@ -32,7 +32,7 @@ public class HurufFragment extends Fragment {
     TextView textView;
     ArrayList<WordEntity> arrayList = new ArrayList<>();
     ImageAdapter adapter;
-    AppDatabase2 appDatabase;
+    AppDatabase2 appDatabase ;
 
     public static HurufFragment newInstance() {
     return new HurufFragment();

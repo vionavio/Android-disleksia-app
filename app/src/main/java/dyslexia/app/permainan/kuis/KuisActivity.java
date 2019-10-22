@@ -59,4 +59,9 @@ public class KuisActivity extends AppCompatActivity {
         intent.setClass(getApplicationContext(), PermainanActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

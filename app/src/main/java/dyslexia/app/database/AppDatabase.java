@@ -17,7 +17,7 @@ import dyslexia.app.database.entities.WordEntity;
 
 import static dyslexia.app.utils.Constant.DATABASE_NAME;
 
-@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 2)
+@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase appDatabaseInstance;
 
