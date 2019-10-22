@@ -9,7 +9,7 @@
     android:background="#ffffcc"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    tools:context=".permainan.kuis.game.ScoreAkhirActivity">
+    tools:context=".ui.permainan.kuis.game.ScoreAkhirActivity">
 
     <RatingBar
         android:id="@+id/rating"

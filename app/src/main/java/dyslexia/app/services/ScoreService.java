@@ -5,8 +5,8 @@ import android.util.Log;
 
 import java.util.List;
 
-import dyslexia.app.database.AppDatabase;
-import dyslexia.app.database.entities.ScoreEntity;
+import dyslexia.app.repositories.database.AppDatabase;
+import dyslexia.app.repositories.database.entities.ScoreEntity;
 import dyslexia.app.repositories.SharedPreferenceRepository;
 
 import static dyslexia.app.utils.Constant.TAG;

@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context=".setting.SettingActivity">
+    tools:context=".ui.setting.SettingActivity">
 
     <Button
         android:id="@+id/btn_profil"
