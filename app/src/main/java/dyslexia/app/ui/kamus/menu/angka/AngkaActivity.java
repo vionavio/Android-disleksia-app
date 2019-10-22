@@ -2,7 +2,7 @@ package dyslexia.app.ui.kamus.menu.angka;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
-import dyslexia.app.repositories.database.AppDatabase2;
+import dyslexia.app.repositories.database.AppDatabase;
 import dyslexia.app.repositories.database.entities.WordEntity;
 import dyslexia.app.ui.kamus.adapter.WordImageAdapter;
 //import dyslexia.app.ui.kamus.database.DatabaseDictionary;
@@ -31,7 +31,7 @@ public class AngkaActivity extends AppCompatActivity  {
     TextView textView;
     WordImageAdapter adapter;
     TextToSpeech textToSpeech;
-    AppDatabase2 appDatabase;
+    AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class AngkaActivity extends AppCompatActivity  {
 
     private void loadData() {
         //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getApplicationContext());
-        appDatabase = AppDatabase2.getInstance(this);
+        appDatabase = AppDatabase.getInstance(this);
         ArrayList<WordEntity> imageList =
                 (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Numeral");
                     //    databaseDictionary.retrieveKamus("Numeral");

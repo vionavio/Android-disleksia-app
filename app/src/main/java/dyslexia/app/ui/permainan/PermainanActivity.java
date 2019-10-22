@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-import dyslexia.app.ui.authentication.MenuActivity;
+import dyslexia.app.ui.feature.MenuActivity;
 import dyslexia.app.R;
 import dyslexia.app.ui.permainan.alphabetSpeech.AlphabetSpeechActivity;
 import dyslexia.app.ui.permainan.kuis.KuisActivity;

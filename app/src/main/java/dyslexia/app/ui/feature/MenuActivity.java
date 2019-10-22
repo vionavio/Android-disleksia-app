@@ -1,4 +1,4 @@
-package dyslexia.app.ui.authentication;
+package dyslexia.app.ui.feature;
 
 import android.content.Intent;
 import android.os.Bundle;

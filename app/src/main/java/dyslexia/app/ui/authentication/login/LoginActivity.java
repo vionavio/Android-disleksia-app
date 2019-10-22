@@ -13,7 +13,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
-import dyslexia.app.ui.authentication.MenuActivity;
+import dyslexia.app.ui.feature.MenuActivity;
 import dyslexia.app.R;
 import dyslexia.app.repositories.database.AppDatabase;
 import dyslexia.app.repositories.database.entities.UserEntity;

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import dyslexia.app.R;
-import dyslexia.app.repositories.database.AppDatabase2;
+import dyslexia.app.repositories.database.AppDatabase;
 import dyslexia.app.repositories.database.entities.WordEntity;
 import dyslexia.app.ui.kamus.adapter.WordImageAdapter;
 //import dyslexia.app.ui.kamus.database.DatabaseDictionary;
@@ -31,7 +31,7 @@ public class TransportasiFragment extends Fragment {
     TextView textView;
     ArrayList<WordEntity> arrayList = new ArrayList<>();
     WordImageAdapter adapter;
-    AppDatabase2 appDatabase;
+    AppDatabase appDatabase;
 
     public static TransportasiFragment newInstance() {
         return new TransportasiFragment();

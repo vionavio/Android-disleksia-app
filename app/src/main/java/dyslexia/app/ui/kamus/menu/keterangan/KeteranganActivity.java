@@ -2,7 +2,7 @@ package dyslexia.app.ui.kamus.menu.keterangan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
-import dyslexia.app.repositories.database.AppDatabase2;
+import dyslexia.app.repositories.database.AppDatabase;
 import dyslexia.app.repositories.database.entities.WordEntity;
 import dyslexia.app.ui.kamus.adapter.WordAdapter;
 //import dyslexia.app.ui.kamus.database.DatabaseDictionary;
@@ -31,7 +31,7 @@ public class KeteranganActivity extends AppCompatActivity {
     TextView textView;
     WordAdapter adapter;
     TextToSpeech textToSpeech;
-    AppDatabase2 appDatabase;
+    AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
