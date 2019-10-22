@@ -17,24 +17,28 @@ import dyslexia.app.database.entities.WordEntity;
 
 import static dyslexia.app.utils.Constant.DATABASE_NAME;
 
-@Database(entities = {UserEntity.class, ScoreEntity.class}, version = 2)
-public abstract class AppDatabase extends RoomDatabase {
-    private static AppDatabase appDatabaseInstance;
+@Database(entities = { WordEntity.class, SpeechEntity.class}, version = 2)
+public abstract class AppDatabase2 extends RoomDatabase {
+    private static AppDatabase2 appDatabaseInstance;
 
-    public static synchronized AppDatabase getInstance(Context context) {
+    public static synchronized AppDatabase2 getInstance(Context context) {
+
+
         if (appDatabaseInstance == null) {
             appDatabaseInstance = Room.databaseBuilder(
                     context.getApplicationContext(),
-                    AppDatabase.class, DATABASE_NAME
+                    AppDatabase2.class, "dictionary2.db"
             ).fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build();
         }
         return appDatabaseInstance;
+
+
     }
 
-    public abstract UserDao userDao();
+    public abstract WordDao wordDao();
 
-    public abstract ScoreDao scoreDao();
+    public abstract SpeechDao speechDao();
 
 }

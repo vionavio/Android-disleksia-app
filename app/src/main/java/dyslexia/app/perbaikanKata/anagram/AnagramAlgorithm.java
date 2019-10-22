@@ -4,7 +4,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import dyslexia.app.database.AppDatabase;
+//import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.AppDatabase2;
 import dyslexia.app.database.entities.WordEntity;
 //import dyslexia.app.kamus.database.DatabaseDictionary;
 //import dyslexia.app.kamus.model.Dictionary;
@@ -15,7 +16,7 @@ public class AnagramAlgorithm {
 
     private Context mContext;
     //private DatabaseDictionary databaseDictionary;
-    AppDatabase appDatabase;
+    AppDatabase2 appDatabase;
     private ArrayList<String> stringArrayList = new ArrayList<>();
 
 

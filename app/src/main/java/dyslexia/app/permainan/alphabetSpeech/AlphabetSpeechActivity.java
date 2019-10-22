@@ -2,7 +2,8 @@ package dyslexia.app.permainan.alphabetSpeech;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
-import dyslexia.app.database.AppDatabase;
+//import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.AppDatabase2;
 import dyslexia.app.database.entities.SpeechEntity;
 //import dyslexia.app.kamus.database.DatabaseDictionary;
 
@@ -36,7 +37,7 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
     int position;
     boolean isAnswer = false;
     TextToSpeech tts;
-    AppDatabase appDatabase;
+    AppDatabase2 appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class AlphabetSpeechActivity extends AppCompatActivity implements View.On
         playButton.setOnClickListener(this);
 
         createTTS();
-        appDatabase = AppDatabase.getInstance(this);
+        appDatabase = AppDatabase2.getInstance(this);
         //databaseDictionary = new DatabaseDictionary(getApplicationContext());
         list = (ArrayList<SpeechEntity>) appDatabase.speechDao().getAll();
         getRandomPosition();

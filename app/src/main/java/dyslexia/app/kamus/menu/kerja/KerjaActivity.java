@@ -2,7 +2,7 @@ package dyslexia.app.kamus.menu.kerja;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
-import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.AppDatabase2;
 import dyslexia.app.database.entities.WordEntity;
 import dyslexia.app.kamus.adapter.WordAdapter;
 //import dyslexia.app.kamus.database.DatabaseDictionary;
@@ -30,7 +30,7 @@ public class KerjaActivity extends AppCompatActivity {
     TextView textView;
     WordAdapter adapter;
     TextToSpeech textToSpeech;
-    AppDatabase appDatabase;
+    AppDatabase2 appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

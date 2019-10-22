@@ -26,7 +26,8 @@ import java.util.Locale;
 
 import dyslexia.app.R;
 import dyslexia.app.base.BaseActivity;
-import dyslexia.app.database.AppDatabase;
+//import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.AppDatabase2;
 import dyslexia.app.database.entities.WordEntity;
 //import dyslexia.app.kamus.database.DatabaseDictionary;
 //import dyslexia.app.kamus.model.Dictionary;
@@ -45,7 +46,7 @@ public class WordRepairActivity extends BaseActivity {
     ImageView iv_suara;
     TextView tv_resultWord;
     ArrayList<WordEntity> wordRepairResultList = new ArrayList<>();
-    AppDatabase appDatabase;
+    AppDatabase2 appDatabase;
 
 
     //anagram

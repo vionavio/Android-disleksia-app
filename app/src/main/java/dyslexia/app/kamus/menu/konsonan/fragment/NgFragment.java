@@ -5,7 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import dyslexia.app.R;
-import dyslexia.app.database.AppDatabase;
+//import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.AppDatabase2;
 import dyslexia.app.database.entities.WordEntity;
 import dyslexia.app.kamus.adapter.WordAdapter;
 //import dyslexia.app.kamus.database.DatabaseDictionary;
@@ -29,7 +30,7 @@ public class NgFragment extends Fragment {
     TextView textView;
     ArrayList<WordEntity> arrayList = new ArrayList<>();
     WordAdapter adapter;
-    AppDatabase appDatabase;
+    AppDatabase2 appDatabase;
 
 
     public static NgFragment newInstance() {
