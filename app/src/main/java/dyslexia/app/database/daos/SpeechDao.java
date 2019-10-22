@@ -9,7 +9,7 @@ import dyslexia.app.database.entities.SpeechEntity;
 @Dao
 public interface SpeechDao {
 
-    @Query("SElECt * FROM alphabet_speech")
+    @Query("SElECT * FROM speech")
     List<SpeechEntity> getAll();
 
 }

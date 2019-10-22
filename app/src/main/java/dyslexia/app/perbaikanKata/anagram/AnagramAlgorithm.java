@@ -4,15 +4,18 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import dyslexia.app.kamus.database.DatabaseDictionary;
-import dyslexia.app.kamus.model.Dictionary;
+import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.entities.WordEntity;
+//import dyslexia.app.kamus.database.DatabaseDictionary;
+//import dyslexia.app.kamus.model.Dictionary;
 
 public class AnagramAlgorithm {
 
-    private ArrayList<Dictionary> sortedDictionary;
+    private ArrayList<WordEntity> sortedDictionary;
 
     private Context mContext;
-    private DatabaseDictionary databaseDictionary;
+    //private DatabaseDictionary databaseDictionary;
+    AppDatabase appDatabase;
     private ArrayList<String> stringArrayList = new ArrayList<>();
 
 
@@ -21,8 +24,9 @@ public class AnagramAlgorithm {
     }
 
     private void loadDatabase(){
-        databaseDictionary = new DatabaseDictionary(mContext);
-        sortedDictionary = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("all");
+        //databaseDictionary = new DatabaseDictionary(mContext);
+        //appDatabase = new AppDatabase(get);
+        sortedDictionary = (ArrayList<WordEntity>) appDatabase.wordDao().getAll();
     }
 
     public ArrayList<String> getAnagrams(String inputWord){
@@ -58,7 +62,7 @@ public class AnagramAlgorithm {
 
     private void mainAlgorithm(int index , char[] unresolvedInputWordChar, int wordSize) {
 
-        Dictionary availableWord = sortedDictionary.get(index);
+        WordEntity availableWord = sortedDictionary.get(index);
         char[] searchWordChars = availableWord.getWord().toCharArray();
 
        //Mengembalikan True jika set lain berisi set ini

@@ -10,6 +10,7 @@ import dyslexia.app.database.entities.WordEntity;
 
 @Dao
 public interface WordDao {
+
     @Query("SElECt * FROM words")
     List<WordEntity> getAll();
 

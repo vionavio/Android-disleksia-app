@@ -16,7 +16,7 @@ import java.util.Locale;
 import androidx.annotation.NonNull;
 import dyslexia.app.R;
 import dyslexia.app.database.entities.WordEntity;
-import dyslexia.app.kamus.model.Dictionary;
+//import dyslexia.app.kamus.model.Dictionary;
 
 //this adapter have function to connect picture in drawable and show it in listview
 

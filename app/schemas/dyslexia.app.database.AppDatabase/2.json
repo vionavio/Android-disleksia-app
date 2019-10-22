@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "ef8aca8696b84251784da4a7fa9c7237",
+    "identityHash": "addf0f71d2dd6492e8a7ecb0117fe0f0",
     "entities": [
       {
         "tableName": "users",
@@ -97,12 +97,82 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "words",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_word` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `word` TEXT, `type` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id_word",
+            "columnName": "id_word",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "word",
+            "columnName": "word",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_word"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "speech",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_alphabetSpeech` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `letter` TEXT, `transcription` TEXT, `coef` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id_alphabetSpeech",
+            "columnName": "id_alphabetSpeech",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "letter",
+            "columnName": "letter",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "transcription",
+            "columnName": "transcription",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "coef",
+            "columnName": "coef",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_alphabetSpeech"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'ef8aca8696b84251784da4a7fa9c7237')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'addf0f71d2dd6492e8a7ecb0117fe0f0')"
     ]
   }
 }

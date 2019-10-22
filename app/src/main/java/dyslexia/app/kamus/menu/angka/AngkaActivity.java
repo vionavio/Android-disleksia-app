@@ -5,8 +5,8 @@ import dyslexia.app.R;
 import dyslexia.app.database.AppDatabase;
 import dyslexia.app.database.entities.WordEntity;
 import dyslexia.app.kamus.adapter.WordImageAdapter;
-import dyslexia.app.kamus.database.DatabaseDictionary;
-import dyslexia.app.kamus.model.Dictionary;
+//import dyslexia.app.kamus.database.DatabaseDictionary;
+//import dyslexia.app.kamus.model.Dictionary;
 
 import android.app.SearchManager;
 import android.content.Context;

@@ -9,8 +9,8 @@ import dyslexia.app.R;
 import dyslexia.app.database.AppDatabase;
 import dyslexia.app.database.entities.WordEntity;
 import dyslexia.app.kamus.adapter.ImageAdapter;
-import dyslexia.app.kamus.database.DatabaseDictionary;
-import dyslexia.app.kamus.model.Dictionary;
+//import dyslexia.app.kamus.database.DatabaseDictionary;
+//import dyslexia.app.kamus.model.Dictionary;
 
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
 import dyslexia.app.database.AppDatabase;
 import dyslexia.app.database.entities.SpeechEntity;
-import dyslexia.app.kamus.database.DatabaseDictionary;
+//import dyslexia.app.kamus.database.DatabaseDictionary;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;

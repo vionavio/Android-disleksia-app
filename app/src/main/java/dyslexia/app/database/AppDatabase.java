@@ -11,12 +11,13 @@ import dyslexia.app.database.daos.SpeechDao;
 import dyslexia.app.database.daos.UserDao;
 import dyslexia.app.database.daos.WordDao;
 import dyslexia.app.database.entities.ScoreEntity;
+import dyslexia.app.database.entities.SpeechEntity;
 import dyslexia.app.database.entities.UserEntity;
 import dyslexia.app.database.entities.WordEntity;
 
 import static dyslexia.app.utils.Constant.DATABASE_NAME;
 
-@Database(entities = {UserEntity.class, ScoreEntity.class, WordEntity.class}, version = 2)
+@Database(entities = {UserEntity.class, ScoreEntity.class, WordEntity.class, SpeechEntity.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase appDatabaseInstance;
 
@@ -39,6 +40,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract WordDao wordDao();
 
     public abstract SpeechDao speechDao();
-
 
 }

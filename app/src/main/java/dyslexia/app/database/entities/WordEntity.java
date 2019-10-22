@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "words")
 public class WordEntity {
     @PrimaryKey(autoGenerate = true)
-    public int id_word;
+    public long id_word;
 
     @ColumnInfo(name = "word")
     public String word;
@@ -15,11 +15,11 @@ public class WordEntity {
     @ColumnInfo(name = "type")
     public String type;
 
-    public int getId_word() {
+    public long getId_word() {
         return id_word;
     }
 
-    public void setId_word(int id_word) {
+    public void setId_word(long id_word) {
         this.id_word = id_word;
     }
 
@@ -39,7 +39,7 @@ public class WordEntity {
         this.type = type;
     }
 
-    public WordEntity(int id_word, String word, String type) {
+    public WordEntity(long id_word, String word, String type) {
         this.id_word = id_word;
         this.word = word;
         this.type = type;

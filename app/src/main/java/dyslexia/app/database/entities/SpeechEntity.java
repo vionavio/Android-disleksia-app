@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "alphabet_speech")
+@Entity(tableName = "speech")
 public class SpeechEntity {
 
     @PrimaryKey(autoGenerate = true)

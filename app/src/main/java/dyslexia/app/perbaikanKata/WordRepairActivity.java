@@ -26,8 +26,10 @@ import java.util.Locale;
 
 import dyslexia.app.R;
 import dyslexia.app.base.BaseActivity;
-import dyslexia.app.kamus.database.DatabaseDictionary;
-import dyslexia.app.kamus.model.Dictionary;
+import dyslexia.app.database.AppDatabase;
+import dyslexia.app.database.entities.WordEntity;
+//import dyslexia.app.kamus.database.DatabaseDictionary;
+//import dyslexia.app.kamus.model.Dictionary;
 import dyslexia.app.perbaikanKata.JaroWinkler.DictionarySimilar;
 import dyslexia.app.perbaikanKata.JaroWinkler.JaroWinklerDistance;
 import dyslexia.app.perbaikanKata.ReplaceLetter.ReplaceLetter;
@@ -39,10 +41,11 @@ public class WordRepairActivity extends BaseActivity {
     EditText ed_inputWord;
     Button btn_proseskata;
     ListView listViewSimiliarWords;
-    DatabaseDictionary databaseDictionary;
+    //DatabaseDictionary databaseDictionary;
     ImageView iv_suara;
     TextView tv_resultWord;
-    ArrayList<Dictionary> wordRepairResultList = new ArrayList<>();
+    ArrayList<WordEntity> wordRepairResultList = new ArrayList<>();
+    AppDatabase appDatabase;
 
 
     //anagram
@@ -53,7 +56,7 @@ public class WordRepairActivity extends BaseActivity {
     private Button deleteButton;
     AnagramAlgorithm anagramAlgorithm;
 
-    List<Dictionary> dictionaryWords = new ArrayList<>();
+    List<WordEntity> dictionaryWords = new ArrayList<>();
     String inputWord;
     final String TAG = "WordRepairActivity";
 
@@ -69,7 +72,7 @@ public class WordRepairActivity extends BaseActivity {
         ed_inputWord = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
-        databaseDictionary = new DatabaseDictionary(getApplicationContext());
+        //databaseDictionary = new DatabaseDictionary(getApplicationContext());
         anagramAlgorithm = new AnagramAlgorithm(WordRepairActivity.this);
     }
 
@@ -90,10 +93,10 @@ public class WordRepairActivity extends BaseActivity {
         //Log.d(TAG, "wordRepairResultList: " + wordRepairResultList);
         //Log.d(TAG, "resultAnagramSearchList: " + resultAnagramSearchList);
         for (String resultAnagramSearchWord : resultAnagramSearchList) {
-            Dictionary dictionary = new Dictionary(0,resultAnagramSearchWord,"");
+            WordEntity dictionary = new WordEntity(0,resultAnagramSearchWord,"");
             wordRepairResultList.add(dictionary);
         }
-        ArrayAdapter<Dictionary> adapter;
+        ArrayAdapter<WordEntity> adapter;
         adapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, wordRepairResultList);
         Log.d(TAG, "anagramSearch: "+ wordRepairResultList);
 
@@ -128,16 +131,16 @@ public class WordRepairActivity extends BaseActivity {
         Log.d(TAG, "generateWordsFromAbnormalityCondition 3: " + generatedWordsFromSimilarCase.toString());
 
         ArrayList<String> stringArrayList = new ArrayList<>();
-        ArrayList<Dictionary> replacedWordsAnagram = new ArrayList<>();
+        ArrayList<WordEntity> replacedWordsAnagram = new ArrayList<>();
 
         stringArrayList = anagramAlgorithm.getAnagrams(generatedWordsFromSimilarCase);
 
         for (String string : stringArrayList) {
-            replacedWordsAnagram.add(new Dictionary(0, string, ""));
+            replacedWordsAnagram.add(new WordEntity(0, string, ""));
         }
         Log.d(TAG, "cariLagiDiAnagram: " + replacedWordsAnagram);
 
-        ArrayAdapter<Dictionary> adapter;
+        ArrayAdapter<WordEntity> adapter;
         adapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, replacedWordsAnagram);
         if (!(replacedWordsAnagram.isEmpty())) {
             jaroWinklerDistance2(replacedWordsAnagram);
@@ -151,7 +154,7 @@ public class WordRepairActivity extends BaseActivity {
         inputMethodManager();
     }
 
-    private void jaroWinklerDistance2(ArrayList<Dictionary> wordResultAnagram) {
+    private void jaroWinklerDistance2(ArrayList<WordEntity> wordResultAnagram) {
 
         Log.d("wwwwwwwwww", "jaroWinklerDistance: " + wordResultAnagram);
         Log.d("ooooooooooooooo", "jaroWinklerDistance: " + inputWord);
@@ -162,7 +165,7 @@ public class WordRepairActivity extends BaseActivity {
 
 
 
-        for (Dictionary dictionary : wordResultAnagram) {
+        for (WordEntity dictionary : wordResultAnagram) {
             //menginstansiasi dictionarySimilar dari kelas DictionarySimilar untuk menampung score
             //menyimpan value ke dalam kamusSimilarList
             DictionarySimilar dictionarySimilar = new DictionarySimilar(dictionary.getId_word(), dictionary.getWord(), dictionary.getType(), getSimilarScore(dictionary.getWord()));
@@ -195,7 +198,8 @@ public class WordRepairActivity extends BaseActivity {
     private void jaroWinklerDistance() {
 
 
-        dictionaryWords = databaseDictionary.retrieveKamus("all");
+        //dictionaryWords = databaseDictionary.retrieveKamus("all");
+        dictionaryWords = appDatabase.wordDao().getAll();
 
         Log.d("ooooooooooooooo", "jaroWinklerDistance: " + inputWord);
         inputWord = ed_inputWord.getText().toString().trim();
@@ -204,7 +208,7 @@ public class WordRepairActivity extends BaseActivity {
         List<String> finalWords = new ArrayList<>();
 
 
-        for (Dictionary dictionary : dictionaryWords) {
+        for (WordEntity dictionary : dictionaryWords) {
             //menginstansiasi dictionarySimilar dari kelas DictionarySimilar untuk menampung score
             //menyimpan value ke dalam kamusSimilarList
             DictionarySimilar dictionarySimilar = new DictionarySimilar(dictionary.getId_word(), dictionary.getWord(), dictionary.getType(), getSimilarScore(dictionary.getWord()));
@@ -302,7 +306,7 @@ public class WordRepairActivity extends BaseActivity {
 
             //String selectedFromList = (String) listViewSimiliarWords.getItemAtPosition(position);
 
-            Dictionary selectedFromList = (Dictionary) listViewSimiliarWords.getItemAtPosition(position);
+            WordEntity selectedFromList = (WordEntity) listViewSimiliarWords.getItemAtPosition(position);
 
 
             //apabila tombol edit diklik
