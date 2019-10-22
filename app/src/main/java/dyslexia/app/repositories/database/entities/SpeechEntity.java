@@ -6,9 +6,8 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "speech")
 public class SpeechEntity {
-
     @PrimaryKey(autoGenerate = true)
-    public int id_alphabetSpeech;
+    private int id_alphabetSpeech;
 
     @ColumnInfo(name = "letter")
     private String letter;

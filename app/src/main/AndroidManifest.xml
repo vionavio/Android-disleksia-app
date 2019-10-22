@@ -56,32 +56,32 @@
         <activity
             android:name=".ui.bantuan.BantuanActivity"
             android:label="Bantuan"
-            android:parentActivityName="dyslexia.app.ui.authentication.MenuActivity"
+            android:parentActivityName="dyslexia.app.ui.feature.MenuActivity"
             android:theme="@style/Bantuan" />
         <activity
             android:name=".ui.tentang.TentangActivity"
             android:label="Tentang"
-            android:parentActivityName="dyslexia.app.ui.authentication.MenuActivity"
+            android:parentActivityName="dyslexia.app.ui.feature.MenuActivity"
             android:theme="@style/Tentang" />
         <activity
             android:name=".ui.setting.SettingActivity"
             android:label="Pengaturan"
-            android:parentActivityName="dyslexia.app.ui.authentication.MenuActivity"
+            android:parentActivityName="dyslexia.app.ui.feature.MenuActivity"
             android:theme="@style/Setting" />
         <activity
             android:name=".ui.perbaikanKata.WordRepairActivity"
             android:label="Perbaikan Kata"
-            android:parentActivityName="dyslexia.app.ui.authentication.MenuActivity"
+            android:parentActivityName="dyslexia.app.ui.feature.MenuActivity"
             android:theme="@style/PerbaikanKata" />
         <activity
             android:name=".ui.permainan.PermainanActivity"
             android:label="Permainan"
-            android:parentActivityName="dyslexia.app.ui.authentication.MenuActivity"
+            android:parentActivityName="dyslexia.app.ui.feature.MenuActivity"
             android:theme="@style/MenuGame" />
         <activity
             android:name="dyslexia.app.ui.kamus.DictionaryActivity"
             android:label="Kamus"
-            android:parentActivityName="dyslexia.app.ui.authentication.MenuActivity"
+            android:parentActivityName="dyslexia.app.ui.feature.MenuActivity"
             android:theme="@style/MenuKamus" />
         <activity
             android:name="dyslexia.app.ui.kamus.menu.keterangan.KeteranganActivity"
@@ -115,7 +115,7 @@
             android:name="dyslexia.app.ui.authentication.login.LoginActivity"
             android:theme="@style/noTitleBar" />
         <activity
-            android:name="dyslexia.app.ui.authentication.MenuActivity"
+            android:name="dyslexia.app.ui.feature.MenuActivity"
             android:label="Disleksia App"
             android:theme="@style/MenuUtama" />
         <activity android:name="dyslexia.app.ui.authentication.register.RegisterActivity"

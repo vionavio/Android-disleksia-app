@@ -10,6 +10,7 @@ import dyslexia.app.R;
 import dyslexia.app.ui.authentication.login.LoginActivity;
 import dyslexia.app.ui.authentication.register.RegisterActivity;
 import dyslexia.app.services.AuthService;
+import dyslexia.app.ui.feature.MenuActivity;
 
 public class MainActivity extends AppCompatActivity {
 
