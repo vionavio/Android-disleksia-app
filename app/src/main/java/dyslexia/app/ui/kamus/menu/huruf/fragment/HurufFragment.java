@@ -61,6 +61,7 @@ public class HurufFragment extends Fragment {
 
     private void loadData() {
         //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
+         appDatabase = AppDatabase.getInstance(getContext());
         //ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Alfabet");
         appDatabase = AppDatabase.getInstance(getContext());
         ArrayList<WordEntity> imageList = (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Alfabet");
