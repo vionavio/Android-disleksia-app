@@ -66,6 +66,7 @@ public class VokalFragment extends Fragment {
 
     private void loadData() {
         //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
+        appDatabase = AppDatabase.getInstance(getContext());
         //ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Vokal");
         appDatabase = AppDatabase.getInstance(getContext());
         ArrayList<WordEntity> imageList = (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Vokal");

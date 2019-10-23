@@ -102,24 +102,10 @@ public class KerjaActivity extends AppCompatActivity {
         return "Kata Kerja";
     }
 
-
-
     @Override
     protected void onStop() {
         super.onStop();
     }
 
-    @Override
-    protected void onDestroy() {
 
-
-        //Close the Text to Speech Library
-        if(textToSpeech != null) {
-
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-            Log.d("tttttttttt", "TTS Destroyed");
-        }
-        super.onDestroy();
-    }
 }

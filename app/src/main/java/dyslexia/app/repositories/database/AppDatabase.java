@@ -26,7 +26,7 @@ public abstract class AppDatabase extends RoomDatabase {
             appDatabaseInstance = Room.databaseBuilder(
                     context.getApplicationContext(),
                     AppDatabase.class, DATABASE_NAME
-            )
+            ) //.createFromAsset("databases/dictionary2.db")
                      .fallbackToDestructiveMigration()
 
                     .allowMainThreadQueries()
