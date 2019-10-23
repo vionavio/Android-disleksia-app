@@ -6,11 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import dyslexia.app.R;
-import dyslexia.app.repositories.database.AppDatabase;
-import dyslexia.app.repositories.database.entities.WordEntity;
 import dyslexia.app.ui.kamus.adapter.ImageAdapter;
-//import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-//import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.kamus.database.DatabaseDictionary;
+import dyslexia.app.ui.kamus.model.Dictionary;
 
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
@@ -24,20 +22,17 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class VokalFragment extends Fragment {
 
     ListView listView;
     TextView textView;
-    ArrayList<WordEntity> arrayList = new ArrayList<>();
+    ArrayList<Dictionary> arrayList = new ArrayList<>();
     ImageAdapter adapter;
     TextToSpeech textToSpeech;
-    AppDatabase appDatabase;
+    DatabaseDictionary databaseDictionary;
 
     public static VokalFragment newInstance() {
         return new VokalFragment();
@@ -65,34 +60,15 @@ public class VokalFragment extends Fragment {
     }
 
     private void loadData() {
-        //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
-        appDatabase = AppDatabase.getInstance(getContext());
-        //ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Vokal");
-        appDatabase = AppDatabase.getInstance(getContext());
-        ArrayList<WordEntity> imageList = (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Vokal");
+        DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
+        ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Vokal");
 
-        for (WordEntity kamus: imageList){
-            arrayList.add(new WordEntity(kamus.id_word, kamus.word, kamus.type));
+        for (Dictionary kamus: imageList){
+            arrayList.add(new Dictionary(kamus.id_word, kamus.word, kamus.type));
         }
         Log.d("lllllll", "loadData: "+ arrayList);
         adapter = new ImageAdapter(getContext(), arrayList);
         listView.setAdapter(adapter);
-
-        textToSpeech = new TextToSpeech(getActivity().getApplicationContext(), status -> {
-            if (status != TextToSpeech.ERROR) {
-                textToSpeech.setLanguage(new Locale("id", "ID"));
-            }
-        });
-
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            List<WordEntity> list = new ArrayList<>();
-            //final Dictionary currentKamus = list.get(position);
-
-            WordEntity selectedFromList = (WordEntity) listView.getItemAtPosition(position);
-            Log.d("mmmmmm", "loadData: "+selectedFromList.word);
-            Toast.makeText(getActivity(), " " + selectedFromList.word, Toast.LENGTH_LONG).show();
-            textToSpeech.speak(String.valueOf(selectedFromList.word), TextToSpeech.QUEUE_FLUSH, null);
-        });
 
     }
 

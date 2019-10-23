@@ -4,19 +4,15 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-//import dyslexia.app.repositories.database.AppDatabase;
-import dyslexia.app.repositories.database.AppDatabase;
-import dyslexia.app.repositories.database.entities.WordEntity;
-//import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-//import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.kamus.database.DatabaseDictionary;
+import dyslexia.app.ui.kamus.model.Dictionary;
 
 public class AnagramAlgorithm {
 
-    private ArrayList<WordEntity> sortedDictionary;
+    private ArrayList<Dictionary> sortedDictionary;
 
     private Context mContext;
-    //private DatabaseDictionary databaseDictionary;
-    AppDatabase appDatabase;
+    private DatabaseDictionary databaseDictionary;
     private ArrayList<String> stringArrayList = new ArrayList<>();
 
 
@@ -25,9 +21,8 @@ public class AnagramAlgorithm {
     }
 
     private void loadDatabase(){
-        //databaseDictionary = new DatabaseDictionary(mContext);
-        //appDatabase = new AppDatabase(get);
-        sortedDictionary = (ArrayList<WordEntity>) appDatabase.wordDao().getAll();
+        databaseDictionary = new DatabaseDictionary(mContext);
+        sortedDictionary = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("all");
     }
 
     public ArrayList<String> getAnagrams(String inputWord){
@@ -63,7 +58,7 @@ public class AnagramAlgorithm {
 
     private void mainAlgorithm(int index , char[] unresolvedInputWordChar, int wordSize) {
 
-        WordEntity availableWord = sortedDictionary.get(index);
+        Dictionary availableWord = sortedDictionary.get(index);
         char[] searchWordChars = availableWord.getWord().toCharArray();
 
        //Mengembalikan True jika set lain berisi set ini

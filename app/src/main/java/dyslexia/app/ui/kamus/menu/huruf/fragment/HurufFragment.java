@@ -6,11 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import dyslexia.app.R;
-import dyslexia.app.repositories.database.AppDatabase;
-import dyslexia.app.repositories.database.entities.WordEntity;
 import dyslexia.app.ui.kamus.adapter.ImageAdapter;
-//import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-//import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.kamus.database.DatabaseDictionary;
+import dyslexia.app.ui.kamus.model.Dictionary;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -30,9 +28,9 @@ public class HurufFragment extends Fragment {
 
     ListView listView;
     TextView textView;
-    ArrayList<WordEntity> arrayList = new ArrayList<>();
+    ArrayList<Dictionary> arrayList = new ArrayList<>();
     ImageAdapter adapter;
-    AppDatabase appDatabase ;
+    DatabaseDictionary databaseDictionary ;
 
     public static HurufFragment newInstance() {
     return new HurufFragment();
@@ -60,14 +58,11 @@ public class HurufFragment extends Fragment {
     }
 
     private void loadData() {
-        //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
-         appDatabase = AppDatabase.getInstance(getContext());
-        //ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Alfabet");
-        appDatabase = AppDatabase.getInstance(getContext());
-        ArrayList<WordEntity> imageList = (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Alfabet");
+         databaseDictionary = new DatabaseDictionary(getContext());
+         ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Alfabet");
 
-        for (WordEntity kamus: imageList){
-            arrayList.add(new WordEntity(kamus.id_word, kamus.word, kamus.type));
+        for (Dictionary kamus: imageList){
+            arrayList.add(new Dictionary(kamus.id_word, kamus.word, kamus.type));
         }
         adapter = new ImageAdapter(getContext(), arrayList);
         listView.setAdapter(adapter);

@@ -25,7 +25,6 @@ public class BendaActivity extends AppCompatActivity implements TabLayout.OnTabS
     private TabLayout tabLayout;
     private ViewPager viewPager;
     int currentPosition = 0;
-    TextToSpeech textToSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,17 +80,5 @@ public class BendaActivity extends AppCompatActivity implements TabLayout.OnTabS
     protected void onStop() {
         super.onStop();
     }
-    @Override
-    protected void onDestroy() {
 
-
-        //Close the Text to Speech Library
-        if(textToSpeech != null) {
-
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-            Log.d("tttttttttt", "TTS Destroyed");
-        }
-        super.onDestroy();
-    }
 }

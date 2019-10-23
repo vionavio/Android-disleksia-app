@@ -1,11 +1,10 @@
 package dyslexia.app.ui.perbaikanKata.JaroWinkler;
 
-//import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.kamus.model.Dictionary;
 
-import dyslexia.app.repositories.database.entities.WordEntity;
 
 //kelas baru yang mewarisi dictionary untuk menampilkan nilai jaro
-public class DictionarySimilar extends WordEntity {
+public class DictionarySimilar extends Dictionary {
     private double similarScore;
 
     public DictionarySimilar(long id_word, String word, String type, double similarScore) {

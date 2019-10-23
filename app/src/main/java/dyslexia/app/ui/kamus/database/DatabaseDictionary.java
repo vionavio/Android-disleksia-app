@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dyslexia.app.ui.kamus.model.Dictionary;
-import dyslexia.app.ui.permainan.alphabetSpeech.AlphabetSpeech;
+import dyslexia.app.ui.permainan.alphabetSpeech.model.AlphabetSpeech;
 
 public class DatabaseDictionary extends SQLiteAssetHelper {
 
@@ -114,8 +114,8 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
 
         //make sure kolom adalah nama table
-        String[] sqlSelect = {"id_alphabetSpeech", "letter", "transcription", " coef"};
-        String tableName = "alphabet_speech";
+        String[] sqlSelect = {"id_speech", "letter", "transcription", " coef"};
+        String tableName = "speech";
         qb.setTables(tableName);
         Cursor cursor = qb.query(db, sqlSelect, null, null, null, null, null);
 

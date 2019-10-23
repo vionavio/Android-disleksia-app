@@ -17,21 +17,21 @@ import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import dyslexia.app.R;
-import dyslexia.app.repositories.database.entities.WordEntity;
+import dyslexia.app.ui.kamus.model.Dictionary;
 //import dyslexia.app.ui.kamus.model.Dictionary;
 
 //this adapter have function to connect picture in drawable and show it in listview
 
 public class WordImageAdapter extends BaseAdapter {
 
-    List<WordEntity> list;
-    ArrayList<WordEntity> kamusList;
+    List<Dictionary> list;
+    ArrayList<Dictionary> kamusList;
     Context mContext;
     LayoutInflater inflater;
     TextToSpeech textToSpeech;
 
 
-    public WordImageAdapter(Context context, ArrayList<WordEntity> list) {
+    public WordImageAdapter(Context context, ArrayList<Dictionary> list) {
         //super(context, R.layout.activity_simbol_huruf, kamusList);
         this.mContext = context;
         this.list = list;
@@ -76,7 +76,7 @@ public class WordImageAdapter extends BaseAdapter {
         else {
             holder = (ViewHolder)view.getTag();
         }
-        final WordEntity currentKamus = list.get(position);
+        final Dictionary currentKamus = list.get(position);
 
         Resources resources = mContext.getResources();
         final int resourceId = resources.getIdentifier(currentKamus.getWord(),"drawable",mContext.getPackageName());
@@ -107,7 +107,7 @@ public class WordImageAdapter extends BaseAdapter {
             list.addAll(kamusList);
         }
         else {
-            for (WordEntity strword : kamusList){
+            for (Dictionary strword : kamusList){
                 if (strword.word.toLowerCase(Locale.getDefault())
                         .contains(charText)){
                     list.add(strword);

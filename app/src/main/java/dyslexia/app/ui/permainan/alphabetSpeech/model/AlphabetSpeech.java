@@ -1,4 +1,4 @@
-package dyslexia.app.ui.permainan.alphabetSpeech;
+package dyslexia.app.ui.permainan.alphabetSpeech.model;
 
 public class AlphabetSpeech {
 

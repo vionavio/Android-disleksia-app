@@ -2,18 +2,14 @@ package dyslexia.app.ui.kamus.menu.kerja;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
-import dyslexia.app.repositories.database.AppDatabase;
-import dyslexia.app.repositories.database.entities.WordEntity;
 import dyslexia.app.ui.kamus.adapter.WordAdapter;
-//import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-//import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.kamus.database.DatabaseDictionary;
+import dyslexia.app.ui.kamus.model.Dictionary;
 
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,12 +21,11 @@ import java.util.ArrayList;
 
 public class KerjaActivity extends AppCompatActivity {
 
-    ArrayList<WordEntity> arrayList = new ArrayList<>();
+    ArrayList<Dictionary> arrayList = new ArrayList<>();
     ListView listView;
     TextView textView;
     WordAdapter adapter;
-    TextToSpeech textToSpeech;
-    AppDatabase appDatabase;
+    DatabaseDictionary databaseDictionary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +42,11 @@ public class KerjaActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getApplicationContext());
-        //ArrayList<Dictionary> imageList =(ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Verba");
-        ArrayList<WordEntity> imageList =(ArrayList<WordEntity>) appDatabase.wordDao().getByType("Verba");
+        DatabaseDictionary databaseDictionary = new DatabaseDictionary(getApplicationContext());
+        ArrayList<Dictionary> imageList =(ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Verba");
 
-        for (WordEntity kamus : imageList) {
-            arrayList.add(new WordEntity(kamus.id_word, kamus.word, kamus.type));
+        for (Dictionary kamus : imageList) {
+            arrayList.add(new Dictionary(kamus.id_word, kamus.word, kamus.type));
         }
         adapter = new WordAdapter(KerjaActivity.this, arrayList);
         listView.setAdapter(adapter);

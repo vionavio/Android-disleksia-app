@@ -2,11 +2,9 @@ package dyslexia.app.ui.kamus.menu.keterangan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
-import dyslexia.app.repositories.database.AppDatabase;
-import dyslexia.app.repositories.database.entities.WordEntity;
 import dyslexia.app.ui.kamus.adapter.WordAdapter;
-//import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-//import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.kamus.database.DatabaseDictionary;
+import dyslexia.app.ui.kamus.model.Dictionary;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -26,12 +24,12 @@ import java.util.ArrayList;
 public class KeteranganActivity extends AppCompatActivity {
 
 
-    ArrayList<WordEntity> arrayList = new ArrayList<>();
+    ArrayList<Dictionary> arrayList = new ArrayList<>();
     ListView listView;
     TextView textView;
     WordAdapter adapter;
     TextToSpeech textToSpeech;
-    AppDatabase appDatabase;
+    DatabaseDictionary databaseDictionary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +46,11 @@ public class KeteranganActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getApplicationContext());
-        //ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Adverbia");
-        ArrayList<WordEntity> imageList = (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Adverbia");
+         databaseDictionary = new DatabaseDictionary(getApplicationContext());
+        ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Adverbia");
 
-        for (WordEntity kamus : imageList) {
-            arrayList.add(new WordEntity(kamus.id_word, kamus.word, kamus.type));
+        for (Dictionary kamus : imageList) {
+            arrayList.add(new Dictionary(kamus.id_word, kamus.word, kamus.type));
         }
         adapter = new WordAdapter(this, arrayList);
         listView.setAdapter(adapter);
