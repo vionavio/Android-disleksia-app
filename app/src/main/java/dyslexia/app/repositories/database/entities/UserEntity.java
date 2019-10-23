@@ -25,8 +25,7 @@ public class UserEntity {
     public String password;
 
 
-
-    public UserEntity(String name , String gender, String dob, String email, String password) {
+    public UserEntity(String name, String gender, String dob, String email, String password) {
         this.name = name;
         this.gender = gender;
         this.dob = dob;
