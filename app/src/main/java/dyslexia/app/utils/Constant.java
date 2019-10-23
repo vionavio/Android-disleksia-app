@@ -10,5 +10,5 @@ public class Constant {
     public static final String GAME_KETERANGAN = "gameKeterangan";
     public static final String GAME_SIFAT = "gameSifat";
 
-    public static final String DATABASE_NAME = "disleksia_db";
+    public static final String DATABASE_NAME = "dictionary_db";
 }
