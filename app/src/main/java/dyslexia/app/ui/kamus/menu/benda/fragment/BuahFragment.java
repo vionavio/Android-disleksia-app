@@ -61,6 +61,7 @@ public class BuahFragment extends Fragment {
     private void loadData() {
         //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
         //ArrayList<Dictionary> imageList = (ArrayList<WordEntity>) databaseDictionary.retrieveKamus("Nomina_b");
+        appDatabase = AppDatabase.getInstance(getContext());
         ArrayList<WordEntity> imageList = (ArrayList<WordEntity>) appDatabase.wordDao().getByType ("Nomina_b");
         for (WordEntity kamus: imageList){
             arrayList.add(new WordEntity(kamus.id_word, kamus.word, kamus.type));

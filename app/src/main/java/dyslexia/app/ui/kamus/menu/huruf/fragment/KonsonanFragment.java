@@ -61,6 +61,7 @@ public class KonsonanFragment extends Fragment {
     private void loadData() {
         //DatabaseDictionary databaseDictionary = new DatabaseDictionary(getContext());
         //ArrayList<Dictionary> imageList = (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Konsonan_h");
+        appDatabase = AppDatabase.getInstance(getContext());
         ArrayList<WordEntity> imageList = (ArrayList<WordEntity>) appDatabase.wordDao().getByType("Konsonan_h");
 
         for (WordEntity kamus: imageList){
