@@ -1,6 +1,6 @@
 package dyslexia.app.ui.perbaikanKata.JaroWinkler;
 
-import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.database.model.Dictionary;
 
 
 //kelas baru yang mewarisi dictionary untuk menampilkan nilai jaro

@@ -1,6 +1,5 @@
-package dyslexia.app.ui.kamus.database;
+package dyslexia.app.ui.database;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.database.model.Dictionary;
 import dyslexia.app.ui.permainan.alphabetSpeech.model.AlphabetSpeech;
 
 public class DatabaseDictionary extends SQLiteAssetHelper {
@@ -64,21 +63,21 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
     }
 
 
-    public long insert(String word, String type) {
-
-        database = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("word", word);
-        contentValues.put("type", type);
-        long id = database.insert("words", null, contentValues);
-
-        // close db connection
-        database.close();
-
-        // return newly inserted row id
-
-        return id;
-    }
+//    public long insert(String word, String type) {
+//
+//        database = this.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("word", word);
+//        contentValues.put("type", type);
+//        long id = database.insert("words", null, contentValues);
+//
+//        // close db connection
+//        database.close();
+//
+//        // return newly inserted row id
+//
+//        return id;
+//    }
 
     public List<Dictionary> getWord(String word){
         SQLiteDatabase db = getReadableDatabase();

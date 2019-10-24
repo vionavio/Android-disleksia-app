@@ -1,4 +1,4 @@
-package dyslexia.app.ui.kamus.model;
+package dyslexia.app.ui.database.model;
 
 import org.junit.After;
 import org.junit.Before;

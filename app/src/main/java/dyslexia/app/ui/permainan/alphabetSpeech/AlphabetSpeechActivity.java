@@ -2,7 +2,7 @@ package dyslexia.app.ui.permainan.alphabetSpeech;
 
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
-import dyslexia.app.ui.kamus.database.DatabaseDictionary;
+import dyslexia.app.ui.database.DatabaseDictionary;
 import dyslexia.app.ui.permainan.alphabetSpeech.model.AlphabetSpeech;
 
 import android.content.ActivityNotFoundException;

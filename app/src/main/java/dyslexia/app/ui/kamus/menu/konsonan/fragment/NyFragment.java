@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment;
 import dyslexia.app.R;
 //import dyslexia.app.repositories.database.AppDatabase;
 import dyslexia.app.ui.kamus.adapter.WordAdapter;
-import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.database.DatabaseDictionary;
+import dyslexia.app.ui.database.model.Dictionary;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;

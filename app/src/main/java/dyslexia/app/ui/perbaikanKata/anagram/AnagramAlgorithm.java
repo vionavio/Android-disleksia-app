@@ -4,8 +4,8 @@ import android.content.Context;
 
 import java.util.ArrayList;
 
-import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.database.DatabaseDictionary;
+import dyslexia.app.ui.database.model.Dictionary;
 
 public class AnagramAlgorithm {
 

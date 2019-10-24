@@ -3,8 +3,8 @@ package dyslexia.app.ui.kamus.menu.angka;
 import androidx.appcompat.app.AppCompatActivity;
 import dyslexia.app.R;
 import dyslexia.app.ui.kamus.adapter.WordImageAdapter;
-import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.database.DatabaseDictionary;
+import dyslexia.app.ui.database.model.Dictionary;
 
 import android.app.SearchManager;
 import android.content.Context;

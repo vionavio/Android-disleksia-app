@@ -1,4 +1,4 @@
-package dyslexia.app.ui.kamus.model;
+package dyslexia.app.ui.database.model;
 
 public class Dictionary {
     // model = menggambarkan struktur data dalam database

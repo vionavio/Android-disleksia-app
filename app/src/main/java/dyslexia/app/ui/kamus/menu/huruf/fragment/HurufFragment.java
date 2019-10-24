@@ -7,8 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import dyslexia.app.R;
 import dyslexia.app.ui.kamus.adapter.ImageAdapter;
-import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.database.DatabaseDictionary;
+import dyslexia.app.ui.database.model.Dictionary;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;

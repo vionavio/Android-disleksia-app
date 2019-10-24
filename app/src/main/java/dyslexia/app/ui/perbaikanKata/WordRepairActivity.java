@@ -26,8 +26,8 @@ import java.util.Locale;
 
 import dyslexia.app.R;
 import dyslexia.app.base.BaseActivity;
-import dyslexia.app.ui.kamus.database.DatabaseDictionary;
-import dyslexia.app.ui.kamus.model.Dictionary;
+import dyslexia.app.ui.database.DatabaseDictionary;
+import dyslexia.app.ui.database.model.Dictionary;
 import dyslexia.app.ui.perbaikanKata.JaroWinkler.DictionarySimilar;
 import dyslexia.app.ui.perbaikanKata.JaroWinkler.JaroWinklerDistance;
 import dyslexia.app.ui.perbaikanKata.ReplaceLetter.ReplaceLetter;
