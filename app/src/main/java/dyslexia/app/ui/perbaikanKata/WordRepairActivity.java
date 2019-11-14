@@ -69,7 +69,7 @@ public class WordRepairActivity extends BaseActivity {
         ed_inputWord = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
-        //databaseDictionary = new DatabaseDictionary(getApplicationContext());
+        databaseDictionary = new DatabaseDictionary(getApplicationContext());
         anagramAlgorithm = new AnagramAlgorithm(WordRepairActivity.this);
     }
 
@@ -99,7 +99,7 @@ public class WordRepairActivity extends BaseActivity {
 
 
         if (!(wordRepairResultList.isEmpty())) {
-            jaroWinklerDistance2(wordRepairResultList);
+            jaroWinklerDistanceAnagram(wordRepairResultList);
 //            tv_resultWord.setText(" ");
 //            listViewSimiliarWords.setAdapter(adapter);
 
@@ -140,7 +140,7 @@ public class WordRepairActivity extends BaseActivity {
         ArrayAdapter<Dictionary> adapter;
         adapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, replacedWordsAnagram);
         if (!(replacedWordsAnagram.isEmpty())) {
-            jaroWinklerDistance2(replacedWordsAnagram);
+            jaroWinklerDistanceAnagram(replacedWordsAnagram);
 //            tv_resultWord.setText(" ");
 //            listViewSimiliarWords.setAdapter(adapter);
         }
@@ -151,7 +151,7 @@ public class WordRepairActivity extends BaseActivity {
         inputMethodManager();
     }
 
-    private void jaroWinklerDistance2(ArrayList<Dictionary> wordResultAnagram) {
+    private void jaroWinklerDistanceAnagram(ArrayList<Dictionary> wordResultAnagram) {
 
         Log.d("wwwwwwwwww", "jaroWinklerDistance: " + wordResultAnagram);
         Log.d("ooooooooooooooo", "jaroWinklerDistance: " + inputWord);
