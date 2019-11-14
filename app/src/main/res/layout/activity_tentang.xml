@@ -26,4 +26,12 @@
         android:text="@string/tentang_isi"
         />
 
+    <ImageView
+        android:id="@+id/call"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="2dp"
+        android:layout_gravity="right"
+        android:src="@drawable/phone"/>
+
 </LinearLayout>

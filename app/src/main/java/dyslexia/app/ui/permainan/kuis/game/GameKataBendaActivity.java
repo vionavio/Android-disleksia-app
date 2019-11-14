@@ -1,5 +1,6 @@
 package dyslexia.app.ui.permainan.kuis.game;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -7,7 +8,9 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,15 +38,18 @@ public class GameKataBendaActivity extends AppCompatActivity {
     public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
 
 
-    private String[] names = new String[]{"sepatu", "tas", "buku", "pensil", "baju",
-            "celana", "meja", "kursi", "bola", "mobil", "sepeda",
-            "pesawat", "apel", "topi", "rumah", "pintu",
-            "jendela", "burung", "televisi", "jam"};
+    private String[] names = new String[] {"singa", "anjing", "apel","jamur","buku", "sapi","mobil" ,"pensil","sepeda"};
+//            {"sepatu", "tas", "buku", "pensil", "baju",
+//            "celana", "meja", "kursi", "bola", "mobil", "sepeda",
+//            "pesawat", "apel", "topi", "rumah", "pintu",
+//            "jendela", "burung", "televisi", "jam"};
 
+
+    Context mContext;
     private String word;
     private String answer;
     private Boolean answered;
-    private String scrambled;
+    private String scrambled, normal;
     private ImageView pic;
     private TextView tvScore, tvQuestionCount, tvCountdown;
     private Button btn_check;
@@ -54,11 +60,14 @@ public class GameKataBendaActivity extends AppCompatActivity {
     int score = 0;
     int question = 0;
     int chances = 10;
+    TextToSpeech textToSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_kata_benda);
+
+        TextView normi = findViewById(R.id.normalletters);
 
         btn_check = findViewById(R.id.check);
         tvScore = findViewById(R.id.tvScore);
@@ -73,6 +82,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
             word = savedInstanceState.getString("word");
             answer = savedInstanceState.getString("answer");
             previousChoice = savedInstanceState.getInt("previousChoice");
+            normal = savedInstanceState.getString("normal");
             scrambled = savedInstanceState.getString("scrambled");
             imageResource = savedInstanceState.getInt("image");
             answered = savedInstanceState.getBoolean("answered");
@@ -82,15 +92,35 @@ public class GameKataBendaActivity extends AppCompatActivity {
 
             Drawable resources = getResources().getDrawable(imageResource);
             pic.setImageDrawable(resources);
+            TextView norm = findViewById(R.id.normalletters);
+            norm.setText(normal);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
-            scram.setTypeface(customfont);
+//            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
+//            scram.setTypeface(customfont);
 
         } else {
 
             setImage();
         }
+
+        textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech.setLanguage(new Locale("id", "ID"));
+            }
+        });
+        pic.setOnClickListener(view -> {
+            String toSpeak = normi.getText().toString().trim();
+            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_LONG).show();
+            textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+        });
+
+        normi.setOnClickListener(view -> {
+            String toSpeak = normi.getText().toString().trim();
+            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_LONG).show();
+            textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+        });
+
 
         btn_check.setOnClickListener(view -> {
             answered = true;
@@ -189,8 +219,8 @@ public class GameKataBendaActivity extends AppCompatActivity {
 
     protected void setImage() {
         EditText input = findViewById(R.id.answer);
-        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
-        input.setTypeface(customfont);
+//        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
+//        input.setTypeface(customfont);
         answer = input.getText().toString().toLowerCase().trim();
         if (question < chances) {
             WordShuffler shuffler = new WordShuffler();
@@ -198,7 +228,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
             //use this code block to make sure don't show the same picture back to back
             int whichpic = previousChoice;
             while (whichpic == previousChoice) {
-                whichpic = random.nextInt(20);
+                whichpic = random.nextInt(9);
             }
             previousChoice = whichpic;
 
@@ -208,12 +238,17 @@ public class GameKataBendaActivity extends AppCompatActivity {
             Drawable res = getResources().getDrawable(imageResource);
             pic.setImageDrawable(res);
 
+            TextView normi = findViewById(R.id.normalletters);
+
             //set the new word value and scramble up the new letters! reset the views
             word = names[whichpic];
+            normal  = word;
             scrambled = shuffler.shuffle(word);
+            normi.setText(normal);
+
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            scram.setTypeface(customfont);
+            //scram.setTypeface(customfont);
             EditText answer5 = findViewById(R.id.answer);
             answer5.setText("");
             timeLeftInMillis = COUNTDOWN_IN_MILLIS;
@@ -229,6 +264,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
         savedInstanceState.putString("answer", answer);
         savedInstanceState.putInt("previousChoice", previousChoice);
         savedInstanceState.putStringArray("names", names);
+        savedInstanceState.putString("normal", normal);
         savedInstanceState.putString("scrambled", scrambled);
         savedInstanceState.putInt("image", imageResource);
         savedInstanceState.putBoolean("answered", answered);

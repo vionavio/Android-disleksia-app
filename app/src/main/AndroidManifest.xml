@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dyslexia.app">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -49,7 +51,7 @@
             android:parentActivityName=".ui.permainan.PermainanActivity"
             android:theme="@style/MenuKuis" />
         <activity
-            android:name=".ui.permainan.susunAlfabet.UppercaseAlfabet"
+            android:name=".ui.permainan.susunAlfabet.UppercaseActivity"
             android:label="Menyusun Abjad"
             android:parentActivityName=".ui.permainan.PermainanActivity"
             android:theme="@style/GameAbjad" />
@@ -97,7 +99,7 @@
             android:label="Kata Benda"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="dyslexia.app.ui.kamus.menu.konsonan.MenuKonsonanActivity"
+            android:name="dyslexia.app.ui.kamus.menu.konsonan.KonsonanNgNyActivity"
             android:label="Akhiran Konsonan, Ng, Ny"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -110,6 +112,7 @@
         <activity
             android:name=".ui.permainan.kuis.skor.ScoreActivity"
             android:label="Skor"
+            android:parentActivityName="dyslexia.app.ui.authentication.MainActivity"
             android:theme="@style/Score" />
         <activity
             android:name="dyslexia.app.ui.authentication.login.LoginActivity"

@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,7 +32,7 @@ import static dyslexia.app.utils.Constant.GAME_KETERANGAN;
 
 public class GameKataKeteranganActivity extends AppCompatActivity {
 
-    public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
+    public static final long COUNTDOWN_IN_MILLIS = 60000; // timer countdown counter
 
 
     private String[] names = new String[]{"salon",
@@ -62,6 +63,7 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
     int score = 0;
     int question = 0;
     int chances = 10;
+    TextToSpeech textToSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +94,24 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
             pic.setImageDrawable(res);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
-            scram.setTypeface(customfont);
+//            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
+//            scram.setTypeface(customfont);
 
         } else {
 
             setImage();
         }
+
+        textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech.setLanguage(new Locale("id", "ID"));
+            }
+        });
+
+        pic.setOnClickListener(view -> {
+            Toast.makeText(getApplicationContext(), word, Toast.LENGTH_LONG).show();
+            textToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null);
+        });
 
         btn_check.setOnClickListener(view -> {
             answered = true;
@@ -199,8 +212,8 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
 
     protected void setImage() {
         EditText input = findViewById(R.id.answer);
-        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
-        input.setTypeface(customfont);
+//        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
+//        input.setTypeface(customfont);
         answer = input.getText().toString().toLowerCase().trim();
         if (question < chances) {
             WordShuffler shuffler = new WordShuffler();
@@ -223,7 +236,7 @@ public class GameKataKeteranganActivity extends AppCompatActivity {
             scrambled = shuffler.shuffle(word);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            scram.setTypeface(customfont);
+            //scram.setTypeface(customfont);
             EditText answer5 = findViewById(R.id.answer);
             answer5.setText("");
             timeLeftInMillis = COUNTDOWN_IN_MILLIS;
