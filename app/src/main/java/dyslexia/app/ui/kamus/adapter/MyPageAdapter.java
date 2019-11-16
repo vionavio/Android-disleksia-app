@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+//berfungsi untuk membuat fragment
 public class MyPageAdapter extends FragmentPagerAdapter {
 
     List<Fragment> pages = new ArrayList<>();

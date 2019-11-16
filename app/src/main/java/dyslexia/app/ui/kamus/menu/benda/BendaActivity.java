@@ -47,6 +47,7 @@ public class BendaActivity extends AppCompatActivity implements TabLayout.OnTabS
 
     private void addPages() {
         MyPageAdapter myPageAdapter = new MyPageAdapter(getSupportFragmentManager());
+        // instance untuk menampilkan fragment
         myPageAdapter.addPage(BuahFragment.newInstance());
         myPageAdapter.addPage(SayurFragment.newInstance());
         myPageAdapter.addPage(HewanFragment.newInstance());

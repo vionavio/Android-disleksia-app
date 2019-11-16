@@ -25,7 +25,6 @@ public class KerjaActivity extends AppCompatActivity {
     ListView listView;
     TextView textView;
     WordAdapter adapter;
-    DatabaseDictionary databaseDictionary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

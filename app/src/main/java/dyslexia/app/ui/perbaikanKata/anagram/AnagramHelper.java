@@ -6,7 +6,7 @@ import java.util.List;
 //class yang berisi method untuk anagram algorithm
 public class AnagramHelper {
 
-    //mencari bagian karakter dari cahr1 di char2
+    //mencari bagian karakter dari char1 di char2
     public static boolean isSubset(char[] charArray1, char[] charArray2) {
         if (charArray1.length > charArray2.length) {
             return false;

@@ -74,7 +74,7 @@ public class NyFragment extends Fragment {
 
     @Override
     public String toString() {
-        return "Ny";
+        return "Kata yang Mengandung Ny";
     }
 
     @Override

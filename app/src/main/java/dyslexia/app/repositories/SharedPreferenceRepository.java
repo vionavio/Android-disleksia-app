@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+//penyimpanan sementara
 public class SharedPreferenceRepository {
     private static SharedPreferences sharedPreferences;
 

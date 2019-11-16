@@ -102,5 +102,15 @@
             android:textAllCaps="false"
             android:textColor="#332FA2"
             android:textSize="25sp" />
+
+        <ImageView
+            android:id="@+id/idea"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/back_editext"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/idea"
+            />
     </LinearLayout>
 </LinearLayout>

@@ -10,7 +10,7 @@ import dyslexia.app.ui.feature.MenuActivity;
 import dyslexia.app.R;
 import dyslexia.app.ui.permainan.alphabetSpeech.AlphabetSpeechActivity;
 import dyslexia.app.ui.permainan.kuis.KuisActivity;
-import dyslexia.app.ui.permainan.susunAlfabet.UppercaseAlfabet;
+import dyslexia.app.ui.permainan.susunAlfabet.UppercaseActivity;
 
 public class PermainanActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class PermainanActivity extends AppCompatActivity {
 
         CardView alfabet = findViewById(R.id.susunabjad);
         alfabet.setOnClickListener(view -> {
-            startActivity(new Intent(PermainanActivity.this, UppercaseAlfabet.class));
+            startActivity(new Intent(PermainanActivity.this, UppercaseActivity.class));
         });
 
         CardView kuis = findViewById(R.id.kuis);

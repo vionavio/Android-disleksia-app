@@ -19,7 +19,6 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
     private static final String DB_NAME = "dictionary2.db";
     private static final int DB_VER = 1;
     public Dictionary dictionary;
-    SQLiteDatabase database;
 
 
 
@@ -125,6 +124,7 @@ public class DatabaseDictionary extends SQLiteAssetHelper {
         if (cursor.moveToFirst()) {
             do {
                 AlphabetSpeech alphabetSpeech = new AlphabetSpeech();
+                alphabetSpeech.setId_speech(cursor.getInt(cursor.getColumnIndex("id_speech")));
                 alphabetSpeech.setLetter(cursor.getString(cursor.getColumnIndex("letter")));
                 alphabetSpeech.setTranscription(cursor.getString(cursor.getColumnIndex("transcription")));
                 alphabetSpeech.setCoef(cursor.getInt(cursor.getColumnIndex("coef")));

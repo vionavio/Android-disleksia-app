@@ -29,7 +29,6 @@ public class SifatActivity extends AppCompatActivity {
     ListView listView;
     TextView textView;
     WordAdapter adapter;
-    TextToSpeech textToSpeech;
     DatabaseDictionary databaseDictionary;
 
     @Override
@@ -108,17 +107,4 @@ public class SifatActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    @Override
-    protected void onDestroy() {
-
-
-        //Close the Text to Speech Library
-        if(textToSpeech != null) {
-
-            textToSpeech.stop();
-            textToSpeech.shutdown();
-            Log.d("tttttttttt", "TTS Destroyed");
-        }
-        super.onDestroy();
-    }
 }

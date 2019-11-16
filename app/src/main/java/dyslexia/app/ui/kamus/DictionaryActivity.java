@@ -12,7 +12,7 @@ import dyslexia.app.ui.kamus.menu.benda.BendaActivity;
 import dyslexia.app.ui.kamus.menu.huruf.HurufActivity;
 import dyslexia.app.ui.kamus.menu.kerja.KerjaActivity;
 import dyslexia.app.ui.kamus.menu.keterangan.KeteranganActivity;
-import dyslexia.app.ui.kamus.menu.konsonan.MenuKonsonanActivity;
+import dyslexia.app.ui.kamus.menu.konsonan.KonsonanNgNyActivity;
 import dyslexia.app.ui.kamus.menu.sifat.SifatActivity;
 
 import static dyslexia.app.R.layout.activity_dictionary;
@@ -35,7 +35,7 @@ public class DictionaryActivity extends AppCompatActivity  {
 
         CardView menuKonsonan =  findViewById(R.id.konsonan);
         menuKonsonan.setOnClickListener(view -> {
-            startActivity(new Intent(this, MenuKonsonanActivity.class));
+            startActivity(new Intent(this, KonsonanNgNyActivity.class));
         });
 
         CardView kataBenda =  findViewById(R.id.kata_benda);

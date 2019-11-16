@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class UppercaseActivity extends AppCompatActivity {
     EditText editText;
     FlexboxLayout flexboxLayout;
     Animation smallbigforth;
+    ImageView iv_idea;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +43,11 @@ public class UppercaseActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.editText);
         flexboxLayout = findViewById(R.id.layoutParent);
+        iv_idea = findViewById(R.id.idea);
 
         Button lowercase = findViewById(R.id.lowercase);
         lowercase.setOnClickListener(view -> {
-            Intent lowercaseIntent = new Intent(UppercaseActivity.this, LowercaseActivity.class);
-            startActivity(lowercaseIntent);
+            startActivity(new Intent(UppercaseActivity.this, LowercaseActivity.class));
         });
 
         Button reset = findViewById(R.id.ulangi);
@@ -52,6 +55,9 @@ public class UppercaseActivity extends AppCompatActivity {
             editText.setText("");
             doValidateReset();
         });
+
+        iv_idea.setOnClickListener(view ->
+                startActivity(new Intent(UppercaseActivity.this, UppercaseAnswerActivity.class)));
 
         smallbigforth = AnimationUtils.loadAnimation(this, R.anim.smallbigforth);
 

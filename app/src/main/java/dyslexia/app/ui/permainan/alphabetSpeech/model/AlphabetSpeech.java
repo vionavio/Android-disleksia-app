@@ -3,6 +3,16 @@ package dyslexia.app.ui.permainan.alphabetSpeech.model;
 public class AlphabetSpeech {
 
 
+    private int id_speech;
+
+    public int getId_speech() {
+        return id_speech;
+    }
+
+    public void setId_speech(int id_speech) {
+        this.id_speech = id_speech;
+    }
+
     private String letter;
     private String transcription;
     private int coef;

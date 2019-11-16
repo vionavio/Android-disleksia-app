@@ -43,7 +43,7 @@ public class AngkaActivity extends AppCompatActivity  {
     }
 
     private void loadData() {
-        DatabaseDictionary databaseDictionary = new DatabaseDictionary(getApplicationContext());
+         databaseDictionary = new DatabaseDictionary(getApplicationContext());
         ArrayList<Dictionary> imageList =
                 (ArrayList<Dictionary>) databaseDictionary.retrieveKamus("Numeral");
 

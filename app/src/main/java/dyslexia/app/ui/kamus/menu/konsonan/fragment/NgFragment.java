@@ -69,7 +69,7 @@ public class NgFragment extends Fragment {
 
     @Override
     public String toString() {
-        return "Ng";
+        return "Kata yang Mengandung Ng";
     }
 
     @Override
