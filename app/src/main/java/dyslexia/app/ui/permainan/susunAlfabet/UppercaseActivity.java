@@ -32,6 +32,7 @@ public class UppercaseActivity extends AppCompatActivity {
     private String textAnswer = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ";
     TextView textQuestion;
     EditText editText;
+    Button lowercase;
     FlexboxLayout flexboxLayout;
     Animation smallbigforth;
     ImageView iv_idea;
@@ -44,8 +45,8 @@ public class UppercaseActivity extends AppCompatActivity {
         editText = findViewById(R.id.editText);
         flexboxLayout = findViewById(R.id.layoutParent);
         iv_idea = findViewById(R.id.idea);
+        lowercase = findViewById(R.id.lowercase);
 
-        Button lowercase = findViewById(R.id.lowercase);
         lowercase.setOnClickListener(view -> {
             startActivity(new Intent(UppercaseActivity.this, LowercaseActivity.class));
         });

@@ -41,6 +41,7 @@ public class LowercaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lowercase);
 
+        iv_idea = findViewById(R.id.idea);
         editText = findViewById(R.id.editText);
         flexboxLayout = findViewById(R.id.layoutParent);
 

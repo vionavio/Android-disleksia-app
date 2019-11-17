@@ -37,7 +37,7 @@ public class WordRepairActivity extends BaseActivity {
 
     TextToSpeech textToSpeech;
     EditText ed_inputWord;
-    Button btn_proseskata;
+    Button btn_proseskata, clear;
     ListView listViewSimiliarWords;
     DatabaseDictionary databaseDictionary;
     ImageView iv_suara;
@@ -68,6 +68,7 @@ public class WordRepairActivity extends BaseActivity {
         iv_suara = findViewById(R.id.iv_suara);
         ed_inputWord = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
+        clear = findViewById(R.id.clear);
         listViewSimiliarWords = findViewById(R.id.lv_similar_words);
         databaseDictionary = new DatabaseDictionary(getApplicationContext());
         anagramAlgorithm = new AnagramAlgorithm(WordRepairActivity.this);
@@ -75,11 +76,18 @@ public class WordRepairActivity extends BaseActivity {
 
     @Override
     public void populateView() {
+        clear.setOnClickListener((View view) -> reset());
         btn_proseskata.setOnClickListener((View view) -> anagramSearch());
         loadSuara();
         loadSuara2();
         loadSuara3();
         loadMenu();
+    }
+
+    private void reset() {
+        tv_resultWord.setText(" ");
+        ed_inputWord.setText("");
+            listViewSimiliarWords.setAdapter(null);
     }
 
     private void anagramSearch() {
