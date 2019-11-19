@@ -59,12 +59,12 @@
         android:textSize="23sp"
         android:textStyle="bold" />
 
-
     <ListView
         android:id="@+id/lv_similar_words"
         android:layout_width="match_parent"
         android:layout_marginBottom="20dp"
         android:layout_height="280dp"/>
+
 <Button
     android:id="@+id/clear"
     android:layout_gravity="center"

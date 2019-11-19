@@ -2,6 +2,7 @@ package dyslexia.app.ui.perbaikanKata;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Menu;
@@ -21,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,8 +51,6 @@ public class WordRepairActivity extends BaseActivity {
     ArrayList<String> resultAnagramSearchList;
     ArrayList<String> generatedWordsFromSimilarCase = new ArrayList<>();
 
-    private Button editButton;
-    private Button deleteButton;
     AnagramAlgorithm anagramAlgorithm;
 
     List<Dictionary> dictionaryWords = new ArrayList<>();
@@ -77,11 +77,14 @@ public class WordRepairActivity extends BaseActivity {
     @Override
     public void populateView() {
         clear.setOnClickListener((View view) -> reset());
+
         btn_proseskata.setOnClickListener((View view) -> anagramSearch());
+
+
         loadSuara();
         loadSuara2();
         loadSuara3();
-        loadMenu();
+
     }
 
     private void reset() {
@@ -191,14 +194,19 @@ public class WordRepairActivity extends BaseActivity {
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
         if (!(finalWords.isEmpty())) {
+
+
             tv_resultWord.setText(" ");
             listViewSimiliarWords.setAdapter(arrayAdapter);
+
+
         }
         else
         {
            jaroWinklerDistance();   }
         inputMethodManager();
     }
+
 
     private void jaroWinklerDistance() {
 
@@ -235,6 +243,7 @@ public class WordRepairActivity extends BaseActivity {
         if (!(finalWords.isEmpty())) {
             tv_resultWord.setText(" ");
             listViewSimiliarWords.setAdapter(arrayAdapter);
+
         }
         else
         {
@@ -269,6 +278,7 @@ public class WordRepairActivity extends BaseActivity {
             textToSpeech.speak(selectedItem, TextToSpeech.QUEUE_FLUSH, null);
         });
 
+
     }
 
     private void loadSuara2() {
@@ -299,67 +309,6 @@ public class WordRepairActivity extends BaseActivity {
 
     }
 
-    private void loadMenu() {
-        listViewSimiliarWords.setOnItemLongClickListener((adapterView, view, position, l) -> {
-            Dialog dialog = new Dialog(WordRepairActivity.this);
-            dialog.setContentView(R.layout.dialog_view_kata);
-            dialog.show();
-
-            editButton = dialog.findViewById(R.id.button_edit_data);
-            deleteButton = dialog.findViewById(R.id.button_delete_data);
-
-            //String selectedFromList = (String) listViewSimiliarWords.getItemAtPosition(position);
-
-            Dictionary selectedFromList = (Dictionary) listViewSimiliarWords.getItemAtPosition(position);
-
-
-            //apabila tombol edit diklik
-            editButton.setOnClickListener(
-                    v -> {
-                        //  Auto-generated method stub
-                        //switchToEdit(selectedFromList.getId_word());
-//                        Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
-//                        startActivity(tambahIntent);
-                    }
-            );
-
-            deleteButton.setOnClickListener(
-                    v -> {
-                        // Delete kata dari db
-
-                        //Dictionary selectedItem = (Dictionary) adapterView.getItemAtPosition(position);
-                        // DatabaseDictionary databaseDictionary = new DatabaseDictionary(getApplicationContext());
-                        //databaseDictionary.deleteKamus(selectedItem.getId_word());
-                        // finish();
-                        //startActivity(getIntent());
-
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(WordRepairActivity.this);
-                        builder.setTitle("Delete process");
-                        builder.setMessage("Are you sure to delete : ");
-
-                        builder.setPositiveButton("YES", (dialogInterface, i) -> {
-
-//                                databaseDictionary.deleteKamus(id.getText().toString());
-//                                name.setText("");
-//                                tel.setText("");
-                            Toast.makeText(WordRepairActivity.this, "A contact is deleted ",
-                                    Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }).setNegativeButton("NO", (dialogInterface, i) -> {
-                            dialogInterface.cancel();
-                            dialog.dismiss();
-                        });
-
-                        builder.create().show();
-
-                    }
-            );
-
-
-            return false;
-        });
-    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.option_menu, menu);
