@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import dyslexia.app.R;
 
 public class GameLetterAdapter extends RecyclerView.Adapter<GameLetterAdapter.ListViewHolder> {
-    private ArrayList<String> letters;
+    private ArrayList<Character> letters;
+    private OnItemClickListener onItemClickListener;
 
-    public GameLetterAdapter(ArrayList<String> letters) {
+    public GameLetterAdapter(ArrayList<Character> letters, OnItemClickListener onItemClickListener) {
         this.letters = letters;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -29,12 +31,14 @@ public class GameLetterAdapter extends RecyclerView.Adapter<GameLetterAdapter.Li
 
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
-        String letter = letters.get(position);
-        holder.textViewLetter.setText(letter);
+        Character letter = letters.get(position);
+        holder.textViewLetter.setText(letter.toString());
 
         holder.itemView.setOnClickListener(v -> {
-            Toast.makeText(holder.itemView.getContext(), letter, Toast.LENGTH_SHORT).show();
-            letters.remove(letter);
+            onItemClickListener.onClick(letter);
+            letters.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, letters.size());
         });
     }
 
@@ -51,4 +55,9 @@ public class GameLetterAdapter extends RecyclerView.Adapter<GameLetterAdapter.Li
             textViewLetter = itemView.findViewById(R.id.tv_letter);
         }
     }
+
+    public interface OnItemClickListener {
+        public void onClick(Character clickedLetter);
+    }
+
 }

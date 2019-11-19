@@ -30,13 +30,13 @@ import dyslexia.app.repositories.database.entities.ScoreEntity;
 import dyslexia.app.services.AccountService;
 import dyslexia.app.ui.permainan.kuis.WordShuffler;
 import dyslexia.app.utils.Constant;
+import dyslexia.app.utils.StringUtil;
 
 import static dyslexia.app.utils.Constant.GAME_BENDA;
 
 public class GameKataBendaActivity extends AppCompatActivity {
 
-    //    public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
-    public static final long COUNTDOWN_IN_MILLIS = 90000; // timer countdown counter
+        public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
 
 
     private String[] names = new String[]{"singa", "anjing", "apel", "jamur", "buku", "sapi", "mobil", "pensil", "sepeda"};
@@ -55,6 +55,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
     private Button btn_check;
     private CountDownTimer countDownTimer;
     private RecyclerView recyclerViewLetter;
+    private EditText editTextAnswer;
     private int previousChoice;
     private long timeLeftInMillis;
     private int imageResource;
@@ -69,6 +70,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_kata_benda);
 
         TextView normi = findViewById(R.id.normalletters);
+        editTextAnswer = findViewById(R.id.answer);
 
         btn_check = findViewById(R.id.check);
         tvScore = findViewById(R.id.tvScore);
@@ -246,11 +248,15 @@ public class GameKataBendaActivity extends AppCompatActivity {
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
 
-            ArrayList<String> a = new ArrayList<>();
-            a.add("a");
-            a.add("b");
+            ArrayList<Character> a = new ArrayList<>();
+            a.add('a');
+            a.add('b');
+
             recyclerViewLetter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            GameLetterAdapter gameLetterAdapter = new GameLetterAdapter(a);
+            GameLetterAdapter gameLetterAdapter = new GameLetterAdapter(StringUtil.stringToArrayList(scrambled), clickedLetter -> {
+                Toast.makeText(this, clickedLetter.toString(), Toast.LENGTH_SHORT).show();
+                editTextAnswer.append(clickedLetter.toString());
+            });
             recyclerViewLetter.setAdapter(gameLetterAdapter);
 
             //scram.setTypeface(customfont);
@@ -287,5 +293,4 @@ public class GameKataBendaActivity extends AppCompatActivity {
             countDownTimer.cancel();
         }
     }
-
 }
