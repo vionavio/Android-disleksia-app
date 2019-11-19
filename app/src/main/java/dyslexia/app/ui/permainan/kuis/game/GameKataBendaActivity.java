@@ -45,7 +45,6 @@ public class GameKataBendaActivity extends AppCompatActivity {
 //            "jendela", "burung", "televisi", "jam"};
 
 
-    Context mContext;
     private String word;
     private String answer;
     private Boolean answered;
@@ -96,8 +95,6 @@ public class GameKataBendaActivity extends AppCompatActivity {
             norm.setText(normal);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-//            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
-//            scram.setTypeface(customfont);
 
         } else {
 

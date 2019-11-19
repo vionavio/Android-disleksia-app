@@ -50,7 +50,7 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
     private int previousChoice;
     private long timeLeftInMillis;
     private int imageResource;
-    FlexboxLayout flexboxLayout;
+
     int score = 0;
     int question = 0;
     int chances = 10;
@@ -62,7 +62,6 @@ public class GameSimbolAngkaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_simbol_angka);
 
         TextView normi = findViewById(R.id.normalletters);
-        flexboxLayout = findViewById(R.id.layoutParent);
 
 
         btn_check = findViewById(R.id.check);

@@ -1,5 +1,6 @@
 package dyslexia.app.ui.permainan.kuis.game;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -59,7 +60,7 @@ public class GameKataKerjaActivity extends AppCompatActivity {
     private String word;
     private String answer;
     private Boolean answered;
-    private String scrambled ;
+    private String scrambled, normal ;
     private ImageView pic;
     private TextView tvScore, tvQuestionCount, tvCountdown;
     private Button btn_check;
@@ -72,12 +73,14 @@ public class GameKataKerjaActivity extends AppCompatActivity {
     int chances = 10;
     TextToSpeech textToSpeech;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_kata_kerja);
 
-        //TextView normi = findViewById(R.id.normalletters);
+        TextView normi = findViewById(R.id.normalletters);
+
         btn_check = findViewById(R.id.check);
         tvScore = findViewById(R.id.tvScore);
         tvQuestionCount = findViewById(R.id.question_count);
@@ -90,7 +93,7 @@ public class GameKataKerjaActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             word = savedInstanceState.getString("word");
             answer = savedInstanceState.getString("answer");
-           // normal = savedInstanceState.getString("normal");
+            normal = savedInstanceState.getString("normal");
             previousChoice = savedInstanceState.getInt("previousChoice");
             scrambled = savedInstanceState.getString("scrambled");
             imageResource = savedInstanceState.getInt("image");
@@ -101,12 +104,10 @@ public class GameKataKerjaActivity extends AppCompatActivity {
 
             Drawable res = getResources().getDrawable(imageResource);
             pic.setImageDrawable(res);
-//            TextView norm = findViewById(R.id.normalletters);
-//            norm.setText(normal);
+            TextView norm = findViewById(R.id.normalletters);
+            norm.setText(normal);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-//            Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
-//            scram.setTypeface(customfont);
 
         } else {
 
@@ -124,6 +125,11 @@ public class GameKataKerjaActivity extends AppCompatActivity {
             textToSpeech.speak(word, TextToSpeech.QUEUE_FLUSH, null);
         });
 
+        normi.setOnClickListener(view -> {
+            String toSpeak = normi.getText().toString().trim();
+            Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_LONG).show();
+            textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
+        });
 
 
         btn_check.setOnClickListener(view -> {
@@ -212,21 +218,17 @@ public class GameKataKerjaActivity extends AppCompatActivity {
         String currentDateandTime = simpleDateFormat.format(new Date());
 
         AppDatabase appDatabase = AppDatabase.getInstance(this);
-        // TODO: buat tanggal yang compatible dentan API 21
         appDatabase.scoreDao().insert(new ScoreEntity(
                 AccountService.getUserId(this),
                 GAME_KERJA,
                 score,
                 currentDateandTime
         ));
-
         Log.d("aaaaaaaaa", "saveScore: " + appDatabase.scoreDao().getAll());
     }
 
     protected void setImage() {
         EditText input = findViewById(R.id.answer);
-//        Typeface customfont = Typeface.createFromAsset(getAssets(), "fonts/AlteHaasGroteskRegular.ttf");
-//        input.setTypeface(customfont);
         answer = input.getText().toString().toLowerCase().trim();
         if (question < chances) {
             WordShuffler shuffler = new WordShuffler();
@@ -244,17 +246,16 @@ public class GameKataKerjaActivity extends AppCompatActivity {
             Drawable res = getResources().getDrawable(imageResource);
             pic.setImageDrawable(res);
 
-//            TextView normi = findViewById(R.id.normalletters);
-//            normal  = word;
-//            normi.setText(normal);
-
+            TextView normi = findViewById(R.id.normalletters);
 
             //set the new word value and scramble up the new letters! reset the views
             word = names[whichpic];
+            normal= word;
+            normi.setText(normal);
             scrambled = shuffler.shuffle(word);
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
-            //scram.setTypeface(customfont);
+
             EditText answer5 = findViewById(R.id.answer);
             answer5.setText("");
             timeLeftInMillis = COUNTDOWN_IN_MILLIS;
@@ -270,7 +271,7 @@ public class GameKataKerjaActivity extends AppCompatActivity {
         savedInstanceState.putString("answer", answer);
         savedInstanceState.putInt("previousChoice", previousChoice);
         savedInstanceState.putStringArray("names", names);
-        //savedInstanceState.putString("normal", normal);
+        savedInstanceState.putString("normal", normal);
         savedInstanceState.putString("scrambled", scrambled);
         savedInstanceState.putInt("image", imageResource);
         savedInstanceState.putBoolean("answered", answered);
