@@ -55,6 +55,7 @@ public class WordRepairActivity extends BaseActivity {
     List<Dictionary> dictionaryWords = new ArrayList<>();
     String inputWord;
     final String TAG = "WordRepairActivity";
+    WordRepairAdapter wordRepairAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -170,10 +171,12 @@ public class WordRepairActivity extends BaseActivity {
             finalWords.add(kamusSimilar.getWord());
         }
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
+        wordRepairAdapter = new WordRepairAdapter(this, R.layout.word_repair_item, finalWords);
+
         if (!(finalWords.isEmpty())) {
             tv_resultWord.setText(" ");
-            listViewSimilarWords.setAdapter(arrayAdapter);
+            listViewSimilarWords.setAdapter(wordRepairAdapter);
         } else {
             jaroWinklerDistance();
         }
@@ -206,10 +209,11 @@ public class WordRepairActivity extends BaseActivity {
             finalWords.add(kamusSimilar.getWord());
         }
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
+        wordRepairAdapter = new WordRepairAdapter(this, R.layout.word_repair_item, finalWords);
         if (!(finalWords.isEmpty())) {
             tv_resultWord.setText(" ");
-            listViewSimilarWords.setAdapter(arrayAdapter);
+            listViewSimilarWords.setAdapter(wordRepairAdapter);
         } else {
             tv_resultWord.setText(R.string.hasil_kosong);
             listViewSimilarWords.setAdapter(null);
