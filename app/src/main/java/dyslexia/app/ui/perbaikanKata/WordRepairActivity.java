@@ -38,12 +38,11 @@ public class WordRepairActivity extends BaseActivity {
     TextToSpeech textToSpeech;
     EditText ed_inputWord;
     Button btn_proseskata, clear;
-    ListView listViewSimiliarWords;
+    ListView listViewSimilarWords;
     DatabaseDictionary databaseDictionary;
     ImageView iv_suara;
     TextView tv_resultWord;
     ArrayList<Dictionary> wordRepairResultList = new ArrayList<>();
-
 
     //anagram
     ArrayList<String> resultAnagramSearchList;
@@ -56,6 +55,7 @@ public class WordRepairActivity extends BaseActivity {
     List<Dictionary> dictionaryWords = new ArrayList<>();
     String inputWord;
     final String TAG = "WordRepairActivity";
+    WordRepairAdapter wordRepairAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -69,7 +69,7 @@ public class WordRepairActivity extends BaseActivity {
         ed_inputWord = findViewById(R.id.ed_kataAwal);
         btn_proseskata = findViewById(R.id.btnProsesKata);
         clear = findViewById(R.id.clear);
-        listViewSimiliarWords = findViewById(R.id.lv_similar_words);
+        listViewSimilarWords = findViewById(R.id.lv_similar_words);
         databaseDictionary = new DatabaseDictionary(getApplicationContext());
         anagramAlgorithm = new AnagramAlgorithm(WordRepairActivity.this);
     }
@@ -78,16 +78,16 @@ public class WordRepairActivity extends BaseActivity {
     public void populateView() {
         clear.setOnClickListener((View view) -> reset());
         btn_proseskata.setOnClickListener((View view) -> anagramSearch());
-        loadSuara();
-        loadSuara2();
-        loadSuara3();
+        loadVoice();
+        loadVoice2();
+        loadVoice3();
         loadMenu();
     }
 
     private void reset() {
         tv_resultWord.setText(" ");
         ed_inputWord.setText("");
-            listViewSimiliarWords.setAdapter(null);
+        listViewSimilarWords.setAdapter(null);
     }
 
     private void anagramSearch() {
@@ -95,22 +95,13 @@ public class WordRepairActivity extends BaseActivity {
 
         wordRepairResultList.clear();
         resultAnagramSearchList = anagramAlgorithm.getAnagrams(inputWord);
-        //Log.d(TAG, "wordRepairResultList: " + wordRepairResultList);
-        //Log.d(TAG, "resultAnagramSearchList: " + resultAnagramSearchList);
         for (String resultAnagramSearchWord : resultAnagramSearchList) {
-            Dictionary dictionary = new Dictionary(0,resultAnagramSearchWord,"");
+            Dictionary dictionary = new Dictionary(0, resultAnagramSearchWord, "");
             wordRepairResultList.add(dictionary);
         }
-        ArrayAdapter<Dictionary> adapter;
-        adapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, wordRepairResultList);
-        Log.d(TAG, "anagramSearch: "+ wordRepairResultList);
-
 
         if (!(wordRepairResultList.isEmpty())) {
             jaroWinklerDistanceAnagram(wordRepairResultList);
-//            tv_resultWord.setText(" ");
-//            listViewSimiliarWords.setAdapter(adapter);
-
         } else {
             Log.d(TAG, "anagramSearch: tidak ketemu di anagramSearch 1");
             generateWordsFromAbnormalityCondition();
@@ -119,7 +110,7 @@ public class WordRepairActivity extends BaseActivity {
     }
 
     private void generateWordsFromAbnormalityCondition() {
-       // ArrayList<String> generatedWordsFromSimilarCase = new ArrayList<>();
+        // ArrayList<String> generatedWordsFromSimilarCase = new ArrayList<>();
         generatedWordsFromSimilarCase.clear();
         inputWord = ed_inputWord.getText().toString().trim();
         Log.d(TAG, "generateWordsFromAbnormalityCondition: " + inputWord);
@@ -150,25 +141,18 @@ public class WordRepairActivity extends BaseActivity {
         if (!(replacedWordsAnagram.isEmpty())) {
             jaroWinklerDistanceAnagram(replacedWordsAnagram);
 //            tv_resultWord.setText(" ");
-//            listViewSimiliarWords.setAdapter(adapter);
-        }
-        else
-        {
+//            listViewSimilarWords.setAdapter(adapter);
+        } else {
             jaroWinklerDistance();
         }
         inputMethodManager();
     }
 
     private void jaroWinklerDistanceAnagram(ArrayList<Dictionary> wordResultAnagram) {
-
-        Log.d("wwwwwwwwww", "jaroWinklerDistance: " + wordResultAnagram);
-        Log.d("ooooooooooooooo", "jaroWinklerDistance: " + inputWord);
         inputWord = ed_inputWord.getText().toString().trim();
         List<DictionarySimilar> kamusSimilarList = new ArrayList<>();
         List<DictionarySimilar> kamusSimilarFilteredList = new ArrayList<>();
         List<String> finalWords = new ArrayList<>();
-
-
 
         for (Dictionary dictionary : wordResultAnagram) {
             //menginstansiasi dictionarySimilar dari kelas DictionarySimilar untuk menampung score
@@ -179,38 +163,33 @@ public class WordRepairActivity extends BaseActivity {
 
         //kelas baru yang mewarisi kelas dictionary untuk mengaluarkan nilai jaro
         for (DictionarySimilar kamusSimilar : kamusSimilarList) {
-
-                kamusSimilarFilteredList.add(kamusSimilar);
-
+            kamusSimilarFilteredList.add(kamusSimilar);
         }
+
         Collections.sort(kamusSimilarFilteredList, (kamusSimilar, kamusSimilar2) -> Double.compare(kamusSimilar2.getSimilarScore(), kamusSimilar.getSimilarScore()));
-        Log.d("aaaaaa", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
         for (DictionarySimilar kamusSimilar : kamusSimilarFilteredList) {
             finalWords.add(kamusSimilar.getWord());
         }
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
+        wordRepairAdapter = new WordRepairAdapter(this, R.layout.word_repair_item, finalWords);
+
         if (!(finalWords.isEmpty())) {
             tv_resultWord.setText(" ");
-            listViewSimiliarWords.setAdapter(arrayAdapter);
+            listViewSimilarWords.setAdapter(wordRepairAdapter);
+        } else {
+            jaroWinklerDistance();
         }
-        else
-        {
-           jaroWinklerDistance();   }
         inputMethodManager();
     }
 
     private void jaroWinklerDistance() {
-
-
         dictionaryWords = databaseDictionary.retrieveKamus("all");
 
-        Log.d("ooooooooooooooo", "jaroWinklerDistance: " + inputWord);
         inputWord = ed_inputWord.getText().toString().trim();
         List<DictionarySimilar> kamusSimilarList = new ArrayList<>();
         List<DictionarySimilar> kamusSimilarFilteredList = new ArrayList<>();
         List<String> finalWords = new ArrayList<>();
-
 
         for (Dictionary dictionary : dictionaryWords) {
             //menginstansiasi dictionarySimilar dari kelas DictionarySimilar untuk menampung score
@@ -226,21 +205,18 @@ public class WordRepairActivity extends BaseActivity {
             }
         }
         Collections.sort(kamusSimilarFilteredList, (kamusSimilar, kamusSimilar2) -> Double.compare(kamusSimilar2.getSimilarScore(), kamusSimilar.getSimilarScore()));
-        Log.d("aaaaaa", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
         for (DictionarySimilar kamusSimilar : kamusSimilarFilteredList) {
             finalWords.add(kamusSimilar.getWord());
         }
 
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
+//        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.kamus_list_row, finalWords);
+        wordRepairAdapter = new WordRepairAdapter(this, R.layout.word_repair_item, finalWords);
         if (!(finalWords.isEmpty())) {
             tv_resultWord.setText(" ");
-            listViewSimiliarWords.setAdapter(arrayAdapter);
-        }
-        else
-        {
+            listViewSimilarWords.setAdapter(wordRepairAdapter);
+        } else {
             tv_resultWord.setText(R.string.hasil_kosong);
-            listViewSimiliarWords.setAdapter(null);
-            Log.d("eeeeee", "jaroWinklerDistance: " + kamusSimilarFilteredList.toString());
+            listViewSimilarWords.setAdapter(null);
         }
         inputMethodManager();
     }
@@ -253,7 +229,9 @@ public class WordRepairActivity extends BaseActivity {
         if (view == null) {
             view = new View(this);
         }
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        if (inputMethodManager != null) {
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private double getSimilarScore(String word) {
@@ -261,27 +239,25 @@ public class WordRepairActivity extends BaseActivity {
         return new JaroWinklerDistance().getSimilarity(inputWord, word);
     }
 
-    private void loadSuara() {
+    private void loadVoice() {
         textToSpeech();
-        listViewSimiliarWords.setOnItemClickListener((AdapterView<?> adapterView, View view, int position, long l) -> {
+        listViewSimilarWords.setOnItemClickListener((AdapterView<?> adapterView, View view, int position, long l) -> {
             String selectedItem = String.valueOf(adapterView.getItemAtPosition(position));
             Toast.makeText(getApplicationContext(), "" + selectedItem, Toast.LENGTH_LONG).show();
             textToSpeech.speak(selectedItem, TextToSpeech.QUEUE_FLUSH, null);
         });
-
     }
 
-    private void loadSuara2() {
+    private void loadVoice2() {
         textToSpeech();
         iv_suara.setOnClickListener(view -> {
             String toSpeak = ed_inputWord.getText().toString().trim();
             Toast.makeText(getApplicationContext(), toSpeak, Toast.LENGTH_LONG).show();
             textToSpeech.speak(toSpeak, TextToSpeech.QUEUE_FLUSH, null);
         });
-
     }
 
-    private void loadSuara3() {
+    private void loadVoice3() {
         textToSpeech();
         tv_resultWord.setOnClickListener(view -> {
             String toSpeak = tv_resultWord.getText().toString().trim();
@@ -296,11 +272,10 @@ public class WordRepairActivity extends BaseActivity {
                 textToSpeech.setLanguage(new Locale("id", "ID"));
             }
         });
-
     }
 
     private void loadMenu() {
-        listViewSimiliarWords.setOnItemLongClickListener((adapterView, view, position, l) -> {
+        listViewSimilarWords.setOnItemLongClickListener((adapterView, view, position, l) -> {
             Dialog dialog = new Dialog(WordRepairActivity.this);
             dialog.setContentView(R.layout.dialog_view_kata);
             dialog.show();
@@ -308,10 +283,9 @@ public class WordRepairActivity extends BaseActivity {
             editButton = dialog.findViewById(R.id.button_edit_data);
             deleteButton = dialog.findViewById(R.id.button_delete_data);
 
-            //String selectedFromList = (String) listViewSimiliarWords.getItemAtPosition(position);
+            //String selectedFromList = (String) listViewSimilarWords.getItemAtPosition(position);
 
-            Dictionary selectedFromList = (Dictionary) listViewSimiliarWords.getItemAtPosition(position);
-
+            Dictionary selectedFromList = (Dictionary) listViewSimilarWords.getItemAtPosition(position);
 
             //apabila tombol edit diklik
             editButton.setOnClickListener(
@@ -367,14 +341,10 @@ public class WordRepairActivity extends BaseActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.tambahKata:
-//                Intent tambahIntent = new Intent(this, TambahKamusActivity.class);
-//                startActivity(tambahIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.tambahKata) {
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
