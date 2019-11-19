@@ -1,16 +1,13 @@
 package dyslexia.app.ui.permainan.kuis.game;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,8 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
@@ -27,18 +27,19 @@ import java.util.Random;
 import dyslexia.app.R;
 import dyslexia.app.repositories.database.AppDatabase;
 import dyslexia.app.repositories.database.entities.ScoreEntity;
-import dyslexia.app.ui.permainan.kuis.WordShuffler;
 import dyslexia.app.services.AccountService;
+import dyslexia.app.ui.permainan.kuis.WordShuffler;
 import dyslexia.app.utils.Constant;
 
 import static dyslexia.app.utils.Constant.GAME_BENDA;
 
 public class GameKataBendaActivity extends AppCompatActivity {
 
-    public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
+    //    public static final long COUNTDOWN_IN_MILLIS = 30000; // timer countdown counter
+    public static final long COUNTDOWN_IN_MILLIS = 90000; // timer countdown counter
 
 
-    private String[] names = new String[] {"singa", "anjing", "apel","jamur","buku", "sapi","mobil" ,"pensil","sepeda"};
+    private String[] names = new String[]{"singa", "anjing", "apel", "jamur", "buku", "sapi", "mobil", "pensil", "sepeda"};
 //            {"sepatu", "tas", "buku", "pensil", "baju",
 //            "celana", "meja", "kursi", "bola", "mobil", "sepeda",
 //            "pesawat", "apel", "topi", "rumah", "pintu",
@@ -53,6 +54,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
     private TextView tvScore, tvQuestionCount, tvCountdown;
     private Button btn_check;
     private CountDownTimer countDownTimer;
+    private RecyclerView recyclerViewLetter;
     private int previousChoice;
     private long timeLeftInMillis;
     private int imageResource;
@@ -73,6 +75,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
         tvQuestionCount = findViewById(R.id.question_count);
         tvCountdown = findViewById(R.id.tvCountdown);
         pic = findViewById(R.id.imageView1);
+        recyclerViewLetter = findViewById(R.id.rv_letters);
 
         tvScore.setText("SCORE: " + score);
         tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
@@ -97,7 +100,6 @@ public class GameKataBendaActivity extends AppCompatActivity {
             scram.setText(scrambled);
 
         } else {
-
             setImage();
         }
 
@@ -137,7 +139,6 @@ public class GameKataBendaActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
                 updateCountDownText();
-
             }
 
             @Override
@@ -145,7 +146,6 @@ public class GameKataBendaActivity extends AppCompatActivity {
                 timeLeftInMillis = 0;
                 updateCountDownText();
                 checkAnswer();
-
             }
         }.start();
 
@@ -239,12 +239,20 @@ public class GameKataBendaActivity extends AppCompatActivity {
 
             //set the new word value and scramble up the new letters! reset the views
             word = names[whichpic];
-            normal  = word;
+            normal = word;
             scrambled = shuffler.shuffle(word);
             normi.setText(normal);
 
             TextView scram = findViewById(R.id.scrambledletters);
             scram.setText(scrambled);
+
+            ArrayList<String> a = new ArrayList<>();
+            a.add("a");
+            a.add("b");
+            recyclerViewLetter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            GameLetterAdapter gameLetterAdapter = new GameLetterAdapter(a);
+            recyclerViewLetter.setAdapter(gameLetterAdapter);
+
             //scram.setTypeface(customfont);
             EditText answer5 = findViewById(R.id.answer);
             answer5.setText("");

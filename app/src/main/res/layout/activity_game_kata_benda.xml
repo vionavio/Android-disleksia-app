@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#d5f4bd"
+    android:orientation="vertical"
     tools:context=".ui.permainan.kuis.game.GameKataBendaActivity">
 
     <RelativeLayout
@@ -19,18 +18,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:freezesText="true"
             android:text="@string/_00_30"
             android:textColor="@android:color/black"
-            android:textSize="32sp"
-            android:freezesText="true"/>
+            android:textSize="32sp" />
+
         <TextView
             android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:text="@string/nilai_0"
             android:textAlignment="viewEnd"
             android:textColor="@android:color/black"
-            android:text="@string/nilai_0"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
@@ -38,103 +38,110 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvScore"
-            android:textSize="18sp"
+            android:text="@string/pertanyaan_1_x"
             android:textAlignment="viewStart"
             android:textColor="@android:color/black"
-            android:text="@string/pertanyaan_1_x"
-            android:textStyle="bold"/>
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
         android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:weightSum="1">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="140dp"
+            android:padding="10dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="6dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_marginBottom="30dp"
-            android:layout_height="140dp"
-            app:srcCompat="@drawable/buku"
-            android:id="@+id/imageView1" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginBottom="30dp"
+                app:srcCompat="@drawable/buku" />
         </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/message3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:textColor="@color/primary_color"
             android:gravity="center"
-            android:text="Ssusun huruf seperti dibawah ini" />
+            android:paddingTop="10dp"
+            android:text="Susun huruf seperti dibawah ini"
+            android:textColor="@color/primary_color" />
 
         <TextView
             android:id="@+id/normalletters"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textColor="@color/colorBlack"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textAllCaps="false"
+            android:textColor="@color/colorBlack"
             android:textSize="28sp"
             android:textStyle="bold" />
 
 
-
         <TextView
 
-            android:gravity="center"
+            android:id="@+id/message2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Susun huruf dengan urutan yang benar"
+            android:gravity="center"
             android:paddingBottom="10dp"
-            android:textColor="@color/primary_color"
-            android:id="@+id/message2"
-            />
+            android:text="Susun huruf dengan urutan yang benar"
+            android:textColor="@color/primary_color" />
 
         <EditText
             android:id="@+id/answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary_color"
             android:ems="10"
-            android:textSize="26sp"
             android:gravity="center"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColor="@color/primary_color"
+            android:textSize="26sp" />
+
         <TextView
             android:id="@+id/message1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:textColor="@color/primary_color"
             android:gravity="center"
-            android:text="Huruf yang diacak" />
+            android:paddingTop="10dp"
+            android:text="Huruf yang diacak"
+            android:textColor="@color/primary_color" />
 
         <TextView
             android:id="@+id/scrambledletters"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textColor="@color/primary_color"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textAllCaps="false"
+            android:textColor="@color/primary_color"
             android:textSize="28sp"
             android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_letters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/check"
             android:layout_width="match_parent"
