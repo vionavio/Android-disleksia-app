@@ -92,6 +92,27 @@
             android:textStyle="bold" />
 
 
+
+        <TextView
+
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Susun huruf dengan urutan yang benar"
+            android:paddingBottom="10dp"
+            android:textColor="@color/primary_color"
+            android:id="@+id/message2"
+            />
+
+        <EditText
+            android:id="@+id/answer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary_color"
+            android:ems="10"
+            android:textSize="26sp"
+            android:gravity="center"
+            android:inputType="text" />
         <TextView
             android:id="@+id/message1"
             android:layout_width="match_parent"
@@ -114,26 +135,6 @@
             android:layout_marginBottom="5dp"
             android:textSize="28sp"
             android:textStyle="bold" />
-        <TextView
-
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Susun huruf dengan urutan yang benar"
-            android:paddingBottom="10dp"
-            android:textColor="@color/primary_color"
-            android:id="@+id/message2"
-            />
-
-        <EditText
-            android:id="@+id/answer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary_color"
-            android:ems="10"
-            android:textSize="26sp"
-            android:gravity="center"
-            android:inputType="text" />
         <Button
             android:id="@+id/check"
             android:layout_width="match_parent"
