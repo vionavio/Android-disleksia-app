@@ -1,5 +1,7 @@
 package dyslexia.app.ui.perbaikanKata.JaroWinkler;
 
+import android.util.Log;
+
 import static java.lang.Double.isNaN;
 
 public class JaroWinklerDistance {
@@ -22,10 +24,13 @@ public class JaroWinklerDistance {
 
         //jumlah karakter yang sama persis
         int m = getMatch(wordString1,wordString2);
-        int t = 0;
+        int t ;
         if (getMissMatch(wordString2, wordString1) > 0) {
-            t = ((getMissMatch(wordString1, wordString2) / getMissMatch(wordString2, wordString1))/2);
-
+             t = ((getMissMatch(wordString1, wordString2) / getMissMatch(wordString2, wordString1))/2);
+        }
+        else
+        {
+             t = 0;
         }
 
         int lengthString1 = wordString1.length();
@@ -34,7 +39,8 @@ public class JaroWinklerDistance {
         double f = 0.3333;
         double mt = (double) (m - t) / m;
         if (isNaN(mt)) mt = 0.0;
-
+        Log.d("mmmm", "gem: " + m);
+        Log.d("tttttttttttttt", "gettttt: " + t);
         double p = 0.1;
         
         //rumus jaro untuk menghitung jarak

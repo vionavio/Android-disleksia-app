@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
+import android.text.InputType;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,11 +24,14 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import dyslexia.app.R;
 import dyslexia.app.repositories.database.AppDatabase;
 import dyslexia.app.repositories.database.entities.ScoreEntity;
 import dyslexia.app.ui.permainan.kuis.WordShuffler;
 import dyslexia.app.services.AccountService;
+import dyslexia.app.utils.StringUtil;
 
 import static dyslexia.app.utils.Constant.GAME_KERJA;
 
@@ -65,6 +69,8 @@ public class GameKataKerjaActivity extends AppCompatActivity {
     private TextView tvScore, tvQuestionCount, tvCountdown;
     private Button btn_check;
     private CountDownTimer countDownTimer;
+    private RecyclerView recyclerViewLetter;
+    private EditText editTextAnswer;
     private int previousChoice;
     private long timeLeftInMillis;
     private int imageResource;
@@ -80,12 +86,15 @@ public class GameKataKerjaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_kata_kerja);
 
         TextView normi = findViewById(R.id.normalletters);
+        editTextAnswer = findViewById(R.id.answer);
+        editTextAnswer.setInputType(InputType.TYPE_NULL);
 
         btn_check = findViewById(R.id.check);
         tvScore = findViewById(R.id.tvScore);
         tvQuestionCount = findViewById(R.id.question_count);
         tvCountdown = findViewById(R.id.tvCountdown);
         pic = findViewById(R.id.imageView1);
+        recyclerViewLetter = findViewById(R.id.rv_letters);
 
         tvScore.setText("SCORE: " + score);
         tvQuestionCount.setText("Pertanyaan: " + question + "/" + 10);
@@ -106,8 +115,7 @@ public class GameKataKerjaActivity extends AppCompatActivity {
             pic.setImageDrawable(res);
             TextView norm = findViewById(R.id.normalletters);
             norm.setText(normal);
-            TextView scram = findViewById(R.id.scrambledletters);
-            scram.setText(scrambled);
+
 
         } else {
 
@@ -253,8 +261,13 @@ public class GameKataKerjaActivity extends AppCompatActivity {
             normal= word;
             normi.setText(normal);
             scrambled = shuffler.shuffle(word);
-            TextView scram = findViewById(R.id.scrambledletters);
-            scram.setText(scrambled);
+
+            recyclerViewLetter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            GameLetterAdapter gameLetterAdapter = new GameLetterAdapter(StringUtil.stringToArrayList(scrambled), clickedLetter -> {
+                Toast.makeText(this, clickedLetter.toString(), Toast.LENGTH_SHORT).show();
+                editTextAnswer.append(clickedLetter.toString());
+            });
+            recyclerViewLetter.setAdapter(gameLetterAdapter);
 
             EditText answer5 = findViewById(R.id.answer);
             answer5.setText("");

@@ -108,33 +108,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/primary_color"
-            android:ems="10"
             android:textSize="26sp"
 
-            android:gravity="center"
-            android:inputType="text" />
-        <TextView
-            android:id="@+id/message1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:textColor="@color/primary_color"
-            android:gravity="center"
-            android:text="Huruf yang diacak" />
+            android:gravity="center" />
+<!--        <TextView-->
+<!--            android:id="@+id/message1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:paddingTop="10dp"-->
+<!--            android:textColor="@color/primary_color"-->
+<!--            android:gravity="center"-->
+<!--            android:text="Huruf yang diacak" />-->
 
-        <TextView
-            android:id="@+id/scrambledletters"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
+<!--        <TextView-->
+<!--            android:id="@+id/scrambledletters"-->
+<!--            android:gravity="center"-->
+<!--            android:paddingBottom="5dp"-->
+<!--            android:paddingTop="5dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="@color/primary_color"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:textSize="28sp"-->
+<!--            android:textStyle="bold" />-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_letters"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:textColor="@color/primary_color"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:layout_height="100dp" />
         <Button
             android:id="@+id/check"
             android:layout_width="match_parent"

@@ -37,8 +37,8 @@ public class WordRepairAdapter extends ArrayAdapter<String> {
         TextView text = listItem.findViewById(R.id.tv_text);
         text.setText(currentWord);
         if (position == 0) {
-            text.setTextColor(mContext.getResources().getColor(R.color.colorWhite));
-            text.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary));
+            text.setTextColor(mContext.getResources().getColor(R.color.colorPrimary3));
+            text.setBackgroundColor(mContext.getResources().getColor(R.color.colorPrimary2));
         }
 
         return listItem;

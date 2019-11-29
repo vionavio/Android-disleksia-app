@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.speech.tts.TextToSpeech;
+import android.text.InputType;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +72,7 @@ public class GameKataBendaActivity extends AppCompatActivity {
 
         TextView normi = findViewById(R.id.normalletters);
         editTextAnswer = findViewById(R.id.answer);
+        editTextAnswer.setInputType(InputType.TYPE_NULL);
 
         btn_check = findViewById(R.id.check);
         tvScore = findViewById(R.id.tvScore);
@@ -98,8 +100,8 @@ public class GameKataBendaActivity extends AppCompatActivity {
             pic.setImageDrawable(resources);
             TextView norm = findViewById(R.id.normalletters);
             norm.setText(normal);
-            TextView scram = findViewById(R.id.scrambledletters);
-            scram.setText(scrambled);
+//            TextView scram = findViewById(R.id.scrambledletters);
+//            scram.setText(scrambled);
 
         } else {
             setImage();
@@ -245,8 +247,8 @@ public class GameKataBendaActivity extends AppCompatActivity {
             scrambled = shuffler.shuffle(word);
             normi.setText(normal);
 
-            TextView scram = findViewById(R.id.scrambledletters);
-            scram.setText(scrambled);
+//            TextView scram = findViewById(R.id.scrambledletters);
+//            scram.setText(scrambled);
 
             ArrayList<Character> a = new ArrayList<>();
             a.add('a');
@@ -268,6 +270,15 @@ public class GameKataBendaActivity extends AppCompatActivity {
             finishQuiz();
         }
     }
+
+    private void textToSpeech() {
+        textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech.setLanguage(new Locale("id", "ID"));
+            }
+        });
+    }
+
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
